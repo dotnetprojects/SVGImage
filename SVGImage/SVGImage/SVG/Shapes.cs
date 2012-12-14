@@ -477,11 +477,11 @@ namespace SVGImage.SVG
 				list.Add(new PathShape(svg, childnode));
 				return list[list.Count - 1];
 			}
-			if (childnode.Name == SVGTags.sShapeGroup)
-			{
-				list.Add(new Group(svg, childnode, parent));
-				return list[list.Count - 1];
-			}
+            if (childnode.Name == SVGTags.sShapeGroup || childnode.Name == SVGTags.sSwitch)
+            {
+                list.Add(new Group(svg, childnode, parent));
+                return list[list.Count - 1];
+            }			
 			if (childnode.Name == SVGTags.sLinearGradient)
 			{
 				svg.PaintServers.Create(childnode);
