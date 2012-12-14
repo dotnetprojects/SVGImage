@@ -76,6 +76,9 @@ namespace SVGImage.SVG
 
 		static Geometry BuildGlyphRun(TextStyle textStyle, string text, double x, double y, ref double totalwidth)
 		{
+            if (string.IsNullOrEmpty(text))
+                return new GeometryGroup();
+
 			double fontSize = textStyle.FontSize;
 			GlyphRun glyphs = null;
 			Typeface font = new Typeface(new FontFamily(textStyle.FontFamily), 
