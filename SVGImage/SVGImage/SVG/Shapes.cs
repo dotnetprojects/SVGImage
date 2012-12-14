@@ -393,14 +393,20 @@ namespace SVGImage.SVG
 			string hRef = XmlUtil.AttrValue(node, "xlink:href", string.Empty);
 			if (hRef.Length > 0)
 			{
-				// filename given must be relative to the location of the svg file
-				string svgpath = System.IO.Path.GetDirectoryName(svg.Filename);
-				string filename = System.IO.Path.Combine(svgpath, hRef);
-
-				BitmapImage b = new  BitmapImage();
+                BitmapImage b = new  BitmapImage();
 				b.BeginInit();
-				b.UriSource = new Uri(filename, UriKind.RelativeOrAbsolute);
-				b.EndInit();
+			    if (hRef.StartsWith("data:image/png;base64"))
+			    {
+			        b.StreamSource = new System.IO.MemoryStream(Convert.FromBase64String(hRef.Substring("data:image/png;base64,".Length)));
+			    }
+			    else
+			    {
+			        // filename given must be relative to the location of the svg file
+			        string svgpath = System.IO.Path.GetDirectoryName(svg.Filename);
+			        string filename = System.IO.Path.Combine(svgpath, hRef);
+			        b.UriSource = new Uri(filename, UriKind.RelativeOrAbsolute);
+			    }
+			    b.EndInit();
 				this.ImageSource = b;
 			}
 		}

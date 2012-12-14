@@ -373,8 +373,19 @@ namespace SVGImage.SVG
 								s.Point3 = lastPoint + (Vector)c.Point;
 							}
 							else
-							{
-								s.Point1 = c.CtrlPoint1;
+                            {
+                                if (c.Command == 'S')
+                                {
+                                    // first control point is a mirrored point of last end control point
+                                    //s.Point1 = lastPoint + new Vector(lastc.Point.X - dx, lastc.Point.Y - dy);
+                                    //s.Point1 = new Point(lastctrlpoint.X+2, lastctrlpoint.Y+2);
+
+                                    double dx = lastc.CtrlPoint2.X - lastc.Point.X;
+                                    double dy = lastc.CtrlPoint2.Y - lastc.Point.Y;
+                                    s.Point1 = new Point(lastcirPoint.X - dx, lastcirPoint.Y - dy);
+                                }
+                                else
+								    s.Point1 = c.CtrlPoint1;
 								s.Point2 = c.CtrlPoint2;
 								s.Point3 = c.Point;
 							}

@@ -31,6 +31,8 @@
 		public const string sShapeUse= "use";
 		public const string sShapeImage= "image";
 
+        public const string sSwitch = "switch";
+
 		public const string sDefinitions = "defs";
 		public const string sGradientUserSpace = "userSpaceOnUse";
 		public const string sLinearGradient = "linearGradient";
