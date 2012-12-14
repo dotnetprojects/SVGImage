@@ -1,0 +1,6 @@
+<svg width="200px" height="200px" viewBox="0 0 200 200">
+<polyline
+points="5 20, 20 20, 25 10, 35 30, 45 10,
+55 30, 65 10, 75 30, 80 20, 95 20"
+style="stroke: black; stroke-width: 3; fill: none;" />
+</svg>

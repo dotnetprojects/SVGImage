@@ -1,0 +1,21 @@
+<svg width="200px" height="200px" viewBox="0 0 200 200">
+<polyline
+style="stroke-linejoin: miter; stroke: black; stroke-width: 12;
+fill: none;"
+points="30 30, 45 15, 60 30"/>
+<polyline
+style="stroke-linejoin: round; stroke: black; stroke-width: 12;
+fill: none;"
+points="90 30, 105 15, 120 30"/>
+<polyline
+style="stroke-linejoin: bevel; stroke-width: 12; stroke: black;
+fill: none;"
+points="150 30, 165 15, 180 30"/>
+
+<circle cx="20" cy="20" r="10" style="stroke: black; stroke-width: 1.5; fill:
+blue; fill-opacity: 0.6" />
+
+<circle cx="20" cy="20" r="5"
+fill="red" stroke="black" stroke-width="2" fill-opacity="0.6" />
+
+</svg>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+    "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+         width="200" height="200"
+         viewBox="0 0 200 200"  >
+	
+	<!-- Matthew Bystedt http://pike.port5.com 2005 -->
+	
+	<!-- Pattern Definition -->
+	<defs>
+		<pattern id="rulerPattern" patternUnits="userSpaceOnUse"
+				x="0" y="0" width="10" height="10"
+				viewBox="0 0 10 10" >
+				
+			<line x1="0" y1="0" x2="10" y2="0" stroke="lightblue" fill="none" stroke-dasharray="2,2" />
+			<line x1="0" y1="0" x2="0" y2="10" stroke="lightblue" fill="none" stroke-dasharray="2,2" />
+		</pattern>
+        
+        <linearGradient id="hill" x1="100%" y1="100%" x2="100%" y2="0%">
+            <stop offset="5%" stop-color="green" />
+            <stop offset="95%" stop-color="blue" stop-opacity="0.8" />        
+        </linearGradient>
+	</defs>
+
+	<!-- Background -->
+	<rect x="0" y="0" width="100%" height="100%" fill="url(#rulerPattern)" stroke="black" />
+
+	<!-- Path Line Example -->
+    
+    <path d="M40,140 L40,100 10,100 C10,10 90,10 90,100 L60,100 60,140 M140,50 C70,180 195,180 190,100 " stroke="darkgreen" stroke-width="4" fill="url(#hill)" />
+    
+    <circle cx="10" cy="10" r="4" fill="none" stroke="red" />
+    <circle cx="90" cy="10" r="4" fill="none" stroke="red" />
+
+    <line x1="10" y1="10" x2="10" y2="100" stroke="black" stroke-width="2" opacity="0.5" />
+    <line x1="90" y1="10" x2="90" y2="100" stroke="black" stroke-width="2" opacity="0.5" />
+
+    <circle cx="70" cy="180" r="4" fill="none" stroke="red" />
+    <circle cx="195" cy="180" r="4" fill="none" stroke="red" />
+
+    <line x1="70" y1="180" x2="140" y2="50" stroke="black" stroke-width="2" opacity="0.5" />
+    <line x1="195" y1="180" x2="190" y2="100" stroke="black" stroke-width="2" opacity="0.5" />
+
+    
+</svg>

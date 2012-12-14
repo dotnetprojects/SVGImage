@@ -1,0 +1,13 @@
+<svg width="200px" height="200px" viewBox="0 0 200 200">
+<line x1="10" y1="15" x2="50" y2="15"
+style="stroke-linecap: butt; stroke-width: 15;"/>
+<line x1="10" y1="45" x2="50" y2="45"
+style="stroke-linecap: round; stroke-width: 15;"/>
+TEAM FLY PRESENTS
+46
+<line x1="10" y1="75" x2="50" y2="75"
+style="stroke-linecap: square; stroke-width: 15;"/>
+<!-- guide lines -->
+<line x1="10" y1="0" x2="10" y2="100" style="stroke: #999;" />
+<line x1="50" y1="0" x2="50" y2="100" style="stroke: #999;" />
+</svg>

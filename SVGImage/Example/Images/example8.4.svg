@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"
+	>
+
+  <g style="font-size: 14pt;">
+	<text x="10" y="30" style="font-size:14pt;">
+	Switch among 
+		<tspan style="font-style:italic;font-family:Calibri;">
+		italic, 
+			<tspan style="font-style:italic;text-decoration:line-through;">
+			italic#2
+			</tspan>, 
+		another italic
+		</tspan>
+	, normal, and 
+		<tspan style="font-weight:bold;font-family:Verdana;font-size: 24pt;">
+		bold..
+		</tspan> 
+		...................text.
+	</text>  
+	<text x="20" y="60" style="font-size: 24pt;">
+C<tspan style="baseline-shift: sub;font-size:10pt;">12</tspan>
+H<tspan style="baseline-shift: sub;font-size:10pt;">22</tspan>
+O<tspan style="baseline-shift: super;font-size:10pt;">11</tspan> (sugar)
+</text>
+<text x="20" y="90" style="font-size: 14pt;font-family:Verdana">
+6.02 x 10<tspan baseline-shift="super" font-size="8pt">23</tspan>
+(Avogadro's number)
+</text>
+<text x="20" y="120" style="font-family:Verdana">
+	<tspan style="font-style:italic;font-weight:bold;font-size: 20pt;fill:blue">blue bold italic</tspan> normal  
+<tspan style="font-style:italic;font-family:Verdana;font-size: 10pt;fill:red">red italic</tspan> .. 
+
+<tspan style="stroke:black;stroke-width:2;fill:green;font-size:30pt;font-weight:bold">BOLD</tspan>
+
+</text>
+</g>  
+  
+</svg>

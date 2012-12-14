@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="240px" height="240px" viewBox="0 0 240 240">
+
+  <g style="font-size: 18pt">
+    <text x="20" y="20" style="font-weight:bold;">bold</text>
+    <text x="120" y="20" style="font-style:italic;">italic</text>
+    <text x="20" y="60" style="text-decoration:underline;">under</text>
+    <text x="120" y="60" style="text-decoration:overline;">over</text>
+    <text x="200" y="60" style="text-decoration:line-through;">through</text>
+	<g style="font-size: 20pt;font-family:Calibri;">
+	<text x="10" y="90"> - </text>
+    <text x="30" y="90" style="word-spacing: 10pt;">more word space</text>
+
+	<text x="10" y="120"> - </text>
+    <text x="30" y="120" style="word-spacing: -3pt;">less word space</text>
+
+	<text x="10" y="150"> - </text>
+    <text x="30" y="150" style="letter-spacing: 5pt;text-decoration:line-through;font-style:italic;">wide letter space</text>
+
+	<text x="10" y="180"> - </text>
+    <text x="30" y="180" style="letter-spacing: -2pt;">narrow letter space</text>
+
+	<text x="10" y="200"> - </text>
+    <text x="30" y="200" style="letter-spacing: -2pt;">This is a test -2pt</text>
+
+	<text x="10" y="230"> - </text>
+    <text x="30" y="230" style="letter-spacing: 0.001pt;">This is a test -0pt</text>
+
+	<text x="10" y="260"> - </text>
+    <text x="30" y="260" style="letter-spacing: +2pt;">This is a test +2pt</text>
+	</g>
+  </g>
+  
+</svg>
