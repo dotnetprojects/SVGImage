@@ -153,6 +153,16 @@
     <Resource Include="Images\tombigel_green_router[1].svg" />
     <Resource Include="Images\tranberry_locked_exclamation_mark_-_padlock.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Human_body_proportions2_svg.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\horse.svg" />
+    <Resource Include="Images\Soccer_ball_animated.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Soccer_Simple.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -123,6 +123,7 @@ namespace SVGImage.SVG
 			dc.Pop();
 			dc.Pop();
 		}
+
 		void RecalcImage()
 		{
 			if (this.m_drawing == null)

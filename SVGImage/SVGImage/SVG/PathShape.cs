@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Xml;
 
+using SVGImage.SVG.Shapes;
+
 namespace SVGImage.SVG
 {
 	class PathShape : Shape
@@ -183,7 +185,8 @@ namespace SVGImage.SVG
 				DefaultFill.Color = svg.PaintServers.Parse("black");
 			}
 			
-			this.ClosePath = false;
+
+            this.ClosePath = false;
 			string path = XmlUtil.AttrValue(node, "d", string.Empty);
 			CommandSplitter cmd = new CommandSplitter(path);
 			string commandstring;

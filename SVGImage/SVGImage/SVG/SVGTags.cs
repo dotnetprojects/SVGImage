@@ -14,6 +14,14 @@
 		public const string sFillRule= "fill-rule";
 		public const string sStyle= "style";
 
+        public const string sAnimate = "animate";
+        public const string sAnimateColor = "animateColor";
+        public const string sAnimateMotion = "animateMotion";
+        public const string sAnimateTransform = "animateTransform";
+
+
+	    public const string sClipPath = "clipPath";
+        
 		public const string sTranslate= "translate";
 		public const string sMatrix= "matrix";
 		public const string sScale= "scale";

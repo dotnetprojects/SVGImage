@@ -1,5 +1,7 @@
 ﻿using System.Windows.Media;
 
+using SVGImage.SVG.PaintServer;
+
 namespace SVGImage.SVG
 {
 	public class Fill
@@ -10,12 +12,12 @@ namespace SVGImage.SVG
 			evenodd
 		}
 		public eFillRule FillRule { get; set;}
-		public PaintServer Color {get; set;}
+		public PaintServer.PaintServer Color {get; set;}
 		public double Opacity {get; set;}
 		public Fill(SVG svg)
 		{
 			this.FillRule = eFillRule.nonzero;
-			this.Color = new SolidColor(svg.PaintServers, Colors.LightSeaGreen);
+			this.Color = new SolidColorPaintServer(svg.PaintServers, Colors.LightSeaGreen);
 			this.Opacity = 100;
 		}
 		public Brush FillBrush(SVG svg)

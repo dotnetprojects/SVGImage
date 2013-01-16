@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 
+using SVGImage.SVG.Shapes;
+
 namespace SVGImage.SVG
 {
 	public class TextStyle

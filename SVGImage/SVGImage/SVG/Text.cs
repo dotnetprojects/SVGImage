@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Xml;
 
+using SVGImage.SVG.Shapes;
+
 namespace SVGImage.SVG
 {
 	class TextShape : Shape

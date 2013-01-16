@@ -1,5 +1,7 @@
 ﻿using System.Windows.Media;
 
+using SVGImage.SVG.PaintServer;
+
 namespace SVGImage.SVG
 {
 	public class Stroke
@@ -16,7 +18,7 @@ namespace SVGImage.SVG
 			round,
 			bevel,
 		}
-		public PaintServer Color {get; set;}
+		public PaintServer.PaintServer Color {get; set;}
 		public double Width {get; set;}
 		public double Opacity {get; set;}
 		public eLineCap LineCap {get; set;}
@@ -24,7 +26,7 @@ namespace SVGImage.SVG
 		public double[] StrokeArray {get; set;} 
 		public Stroke(SVG svg)
 		{
-			this.Color = new SolidColor(svg.PaintServers, Colors.Black);
+			this.Color = new SolidColorPaintServer(svg.PaintServers, Colors.Black);
 			this.Width = 1;
 			this.LineCap = eLineCap.butt;
 			this.LineJoin = eLineJoin.miter;

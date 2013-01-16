@@ -47,8 +47,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Canvases\SVGObjectTree.cs" />
-    <Compile Include="Canvases\SVGViewCanvas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -62,18 +60,36 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SVG\ClipArtElement.cs" />
     <Compile Include="SVG\Fill.cs" />
-    <Compile Include="SVG\PaintServer.cs" />
+    <Compile Include="SVG\PaintServer\GradientColorPaintServer.cs" />
+    <Compile Include="SVG\PaintServer\LinearGradientColorPaintServer.cs" />
+    <Compile Include="SVG\PaintServer\PaintServer.cs" />
+    <Compile Include="SVG\PaintServer\PaintServerManager.cs" />
+    <Compile Include="SVG\PaintServer\RadialGradientColorPaintServer.cs" />
+    <Compile Include="SVG\PaintServer\SolidColorPaintServer.cs" />
     <Compile Include="SVG\PathShape.cs" />
-    <Compile Include="SVG\Shapes.cs" />
+    <Compile Include="SVG\Shapes\CircleShape.cs" />
+    <Compile Include="SVG\Shapes\Clip.cs" />
+    <Compile Include="SVG\Shapes\EllipseShape.cs" />
+    <Compile Include="SVG\Shapes\Group.cs" />
+    <Compile Include="SVG\Shapes\ImageShape.cs" />
+    <Compile Include="SVG\Shapes\LineShape.cs" />
+    <Compile Include="SVG\Shapes\PolygonShape.cs" />
+    <Compile Include="SVG\Shapes\PolylineShape.cs" />
+    <Compile Include="SVG\Shapes\RectangleShape.cs" />
+    <Compile Include="SVG\Shapes\Shape.cs" />
+    <Compile Include="SVG\Shapes\UseShape.cs" />
     <Compile Include="SVG\ShapeUtil.cs" />
     <Compile Include="SVG\Stroke.cs" />
+    <Compile Include="SVG\SVG.cs" />
     <Compile Include="SVG\SVGImage.cs" />
-    <Compile Include="SVG\SVGReader.cs" />
+    <Compile Include="SVG\SVGRender.cs" />
     <Compile Include="SVG\SVGTags.cs" />
     <Compile Include="SVG\Text.cs" />
     <Compile Include="SVG\TextRender.cs" />
     <Compile Include="SVG\TextStyle.cs" />
+    <Compile Include="SVG\Shapes\AnimateTransform.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -90,6 +106,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
