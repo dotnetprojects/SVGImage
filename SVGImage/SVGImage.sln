@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVGImage", "SVGImage\SVGImage.csproj", "{5569522D-5C29-451E-8730-F119F0408BCA}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.25302.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetProjects.SVGImage", "SVGImage\DotNetProjects.SVGImage.csproj", "{5569522D-5C29-451E-8730-F119F0408BCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{6BDADE27-F4F1-4E84-8BB0-4D5989B4380B}"
 EndProject

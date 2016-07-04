@@ -91,12 +91,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SVGImage\SVGImage.csproj">
-      <Project>{5569522d-5c29-451e-8730-f119f0408bca}</Project>
-      <Name>SVGImage</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\aa.svg" />
     <Resource Include="Images\brush.svg" />
     <Resource Include="Images\computer-aj_aj_ashton_01.svg" />
@@ -162,6 +156,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Soccer_Simple.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SVGImage\DotNetProjects.SVGImage.csproj">
+      <Project>{5569522d-5c29-451e-8730-f119f0408bca}</Project>
+      <Name>DotNetProjects.SVGImage</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
