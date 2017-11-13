@@ -18,6 +18,8 @@ namespace SVGImage.SVG
 
         internal Dictionary<string, Shape> m_shapes = new Dictionary<string, Shape>();
 
+        internal Dictionary<string, List<XmlAttribute>> m_styles = new Dictionary<string, List<XmlAttribute>>();
+
         private List<Shape> m_elements = new List<Shape>();
 
         public string Filename { get; private set; }
@@ -88,8 +90,10 @@ namespace SVGImage.SVG
 
         private void Parse(XmlNode node)
         {
-            if (node == null || node.Name != "svg") throw new FormatException("Not a valide SVG node");
-            foreach (XmlNode childnode in node.ChildNodes) Group.AddToList(this, this.m_elements, childnode, null);
+            if (node == null || node.Name != "svg")
+                throw new FormatException("Not a valide SVG node");
+            foreach (XmlNode childnode in node.ChildNodes)
+                Group.AddToList(this, this.m_elements, childnode, null);
         }
     }
 }

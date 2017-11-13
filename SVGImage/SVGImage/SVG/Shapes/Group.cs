@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace SVGImage.SVG.Shapes
@@ -9,6 +10,9 @@ namespace SVGImage.SVG.Shapes
     internal class Group : Shape
     {
         private List<Shape> m_elements = new List<Shape>();
+
+        private static Regex _regexStyle =
+            new Regex("\\.([a-zA-Z0-9 ]*){([^}]*)}", RegexOptions.Compiled | RegexOptions.Singleline);
 
         public IList<Shape> Elements
         {
@@ -127,10 +131,25 @@ namespace SVGImage.SVG.Shapes
                 list.Add(new AnimateTransform(svg, childnode));
                 return list[list.Count - 1];
             }
-            if (childnode.Name == "text")
+            if (childnode.Name == SVGTags.sText)
             {
                 list.Add(new TextShape(svg, childnode, parent));
                 return list[list.Count - 1];
+            }
+            if (childnode.Name == SVGTags.sStyle)
+            {
+                var match = _regexStyle.Match(childnode.InnerText);
+                while (match.Success)
+                {
+                    var name = match.Groups[1].Value.Trim();
+                    var value = match.Groups[2].Value;
+                    svg.m_styles.Add(name, new List<XmlAttribute>());
+                    foreach (ShapeUtil.Attribute styleitem in XmlUtil.SplitStyle(svg, value))
+                    {
+                        svg.m_styles[name].Add(new XmlUtil.StyleItem(childnode, styleitem.Name, styleitem.Value));
+                    }
+                    match = match.NextMatch();
+                }
             }
             return null;
         }

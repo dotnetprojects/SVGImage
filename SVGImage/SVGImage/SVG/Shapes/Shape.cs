@@ -111,6 +111,22 @@ namespace SVGImage.SVG.Shapes
 
         protected virtual void Parse(SVG svg, string name, string value)
         {
+            if (name == SVGTags.sClass)
+            {
+                var classes = value.Split(' ');
+                foreach (var @class in classes)
+                {
+                    List<XmlAttribute> attributes;
+                    if (svg.m_styles.TryGetValue(@class, out attributes))
+                    {
+                        foreach (var xmlAttribute in attributes)
+                        {
+                            Parse(svg, xmlAttribute);
+                        }
+                    }
+                }
+                return;
+            }
             if (name == SVGTags.sTransform)
             {
                 this.Transform = ShapeUtil.ParseTransform(value.ToLower());
