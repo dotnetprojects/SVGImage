@@ -107,7 +107,7 @@ namespace SVGImage.SVG
                 g.Children.Add(geometry);
                 geometry = g;
             }
-            if (shape.Transform != null) geometry.Transform = shape.Transform;
+            //if (shape.Transform != null) geometry.Transform = shape.Transform;
 
             // for debugging, if neither stroke or fill is set then set default pen
             //if (shape.Fill == null && shape.Stroke == null)
@@ -462,10 +462,13 @@ namespace SVGImage.SVG
 
         private void AddDrawingToGroup(DrawingGroup grp, Shape shape, Drawing drawing)
         {
-            if (shape.Clip != null)
+            if (shape.Clip != null || shape.Transform != null)
             {
                 var subgrp = new DrawingGroup();
-                subgrp.ClipGeometry = shape.Clip.ClipGeometry;
+                if (shape.Clip != null)
+                    subgrp.ClipGeometry = shape.Clip.ClipGeometry;
+                if (shape.Transform != null)
+                    subgrp.Transform = shape.Transform;
                 subgrp.Children.Add(drawing);
                 grp.Children.Add(subgrp);
             }
