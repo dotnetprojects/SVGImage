@@ -82,6 +82,7 @@ namespace SVGImage.SVG.Shapes
         {
             this.Opacity = 1;
             this.Parent = parent;
+            this.ParseAtStart(svg, node);
             if (node != null)
             {
                 foreach (XmlAttribute attr in node.Attributes) this.Parse(svg, attr);
@@ -113,6 +114,18 @@ namespace SVGImage.SVG.Shapes
             this.Parse(svg, name, value);
         }
 
+        protected virtual void ParseAtStart(SVG svg, XmlNode node)
+        {
+            List<XmlAttribute> attributes;
+            if (svg.m_styles.TryGetValue(node.Name, out attributes))
+            {
+                foreach (var xmlAttribute in attributes)
+                {
+                    Parse(svg, xmlAttribute);
+                }
+            }
+        }
+
         protected virtual void Parse(SVG svg, string name, string value)
         {
             if (name == SVGTags.sClass)
@@ -121,7 +134,7 @@ namespace SVGImage.SVG.Shapes
                 foreach (var @class in classes)
                 {
                     List<XmlAttribute> attributes;
-                    if (svg.m_styles.TryGetValue(@class, out attributes))
+                    if (svg.m_styles.TryGetValue("." + @class, out attributes))
                     {
                         foreach (var xmlAttribute in attributes)
                         {

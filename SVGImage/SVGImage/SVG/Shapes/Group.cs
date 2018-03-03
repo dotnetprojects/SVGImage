@@ -12,7 +12,7 @@ namespace SVGImage.SVG.Shapes
         private List<Shape> m_elements = new List<Shape>();
 
         private static Regex _regexStyle =
-            new Regex("\\.([a-zA-Z0-9 ]*){([^}]*)}", RegexOptions.Compiled | RegexOptions.Singleline);
+            new Regex("([\\.<>a-zA-Z0-9 ]*){([^}]*)}", RegexOptions.Compiled | RegexOptions.Singleline);
 
         public IList<Shape> Elements
         {

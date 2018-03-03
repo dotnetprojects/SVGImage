@@ -4,7 +4,7 @@
         xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
         Title="MainWindow" Height="412" Width="808" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
     <Grid Background="Wheat">
-        <svg1:SVGImage Source="/Example;component/Images/clipping.svg" Margin="457,53,82,147" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <svg1:SVGImage Source="/Example;component/Images/Layout1.svg" Margin="457,53,82,147" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
 
     </Grid>
 </Window>
