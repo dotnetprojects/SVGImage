@@ -144,7 +144,7 @@
     <Resource Include="Images\test1.svg" />
     <Resource Include="Images\test_3.svg" />
     <Resource Include="Images\test_4.svg" />
-    <Resource Include="Images\tombigel_green_router[1].svg" />
+    <Resource Include="Images\tombigel_green_router.svg" />
     <Resource Include="Images\tranberry_locked_exclamation_mark_-_padlock.svg" />
   </ItemGroup>
   <ItemGroup>

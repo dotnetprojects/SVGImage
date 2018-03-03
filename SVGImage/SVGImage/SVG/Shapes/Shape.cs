@@ -116,12 +116,15 @@ namespace SVGImage.SVG.Shapes
 
         protected virtual void ParseAtStart(SVG svg, XmlNode node)
         {
-            List<XmlAttribute> attributes;
-            if (svg.m_styles.TryGetValue(node.Name, out attributes))
+            if (node != null)
             {
-                foreach (var xmlAttribute in attributes)
+                List<XmlAttribute> attributes;
+                if (svg.m_styles.TryGetValue(node.Name, out attributes))
                 {
-                    Parse(svg, xmlAttribute);
+                    foreach (var xmlAttribute in attributes)
+                    {
+                        Parse(svg, xmlAttribute);
+                    }
                 }
             }
         }
