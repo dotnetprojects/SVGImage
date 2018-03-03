@@ -60,6 +60,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SVG\Animation\AnimationBase.cs" />
     <Compile Include="SVG\ClipArtElement.cs" />
     <Compile Include="SVG\Fill.cs" />
     <Compile Include="SVG\PaintServer\GradientColorPaintServer.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="SVG\PaintServer\PaintServerManager.cs" />
     <Compile Include="SVG\PaintServer\RadialGradientColorPaintServer.cs" />
     <Compile Include="SVG\PaintServer\SolidColorPaintServer.cs" />
-    <Compile Include="SVG\PathShape.cs" />
+    <Compile Include="SVG\Shapes\PathShape.cs" />
     <Compile Include="SVG\Shapes\CircleShape.cs" />
     <Compile Include="SVG\Shapes\Clip.cs" />
     <Compile Include="SVG\Shapes\EllipseShape.cs" />

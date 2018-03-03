@@ -286,6 +286,7 @@ namespace SVGImage.SVG
                     Point lastPoint = new Point(0, 0);
 
                     PathShape.CurveTo lastc = null;
+                    PathShape.QuadraticCurveTo lastq = null;
                     Point lastcirPoint = new Point(0, 0);
 
                     PathGeometry path = new PathGeometry();
@@ -349,7 +350,7 @@ namespace SVGImage.SVG
                             }
                             else
                             {
-                                if (c.Command == 'S')
+                                if (c.Command == 's')
                                 {
                                     // first control point is a mirrored point of last end control point
                                     //s.Point1 = lastPoint + new Vector(lastc.Point.X - dx, lastc.Point.Y - dy);
@@ -368,6 +369,54 @@ namespace SVGImage.SVG
 
                             lastc = c;
                             lastcirPoint = s.Point3;
+
+                            //debugPoints.Add(new ControlLine(startPoint, s.Point1));
+                            //debugPoints.Add(new ControlLine(s.Point3, s.Point2));
+                            continue;
+                        }
+                        if (element is PathShape.QuadraticCurveTo)
+                        {
+                            PathShape.QuadraticCurveTo c = element as PathShape.QuadraticCurveTo;
+                            Point startPoint = lastPoint;
+                            QuadraticBezierSegment s = new QuadraticBezierSegment();
+                            if (isRelative)
+                            {
+                                s.Point1 = lastPoint + (Vector)c.CtrlPoint1;
+
+                                if (c.Command == 'q')
+                                {
+                                    // first control point is a mirrored point of last end control point
+                                    //s.Point1 = lastPoint + new Vector(lastc.Point.X - dx, lastc.Point.Y - dy);
+                                    //s.Point1 = new Point(lastctrlpoint.X+2, lastctrlpoint.Y+2);
+
+                                    double dx = lastq.CtrlPoint1.X - lastq.Point.X;
+                                    double dy = lastq.CtrlPoint1.Y - lastq.Point.Y;
+                                    s.Point1 = new Point(lastcirPoint.X - dx, lastcirPoint.Y - dy);
+                                    //s.Point1 = lastctrlpoint;
+                                }
+
+                                s.Point2 = lastPoint + (Vector)c.Point;
+                            }
+                            else
+                            {
+                                if (c.Command == 'q')
+                                {
+                                    // first control point is a mirrored point of last end control point
+                                    //s.Point1 = lastPoint + new Vector(lastc.Point.X - dx, lastc.Point.Y - dy);
+                                    //s.Point1 = new Point(lastctrlpoint.X+2, lastctrlpoint.Y+2);
+
+                                    double dx = lastq.CtrlPoint1.X - lastq.Point.X;
+                                    double dy = lastq.CtrlPoint1.Y - lastq.Point.Y;
+                                    s.Point1 = new Point(lastcirPoint.X - dx, lastcirPoint.Y - dy);
+                                }
+                                else s.Point1 = c.CtrlPoint1;
+                                s.Point2 = c.Point;
+                            }
+                            lastPoint = s.Point2;
+                            p.Segments.Add(s);
+
+                            lastq = c;
+                            lastcirPoint = s.Point2;
 
                             //debugPoints.Add(new ControlLine(startPoint, s.Point1));
                             //debugPoints.Add(new ControlLine(s.Point3, s.Point2));
