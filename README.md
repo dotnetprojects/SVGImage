@@ -8,5 +8,5 @@ Initialy it's forked from: http://www.codeproject.com/Articles/92434/SVGImage-Co
 But it's extended for Mask/Clip support, basic support of styles.
 
 Todo:
- [] Extend Style support
- [] Animation support
+ - Extend Style support
+ - Animation support
