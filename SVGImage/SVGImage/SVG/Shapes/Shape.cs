@@ -66,6 +66,8 @@ namespace SVGImage.SVG.Shapes
             }
         }
 
+        public double Opacity { get; set; }
+
         public virtual Transform Transform { get; private set; }
 
         public Shape Parent { get; set; }
@@ -78,6 +80,7 @@ namespace SVGImage.SVG.Shapes
         public Shape(SVG svg, XmlNode node, Shape parent)
             : base(node)
         {
+            this.Opacity = 1;
             this.Parent = parent;
             if (node != null)
             {
@@ -88,6 +91,7 @@ namespace SVGImage.SVG.Shapes
         public Shape(SVG svg, List<ShapeUtil.Attribute> attrs, Shape parent)
             : base(null)
         {
+            this.Opacity = 1;
             this.Parent = parent;
             if (attrs != null)
             {
@@ -173,7 +177,7 @@ namespace SVGImage.SVG.Shapes
                 this.GetStroke(svg).LineJoin = (Stroke.eLineJoin)Enum.Parse(typeof(Stroke.eLineJoin), value);
                 return;
             }
-            if (name == SVGTags.sClipPath)
+            if (name == SVGTags.sClipPathProperty)
             {
                 if (value.StartsWith("url"))
                 {
@@ -199,6 +203,11 @@ namespace SVGImage.SVG.Shapes
             if (name == SVGTags.sFillRule)
             {
                 this.GetFill(svg).FillRule = (Fill.eFillRule)Enum.Parse(typeof(Fill.eFillRule), value);
+                return;
+            }
+            if (name == SVGTags.sOpacity)
+            {
+                this.Opacity = XmlUtil.ParseDouble(svg, value);
                 return;
             }
             if (name == SVGTags.sStyle)

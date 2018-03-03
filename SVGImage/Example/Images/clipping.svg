@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Basic//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd">
+<!--======================================================================-->
+<!--=  Copyright 2000 World Wide Web Consortium, (Massachusetts          =-->
+<!--=  Institute of Technology, Institut National de Recherche en        =-->
+<!--=  Informatique et en Automatique, Keio University). All Rights      =-->
+<!--=  Reserved. See http://www.w3.org/Consortium/Legal/.                =-->
+<svg width="360px" height="510px"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Das clipPath-Element</title>
+    <desc>
+        Dieses Beispiel für Clipping beinhaltet 2 Clip-Pfade,
+        von denen einer animiert wird.
+    </desc>
+    <defs>
+        <!-- zwei Clip-Pfade: cp1 und cp2 -->
+        <clipPath id="cp1">
+            <circle cx="80" cy="110" r="50" />
+            <circle cx="180" cy="130" r="80" />
+            <circle cx="280" cy="150" r="50" />
+        </clipPath>
+        <clipPath id="cp2">
+            <circle id="clippie" cx="-10" cy="380" r="30" />
+        </clipPath>
+    </defs>
+
+    <!-- schwarzer Hintergrund -->
+    <rect x="0" y="0" width="360" height="510"
+          style="fill:black; stroke:none;" />
+
+    <!-- die Clip-Pfade werden von zwei image-Elementen referenziert -->
+    <image x="20" y="10" width="320" height="240" xlink:href="raupen.jpg"
+           clip-path="url(#cp1)" />
+    <image x="20" y="260" width="320" height="240" xlink:href="raupen.jpg"
+           clip-path="url(#cp2)" />
+
+    <!-- der Clip-Pfad cp2 wird animiert -->
+    <animate xlink:href="#clippie"
+             attributeType="XML" attributeName="cx"
+             begin="0" dur="12"
+             values="-10;380;-10"
+             repeatDur="indefinite" />
+    <animate xlink:href="#clippie"
+             attributeType="XML" attributeName="r"
+             begin="0" dur="12"
+             values="10;110;10;110;30"
+             repeatDur="indefinite" />
+
+    <!-- Hilfslinien: Umrisse der eingebundenen Grafiken -->
+    <rect x="20" y="10" width="320" height="240" style="fill:none; stroke:white; stroke-dasharray:5,2" />
+    <rect x="20" y="260" width="320" height="240" style="fill:none; stroke:white; stroke-dasharray:5,2" />
+    <text x="95" y="265" style="font-family:Verdana,sans-serif; font-size:36px;font-weight:bold; fill:white;">Clipping</text>
+</svg>

@@ -61,7 +61,7 @@ namespace SVGImage.SVG
             Stroke stroke = shape.Stroke;
             if (stroke != null)
             {
-                item.Pen = new Pen(stroke.StrokeBrush(this.SVG), stroke.Width);
+                item.Pen = new Pen(stroke.StrokeBrush(this.SVG, shape.Opacity), stroke.Width);
                 if (stroke.StrokeArray != null)
                 {
                     item.Pen.DashCap = PenLineCap.Flat;
@@ -100,7 +100,7 @@ namespace SVGImage.SVG
             }
             if (shape.Fill != null)
             {
-                item.Brush = shape.Fill.FillBrush(this.SVG);
+                item.Brush = shape.Fill.FillBrush(this.SVG, shape.Opacity);
                 GeometryGroup g = new GeometryGroup();
                 g.FillRule = FillRule.Nonzero;
                 if (shape.Fill.FillRule == Fill.eFillRule.evenodd) g.FillRule = FillRule.EvenOdd;
@@ -188,7 +188,7 @@ namespace SVGImage.SVG
                         subgroup.ClipGeometry = shape.Clip.ClipGeometry;
                     }
                     if (shape.Transform != null) subgroup.Transform = shape.Transform;
-                    grp.Children.Add(subgroup);
+                    AddDrawingToGroup(grp, shape, subgroup);
                     continue;
                 }
                 if (shape is RectangleShape)
@@ -198,13 +198,15 @@ namespace SVGImage.SVG
                     rect.RadiusX = r.RX;
                     rect.RadiusY = r.RY;
                     if (rect.RadiusX == 0 && rect.RadiusY > 0) rect.RadiusX = rect.RadiusY;
-                    grp.Children.Add(this.NewDrawingItem(shape, rect));
+                    var di = this.NewDrawingItem(shape, rect);
+                    AddDrawingToGroup(grp, shape, di);
                 }
                 if (shape is LineShape)
                 {
                     LineShape r = shape as LineShape;
                     LineGeometry line = new LineGeometry(r.P1, r.P2);
-                    grp.Children.Add(this.NewDrawingItem(shape, line));
+                    var di = this.NewDrawingItem(shape, line);
+                    AddDrawingToGroup(grp, shape, di);
                 }
                 if (shape is PolylineShape)
                 {
@@ -218,7 +220,8 @@ namespace SVGImage.SVG
                     {
                         p.Segments.Add(new LineSegment(r.Points[index], true));
                     }
-                    grp.Children.Add(this.NewDrawingItem(shape, path));
+                    var di = this.NewDrawingItem(shape, path);
+                    AddDrawingToGroup(grp, shape, di);
                 }
                 if (shape is PolygonShape)
                 {
@@ -232,25 +235,28 @@ namespace SVGImage.SVG
                     {
                         p.Segments.Add(new LineSegment(r.Points[index], true));
                     }
-                    grp.Children.Add(this.NewDrawingItem(shape, path));
+                    var di = this.NewDrawingItem(shape, path);
+                    AddDrawingToGroup(grp, shape, di);
                 }
                 if (shape is CircleShape)
                 {
                     CircleShape r = shape as CircleShape;
                     EllipseGeometry c = new EllipseGeometry(new Point(r.CX, r.CY), r.R, r.R);
-                    grp.Children.Add(this.NewDrawingItem(shape, c));
+                    var di = this.NewDrawingItem(shape, c);
+                    AddDrawingToGroup(grp, shape, di);
                 }
                 if (shape is EllipseShape)
                 {
                     EllipseShape r = shape as EllipseShape;
                     EllipseGeometry c = new EllipseGeometry(new Point(r.CX, r.CY), r.RX, r.RY);
-                    grp.Children.Add(this.NewDrawingItem(shape, c));
+                    var di = this.NewDrawingItem(shape, c);
+                    AddDrawingToGroup(grp, shape, di);
                 }
                 if (shape is ImageShape)
                 {
                     ImageShape image = shape as ImageShape;
                     ImageDrawing i = new ImageDrawing(image.ImageSource, new Rect(image.X, image.Y, image.Width, image.Height));
-                    grp.Children.Add(i);
+                    AddDrawingToGroup(grp, shape, i);
                 }
                 if (shape is TextShape)
                 {
@@ -260,8 +266,16 @@ namespace SVGImage.SVG
                         foreach (Geometry gm in gp.Children)
                         {
                             TextShape.TSpan.Element tspan = TextRender.GetElement(gm);
-                            if (tspan != null) grp.Children.Add(this.NewDrawingItem(tspan, gm));
-                            else grp.Children.Add(this.NewDrawingItem(shape, gm));
+                            if (tspan != null)
+                            {
+                                var di = this.NewDrawingItem(tspan, gm);
+                                AddDrawingToGroup(grp, shape, di);
+                            }
+                            else
+                            {
+                                var di = this.NewDrawingItem(shape, gm);
+                                AddDrawingToGroup(grp, shape, di);
+                            }
                         }
                     }
                 }
@@ -380,7 +394,8 @@ namespace SVGImage.SVG
                     if (r.Transform != null)
                         path.Transform = r.Transform;
                     */
-                    grp.Children.Add(this.NewDrawingItem(shape, path));
+                    var di = this.NewDrawingItem(shape, path);
+                    AddDrawingToGroup(grp, shape, di);
                     //}
                 }
             }
@@ -388,9 +403,25 @@ namespace SVGImage.SVG
 
             if (debugPoints != null)
             {
-                foreach (ControlLine line in debugPoints) grp.Children.Add(line.Draw());
+                foreach (ControlLine line in debugPoints)
+                {
+                    grp.Children.Add(line.Draw());
+                }
             }
             return grp;
+        }
+
+        private void AddDrawingToGroup(DrawingGroup grp, Shape shape, Drawing drawing)
+        {
+            if (shape.Clip != null)
+            {
+                var subgrp = new DrawingGroup();
+                subgrp.ClipGeometry = shape.Clip.ClipGeometry;
+                subgrp.Children.Add(drawing);
+                grp.Children.Add(subgrp);
+            }
+            else
+                grp.Children.Add(drawing);
         }
     }
 }

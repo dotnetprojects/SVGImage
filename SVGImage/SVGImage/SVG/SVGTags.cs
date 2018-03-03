@@ -13,6 +13,7 @@
         public const string sFillOpacity = "fill-opacity";
         public const string sFillRule = "fill-rule";
         public const string sStyle = "style";
+        public const string sOpacity = "opacity";
 
         public const string sAnimate = "animate";
         public const string sAnimateColor = "animateColor";
@@ -21,6 +22,7 @@
 
 
         public const string sClipPath = "clipPath";
+        public const string sClipPathProperty = "clip-path";
 
         public const string sTranslate = "translate";
         public const string sMatrix = "matrix";

@@ -32,10 +32,10 @@ namespace SVGImage.SVG
 			this.LineJoin = eLineJoin.miter;
 			this.Opacity = 100;
 		}
-		public Brush StrokeBrush(SVG svg)
+		public Brush StrokeBrush(SVG svg, double elementOpacity)
 		{
 			if (this.Color != null)
-				return this.Color.GetBrush(this.Opacity, svg);
+				return this.Color.GetBrush(this.Opacity*elementOpacity, svg);
 			return null;
 		}
 	}
