@@ -58,5 +58,10 @@
         public const string sText = "text";
 
         public const string sClass = "class";
+
+        public const string sFilter = "filter";
+        public const string sFilterProperty = "filter";
+        public const string sFeGaussianBlur = "feGaussianBlur";
+        
     }
 }

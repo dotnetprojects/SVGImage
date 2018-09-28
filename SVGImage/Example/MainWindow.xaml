@@ -13,7 +13,7 @@
         <svg1:SVGImage Source="/Example;component/Images/example radgrad01.svg" Margin="10,382,0,0" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="261" Height="181" VerticalAlignment="Top" />
         <svg1:SVGImage Source="/Example;component/Images/clipping_css.svg" Margin="276,382,0,0" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="261" Height="181" VerticalAlignment="Top" />
         <svg1:SVGImage Source="/Example;component/Images/jktest.svg" Margin="542,382,0,0" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="261" Height="181" VerticalAlignment="Top" />
-        <svg1:SVGImage Source="/Example;component/Images/Layout1.svg" Margin="10,568,10,10" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <svg1:SVGImage Source="/Example;component/Images/171.svg" Margin="10,568,10,10" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
 
     </Grid>
 </Window>

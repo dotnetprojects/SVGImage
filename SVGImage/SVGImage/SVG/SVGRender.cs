@@ -151,7 +151,7 @@ namespace SVGImage.SVG
         {
             List<ControlLine> debugPoints = new List<ControlLine>();
             DrawingGroup grp = new DrawingGroup();
-
+            
             if (viewBox.HasValue) grp.ClipGeometry = new RectangleGeometry(viewBox.Value);
 
             foreach (Shape shape in elements)
@@ -462,13 +462,15 @@ namespace SVGImage.SVG
 
         private void AddDrawingToGroup(DrawingGroup grp, Shape shape, Drawing drawing)
         {
-            if (shape.Clip != null || shape.Transform != null)
+            if (shape.Clip != null || shape.Transform != null || shape.Filter != null)
             {
                 var subgrp = new DrawingGroup();
                 if (shape.Clip != null)
                     subgrp.ClipGeometry = shape.Clip.ClipGeometry;
                 if (shape.Transform != null)
                     subgrp.Transform = shape.Transform;
+                if (shape.Filter != null)
+                    subgrp.BitmapEffect = shape.Filter.GetBitmapEffect();
                 subgrp.Children.Add(drawing);
                 grp.Children.Add(subgrp);
             }

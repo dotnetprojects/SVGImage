@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
+using DotNetProjects.SVGImage.SVG.Shapes.Filter;
 
 namespace SVGImage.SVG.Shapes
 {
@@ -59,6 +60,16 @@ namespace SVGImage.SVG.Shapes
             if (childnode.Name == SVGTags.sShapeRect)
             {
                 list.Add(new RectangleShape(svg, childnode));
+                return list[list.Count - 1];
+            }
+            if (childnode.Name == SVGTags.sFilter)
+            {
+                list.Add(new Filter(svg, childnode, parent));
+                return list[list.Count - 1];
+            }
+            if (childnode.Name == SVGTags.sFeGaussianBlur)
+            {
+                list.Add(new FilterFeGaussianBlur(svg, childnode, parent));
                 return list[list.Count - 1];
             }
             if (childnode.Name == SVGTags.sShapeCircle)

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Media;
 using System.Xml;
 using System.Windows;
+using DotNetProjects.SVGImage.SVG.Shapes.Filter;
 
 namespace SVGImage.SVG.Shapes
 {
@@ -70,6 +72,8 @@ namespace SVGImage.SVG.Shapes
 
         public virtual Transform Transform { get; private set; }
 
+        internal virtual Filter Filter { get; private set; }
+
         public Shape Parent { get; set; }
 
         public Shape(SVG svg, XmlNode node)
@@ -85,7 +89,8 @@ namespace SVGImage.SVG.Shapes
             this.ParseAtStart(svg, node);
             if (node != null)
             {
-                foreach (XmlAttribute attr in node.Attributes) this.Parse(svg, attr);
+                foreach (XmlAttribute attr in node.Attributes)
+                    this.Parse(svg, attr);
             }
         }
 
@@ -96,7 +101,8 @@ namespace SVGImage.SVG.Shapes
             this.Parent = parent;
             if (attrs != null)
             {
-                foreach (ShapeUtil.Attribute attr in attrs) this.Parse(svg, attr);
+                foreach (ShapeUtil.Attribute attr in attrs)
+                    this.Parse(svg, attr);
             }
         }
 
@@ -193,6 +199,19 @@ namespace SVGImage.SVG.Shapes
                 this.GetStroke(svg).LineJoin = (Stroke.eLineJoin)Enum.Parse(typeof(Stroke.eLineJoin), value);
                 return;
             }
+            if (name == SVGTags.sFilterProperty)
+            {
+                if (value.StartsWith("url"))
+                {
+                    Shape result;
+                    string id = ShapeUtil.ExtractBetween(value, '(', ')');
+                    if (id.Length > 0 && id[0] == '#') id = id.Substring(1);
+                    svg.m_shapes.TryGetValue(id, out result);
+                    this.Filter = result as Filter;
+                    return;
+                }
+                return;
+            }
             if (name == SVGTags.sClipPathProperty)
             {
                 if (value.StartsWith("url"))
@@ -286,6 +305,8 @@ namespace SVGImage.SVG.Shapes
                 this.GetTextStyle(svg).BaseLineShift = value;
                 return;
             }
+
+            //Debug.WriteLine("Unsupported: "+ name);
         }
 
         private Stroke GetStroke(SVG svg)
