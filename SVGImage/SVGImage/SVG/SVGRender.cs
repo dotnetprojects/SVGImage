@@ -165,7 +165,8 @@ namespace SVGImage.SVG
                         Shape oldparent = group.Parent;
                         group.Parent = useshape; // this to get proper style propagated
                         DrawingGroup subgroup = this.LoadGroup(group.Elements, null);
-                        if (group.Clip != null) subgroup.ClipGeometry = group.Clip.ClipGeometry;
+                        if (group.Clip != null)
+                            subgroup.ClipGeometry = group.Clip.ClipGeometry;
                         subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
                         grp.Children.Add(subgroup);
                         group.Parent = oldparent;
@@ -176,18 +177,14 @@ namespace SVGImage.SVG
                 if (shape is Clip)
                 {
                     DrawingGroup subgroup = this.LoadGroup((shape as Clip).Elements, null);
-                    if (shape.Transform != null) subgroup.Transform = shape.Transform;
+                    if (shape.Transform != null)
+                        subgroup.Transform = shape.Transform;
                     grp.Children.Add(subgroup);
                     continue;
                 }
                 if (shape is Group)
                 {
                     DrawingGroup subgroup = this.LoadGroup((shape as Group).Elements, null);
-                    if (shape.Clip != null)
-                    {
-                        subgroup.ClipGeometry = shape.Clip.ClipGeometry;
-                    }
-                    if (shape.Transform != null) subgroup.Transform = shape.Transform;
                     AddDrawingToGroup(grp, shape, subgroup);
                     continue;
                 }

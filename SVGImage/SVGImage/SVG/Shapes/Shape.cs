@@ -326,5 +326,10 @@ namespace SVGImage.SVG.Shapes
             if (this.m_textstyle == null) this.m_textstyle = new TextStyle(svg, this);
             return this.m_textstyle;
         }
+
+        public override string ToString()
+        {
+            return this.GetType().Name + " (" + (Id ?? "") + ")";
+        }
     }
 }
