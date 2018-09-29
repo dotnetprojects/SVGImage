@@ -63,6 +63,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SVG\Animation\AnimateTransformType.cs" />
     <Compile Include="SVG\Animation\AnimationBase.cs" />
     <Compile Include="SVG\ClipArtElement.cs" />
     <Compile Include="SVG\Fill.cs" />
@@ -96,7 +97,7 @@
     <Compile Include="SVG\Text.cs" />
     <Compile Include="SVG\TextRender.cs" />
     <Compile Include="SVG\TextStyle.cs" />
-    <Compile Include="SVG\Shapes\AnimateTransform.cs" />
+    <Compile Include="SVG\Animation\AnimateTransform.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

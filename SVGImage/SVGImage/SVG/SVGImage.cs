@@ -67,6 +67,15 @@ namespace SVGImage.SVG
             set { this.SetValue(ImageSourcePoperty, value); }
         }
 
+        public bool UseAnimations
+        {
+            get { return (bool)GetValue(UseAnimationsProperty); }
+            set { SetValue(UseAnimationsProperty, value); }
+        }
+
+        public static readonly DependencyProperty UseAnimationsProperty =
+            DependencyProperty.Register("UseAnimations", typeof(bool), typeof(SVGImage), new PropertyMetadata(true));
+
         Drawing m_drawing;
         TranslateTransform m_offsetTransform = new TranslateTransform();
         ScaleTransform m_scaleTransform = new ScaleTransform();
@@ -84,14 +93,50 @@ namespace SVGImage.SVG
         }
         public void SetImage(string svgFilename)
         {
-            SVGRender render = new SVGRender();
-            this.SetImage(render.LoadDrawing(svgFilename));
+            loadImage = (render) =>
+            {
+                this.SetImage(render.LoadDrawing(svgFilename));
+            };
+
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                SVGRender render = new SVGRender();
+                render.UseAnimations = false;
+                loadImage(render);
+                loadImage = null;
+            }
         }
+
         public void SetImage(Stream stream)
         {
-            SVGRender render = new SVGRender();
-            this.SetImage(render.LoadDrawing(stream));
+            loadImage = (render) =>
+            {
+                this.SetImage(render.LoadDrawing(stream));
+            };
+
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                SVGRender render = new SVGRender();
+                render.UseAnimations = false;
+                loadImage(render);
+                loadImage = null;
+            }
         }
+
+        private Action<SVGRender> loadImage = null;
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            if (loadImage != null)
+            {
+                SVGRender render = new SVGRender();
+                render.UseAnimations = this.UseAnimations;
+                loadImage(render);
+                loadImage = null;
+            }
+        }
+
         public void SetImage(Drawing drawing)
         {
             this.m_drawing = drawing;

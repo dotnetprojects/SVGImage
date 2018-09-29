@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Windows.Markup;
-using System.Xml;
 using System.Windows;
 using System.Windows.Media;
-
+using System.Windows.Media.Animation;
+using DotNetProjects.SVGImage.SVG.Animation;
 using SVGImage.SVG.Shapes;
 
 namespace SVGImage.SVG
@@ -24,6 +21,8 @@ namespace SVGImage.SVG
                 return this.m_svg;
             }
         }
+
+        public bool UseAnimations { get; set; }
 
         public DrawingGroup LoadDrawing(string filename)
         {
@@ -151,11 +150,35 @@ namespace SVGImage.SVG
         {
             List<ControlLine> debugPoints = new List<ControlLine>();
             DrawingGroup grp = new DrawingGroup();
-            
             if (viewBox.HasValue) grp.ClipGeometry = new RectangleGeometry(viewBox.Value);
 
             foreach (Shape shape in elements)
             {
+                if (shape is AnimationBase)
+                {
+                    if (UseAnimations)
+                    {
+                        if (shape is AnimateTransform animateTransform)
+                        {
+                            if (animateTransform.Type == AnimateTransformType.Rotate)
+                            {
+                                var animation = new DoubleAnimation
+                                {
+                                    From = double.Parse(animateTransform.From),
+                                    To = double.Parse(animateTransform.To),
+                                    Duration = animateTransform.Duration
+                                };
+                                animation.RepeatBehavior = RepeatBehavior.Forever;
+                                var r = new RotateTransform();
+                                grp.Transform = r;
+                                r.BeginAnimation(RotateTransform.AngleProperty, animation);
+                            }
+                        }
+                    }
+
+                    continue;
+                }
+
                 if (shape is UseShape)
                 {
                     UseShape useshape = shape as UseShape;

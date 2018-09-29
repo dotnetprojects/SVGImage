@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Xml;
+using DotNetProjects.SVGImage.SVG.Animation;
 using DotNetProjects.SVGImage.SVG.Shapes.Filter;
 
 namespace SVGImage.SVG.Shapes
@@ -8,7 +9,6 @@ namespace SVGImage.SVG.Shapes
     internal class Group : Shape
     {
         private List<Shape> m_elements = new List<Shape>();
-
         private static Regex _regexStyle =
             new Regex("([\\.<>a-zA-Z0-9 ]*){([^}]*)}", RegexOptions.Compiled | RegexOptions.Singleline);
 
@@ -136,7 +136,7 @@ namespace SVGImage.SVG.Shapes
             }
             if (childnode.Name == SVGTags.sAnimateTransform)
             {
-                list.Add(new AnimateTransform(svg, childnode));
+                list.Add(new AnimateTransform(svg, childnode, parent));
                 return list[list.Count - 1];
             }
             if (childnode.Name == SVGTags.sText)
