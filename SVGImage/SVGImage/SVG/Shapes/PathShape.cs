@@ -195,11 +195,11 @@ namespace SVGImage.SVG
         // http://apike.ca/prog_svg_paths.html
         public PathShape(SVG svg, XmlNode node, Shape parent) : base(svg, node, parent)
         {
-            if (DefaultFill == null)
-            {
-                DefaultFill = new Fill(svg);
-                DefaultFill.Color = svg.PaintServers.Parse("black");
-            }
+            //if (DefaultFill == null)
+            //{
+            //    DefaultFill = new Fill(svg);
+            //    DefaultFill.Color = svg.PaintServers.Parse("black");
+            //}
 
             this.ClosePath = false;
             string path = XmlUtil.AttrValue(node, "d", string.Empty);
