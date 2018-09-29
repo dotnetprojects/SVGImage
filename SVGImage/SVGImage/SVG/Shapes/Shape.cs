@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Media;
 using System.Xml;
 using System.Windows;
@@ -31,10 +30,11 @@ namespace SVGImage.SVG.Shapes
             get
             {
                 if (this.m_stroke != null) return this.m_stroke;
-                while (this.Parent != null)
+                var parent = this.Parent;
+                while (parent != null)
                 {
-                    if (this.Parent.Stroke != null) return this.Parent.Stroke;
-                    this.Parent = this.Parent.Parent;
+                    if (this.Parent.Stroke != null) return parent.Stroke;
+                    parent = parent.Parent;
                 }
                 return null;
             }
@@ -45,10 +45,11 @@ namespace SVGImage.SVG.Shapes
             get
             {
                 if (this.m_fill != null) return this.m_fill;
-                while (this.Parent != null)
+                var parent = this.Parent;
+                while (parent != null)
                 {
-                    if (this.Parent.Fill != null) return this.Parent.Fill;
-                    this.Parent = this.Parent.Parent;
+                    if (parent.Fill != null) return parent.Fill;
+                    parent = parent.Parent;
                 }
                 return null;
             }
@@ -59,10 +60,11 @@ namespace SVGImage.SVG.Shapes
             get
             {
                 if (this.m_textstyle != null) return this.m_textstyle;
-                while (this.Parent != null)
+                var parent = this.Parent;
+                while (parent != null)
                 {
-                    if (this.Parent.m_textstyle != null) return this.Parent.m_textstyle;
-                    this.Parent = this.Parent.Parent;
+                    if (parent.m_textstyle != null) return parent.m_textstyle;
+                    parent = parent.Parent;
                 }
                 return null;
             }

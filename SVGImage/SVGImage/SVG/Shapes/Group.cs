@@ -96,7 +96,7 @@ namespace SVGImage.SVG.Shapes
             }
             if (childnode.Name == SVGTags.sShapePath)
             {
-                list.Add(new PathShape(svg, childnode));
+                list.Add(new PathShape(svg, childnode, parent));
                 return list[list.Count - 1];
             }
             if (childnode.Name == SVGTags.sClipPath)
