@@ -25,6 +25,8 @@ namespace SVGImage.SVG.Shapes
             }
         }
 
+        internal Geometry geometryElement;
+
         public virtual Stroke Stroke
         {
             get

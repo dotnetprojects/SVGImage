@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -56,6 +57,7 @@ namespace SVGImage.SVG
 
         private GeometryDrawing NewDrawingItem(Shape shape, Geometry geometry)
         {
+            shape.geometryElement = geometry;
             GeometryDrawing item = new GeometryDrawing();
             Stroke stroke = shape.Stroke;
             if (stroke != null)
@@ -173,6 +175,45 @@ namespace SVGImage.SVG
                                 grp.Transform = r;
                                 r.BeginAnimation(RotateTransform.AngleProperty, animation);
                             }
+                        }
+                        else if (shape is Animate animate)
+                        {
+                            var target = this.SVG.GetShape(animate.hRef);
+                            var g = target.geometryElement;
+                            //todo : rework this all, generalize it!
+                            if (animate.AttributeName == "r")
+                            {
+                                var animation = new DoubleAnimationUsingKeyFrames() { Duration = animate.Duration };
+                                foreach (var d in animate.Values.Split(';').Select(x => new LinearDoubleKeyFrame(double.Parse(x))))
+                                {
+                                    animation.KeyFrames.Add(d);
+                                }
+                                animation.RepeatBehavior = RepeatBehavior.Forever;
+
+                                g.BeginAnimation(EllipseGeometry.RadiusXProperty, animation);
+                                g.BeginAnimation(EllipseGeometry.RadiusYProperty, animation);
+                            }
+                            else if (animate.AttributeName == "cx")
+                            {
+                                var animation = new PointAnimationUsingKeyFrames() { Duration = animate.Duration };
+                                foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(new Point(double.Parse(_), ((EllipseGeometry)g).Center.Y))))
+                                {
+                                    animation.KeyFrames.Add(d);
+                                }
+                                animation.RepeatBehavior = RepeatBehavior.Forever;
+                                g.BeginAnimation(EllipseGeometry.CenterProperty, animation);
+                            }
+                            else if (animate.AttributeName == "cy")
+                            {
+                                var animation = new PointAnimationUsingKeyFrames() { Duration = animate.Duration };
+                                foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(new Point(((EllipseGeometry)g).Center.X, double.Parse(_)))))
+                                {
+                                    animation.KeyFrames.Add(d);
+                                }
+                                animation.RepeatBehavior = RepeatBehavior.Forever;
+                                g.BeginAnimation(EllipseGeometry.CenterProperty, animation);
+                            }
+
                         }
                     }
 

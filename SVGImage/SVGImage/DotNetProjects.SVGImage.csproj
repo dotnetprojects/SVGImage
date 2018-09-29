@@ -63,6 +63,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SVG\Animation\AnimateColor.cs" />
+    <Compile Include="SVG\Animation\AnimateMotion.cs" />
+    <Compile Include="SVG\Animation\Animate.cs" />
     <Compile Include="SVG\Animation\AnimateTransformType.cs" />
     <Compile Include="SVG\Animation\AnimationBase.cs" />
     <Compile Include="SVG\ClipArtElement.cs" />

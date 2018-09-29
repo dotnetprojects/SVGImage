@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Xml;
 
@@ -41,12 +37,16 @@ namespace SVGImage.SVG.Shapes
             if (shp is RectangleShape)
             {
                 var r = shp as RectangleShape;
-                return new RectangleGeometry(new Rect(r.RX, r.RY, r.Width, r.Height));
+                var g = new RectangleGeometry(new Rect(r.RX, r.RY, r.Width, r.Height));
+                r.geometryElement = g;
+                return g;
             }
             if (shp is CircleShape)
             {
                 var c = shp as CircleShape;
-                return new EllipseGeometry(new Point(c.CX, c.CY), c.R, c.R);
+                var g = new EllipseGeometry(new Point(c.CX, c.CY), c.R, c.R);
+                c.geometryElement = g;
+                return g;
             }
             return null;
         }
