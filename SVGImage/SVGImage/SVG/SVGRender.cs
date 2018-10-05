@@ -25,6 +25,8 @@ namespace SVGImage.SVG
 
         public bool UseAnimations { get; set; }
 
+        public Color? OverrideColor { get; set; }
+
         public DrawingGroup LoadDrawing(string filename)
         {
             this.m_svg = new SVG(filename);
@@ -62,7 +64,10 @@ namespace SVGImage.SVG
             Stroke stroke = shape.Stroke;
             if (stroke != null)
             {
-                item.Pen = new Pen(stroke.StrokeBrush(this.SVG, shape.Opacity), stroke.Width);
+                var brush = stroke.StrokeBrush(this.SVG, shape.Opacity);
+                if (OverrideColor != null)
+                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
+                item.Pen = new Pen(brush, stroke.Width);
                 if (stroke.StrokeArray != null)
                 {
                     item.Pen.DashCap = PenLineCap.Flat;
@@ -102,6 +107,8 @@ namespace SVGImage.SVG
             if (shape.Fill != null)
             {
                 item.Brush = shape.Fill.FillBrush(this.SVG, shape.Opacity);
+                if (OverrideColor != null)
+                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
                 g.FillRule = FillRule.Nonzero;
                 if (shape.Fill.FillRule == Fill.eFillRule.evenodd) g.FillRule = FillRule.EvenOdd;

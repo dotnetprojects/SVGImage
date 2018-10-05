@@ -76,6 +76,15 @@ namespace SVGImage.SVG
         public static readonly DependencyProperty UseAnimationsProperty =
             DependencyProperty.Register("UseAnimations", typeof(bool), typeof(SVGImage), new PropertyMetadata(true));
 
+        public Color? OverrideColor
+        {
+            get { return (Color?)GetValue(OverrideColorProperty); }
+            set { SetValue(OverrideColorProperty, value); }
+        }
+
+        public static readonly DependencyProperty OverrideColorProperty =
+            DependencyProperty.Register("OverrideColor", typeof(Color?), typeof(SVGImage), new PropertyMetadata(null));
+
         Drawing m_drawing;
         TranslateTransform m_offsetTransform = new TranslateTransform();
         ScaleTransform m_scaleTransform = new ScaleTransform();
@@ -100,8 +109,9 @@ namespace SVGImage.SVG
 
             if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
-                SVGRender render = new SVGRender();
+                var render = new SVGRender();
                 render.UseAnimations = false;
+                render.OverrideColor = OverrideColor;
                 loadImage(render);
                 loadImage = null;
             }
@@ -116,7 +126,8 @@ namespace SVGImage.SVG
 
             if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
-                SVGRender render = new SVGRender();
+                var render = new SVGRender();
+                render.OverrideColor = OverrideColor;
                 render.UseAnimations = false;
                 loadImage(render);
                 loadImage = null;
@@ -131,6 +142,7 @@ namespace SVGImage.SVG
             if (loadImage != null)
             {
                 SVGRender render = new SVGRender();
+                render.OverrideColor = OverrideColor;
                 render.UseAnimations = this.UseAnimations;
                 loadImage(render);
                 loadImage = null;
