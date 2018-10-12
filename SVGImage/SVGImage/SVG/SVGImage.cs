@@ -50,6 +50,19 @@ namespace SVGImage.SVG
             ((SVGImage)d).SetImage(resource.Stream);
         }
 
+        public string FileSource
+        {
+            get { return (string)GetValue(FileSourceProperty); }
+            set { SetValue(FileSourceProperty, value); }
+        }
+
+        public static readonly DependencyProperty FileSourceProperty =
+            DependencyProperty.Register("FileSource", typeof(string), typeof(SVGImage), new PropertyMetadata(OnFileSourceChanged));
+        static void OnFileSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((SVGImage)d).SetImage(new FileStream(e.NewValue.ToString(), FileMode.Open));
+        }
+
         public static DependencyProperty ImageSourcePoperty = DependencyProperty.Register("ImageSource",
             typeof(Drawing),
             typeof(SVGImage),
