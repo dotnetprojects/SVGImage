@@ -11,3 +11,7 @@ But it's extended with
   - simple Animation support.
   
 Licence changed to MIT (with grant from the initial author)
+
+Sample App:
+
+![](https://github.com/dotnetprojects/SVGImage/blob/master/sample.png)
