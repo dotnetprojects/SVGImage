@@ -60,7 +60,7 @@ namespace SVGImage.SVG
             DependencyProperty.Register("FileSource", typeof(string), typeof(SVGImage), new PropertyMetadata(OnFileSourceChanged));
         static void OnFileSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((SVGImage)d).SetImage(new FileStream(e.NewValue.ToString(), FileMode.Open));
+            ((SVGImage)d).SetImage(new FileStream(e.NewValue.ToString(), FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
         }
 
         public static DependencyProperty ImageSourcePoperty = DependencyProperty.Register("ImageSource",
