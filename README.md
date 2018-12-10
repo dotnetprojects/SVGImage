@@ -14,4 +14,4 @@ Licence changed to MIT (with grant from the initial author)
 
 Sample App:
 
-![](https://github.com/dotnetprojects/SVGImage/sample.png)
+![](https://github.com/dotnetprojects/SVGImage/blob/master/sample.png)
