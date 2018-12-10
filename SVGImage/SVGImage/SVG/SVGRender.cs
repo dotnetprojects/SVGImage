@@ -13,15 +13,7 @@ namespace SVGImage.SVG
     // http://commons.oreilly.com/wiki/index.php/SVG_Essentials
     public class SVGRender
     {
-        private SVG m_svg;
-
-        public SVG SVG
-        {
-            get
-            {
-                return this.m_svg;
-            }
-        }
+        public SVG SVG { get; private set; }
 
         public bool UseAnimations { get; set; }
 
@@ -29,22 +21,15 @@ namespace SVGImage.SVG
 
         public DrawingGroup LoadDrawing(string filename)
         {
-            this.m_svg = new SVG(filename);
-            return this.CreateDrawing(this.m_svg);
+            this.SVG = new SVG(filename);
+            return this.CreateDrawing(this.SVG);
         }
 
         public DrawingGroup LoadDrawing(Stream stream)
         {
-            this.m_svg = new SVG(stream);
+            this.SVG = new SVG(stream);
 
-            /*var aa = new MemoryStream();
-            var qq = XmlWriter.Create(aa, new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = true });
-            XamlWriter.Save(this.CreateDrawing(this.m_svg), qq);
-            aa.Position = 0;
-            var bb = new StreamReader(aa);
-            var cc = bb.ReadToEnd();*/
-
-            return this.CreateDrawing(this.m_svg);
+            return this.CreateDrawing(this.SVG);
         }
 
         public DrawingGroup CreateDrawing(SVG svg)
@@ -268,6 +253,7 @@ namespace SVGImage.SVG
                     if (rect.RadiusX == 0 && rect.RadiusY > 0) rect.RadiusX = rect.RadiusY;
                     var di = this.NewDrawingItem(shape, rect);
                     AddDrawingToGroup(grp, shape, di);
+                    continue;
                 }
                 if (shape is LineShape)
                 {
@@ -275,6 +261,7 @@ namespace SVGImage.SVG
                     LineGeometry line = new LineGeometry(r.P1, r.P2);
                     var di = this.NewDrawingItem(shape, line);
                     AddDrawingToGroup(grp, shape, di);
+                    continue;
                 }
                 if (shape is PolylineShape)
                 {
@@ -290,6 +277,7 @@ namespace SVGImage.SVG
                     }
                     var di = this.NewDrawingItem(shape, path);
                     AddDrawingToGroup(grp, shape, di);
+                    continue;
                 }
                 if (shape is PolygonShape)
                 {
@@ -305,6 +293,7 @@ namespace SVGImage.SVG
                     }
                     var di = this.NewDrawingItem(shape, path);
                     AddDrawingToGroup(grp, shape, di);
+                    continue;
                 }
                 if (shape is CircleShape)
                 {
@@ -312,6 +301,7 @@ namespace SVGImage.SVG
                     EllipseGeometry c = new EllipseGeometry(new Point(r.CX, r.CY), r.R, r.R);
                     var di = this.NewDrawingItem(shape, c);
                     AddDrawingToGroup(grp, shape, di);
+                    continue;
                 }
                 if (shape is EllipseShape)
                 {
@@ -319,12 +309,14 @@ namespace SVGImage.SVG
                     EllipseGeometry c = new EllipseGeometry(new Point(r.CX, r.CY), r.RX, r.RY);
                     var di = this.NewDrawingItem(shape, c);
                     AddDrawingToGroup(grp, shape, di);
+                    continue;
                 }
                 if (shape is ImageShape)
                 {
                     ImageShape image = shape as ImageShape;
                     ImageDrawing i = new ImageDrawing(image.ImageSource, new Rect(image.X, image.Y, image.Width, image.Height));
                     AddDrawingToGroup(grp, shape, i);
+                    continue;
                 }
                 if (shape is TextShape)
                 {
@@ -346,6 +338,7 @@ namespace SVGImage.SVG
                             }
                         }
                     }
+                    continue;
                 }
                 if (shape is PathShape)
                 {

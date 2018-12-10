@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Xml;
 
@@ -14,8 +12,6 @@ namespace SVGImage.SVG
 {
     public class SVG
     {
-        private PaintServerManager m_paintServers = new PaintServerManager();
-
         internal Dictionary<string, Shape> m_shapes = new Dictionary<string, Shape>();
 
         internal Dictionary<string, List<XmlAttribute>> m_styles = new Dictionary<string, List<XmlAttribute>>();
@@ -39,18 +35,10 @@ namespace SVGImage.SVG
             return shape;
         }
 
-        public PaintServerManager PaintServers
-        {
-            get
-            {
-                return this.m_paintServers;
-            }
-        }
+        public PaintServerManager PaintServers { get; } = new PaintServerManager();
 
         public SVG()
-        {
-
-        }
+        { }
 
         public SVG(string filename)
         {
@@ -80,13 +68,7 @@ namespace SVGImage.SVG
             this.Parse(n);
         }
 
-        public IList<Shape> Elements
-        {
-            get
-            {
-                return this.m_elements.AsReadOnly();
-            }
-        }
+        public IList<Shape> Elements => this.m_elements.AsReadOnly();
 
         private void Parse(XmlNode node)
         {
