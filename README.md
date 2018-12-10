@@ -9,3 +9,5 @@ But it's extended with
   - Mask/Clip support
   - support of styles.
   - simple Animation support.
+  
+Licence changed to MIT (with grant from the initial author)
