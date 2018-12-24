@@ -215,17 +215,21 @@ namespace SVGImage.SVG
                 if (shape is UseShape)
                 {
                     UseShape useshape = shape as UseShape;
-                    Group group = this.SVG.GetShape(useshape.hRef) as Group;
-                    if (group != null)
+                    Shape currentUsedShape = this.SVG.GetShape(useshape.hRef);
+                    if (currentUsedShape != null)
                     {
-                        Shape oldparent = group.Parent;
-                        group.Parent = useshape; // this to get proper style propagated
-                        DrawingGroup subgroup = this.LoadGroup(group.Elements, null);
-                        if (group.Clip != null)
-                            subgroup.ClipGeometry = group.Clip.ClipGeometry;
+                        Shape oldparent = currentUsedShape.Parent;
+                        currentUsedShape.Parent = useshape; // this to get proper style propagated
+                        DrawingGroup subgroup;
+                        if (currentUsedShape is Group)
+                            subgroup = this.LoadGroup(((Group)currentUsedShape).Elements, null);
+                        else
+                            subgroup = this.LoadGroup(new[]{ currentUsedShape }, null);
+                        if (currentUsedShape.Clip != null)
+                            subgroup.ClipGeometry = currentUsedShape.Clip.ClipGeometry;
                         subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
                         grp.Children.Add(subgroup);
-                        group.Parent = oldparent;
+                        currentUsedShape.Parent = oldparent;
                     }
                     continue;
 
