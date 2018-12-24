@@ -16,7 +16,7 @@ namespace SVGImage.SVG
 
         internal Dictionary<string, List<XmlAttribute>> m_styles = new Dictionary<string, List<XmlAttribute>>();
 
-        private List<Shape> m_elements = new List<Shape>();
+        private List<Shape> m_elements;
 
         public string Filename { get; private set; }
 
@@ -47,7 +47,7 @@ namespace SVGImage.SVG
             doc.XmlResolver = null;
             doc.Load(filename);
             XmlNode n = doc.GetElementsByTagName("svg")[0];
-            this.Parse(n);
+            this.m_elements = Parse(this, n);
         }
 
         public SVG(Stream stream)
@@ -65,17 +65,19 @@ namespace SVGImage.SVG
                 var cult = CultureInfo.InvariantCulture;
                 this.ViewBox = new Rect(double.Parse(cord[0], cult), double.Parse(cord[1], cult), double.Parse(cord[2], cult), double.Parse(cord[3], cult));
             }
-            this.Parse(n);
+            this.m_elements = Parse(this, n);
         }
 
         public IList<Shape> Elements => this.m_elements.AsReadOnly();
 
-        private void Parse(XmlNode node)
+        internal static List<Shape> Parse(SVG svg, XmlNode node)
         {
-            if (node == null || node.Name != "svg")
+            var lstElements = new List<Shape>();
+            if (node == null || (node.Name != SVGTags.sSvg && node.Name != SVGTags.sPattern))
                 throw new FormatException("Not a valide SVG node");
             foreach (XmlNode childnode in node.ChildNodes)
-                Group.AddToList(this, this.m_elements, childnode, null);
+                Group.AddToList(svg, lstElements, childnode, null);
+            return lstElements;
         }
     }
 }

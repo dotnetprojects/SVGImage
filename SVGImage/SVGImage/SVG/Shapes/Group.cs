@@ -107,12 +107,12 @@ namespace SVGImage.SVG.Shapes
                 retVal = new TextShape(svg, childnode, parent);
             else if (childnode.Name == SVGTags.sLinearGradient)
             {
-                svg.PaintServers.Create(childnode);
+                svg.PaintServers.Create(svg, childnode);
                 return null;
             }
             else if (childnode.Name == SVGTags.sRadialGradient)
             {
-                svg.PaintServers.Create(childnode);
+                svg.PaintServers.Create(svg, childnode);
                 return null;
             }
             else if (childnode.Name == SVGTags.sDefinitions)
@@ -137,14 +137,11 @@ namespace SVGImage.SVG.Shapes
             //ShapeGroups defined in the 'def' section is added the the 'Shapes' dictionary in SVG for later reference
             foreach (XmlNode childnode in node.ChildNodes)
             {
-                if (childnode.Name == SVGTags.sLinearGradient)
+                if (childnode.Name == SVGTags.sLinearGradient ||
+                    childnode.Name == SVGTags.sRadialGradient ||
+                    childnode.Name == SVGTags.sPattern)
                 {
-                    svg.PaintServers.Create(childnode);
-                    continue;
-                }
-                if (childnode.Name == SVGTags.sRadialGradient)
-                {
-                    svg.PaintServers.Create(childnode);
+                    svg.PaintServers.Create(svg, childnode);
                     continue;
                 }
                 Group.AddToList(svg, list, childnode, null);

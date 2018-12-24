@@ -12,7 +12,7 @@ namespace SVGImage.SVG.PaintServer
             this.Color = c;
         }
 
-        public override Brush GetBrush(double opacity, SVG svg)
+        public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender)
         {
             byte a = (byte)(255 * opacity / 100);
             Color c = this.Color;

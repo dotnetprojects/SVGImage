@@ -24,10 +24,16 @@ namespace SVGImage.SVG
 				return Transform.Parse(v1);
 			if (type == SVGTags.sScale)
 				return new ScaleTransform(values[0], values[1]);
-			if (type == SVGTags.sRotate)
-				return new RotateTransform(values[0], values[1], values[2]);
+		    if (type == SVGTags.sRotate)
+		    {
+		        if (values.Count == 1)
+		            return new RotateTransform(values[0], 0.5, 0.5);
+		        if (values.Count == 2)
+		            return new RotateTransform(values[0], values[1], 0.5);
+		        return new RotateTransform(values[0], values[1], values[2]);
+		    }
 
-			return null;
+		    return null;
 		}
 		public static string ExtractUntil(string value, char ch)
 		{

@@ -20,10 +20,10 @@ namespace SVGImage.SVG
 			this.Color = new SolidColorPaintServer(svg.PaintServers, Colors.LightSeaGreen);
 			this.Opacity = 100;
 		}
-		public Brush FillBrush(SVG svg, double elementOpacity)
+		public Brush FillBrush(SVG svg, SVGRender svgRender, double elementOpacity)
 		{
 			if (this.Color != null)
-				return this.Color.GetBrush(this.Opacity * elementOpacity, svg);
+				return this.Color.GetBrush(this.Opacity * elementOpacity, svg, svgRender);
 			return null;
 		}
 	}

@@ -13,22 +13,19 @@ namespace SVGImage.SVG.PaintServer
 
         public double Y2 { get; private set; }
 
-        public string Id { get; private set; }
-
         private Brush brush = null;
 
         public LinearGradientColorPaintServerPaintServer(PaintServerManager owner, XmlNode node)
             : base(owner, node)
         {
             System.Diagnostics.Debug.Assert(node.Name == SVGTags.sLinearGradient);
-            this.Id = XmlUtil.AttrValue(node, "id");
             this.X1 = XmlUtil.AttrValue(node, "x1", double.NaN);
             this.Y1 = XmlUtil.AttrValue(node, "y1", double.NaN);
             this.X2 = XmlUtil.AttrValue(node, "x2", double.NaN);
             this.Y2 = XmlUtil.AttrValue(node, "y2", double.NaN);
         }
 
-        public override Brush GetBrush(double opacity, SVG svg)
+        public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender)
         {
             if (this.brush != null) return this.brush;
 
@@ -38,8 +35,8 @@ namespace SVGImage.SVG.PaintServer
             b.MappingMode = BrushMappingMode.RelativeToBoundingBox;
             b.StartPoint = new System.Windows.Point(0, 0);
             b.EndPoint = new System.Windows.Point(1, 0);
-
-            if (this.GradientUnits == SVGTags.sGradientUserSpace)
+            
+            if (this.GradientUnits == SVGTags.sUserSpaceOnUse)
             {
                 Transform tr = this.Transform as Transform;
                 if (tr != null)

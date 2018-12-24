@@ -12,6 +12,6 @@ namespace SVGImage.SVG.PaintServer
             this.Owner = owner;
         }
 
-        public abstract Brush GetBrush(double opacity, SVG svg);
+        public abstract Brush GetBrush(double opacity, SVG svg, SVGRender svgRender);
     }
 }

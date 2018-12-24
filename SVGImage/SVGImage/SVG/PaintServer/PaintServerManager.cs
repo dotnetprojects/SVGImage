@@ -12,7 +12,7 @@ namespace SVGImage.SVG.PaintServer
 
         private Dictionary<string, PaintServer> m_servers = new Dictionary<string, PaintServer>();
 
-        public PaintServer Create(XmlNode node)
+        public PaintServer Create(SVG svg, XmlNode node)
         {
             if (node.Name == SVGTags.sLinearGradient)
             {
@@ -24,6 +24,12 @@ namespace SVGImage.SVG.PaintServer
             {
                 string id = XmlUtil.AttrValue(node, "id");
                 if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new RadialGradientColorPaintServerPaintServer(this, node);
+                return this.m_servers[id];
+            }
+            if (node.Name == SVGTags.sPattern)
+            {
+                string id = XmlUtil.AttrValue(node, "id");
+                if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new PatternPaintServer(this, svg, node);
                 return this.m_servers[id];
             }
             return null;
