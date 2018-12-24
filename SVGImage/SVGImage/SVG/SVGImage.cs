@@ -120,7 +120,7 @@ namespace SVGImage.SVG
                 this.SetImage(render.LoadDrawing(svgFilename));
             };
 
-            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            if (this.IsInitialized || System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 var render = new SVGRender();
                 render.UseAnimations = false;
@@ -137,7 +137,7 @@ namespace SVGImage.SVG
                 this.SetImage(render.LoadDrawing(stream));
             };
 
-            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            if (this.IsInitialized || System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 var render = new SVGRender();
                 render.OverrideColor = OverrideColor;
