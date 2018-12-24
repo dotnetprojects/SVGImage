@@ -82,7 +82,7 @@ namespace SVGImage.SVG
 					startpos = 0;
 				if (startpos >= this.m_value.Length)
 					return float.NaN;
-				string numbers = "0123456789-.";
+				string numbers = "0123456789-.eE";
 				// find start of a number
 				while (startpos < this.m_value.Length && numbers.Contains(this.m_value[startpos]) == false)
 					startpos++;
@@ -91,7 +91,7 @@ namespace SVGImage.SVG
 				while (endpos < this.m_value.Length && numbers.Contains(this.m_value[endpos]))
 				{
 					// '-' if number is followed by '-' then it indicates the end of the value
-					if (endpos != startpos && this.m_value[endpos] == '-')
+					if (endpos != startpos && this.m_value[endpos] == '-' && this.m_value[endpos - 1] != 'e' && this.m_value[endpos - 1] != 'E')
 						break;
 					endpos++;
 				}
