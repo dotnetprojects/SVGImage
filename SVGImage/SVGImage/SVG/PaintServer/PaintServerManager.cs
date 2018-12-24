@@ -43,6 +43,10 @@ namespace SVGImage.SVG.PaintServer
                 this.m_servers.TryGetValue(id, out result);
                 return result;
             }
+            if (value.StartsWith("rgb"))
+            {
+                return this.ParseSolidRgbColor(value);
+            }
             return this.ParseKnownColor(value);
         }
 
@@ -88,6 +92,22 @@ namespace SVGImage.SVG.PaintServer
             result = new SolidColorPaintServer(this, ParseHexColor(value));
             this.m_servers[id] = result;
             return result as SolidColorPaintServer;
+        }
+
+        private SolidColorPaintServer ParseSolidRgbColor(string value)
+        {
+            if (value.StartsWith("rgb("))
+            {
+                var newVal = value.Substring(4, value.Length - 5).Split(',');
+                return ParseSolidColor("#" + int.Parse(newVal[0]).ToString("x") + int.Parse(newVal[1]).ToString("x") + int.Parse(newVal[2]).ToString("x"));
+            }
+            if (value.StartsWith("rgba("))
+            {
+                var newVal = value.Substring(5, value.Length - 6).Split(',');
+                return ParseSolidColor("#" + int.Parse(newVal[0]).ToString("x") + int.Parse(newVal[1]).ToString("x") + int.Parse(newVal[2]).ToString("x") + int.Parse(newVal[3]).ToString("x"));
+            }
+
+            return null;
         }
 
         private SolidColorPaintServer ParseKnownColor(string value)
