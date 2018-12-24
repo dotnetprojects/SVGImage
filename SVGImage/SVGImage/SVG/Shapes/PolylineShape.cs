@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    internal class PolylineShape : Shape
+    public class PolylineShape : Shape
     {
         public Point[] Points { get; private set; }
 

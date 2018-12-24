@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Windows.Media.Effects;
+﻿using System.Windows.Media.Effects;
 using System.Xml;
 using SVGImage.SVG;
 using SVGImage.SVG.Shapes;
 
 namespace DotNetProjects.SVGImage.SVG.Shapes.Filter
 {
-    internal class FilterFeGaussianBlur : FilterBaseFe
+    public class FilterFeGaussianBlur : FilterBaseFe
     {
         public string In { get; set; }
 

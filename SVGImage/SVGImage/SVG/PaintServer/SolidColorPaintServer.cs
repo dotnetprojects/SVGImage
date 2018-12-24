@@ -2,7 +2,7 @@
 
 namespace SVGImage.SVG.PaintServer
 {
-    internal class SolidColorPaintServer : PaintServer
+    public class SolidColorPaintServer : PaintServer
     {
         public Color Color { get; set; }
 

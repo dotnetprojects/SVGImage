@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    internal class UseShape : Shape
+    public class UseShape : Shape
     {
         public double X { get; set; }
 

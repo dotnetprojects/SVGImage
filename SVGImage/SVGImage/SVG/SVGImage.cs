@@ -98,9 +98,10 @@ namespace SVGImage.SVG
         public static readonly DependencyProperty OverrideColorProperty =
             DependencyProperty.Register("OverrideColor", typeof(Color?), typeof(SVGImage), new PropertyMetadata(null));
 
-        Drawing m_drawing;
-        TranslateTransform m_offsetTransform = new TranslateTransform();
-        ScaleTransform m_scaleTransform = new ScaleTransform();
+        private Drawing m_drawing;
+        private TranslateTransform m_offsetTransform = new TranslateTransform();
+        private ScaleTransform m_scaleTransform = new ScaleTransform();
+        private SVGRender _render;
 
         static SVGImage()
         {
@@ -108,11 +109,13 @@ namespace SVGImage.SVG
             ClipToBoundsProperty.OverrideMetadata(typeof(SVGImage), new FrameworkPropertyMetadata(true));
             SnapsToDevicePixelsProperty.OverrideMetadata(typeof(SVGImage), new FrameworkPropertyMetadata(true));
         }
+
         public SVGImage()
         {
             this.ClipToBounds = true;
             this.SnapsToDevicePixels = true;
         }
+
         public void SetImage(string svgFilename)
         {
             loadImage = (render) =>
@@ -122,12 +125,26 @@ namespace SVGImage.SVG
 
             if (this.IsInitialized || System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
-                var render = new SVGRender();
-                render.UseAnimations = false;
-                render.OverrideColor = OverrideColor;
-                loadImage(render);
+                _render = new SVGRender();
+                _render.UseAnimations = false;
+                _render.OverrideColor = OverrideColor;
+                loadImage(_render);
                 loadImage = null;
             }
+        }
+
+        public SVG SVG
+        {
+            get
+            {
+                return _render?.SVG;
+            }
+        }
+
+        public void ReRenderSvg()
+        {
+            if (_render != null)
+                this.SetImage(_render.CreateDrawing(_render.SVG));
         }
 
         public void SetImage(Stream stream)
@@ -139,10 +156,10 @@ namespace SVGImage.SVG
 
             if (this.IsInitialized || System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
-                var render = new SVGRender();
-                render.OverrideColor = OverrideColor;
-                render.UseAnimations = false;
-                loadImage(render);
+                _render = new SVGRender();
+                _render.OverrideColor = OverrideColor;
+                _render.UseAnimations = false;
+                loadImage(_render);
                 loadImage = null;
             }
         }
@@ -154,10 +171,10 @@ namespace SVGImage.SVG
             base.OnInitialized(e);
             if (loadImage != null)
             {
-                SVGRender render = new SVGRender();
-                render.OverrideColor = OverrideColor;
-                render.UseAnimations = this.UseAnimations;
-                loadImage(render);
+                _render = new SVGRender();
+                _render.OverrideColor = OverrideColor;
+                _render.UseAnimations = this.UseAnimations;
+                loadImage(_render);
                 loadImage = null;
             }
         }

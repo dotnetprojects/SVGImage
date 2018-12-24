@@ -6,7 +6,7 @@ using DotNetProjects.SVGImage.SVG.Shapes.Filter;
 
 namespace SVGImage.SVG.Shapes
 {
-    internal class Group : Shape
+    public class Group : Shape
     {
         private List<Shape> m_elements = new List<Shape>();
         private static Regex _regexStyle =

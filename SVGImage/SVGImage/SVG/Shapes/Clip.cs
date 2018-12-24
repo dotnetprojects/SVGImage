@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    internal class Clip : Group
+    public class Clip : Group
     {
         public Clip(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)

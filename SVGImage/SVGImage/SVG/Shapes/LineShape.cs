@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    internal class LineShape : Shape
+    public class LineShape : Shape
     {
         public Point P1 { get; private set; }
 

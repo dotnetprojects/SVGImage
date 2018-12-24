@@ -6,7 +6,7 @@ using SVGImage.SVG.Shapes;
 
 namespace SVGImage.SVG
 {
-    class PathShape : Shape
+    public class PathShape : Shape
     {
         public class CommandSplitter
         {

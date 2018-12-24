@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace SVGImage.SVG.PaintServer
 {
-    internal abstract class GradientColorPaintServer : PaintServer
+    public abstract class GradientColorPaintServer : PaintServer
     {
         // http://www.w3.org/TR/SVG11/pservers.html#LinearGradients
         private List<GradientStop> m_stops = new List<GradientStop>();

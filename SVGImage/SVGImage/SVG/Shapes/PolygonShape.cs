@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    internal class PolygonShape : Shape
+    public class PolygonShape : Shape
     {
         private static Fill DefaultFill = null;
 

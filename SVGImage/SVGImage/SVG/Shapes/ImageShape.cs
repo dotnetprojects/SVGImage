@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -7,7 +6,7 @@ using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    internal class ImageShape : Shape
+    public class ImageShape : Shape
     {
         public double X { get; set; }
 

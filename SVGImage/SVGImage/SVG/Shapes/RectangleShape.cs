@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    internal class RectangleShape : Shape
+    public class RectangleShape : Shape
     {
         private static Fill DefaultFill = null;
 

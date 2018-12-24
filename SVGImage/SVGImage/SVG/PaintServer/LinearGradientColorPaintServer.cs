@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using System.Xml;
 
 namespace SVGImage.SVG.PaintServer
 {
-    internal class LinearGradientColorPaintServerPaintServer : GradientColorPaintServer
+    public class LinearGradientColorPaintServerPaintServer : GradientColorPaintServer
     {
         public double X1 { get; private set; }
 

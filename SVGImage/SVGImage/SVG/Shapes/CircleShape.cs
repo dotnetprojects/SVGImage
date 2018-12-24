@@ -2,7 +2,7 @@
 
 namespace SVGImage.SVG.Shapes
 {
-    internal class CircleShape : Shape
+    public class CircleShape : Shape
     {
         public double CX { get; set; }
 
