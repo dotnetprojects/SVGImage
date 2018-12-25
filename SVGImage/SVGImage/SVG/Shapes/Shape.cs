@@ -29,6 +29,10 @@ namespace SVGImage.SVG.Shapes
 
         public virtual PaintServer.PaintServer Color { get; set; }
 
+        public string RequiredExtensions { get; set; }
+
+        public string RequiredFeatures { get; set; }
+
         public virtual Stroke Stroke
         {
             get
@@ -146,6 +150,9 @@ namespace SVGImage.SVG.Shapes
 
         protected virtual void Parse(SVG svg, string name, string value)
         {
+            if (name.Contains(":"))
+                name = name.Split(':')[1];
+
             if (name == SVGTags.sClass)
             {
                 var classes = value.Split(' ');
@@ -196,6 +203,16 @@ namespace SVGImage.SVG.Shapes
                     a.Add(sp.ReadNextValue());
                 }
                 this.GetStroke(svg).StrokeArray = a.ToArray();
+                return;
+            }
+            if (name == SVGTags.sRequiredFeatures)
+            {
+                this.RequiredFeatures = value.Trim();
+                return;
+            }
+            if (name == SVGTags.sRequiredExtensions)
+            {
+                this.RequiredExtensions = value.Trim();
                 return;
             }
             if (name == SVGTags.sStrokeLinecap)

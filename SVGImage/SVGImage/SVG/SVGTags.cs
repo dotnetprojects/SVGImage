@@ -3,7 +3,8 @@
     class SVGTags
     {
         public const string sSvg = "svg";
-        public const string sSvgNs = "http://www.w3.org/2000/svg";
+        public const string sNsSvg = "http://www.w3.org/2000/svg";
+        public const string sNsXLink = "http://www.w3.org/1999/xlink";
 
         public const string sTransform = "transform";
         public const string sStroke = "stroke";
@@ -23,6 +24,7 @@
         public const string sAnimateMotion = "animateMotion";
         public const string sAnimateTransform = "animateTransform";
 
+        public const string sHref = "href";
 
         public const string sClipPath = "clipPath";
         public const string sClipPathProperty = "clip-path";
@@ -47,6 +49,9 @@
         public const string sShapeImage = "image";
 
         public const string sSwitch = "switch";
+
+        public const string sRequiredFeatures = "requiredFeatures";
+        public const string sRequiredExtensions = "requiredExtensions";
 
         public const string sNone = "none";
         public const string sInherit = "inherit";

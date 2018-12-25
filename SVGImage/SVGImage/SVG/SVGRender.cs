@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using DotNetProjects.SVGImage.SVG;
 using DotNetProjects.SVGImage.SVG.Animation;
 using SVGImage.SVG.PaintServer;
 using SVGImage.SVG.Shapes;
@@ -35,12 +36,12 @@ namespace SVGImage.SVG
 
         public DrawingGroup CreateDrawing(SVG svg)
         {
-            return this.LoadGroup(svg.Elements, svg.ViewBox);
+            return this.LoadGroup(svg.Elements, svg.ViewBox, false);
         }
 
         public DrawingGroup CreateDrawing(Shape shape)
         {
-            return this.LoadGroup(new Shape[] { shape }, null);
+            return this.LoadGroup(new Shape[] { shape }, null, false);
         }
 
         private GeometryDrawing NewDrawingItem(Shape shape, Geometry geometry)
@@ -143,7 +144,7 @@ namespace SVGImage.SVG
             }
         }
 
-        internal DrawingGroup LoadGroup(IList<Shape> elements, Rect? viewBox)
+        internal DrawingGroup LoadGroup(IList<Shape> elements, Rect? viewBox, bool isSwitch)
         {
             List<ControlLine> debugPoints = new List<ControlLine>();
             DrawingGroup grp = new DrawingGroup();
@@ -151,6 +152,25 @@ namespace SVGImage.SVG
 
             foreach (Shape shape in elements)
             {
+                if (isSwitch)
+                {
+                    if (grp.Children.Count > 0)
+                    {
+                        break;
+                    }
+                    if (!string.IsNullOrEmpty(shape.RequiredFeatures))
+                    {
+                        if (!SVGFeatures.Features.Contains(shape.RequiredFeatures))
+                        {
+                            continue;
+                        }
+                        if (!string.IsNullOrEmpty(shape.RequiredExtensions))
+                        {
+                            continue;
+                        }
+                    }
+                }
+
                 if (shape is AnimationBase)
                 {
                     if (UseAnimations)
@@ -225,9 +245,9 @@ namespace SVGImage.SVG
                         Shape oldparent = currentUsedShape.Parent;
                         DrawingGroup subgroup;
                         if (currentUsedShape is Group)
-                            subgroup = this.LoadGroup(((Group)currentUsedShape).Elements, null);
+                            subgroup = this.LoadGroup(((Group)currentUsedShape).Elements, null, false);
                         else
-                            subgroup = this.LoadGroup(new[]{ currentUsedShape }, null);
+                            subgroup = this.LoadGroup(new[]{ currentUsedShape }, null, false);
                         if (currentUsedShape.Clip != null)
                             subgroup.ClipGeometry = currentUsedShape.Clip.ClipGeometry;
                         subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
@@ -240,15 +260,15 @@ namespace SVGImage.SVG
                 }
                 if (shape is Clip)
                 {
-                    DrawingGroup subgroup = this.LoadGroup((shape as Clip).Elements, null);
+                    DrawingGroup subgroup = this.LoadGroup((shape as Clip).Elements, null, false);
                     if (shape.Transform != null)
                         subgroup.Transform = shape.Transform;
                     grp.Children.Add(subgroup);
                     continue;
                 }
-                if (shape is Group)
+                if (shape is Group groupShape)
                 {
-                    DrawingGroup subgroup = this.LoadGroup((shape as Group).Elements, null);
+                    DrawingGroup subgroup = this.LoadGroup((shape as Group).Elements, null, groupShape.IsSwitch);
                     AddDrawingToGroup(grp, shape, subgroup);
                     continue;
                 }

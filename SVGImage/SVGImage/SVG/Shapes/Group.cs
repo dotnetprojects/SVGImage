@@ -18,6 +18,8 @@ namespace SVGImage.SVG.Shapes
             get { return this.m_elements.AsReadOnly(); }
         }
 
+        public bool IsSwitch { get; set; }
+
         private Shape AddChild(Shape shape)
         {
             this.m_elements.Add(shape);
@@ -95,8 +97,10 @@ namespace SVGImage.SVG.Shapes
                 retVal = new PathShape(svg, childnode, parent);
             else if (nodeName == SVGTags.sClipPath)
                 retVal = new Clip(svg, childnode, parent);
-            else if (nodeName == SVGTags.sShapeGroup || nodeName == SVGTags.sSwitch)
+            else if (nodeName == SVGTags.sShapeGroup)
                 retVal = new Group(svg, childnode, parent);
+            else if (nodeName == SVGTags.sSwitch)
+                retVal = new Group(svg, childnode, parent) {IsSwitch = true};
             else if (nodeName == SVGTags.sShapeUse)
                 retVal = new UseShape(svg, childnode);
             else if (nodeName == SVGTags.sShapeImage)
@@ -172,7 +176,7 @@ namespace SVGImage.SVG.Shapes
             {
                 var parts = nodeName.Split(':');
                 var ns = node.GetNamespaceOfPrefix(parts[0]);
-                if (ns == SVGTags.sSvgNs)
+                if (ns == SVGTags.sNsSvg)
                 {
                     return parts[1];
                 }

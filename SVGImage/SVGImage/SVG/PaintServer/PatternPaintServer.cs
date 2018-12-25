@@ -44,7 +44,7 @@ namespace SVGImage.SVG.PaintServer
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            var db = new DrawingBrush() {Drawing = svgRender.LoadGroup(m_elements, null)};
+            var db = new DrawingBrush() {Drawing = svgRender.LoadGroup(m_elements, null, false)};
             db.TileMode = TileMode.Tile;
             db.Transform = PatternTransform;
             db.Viewport = new Rect(X, Y, Width / bounds.Width, Height/ bounds.Height);

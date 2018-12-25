@@ -97,6 +97,7 @@
     <Compile Include="SVG\ShapeUtil.cs" />
     <Compile Include="SVG\Stroke.cs" />
     <Compile Include="SVG\SVG.cs" />
+    <Compile Include="SVG\SVGFeatures.cs" />
     <Compile Include="SVG\SVGImage.cs" />
     <Compile Include="SVG\SVGRender.cs" />
     <Compile Include="SVG\SVGTags.cs" />
