@@ -78,6 +78,9 @@ namespace SVGImage.SVG.Shapes
 
         internal virtual Filter Filter { get; private set; }
 
+        //Used during render
+        internal Shape RealParent;
+
         public Shape Parent { get; set; }
 
         public Shape(SVG svg, XmlNode node)

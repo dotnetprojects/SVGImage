@@ -47,6 +47,8 @@
 
         public const string sSwitch = "switch";
 
+        public const string sSymbol = "symbol";
+
         public const string sDefinitions = "defs";
         public const string sUserSpaceOnUse = "userSpaceOnUse";
         public const string sLinearGradient = "linearGradient";

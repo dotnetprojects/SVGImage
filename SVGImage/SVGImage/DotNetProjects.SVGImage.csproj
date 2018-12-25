@@ -76,6 +76,7 @@
     <Compile Include="SVG\PaintServer\PaintServerManager.cs" />
     <Compile Include="SVG\PaintServer\RadialGradientColorPaintServer.cs" />
     <Compile Include="SVG\PaintServer\PatternPaintServer.cs" />
+    <Compile Include="SVG\PaintServer\InheritPaintServer.cs" />
     <Compile Include="SVG\PaintServer\SolidColorPaintServer.cs" />
     <Compile Include="SVG\Shapes\Filter\FilterBaseFe.cs" />
     <Compile Include="SVG\Shapes\Filter\FilterFeGaussianBlur.cs" />

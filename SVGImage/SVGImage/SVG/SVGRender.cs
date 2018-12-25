@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using DotNetProjects.SVGImage.SVG.Animation;
+using SVGImage.SVG.PaintServer;
 using SVGImage.SVG.Shapes;
 
 namespace SVGImage.SVG
@@ -49,7 +50,7 @@ namespace SVGImage.SVG
             Stroke stroke = shape.Stroke;
             if (stroke != null)
             {
-                var brush = stroke.StrokeBrush(this.SVG, this, shape.Opacity, geometry.Bounds);
+                var brush = stroke.StrokeBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds, stroke.Color);
                 if (OverrideColor != null)
                     brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 item.Pen = new Pen(brush, stroke.Width);
@@ -91,7 +92,7 @@ namespace SVGImage.SVG
             }
             if (shape.Fill != null)
             {
-                item.Brush = shape.Fill.FillBrush(this.SVG, this, shape.Opacity, geometry.Bounds);
+                item.Brush = shape.Fill.FillBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
                     item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
@@ -109,6 +110,8 @@ namespace SVGImage.SVG
             item.Geometry = geometry;
             return item;
         }
+
+        
 
         private class ControlLine
         {
@@ -218,8 +221,8 @@ namespace SVGImage.SVG
                     Shape currentUsedShape = this.SVG.GetShape(useshape.hRef);
                     if (currentUsedShape != null)
                     {
+                        currentUsedShape.RealParent = useshape;
                         Shape oldparent = currentUsedShape.Parent;
-                        currentUsedShape.Parent = useshape; // this to get proper style propagated
                         DrawingGroup subgroup;
                         if (currentUsedShape is Group)
                             subgroup = this.LoadGroup(((Group)currentUsedShape).Elements, null);
@@ -228,11 +231,12 @@ namespace SVGImage.SVG
                         if (currentUsedShape.Clip != null)
                             subgroup.ClipGeometry = currentUsedShape.Clip.ClipGeometry;
                         subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
+                        if (useshape.Transform != null)
+                            subgroup.Transform = new TransformGroup() {Children = new TransformCollection() { subgroup.Transform, useshape.Transform } };
                         grp.Children.Add(subgroup);
                         currentUsedShape.Parent = oldparent;
                     }
                     continue;
-
                 }
                 if (shape is Clip)
                 {

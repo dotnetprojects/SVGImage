@@ -120,12 +120,21 @@ namespace SVGImage.SVG.Shapes
                 ReadDefs(svg, list, childnode);
                 return null;
             }
+            else if (childnode.Name == SVGTags.sSymbol)
+            {
+                retVal = new Group(svg, childnode, parent);
+            }
 
             if (retVal != null)
             {
                 list.Add(retVal);
                 if (retVal.Id.Length > 0)
                     svg.AddShape(retVal.Id, retVal);
+            }
+
+            if (childnode.Name == SVGTags.sSymbol)
+            {
+                return null;
             }
 
             return retVal;
