@@ -17,7 +17,7 @@ namespace SVGImage.SVG
 		        return ParseTransformInternal(value);
 
 		    var tg = new TransformGroup();
-            foreach (var transform in transforms)
+            foreach (var transform in transforms.OrderBy(x => x.StartsWith(SVGTags.sTranslate))) // to check why ordering is needed (see acid.svg)
             {
                 if (!string.IsNullOrEmpty(transform))
                     tg.Children.Add(ParseTransformInternal(transform + ")"));

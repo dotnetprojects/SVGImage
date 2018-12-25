@@ -9,15 +9,13 @@ namespace SVGImage.SVG.Shapes
     public class Group : Shape
     {
         private List<Shape> m_elements = new List<Shape>();
+
         private static Regex _regexStyle =
-            new Regex("([\\.<>a-zA-Z0-9 ]*){([^}]*)}", RegexOptions.Compiled | RegexOptions.Singleline);
+            new Regex("([\\.,<>a-zA-Z0-9: ]*){([^}]*)}", RegexOptions.Compiled | RegexOptions.Singleline);
 
         public IList<Shape> Elements
         {
-            get
-            {
-                return this.m_elements.AsReadOnly();
-            }
+            get { return this.m_elements.AsReadOnly(); }
         }
 
         private Shape AddChild(Shape shape)
@@ -54,73 +52,81 @@ namespace SVGImage.SVG.Shapes
             if (childnode.NodeType != XmlNodeType.Element) return null;
 
             Shape retVal = null;
-            if (childnode.Name == SVGTags.sStyle)
+
+            var nodeName = GetNodeName(childnode);
+            if (nodeName == null)
+                return null;
+            if (nodeName == SVGTags.sStyle)
             {
                 var match = _regexStyle.Match(childnode.InnerText);
                 while (match.Success)
                 {
                     var name = match.Groups[1].Value.Trim();
                     var value = match.Groups[2].Value;
-                    svg.m_styles.Add(name, new List<XmlAttribute>());
-                    foreach (ShapeUtil.Attribute styleitem in XmlUtil.SplitStyle(svg, value))
+                    foreach (var nm in name.Split(','))
                     {
-                        svg.m_styles[name].Add(new XmlUtil.StyleItem(childnode, styleitem.Name, styleitem.Value));
+                        svg.m_styles.Add(nm, new List<XmlAttribute>());
+                        foreach (ShapeUtil.Attribute styleitem in XmlUtil.SplitStyle(svg, value))
+                        {
+                            svg.m_styles[nm].Add(new XmlUtil.StyleItem(childnode, styleitem.Name, styleitem.Value));
+                        }
                     }
+
                     match = match.NextMatch();
                 }
             }
-            else if (childnode.Name == SVGTags.sShapeRect)
+            else if (nodeName == SVGTags.sShapeRect)
                 retVal = new RectangleShape(svg, childnode);
-            else if (childnode.Name == SVGTags.sFilter)
+            else if (nodeName == SVGTags.sFilter)
                 retVal = new Filter(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sFeGaussianBlur)
+            else if (nodeName == SVGTags.sFeGaussianBlur)
                 retVal = new FilterFeGaussianBlur(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sShapeCircle)
+            else if (nodeName == SVGTags.sShapeCircle)
                 retVal = new CircleShape(svg, childnode);
-            else if (childnode.Name == SVGTags.sShapeEllipse)
+            else if (nodeName == SVGTags.sShapeEllipse)
                 retVal = new EllipseShape(svg, childnode);
-            else if (childnode.Name == SVGTags.sShapeLine)
+            else if (nodeName == SVGTags.sShapeLine)
                 retVal = new LineShape(svg, childnode);
-            else if (childnode.Name == SVGTags.sShapePolyline)
+            else if (nodeName == SVGTags.sShapePolyline)
                 retVal = new PolylineShape(svg, childnode);
-            else if (childnode.Name == SVGTags.sShapePolygon)
+            else if (nodeName == SVGTags.sShapePolygon)
                 retVal = new PolygonShape(svg, childnode);
-            else if (childnode.Name == SVGTags.sShapePath)
+            else if (nodeName == SVGTags.sShapePath)
                 retVal = new PathShape(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sClipPath)
+            else if (nodeName == SVGTags.sClipPath)
                 retVal = new Clip(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sShapeGroup || childnode.Name == SVGTags.sSwitch)
+            else if (nodeName == SVGTags.sShapeGroup || nodeName == SVGTags.sSwitch)
                 retVal = new Group(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sShapeUse)
+            else if (nodeName == SVGTags.sShapeUse)
                 retVal = new UseShape(svg, childnode);
-            else if (childnode.Name == SVGTags.sShapeImage)
+            else if (nodeName == SVGTags.sShapeImage)
                 retVal = new ImageShape(svg, childnode);
-            else if (childnode.Name == SVGTags.sAnimate)
+            else if (nodeName == SVGTags.sAnimate)
                 retVal = new Animate(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sAnimateColor)
+            else if (nodeName == SVGTags.sAnimateColor)
                 retVal = new AnimateColor(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sAnimateMotion)
+            else if (nodeName == SVGTags.sAnimateMotion)
                 retVal = new AnimateMotion(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sAnimateTransform)
+            else if (nodeName == SVGTags.sAnimateTransform)
                 retVal = new AnimateTransform(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sText)
+            else if (nodeName == SVGTags.sText)
                 retVal = new TextShape(svg, childnode, parent);
-            else if (childnode.Name == SVGTags.sLinearGradient)
+            else if (nodeName == SVGTags.sLinearGradient)
             {
                 svg.PaintServers.Create(svg, childnode);
                 return null;
             }
-            else if (childnode.Name == SVGTags.sRadialGradient)
+            else if (nodeName == SVGTags.sRadialGradient)
             {
                 svg.PaintServers.Create(svg, childnode);
                 return null;
             }
-            else if (childnode.Name == SVGTags.sDefinitions)
+            else if (nodeName == SVGTags.sDefinitions)
             {
                 ReadDefs(svg, list, childnode);
                 return null;
             }
-            else if (childnode.Name == SVGTags.sSymbol)
+            else if (nodeName == SVGTags.sSymbol)
             {
                 retVal = new Group(svg, childnode, parent);
             }
@@ -132,7 +138,7 @@ namespace SVGImage.SVG.Shapes
                     svg.AddShape(retVal.Id, retVal);
             }
 
-            if (childnode.Name == SVGTags.sSymbol)
+            if (nodeName == SVGTags.sSymbol)
             {
                 return null;
             }
@@ -146,15 +152,34 @@ namespace SVGImage.SVG.Shapes
             //ShapeGroups defined in the 'def' section is added the the 'Shapes' dictionary in SVG for later reference
             foreach (XmlNode childnode in node.ChildNodes)
             {
-                if (childnode.Name == SVGTags.sLinearGradient ||
-                    childnode.Name == SVGTags.sRadialGradient ||
-                    childnode.Name == SVGTags.sPattern)
+                var nodeName = GetNodeName(childnode);
+                if (nodeName == SVGTags.sLinearGradient ||
+                    nodeName == SVGTags.sRadialGradient ||
+                    nodeName == SVGTags.sPattern)
                 {
                     svg.PaintServers.Create(svg, childnode);
                     continue;
                 }
+
                 Group.AddToList(svg, list, childnode, null);
             }
+        }
+
+        private static string GetNodeName(XmlNode node)
+        {
+            var nodeName = node.Name;
+            if (nodeName.Contains(":"))
+            {
+                var parts = nodeName.Split(':');
+                var ns = node.GetNamespaceOfPrefix(parts[0]);
+                if (ns == SVGTags.sSvgNs)
+                {
+                    return parts[1];
+                }
+
+                return null;
+            }
+            return nodeName;
         }
     }
 }

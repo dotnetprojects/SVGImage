@@ -3,6 +3,7 @@
     class SVGTags
     {
         public const string sSvg = "svg";
+        public const string sSvgNs = "http://www.w3.org/2000/svg";
 
         public const string sTransform = "transform";
         public const string sStroke = "stroke";
@@ -46,6 +47,11 @@
         public const string sShapeImage = "image";
 
         public const string sSwitch = "switch";
+
+        public const string sNone = "none";
+        public const string sInherit = "inherit";
+        public const string sCurrentColor = "currentColor";
+        public const string sColor = "color";
 
         public const string sSymbol = "symbol";
 

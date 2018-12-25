@@ -47,7 +47,11 @@ namespace SVGImage.SVG
 		{
 		    if (this.Color != null)
 		    {
-		        if (this.Color is InheritPaintServer)
+		        if (this.Color is CurrentColorPaintServer)
+		        {
+		            return shape.Color.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
+		        }
+                if (this.Color is InheritPaintServer)
 		        {
 		            var p = shape.RealParent ?? shape.Parent;
 		            while (p != null)

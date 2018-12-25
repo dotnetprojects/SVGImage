@@ -27,6 +27,8 @@ namespace SVGImage.SVG.Shapes
 
         internal Geometry geometryElement;
 
+        public virtual PaintServer.PaintServer Color { get; set; }
+
         public virtual Stroke Stroke
         {
             get
@@ -235,6 +237,11 @@ namespace SVGImage.SVG.Shapes
             if (name == SVGTags.sFill)
             {
                 this.GetFill(svg).Color = svg.PaintServers.Parse(value);
+                return;
+            }
+            if (name == SVGTags.sColor)
+            {
+                this.Color = svg.PaintServers.Parse(value);
                 return;
             }
             if (name == SVGTags.sFillOpacity)
