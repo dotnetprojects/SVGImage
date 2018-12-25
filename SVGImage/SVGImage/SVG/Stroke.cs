@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 
 using SVGImage.SVG.PaintServer;
 
@@ -32,10 +33,10 @@ namespace SVGImage.SVG
 			this.LineJoin = eLineJoin.miter;
 			this.Opacity = 100;
 		}
-		public Brush StrokeBrush(SVG svg, SVGRender svgRender, double elementOpacity)
+		public Brush StrokeBrush(SVG svg, SVGRender svgRender, double elementOpacity, Rect bounds)
 		{
 			if (this.Color != null)
-				return this.Color.GetBrush(this.Opacity*elementOpacity, svg, svgRender);
+				return this.Color.GetBrush(this.Opacity*elementOpacity, svg, svgRender, bounds);
 			return null;
 		}
 	}

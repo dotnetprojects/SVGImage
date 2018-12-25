@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 using System.Xml;
 
 namespace SVGImage.SVG.PaintServer
@@ -25,7 +26,7 @@ namespace SVGImage.SVG.PaintServer
             this.Y2 = XmlUtil.AttrValue(node, "y2", double.NaN);
         }
 
-        public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender)
+        public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
             if (this.brush != null) return this.brush;
 

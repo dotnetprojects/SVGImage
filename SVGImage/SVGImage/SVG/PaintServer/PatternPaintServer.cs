@@ -36,25 +36,19 @@ namespace SVGImage.SVG.PaintServer
             }
 
             m_elements = SVG.Parse(new SVG(), node);
-            this.X = XmlUtil.AttrValue(node, "x", double.NaN);
-            this.Y = XmlUtil.AttrValue(node, "y", double.NaN);
-            this.Width = XmlUtil.AttrValue(node, "width", double.NaN);
-            this.Height = XmlUtil.AttrValue(node, "height", double.NaN);
+            this.X = XmlUtil.AttrValue(node, "x", 0, svg.Size.Width);
+            this.Y = XmlUtil.AttrValue(node, "y", 0, svg.Size.Height);
+            this.Width = XmlUtil.AttrValue(node, "width", 1, svg.Size.Width);
+            this.Height = XmlUtil.AttrValue(node, "height", 1, svg.Size.Height);
         }
 
-        public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender)
+        public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            var db = new DrawingBrush() {Drawing = svgRender.LoadGroup(m_elements, null)}; //new Rect(X, Y, Width, Height))};
-            //db.Viewbox = new Rect(X, Y, Width, Height);
+            var db = new DrawingBrush() {Drawing = svgRender.LoadGroup(m_elements, null)};
             db.TileMode = TileMode.Tile;
             db.Transform = PatternTransform;
-            db.Viewport = new Rect(X, Y, Width, Height);
-            db.ViewboxUnits = BrushMappingMode.Absolute;
-            //db.ViewportUnits = BrushMappingMode.Absolute;
-            //if (this.PatternUnits == SVGTags.sUserSpaceOnUse)
-            //{
-            //}
-
+            db.Viewport = new Rect(X, Y, Width / bounds.Width, Height/ bounds.Height);
+            db.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
             return db;
         }
     }
