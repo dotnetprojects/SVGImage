@@ -35,7 +35,7 @@ namespace SVGImage.SVG.PaintServer
                 this.PatternTransform = ShapeUtil.ParseTransform(transform.ToLower());
             }
 
-            m_elements = SVG.Parse(svg, node);
+            m_elements = SVG.Parse(new SVG(), node);
             this.X = XmlUtil.AttrValue(node, "x", double.NaN);
             this.Y = XmlUtil.AttrValue(node, "y", double.NaN);
             this.Width = XmlUtil.AttrValue(node, "width", double.NaN);
@@ -45,10 +45,11 @@ namespace SVGImage.SVG.PaintServer
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender)
         {
             var db = new DrawingBrush() {Drawing = svgRender.LoadGroup(m_elements, null)}; //new Rect(X, Y, Width, Height))};
-            //db.Viewport = new Rect(X, Y, Width, Height);
-            //db.TileMode = TileMode.Tile;
+            //db.Viewbox = new Rect(X, Y, Width, Height);
+            db.TileMode = TileMode.Tile;
             db.Transform = PatternTransform;
-            //db.ViewboxUnits = BrushMappingMode.Absolute;
+            db.Viewport = new Rect(X, Y, Width, Height);
+            db.ViewboxUnits = BrushMappingMode.Absolute;
             //db.ViewportUnits = BrushMappingMode.Absolute;
             //if (this.PatternUnits == SVGTags.sUserSpaceOnUse)
             //{

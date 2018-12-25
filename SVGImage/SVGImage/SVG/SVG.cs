@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Xml;
 
@@ -22,6 +23,8 @@ namespace SVGImage.SVG
 
         public Rect? ViewBox { get; set; }
 
+        public Size Size { get; set; }
+
         public void AddShape(string id, Shape shape)
         {
             System.Diagnostics.Debug.Assert(id.Length > 0 && this.m_shapes.ContainsKey(id) == false);
@@ -38,10 +41,13 @@ namespace SVGImage.SVG
         public PaintServerManager PaintServers { get; } = new PaintServerManager();
 
         public SVG()
-        { }
+        {
+            Size = new Size(300, 150);
+        }
 
         public SVG(string filename)
         {
+            Size = new Size(300, 150);
             this.Filename = filename;
             XmlDocument doc = new XmlDocument();
             doc.XmlResolver = null;
@@ -52,19 +58,13 @@ namespace SVGImage.SVG
 
         public SVG(Stream stream)
         {
+            Size = new Size(300, 150);
             this.Filename = "none";
             XmlDocument doc = new XmlDocument();
             doc.XmlResolver = null;
             doc.Load(stream);
             XmlNode n = doc.GetElementsByTagName("svg")[0];
 
-            var vb = n.Attributes.GetNamedItem("viewBox");
-            if (vb != null)
-            {
-                var cord = vb.Value.Split(' ');
-                var cult = CultureInfo.InvariantCulture;
-                this.ViewBox = new Rect(double.Parse(cord[0], cult), double.Parse(cord[1], cult), double.Parse(cord[2], cult), double.Parse(cord[3], cult));
-            }
             this.m_elements = Parse(this, n);
         }
 
@@ -72,6 +72,16 @@ namespace SVGImage.SVG
 
         internal static List<Shape> Parse(SVG svg, XmlNode node)
         {
+            var vb = node.Attributes.GetNamedItem("viewBox");
+            if (vb != null)
+            {
+                var cord = vb.Value.Split(' ');
+                var cult = CultureInfo.InvariantCulture;
+                svg.ViewBox = new Rect(double.Parse(cord[0], cult), double.Parse(cord[1], cult), double.Parse(cord[2], cult), double.Parse(cord[3], cult));
+            }
+
+            svg.Size = new Size(XmlUtil.AttrValue(node, "width", 300), XmlUtil.AttrValue(node, "height", 150));
+            
             var lstElements = new List<Shape>();
             if (node == null || (node.Name != SVGTags.sSvg && node.Name != SVGTags.sPattern))
                 throw new FormatException("Not a valide SVG node");

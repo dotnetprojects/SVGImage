@@ -28,6 +28,8 @@
 
         public const string sTranslate = "translate";
         public const string sMatrix = "matrix";
+        public const string sSkewX = "skewx";
+        public const string sSkewY = "skewy";
         public const string sScale = "scale";
         public const string sRotate = "rotate";
         public const string sPoints = "points";

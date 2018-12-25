@@ -11,31 +11,58 @@ namespace SVGImage.SVG
 	{
 		public static Transform ParseTransform(string value)
 		{
-			string type = ExtractUntil(value, '(');
-			string v1 = ExtractBetween(value, '(', ')');
-			
-			ShapeUtil.StringSplitter split = new ShapeUtil.StringSplitter(v1);
-			List<double> values = new List<double>();
-			while (split.More)
-				values.Add(split.ReadNextValue());
-			if (type == SVGTags.sTranslate)
-				return new TranslateTransform(values[0], values[1]);
-			if (type == SVGTags.sMatrix)
-				return Transform.Parse(v1);
-			if (type == SVGTags.sScale)
-				return new ScaleTransform(values[0], values[1]);
-		    if (type == SVGTags.sRotate)
-		    {
-		        if (values.Count == 1)
-		            return new RotateTransform(values[0], 0.5, 0.5);
-		        if (values.Count == 2)
-		            return new RotateTransform(values[0], values[1], 0.5);
-		        return new RotateTransform(values[0], values[1], values[2]);
-		    }
+            //todo, increase perf. and object creation of this code (check with acid after)
+		    var transforms = value.Split(')');
+		    if (transforms.Length == 2)
+		        return ParseTransformInternal(value);
 
-		    return null;
+		    var tg = new TransformGroup();
+            foreach (var transform in transforms)
+            {
+                if (!string.IsNullOrEmpty(transform))
+                    tg.Children.Add(ParseTransformInternal(transform + ")"));
+            }
+            return tg;
 		}
-		public static string ExtractUntil(string value, char ch)
+
+	    private static Transform ParseTransformInternal(string value)
+	    {
+	        string type = ExtractUntil(value, '(').TrimStart(',');
+	        string v1 = ExtractBetween(value, '(', ')');
+
+	        ShapeUtil.StringSplitter split = new ShapeUtil.StringSplitter(v1);
+	        List<double> values = new List<double>();
+	        while (split.More)
+	            values.Add(split.ReadNextValue());
+	        if (type == SVGTags.sTranslate)
+	            if (values.Count == 1)
+                    return new TranslateTransform(values[0], 0);
+	            else
+	                return new TranslateTransform(values[0], values[1]);
+            if (type == SVGTags.sMatrix)
+	            return Transform.Parse(v1);
+	        if (type == SVGTags.sScale)
+	            if (values.Count == 1)
+                    return new ScaleTransform(values[0], values[0]);
+	            else
+	                return new ScaleTransform(values[0], values[1]);
+            if (type == SVGTags.sSkewX)
+	            return new SkewTransform(values[0], 0);
+	        if (type == SVGTags.sSkewY)
+	            return new SkewTransform(0, values[0]);
+	        if (type == SVGTags.sRotate)
+	        {
+	            if (values.Count == 1)
+	                return new RotateTransform(values[0], 0, 0);
+	            if (values.Count == 2)
+	                return new RotateTransform(values[0], values[1], 0);
+	            return new RotateTransform(values[0], values[1], values[2]);
+	        }
+
+	        return null;
+	    }
+
+        public static string ExtractUntil(string value, char ch)
 		{
 			int index = value.IndexOf(ch);
 			if (index <= 0)
@@ -190,7 +217,8 @@ namespace SVGImage.SVG
 			SplitValueUnits(attr.Value, out result, out units);
 			return result;
 		}
-		public static double AttrValue(XmlNode node, string id, double defaultvalue)
+
+	    public static double AttrValue(XmlNode node, string id, double defaultvalue, double percentageMaximum = 1)
 		{
 			XmlAttribute attr = node.Attributes[id];
 			if (attr == null)
@@ -199,8 +227,20 @@ namespace SVGImage.SVG
 			double result = 0;
 			string units;
 
-			if (attr != null && SplitValueUnits(attr.Value, out result, out units))
-				return result;
+		    if (attr != null && SplitValueUnits(attr.Value, out result, out units))
+		    {
+		        switch (units) // from http://www.selfsvg.info/?section=3.4
+                {
+                    case "pt": return result * 1.25;
+                    case "mm": return result * 3.54;
+                    case "pc": return result * 15;
+                    case "cm": return result * 35.43;
+                    case "in": return result * 90;
+                    case "%": return result * percentageMaximum / 100;
+                }
+
+                return result;
+		    }
 			return defaultvalue;
 		}
 		public static string AttrValue(XmlNode node, string id, string defaultvalue)
