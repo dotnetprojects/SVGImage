@@ -2,6 +2,8 @@
 {
     class SVGTags
     {
+        public const string sSvg = "svg";
+
         public const string sTransform = "transform";
         public const string sStroke = "stroke";
         public const string sStrokeWidth = "stroke-width";
@@ -26,6 +28,8 @@
 
         public const string sTranslate = "translate";
         public const string sMatrix = "matrix";
+        public const string sSkewX = "skewx";
+        public const string sSkewY = "skewy";
         public const string sScale = "scale";
         public const string sRotate = "rotate";
         public const string sPoints = "points";
@@ -44,7 +48,7 @@
         public const string sSwitch = "switch";
 
         public const string sDefinitions = "defs";
-        public const string sGradientUserSpace = "userSpaceOnUse";
+        public const string sUserSpaceOnUse = "userSpaceOnUse";
         public const string sLinearGradient = "linearGradient";
         public const string sRadialGradient = "radialGradient";
 
@@ -62,6 +66,9 @@
         public const string sFilter = "filter";
         public const string sFilterProperty = "filter";
         public const string sFeGaussianBlur = "feGaussianBlur";
-        
+
+        public const string sPattern = "pattern";
+        public const string sPatternUnits = "patternUnits";
+        public const string sPatternTransform = "patternTransform";
     }
 }

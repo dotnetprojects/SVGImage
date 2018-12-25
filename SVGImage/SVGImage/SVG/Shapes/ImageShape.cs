@@ -21,10 +21,10 @@ namespace SVGImage.SVG.Shapes
         public ImageShape(SVG svg, XmlNode node)
             : base(svg, node)
         {
-            this.X = XmlUtil.AttrValue(node, "x", 0);
-            this.Y = XmlUtil.AttrValue(node, "y", 0);
-            this.Width = XmlUtil.AttrValue(node, "width", 0);
-            this.Height = XmlUtil.AttrValue(node, "height", 0);
+            this.X = XmlUtil.AttrValue(node, "x", 0, svg.Size.Width);
+            this.Y = XmlUtil.AttrValue(node, "y", 0, svg.Size.Height);
+            this.Width = XmlUtil.AttrValue(node, "width", 0, svg.Size.Width);
+            this.Height = XmlUtil.AttrValue(node, "height", 0, svg.Size.Height);
             string hRef = XmlUtil.AttrValue(node, "xlink:href", string.Empty);
             if (hRef.Length > 0)
             {

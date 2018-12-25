@@ -15,10 +15,10 @@ namespace SVGImage.SVG.Shapes
         public EllipseShape(SVG svg, XmlNode node)
             : base(svg, node)
         {
-            this.CX = XmlUtil.AttrValue(node, "cx", 0);
-            this.CY = XmlUtil.AttrValue(node, "cy", 0);
-            this.RX = XmlUtil.AttrValue(node, "rx", 0);
-            this.RY = XmlUtil.AttrValue(node, "ry", 0);
+            this.CX = XmlUtil.AttrValue(node, "cx", 0, svg.Size.Width);
+            this.CY = XmlUtil.AttrValue(node, "cy", 0, svg.Size.Height);
+            this.RX = XmlUtil.AttrValue(node, "rx", 0, svg.Size.Width);
+            this.RY = XmlUtil.AttrValue(node, "ry", 0, svg.Size.Height);
         }
     }
 }

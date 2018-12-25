@@ -12,7 +12,7 @@ namespace SVGImage.SVG.PaintServer
 
         private Dictionary<string, PaintServer> m_servers = new Dictionary<string, PaintServer>();
 
-        public PaintServer Create(XmlNode node)
+        public PaintServer Create(SVG svg, XmlNode node)
         {
             if (node.Name == SVGTags.sLinearGradient)
             {
@@ -26,28 +26,42 @@ namespace SVGImage.SVG.PaintServer
                 if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new RadialGradientColorPaintServerPaintServer(this, node);
                 return this.m_servers[id];
             }
+            if (node.Name == SVGTags.sPattern)
+            {
+                string id = XmlUtil.AttrValue(node, "id");
+                if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new PatternPaintServer(this, svg, node);
+                return this.m_servers[id];
+            }
             return null;
         }
 
         public PaintServer Parse(string value)
         {
-            if (string.IsNullOrEmpty(value)) return null;
-            if (value == "none") return null;
-            if (value[0] == '#') return this.ParseSolidColor(value);
-            PaintServer result = null;
-            if (this.m_servers.TryGetValue(value, out result)) return result;
-            if (value.StartsWith("url"))
+            try
             {
-                string id = ShapeUtil.ExtractBetween(value, '(', ')');
-                if (id.Length > 0 && id[0] == '#') id = id.Substring(1);
-                this.m_servers.TryGetValue(id, out result);
-                return result;
+                if (string.IsNullOrEmpty(value)) return null;
+                if (value == "none") return null;
+                if (value[0] == '#') return this.ParseSolidColor(value);
+                PaintServer result = null;
+                if (this.m_servers.TryGetValue(value, out result)) return result;
+                if (value.StartsWith("url"))
+                {
+                    string id = ShapeUtil.ExtractBetween(value, '(', ')');
+                    if (id.Length > 0 && id[0] == '#') id = id.Substring(1);
+                    this.m_servers.TryGetValue(id, out result);
+                    return result;
+                }
+
+                if (value.StartsWith("rgb"))
+                {
+                    return this.ParseSolidRgbColor(value);
+                }
+
+                return this.ParseKnownColor(value);
             }
-            if (value.StartsWith("rgb"))
-            {
-                return this.ParseSolidRgbColor(value);
-            }
-            return this.ParseKnownColor(value);
+            catch (Exception) { }
+
+            return null;
         }
 
         public static Color ParseHexColor(string value)
@@ -96,18 +110,32 @@ namespace SVGImage.SVG.PaintServer
 
         private SolidColorPaintServer ParseSolidRgbColor(string value)
         {
+            value = value.Replace("\r", "").Replace("\n", "").Replace("\t", "").Replace(" ", "");
             if (value.StartsWith("rgb("))
             {
                 var newVal = value.Substring(4, value.Length - 5).Split(',');
-                return ParseSolidColor("#" + int.Parse(newVal[0]).ToString("x") + int.Parse(newVal[1]).ToString("x") + int.Parse(newVal[2]).ToString("x"));
+                return ParseSolidColor("#" + ParseColorNumber(newVal[0]).ToString("x") + ParseColorNumber(newVal[1]).ToString("x") + ParseColorNumber(newVal[2]).ToString("x"));
             }
             if (value.StartsWith("rgba("))
             {
                 var newVal = value.Substring(5, value.Length - 6).Split(',');
-                return ParseSolidColor("#" + int.Parse(newVal[0]).ToString("x") + int.Parse(newVal[1]).ToString("x") + int.Parse(newVal[2]).ToString("x") + int.Parse(newVal[3]).ToString("x"));
+                return ParseSolidColor("#" + ParseColorNumber(newVal[0]).ToString("x") + ParseColorNumber(newVal[1]).ToString("x") + ParseColorNumber(newVal[2]).ToString("x") + ParseColorNumber(newVal[3]).ToString("x"));
             }
 
             return null;
+        }
+
+        private int ParseColorNumber(string value)
+        {
+            if (value.EndsWith("%"))
+            {
+                var nr = int.Parse(value.Substring(0, value.Length - 1));
+                if (nr < 0)
+                    nr = 255 - nr;
+                return nr * 255 / 100;
+            }
+
+            return int.Parse(value);
         }
 
         private SolidColorPaintServer ParseKnownColor(string value)

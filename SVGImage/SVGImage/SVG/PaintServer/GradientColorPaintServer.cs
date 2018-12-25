@@ -9,20 +9,13 @@ namespace SVGImage.SVG.PaintServer
         // http://www.w3.org/TR/SVG11/pservers.html#LinearGradients
         private List<GradientStop> m_stops = new List<GradientStop>();
 
-        public IList<GradientStop> Stops
-        {
-            get
-            {
-                return this.m_stops.AsReadOnly();
-            }
-        }
+        public IList<GradientStop> Stops => this.m_stops.AsReadOnly();
 
         public Transform Transform { get; protected set; }
 
         public string GradientUnits { get; private set; }
 
-        public GradientColorPaintServer(PaintServerManager owner, XmlNode node)
-            : base(owner)
+        public GradientColorPaintServer(PaintServerManager owner, XmlNode node) : base(owner)
         {
             this.GradientUnits = XmlUtil.AttrValue(node, "gradientUnits", string.Empty);
             string transform = XmlUtil.AttrValue(node, "gradientTransform", string.Empty);

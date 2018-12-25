@@ -49,7 +49,7 @@ namespace SVGImage.SVG
             Stroke stroke = shape.Stroke;
             if (stroke != null)
             {
-                var brush = stroke.StrokeBrush(this.SVG, shape.Opacity);
+                var brush = stroke.StrokeBrush(this.SVG, this, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
                     brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 item.Pen = new Pen(brush, stroke.Width);
@@ -91,7 +91,7 @@ namespace SVGImage.SVG
             }
             if (shape.Fill != null)
             {
-                item.Brush = shape.Fill.FillBrush(this.SVG, shape.Opacity);
+                item.Brush = shape.Fill.FillBrush(this.SVG, this, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
                     item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
@@ -140,7 +140,7 @@ namespace SVGImage.SVG
             }
         }
 
-        private DrawingGroup LoadGroup(IList<Shape> elements, Rect? viewBox)
+        internal DrawingGroup LoadGroup(IList<Shape> elements, Rect? viewBox)
         {
             List<ControlLine> debugPoints = new List<ControlLine>();
             DrawingGroup grp = new DrawingGroup();
@@ -215,17 +215,21 @@ namespace SVGImage.SVG
                 if (shape is UseShape)
                 {
                     UseShape useshape = shape as UseShape;
-                    Group group = this.SVG.GetShape(useshape.hRef) as Group;
-                    if (group != null)
+                    Shape currentUsedShape = this.SVG.GetShape(useshape.hRef);
+                    if (currentUsedShape != null)
                     {
-                        Shape oldparent = group.Parent;
-                        group.Parent = useshape; // this to get proper style propagated
-                        DrawingGroup subgroup = this.LoadGroup(group.Elements, null);
-                        if (group.Clip != null)
-                            subgroup.ClipGeometry = group.Clip.ClipGeometry;
+                        Shape oldparent = currentUsedShape.Parent;
+                        currentUsedShape.Parent = useshape; // this to get proper style propagated
+                        DrawingGroup subgroup;
+                        if (currentUsedShape is Group)
+                            subgroup = this.LoadGroup(((Group)currentUsedShape).Elements, null);
+                        else
+                            subgroup = this.LoadGroup(new[]{ currentUsedShape }, null);
+                        if (currentUsedShape.Clip != null)
+                            subgroup.ClipGeometry = currentUsedShape.Clip.ClipGeometry;
                         subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
                         grp.Children.Add(subgroup);
-                        group.Parent = oldparent;
+                        currentUsedShape.Parent = oldparent;
                     }
                     continue;
 

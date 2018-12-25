@@ -13,8 +13,9 @@ namespace SVGImage.SVG.Shapes
         public CircleShape(SVG svg, XmlNode node)
             : base(svg, node)
         {
-            this.CX = XmlUtil.AttrValue(node, "cx", 0);
-            this.CY = XmlUtil.AttrValue(node, "cy", 0);
+            //this.
+            this.CX = XmlUtil.AttrValue(node, "cx", 0, svg.Size.Width);
+            this.CY = XmlUtil.AttrValue(node, "cy", 0, svg.Size.Height);
             this.R = XmlUtil.AttrValue(node, "r", 0);
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 using System.Xml;
 
 namespace SVGImage.SVG.PaintServer
@@ -15,16 +16,12 @@ namespace SVGImage.SVG.PaintServer
 
         public double R { get; private set; }
 
-        public string Id { get; private set; }
-
         private Brush brush = null;
 
         public RadialGradientColorPaintServerPaintServer(PaintServerManager owner, XmlNode node)
             : base(owner, node)
         {
             System.Diagnostics.Debug.Assert(node.Name == SVGTags.sRadialGradient);
-            this.Id = XmlUtil.AttrValue(node, "id");
-
             this.CX = XmlUtil.AttrValue(node, "cx", double.NaN);
             this.CY = XmlUtil.AttrValue(node, "cy", double.NaN);
             this.FX = XmlUtil.AttrValue(node, "fx", double.NaN);
@@ -33,7 +30,7 @@ namespace SVGImage.SVG.PaintServer
             this.Normalize();
         }
 
-        public override Brush GetBrush(double opacity, SVG svg)
+        public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
             if (this.brush != null) return this.brush;
 
@@ -45,7 +42,7 @@ namespace SVGImage.SVG.PaintServer
             b.RadiusX = 0.5;
             b.RadiusY = 0.5;
 
-            if (this.GradientUnits == SVGTags.sGradientUserSpace)
+            if (this.GradientUnits == SVGTags.sUserSpaceOnUse)
             {
                 b.Center = new System.Windows.Point(this.CX, this.CY);
                 b.GradientOrigin = new System.Windows.Point(this.FX, this.FY);

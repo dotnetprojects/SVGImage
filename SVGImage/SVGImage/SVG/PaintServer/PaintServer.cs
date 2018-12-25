@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 
 namespace SVGImage.SVG.PaintServer
 {
@@ -12,6 +13,6 @@ namespace SVGImage.SVG.PaintServer
             this.Owner = owner;
         }
 
-        public abstract Brush GetBrush(double opacity, SVG svg);
+        public abstract Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds);
     }
 }
