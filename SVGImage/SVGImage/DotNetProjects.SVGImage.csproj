@@ -69,6 +69,8 @@
     <Compile Include="SVG\Animation\AnimateTransformType.cs" />
     <Compile Include="SVG\Animation\AnimationBase.cs" />
     <Compile Include="SVG\ClipArtElement.cs" />
+    <Compile Include="SVG\FileLoaders\FileSystemLoader.cs" />
+    <Compile Include="SVG\FileLoaders\IExternalFileLoader.cs" />
     <Compile Include="SVG\Fill.cs" />
     <Compile Include="SVG\PaintServer\GradientColorPaintServer.cs" />
     <Compile Include="SVG\PaintServer\LinearGradientColorPaintServer.cs" />
@@ -96,12 +98,14 @@
     <Compile Include="SVG\Shapes\UseShape.cs" />
     <Compile Include="SVG\ShapeUtil.cs" />
     <Compile Include="SVG\Stroke.cs" />
+    <Compile Include="SVG\CSS\StyleParser.cs" />
+    <Compile Include="SVG\CSS\StyleItem.cs" />
     <Compile Include="SVG\SVG.cs" />
     <Compile Include="SVG\SVGFeatures.cs" />
     <Compile Include="SVG\SVGImage.cs" />
     <Compile Include="SVG\SVGRender.cs" />
     <Compile Include="SVG\SVGTags.cs" />
-    <Compile Include="SVG\Text.cs" />
+    <Compile Include="SVG\Shapes\Text.cs" />
     <Compile Include="SVG\TextRender.cs" />
     <Compile Include="SVG\TextStyle.cs" />
     <Compile Include="SVG\Animation\AnimateTransform.cs" />

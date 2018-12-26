@@ -10,9 +10,6 @@ namespace SVGImage.SVG.Shapes
     {
         private List<Shape> m_elements = new List<Shape>();
 
-        private static Regex _regexStyle =
-            new Regex("([\\.,<>a-zA-Z0-9: ]*){([^}]*)}", RegexOptions.Compiled | RegexOptions.Singleline);
-
         public IList<Shape> Elements
         {
             get { return this.m_elements.AsReadOnly(); }
@@ -60,22 +57,7 @@ namespace SVGImage.SVG.Shapes
                 return null;
             if (nodeName == SVGTags.sStyle)
             {
-                var match = _regexStyle.Match(childnode.InnerText);
-                while (match.Success)
-                {
-                    var name = match.Groups[1].Value.Trim();
-                    var value = match.Groups[2].Value;
-                    foreach (var nm in name.Split(','))
-                    {
-                        svg.m_styles.Add(nm, new List<XmlAttribute>());
-                        foreach (ShapeUtil.Attribute styleitem in XmlUtil.SplitStyle(svg, value))
-                        {
-                            svg.m_styles[nm].Add(new XmlUtil.StyleItem(childnode, styleitem.Name, styleitem.Value));
-                        }
-                    }
-
-                    match = match.NextMatch();
-                }
+                StyleParser.ParseStyle(svg, childnode.InnerText);
             }
             else if (nodeName == SVGTags.sShapeRect)
                 retVal = new RectangleShape(svg, childnode);
@@ -182,6 +164,11 @@ namespace SVGImage.SVG.Shapes
                 }
 
                 return null;
+            }
+            else
+            {
+                if (node.NamespaceURI != SVGTags.sNsSvg && node.NamespaceURI != "")
+                    return null;
             }
             return nodeName;
         }

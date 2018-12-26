@@ -194,6 +194,25 @@
     <Resource Include="Images\raupen.jpg" />
     <Resource Include="Images\tiger.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1.svg" />
+    <Resource Include="Images\2.svg" />
+    <Resource Include="Images\3.svg" />
+    <Resource Include="Images\4.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\5.svg" />
+    <Resource Include="Images\6.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\acid1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\acid2.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\acid1.css" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

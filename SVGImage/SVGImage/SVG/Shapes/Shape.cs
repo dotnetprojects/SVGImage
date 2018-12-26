@@ -15,6 +15,8 @@ namespace SVGImage.SVG.Shapes
 
         private TextStyle m_textstyle;
 
+        private string m_localStyle;
+
         internal Clip m_clip = null;
 
         internal Clip Clip
@@ -94,8 +96,7 @@ namespace SVGImage.SVG.Shapes
         {
         }
 
-        public Shape(SVG svg, XmlNode node, Shape parent)
-            : base(node)
+        public Shape(SVG svg, XmlNode node, Shape parent) : base(node)
         {
             this.Opacity = 1;
             this.Parent = parent;
@@ -103,49 +104,57 @@ namespace SVGImage.SVG.Shapes
             if (node != null)
             {
                 foreach (XmlAttribute attr in node.Attributes)
-                    this.Parse(svg, attr);
+                    this.Parse(svg, attr.Name, attr.Value);
             }
+            ParseLocalStyle(svg);
         }
 
-        public Shape(SVG svg, List<ShapeUtil.Attribute> attrs, Shape parent)
-            : base(null)
+        public Shape(SVG svg, List<ShapeUtil.Attribute> attrs, Shape parent) : base(null)
         {
             this.Opacity = 1;
             this.Parent = parent;
             if (attrs != null)
             {
                 foreach (ShapeUtil.Attribute attr in attrs)
-                    this.Parse(svg, attr);
+                    this.Parse(svg, attr.Name, attr.Value);
             }
-        }
-
-        protected virtual void Parse(SVG svg, XmlAttribute attr)
-        {
-            string name = attr.Name;
-            string value = attr.Value;
-            this.Parse(svg, name, value);
-        }
-
-        protected virtual void Parse(SVG svg, ShapeUtil.Attribute attr)
-        {
-            string name = attr.Name;
-            string value = attr.Value;
-            this.Parse(svg, name, value);
+            ParseLocalStyle(svg);
         }
 
         protected virtual void ParseAtStart(SVG svg, XmlNode node)
         {
             if (node != null)
             {
-                List<XmlAttribute> attributes;
-                if (svg.m_styles.TryGetValue(node.Name, out attributes))
+                var name = node.Name;
+                if (name.Contains(":"))
+                    name = name.Split(':')[1];
+
+                if (svg.m_styles.TryGetValue(name, out var attributes))
                 {
                     foreach (var xmlAttribute in attributes)
                     {
-                        Parse(svg, xmlAttribute);
+                        Parse(svg, xmlAttribute.Name, xmlAttribute.Value);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(this.Id))
+                {
+                    if (svg.m_styles.TryGetValue("#" + this.Id, out attributes))
+                    {
+                        foreach (var xmlAttribute in attributes)
+                        {
+                            Parse(svg, xmlAttribute.Name, xmlAttribute.Value);
+                        }
                     }
                 }
             }
+        }
+
+        protected virtual void ParseLocalStyle(SVG svg)
+        {
+            if (!string.IsNullOrEmpty(this.m_localStyle))
+                foreach (ShapeUtil.Attribute item in XmlUtil.SplitStyle(svg, this.m_localStyle))
+                    this.Parse(svg, item.Name, item.Value);
         }
 
         protected virtual void Parse(SVG svg, string name, string value)
@@ -158,12 +167,11 @@ namespace SVGImage.SVG.Shapes
                 var classes = value.Split(' ');
                 foreach (var @class in classes)
                 {
-                    List<XmlAttribute> attributes;
-                    if (svg.m_styles.TryGetValue("." + @class, out attributes))
+                    if (svg.m_styles.TryGetValue("." + @class, out var attributes))
                     {
                         foreach (var xmlAttribute in attributes)
                         {
-                            Parse(svg, xmlAttribute);
+                            Parse(svg, xmlAttribute.Name, xmlAttribute.Value);
                         }
                     }
                 }
@@ -278,7 +286,7 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sStyle)
             {
-                foreach (ShapeUtil.Attribute item in XmlUtil.SplitStyle(svg, value)) this.Parse(svg, item);
+                m_localStyle = value;
             }
             //********************** text *******************
             if (name == SVGTags.sFontFamily)

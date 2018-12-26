@@ -59,7 +59,7 @@ namespace SVGImage.SVG.PaintServer
                     return this.ParseSolidRgbColor(value);
                 }
 
-                return this.ParseKnownColor(value);
+                return this.ParseKnownColor(value.ToLower());
             }
             catch (Exception) { }
 

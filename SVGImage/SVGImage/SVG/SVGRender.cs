@@ -6,7 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using DotNetProjects.SVGImage.SVG;
 using DotNetProjects.SVGImage.SVG.Animation;
-using SVGImage.SVG.PaintServer;
+using DotNetProjects.SVGImage.SVG.FileLoaders;
 using SVGImage.SVG.Shapes;
 
 namespace SVGImage.SVG
@@ -15,21 +15,28 @@ namespace SVGImage.SVG
     // http://commons.oreilly.com/wiki/index.php/SVG_Essentials
     public class SVGRender
     {
+        public SVGRender()
+        {
+            ExternalFileLoader = FileSystemLoader.Instance;
+        }
+
         public SVG SVG { get; private set; }
 
         public bool UseAnimations { get; set; }
 
         public Color? OverrideColor { get; set; }
 
+        public IExternalFileLoader ExternalFileLoader { get; set; }
+
         public DrawingGroup LoadDrawing(string filename)
         {
-            this.SVG = new SVG(filename);
+            this.SVG = new SVG(filename, ExternalFileLoader);
             return this.CreateDrawing(this.SVG);
         }
 
         public DrawingGroup LoadDrawing(Stream stream)
         {
-            this.SVG = new SVG(stream);
+            this.SVG = new SVG(stream, ExternalFileLoader);
 
             return this.CreateDrawing(this.SVG);
         }
@@ -275,7 +282,7 @@ namespace SVGImage.SVG
                 if (shape is RectangleShape)
                 {
                     RectangleShape r = shape as RectangleShape;
-                    RectangleGeometry rect = new RectangleGeometry(new Rect(r.X, r.Y, r.Width, r.Height));
+                    RectangleGeometry rect = new RectangleGeometry(new Rect(r.X < 0 ? 0 : r.X, r.Y < 0 ? 0 : r.Y, r.X < 0 ? r.Width + r.X : r.Width, r.Y < 0 ? r.Height + r.Y : r.Height));
                     rect.RadiusX = r.RX;
                     rect.RadiusY = r.RY;
                     if (rect.RadiusX == 0 && rect.RadiusY > 0) rect.RadiusX = rect.RadiusY;

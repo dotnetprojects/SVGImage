@@ -186,12 +186,12 @@ namespace SVGImage.SVG
 		}
 	}
 
-	public class XmlUtil
+	public partial class XmlUtil
 	{
-		static bool SplitValueUnits(string inputstring, out double value, out string units)
+		static bool GetValueRespectingUnits(string inputstring, out double value, double percentageMaximum)
 		{
 			value = 0;
-			units = string.Empty;
+			var units = string.Empty;
 			int index = inputstring.LastIndexOfAny(new char[] {'.','-','0','1','2','3','4','5','6','7','8','9'}) ;
 			if (index >= 0)
 			{
@@ -201,7 +201,18 @@ namespace SVGImage.SVG
 				try
 				{
 					value = System.Xml.XmlConvert.ToDouble(svalue);
-					return true;
+
+				    switch (units) // from http://www.selfsvg.info/?section=3.4
+				    {
+				        case "pt": value = value * 1.25; break;
+                        case "mm": value = value * 3.54; break;
+                        case "pc": value = value * 15; break;
+                        case "cm": value = value * 35.43; break;
+                        case "in": value = value * 90; break;
+                        case "%": value = value * percentageMaximum / 100; break;
+                    }
+
+                    return true;
 				}
 				catch (FormatException)
 				{
@@ -213,8 +224,7 @@ namespace SVGImage.SVG
 		public static double AttrValue(ShapeUtil.Attribute attr)
 		{
 			double result = 0;
-			string units = string.Empty;
-			SplitValueUnits(attr.Value, out result, out units);
+			GetValueRespectingUnits(attr.Value, out result, 1);
 			return result;
 		}
 
@@ -225,21 +235,9 @@ namespace SVGImage.SVG
 				return defaultvalue;
 
 			double result = 0;
-			string units;
-
-		    if (attr != null && SplitValueUnits(attr.Value, out result, out units))
+			if (attr != null && GetValueRespectingUnits(attr.Value, out result, percentageMaximum))
 		    {
-		        switch (units) // from http://www.selfsvg.info/?section=3.4
-                {
-                    case "pt": return result * 1.25;
-                    case "mm": return result * 3.54;
-                    case "pc": return result * 15;
-                    case "cm": return result * 35.43;
-                    case "in": return result * 90;
-                    case "%": return result * percentageMaximum / 100;
-                }
-
-                return result;
+		        return result;
 		    }
 			return defaultvalue;
 		}
@@ -259,20 +257,13 @@ namespace SVGImage.SVG
 
 		public static double ParseDouble(SVG svg, string svalue)
 		{
-			string units = string.Empty;
 			double value = 0d;
-			if (SplitValueUnits(svalue, out value, out units))
+			if (GetValueRespectingUnits(svalue, out value, 1))
 				return value;
 			return 0.1;
 		}
-		public class StyleItem : XmlAttribute
-		{
-			public StyleItem(XmlNode owner, string name, string value) : base(string.Empty, name, string.Empty, owner.OwnerDocument)
-			{
-				this.Value = value;
-			}
-		}
-		public static List<ShapeUtil.Attribute> SplitStyle(SVG svg, string fullstyle)
+
+	    public static List<ShapeUtil.Attribute> SplitStyle(SVG svg, string fullstyle)
 		{
 			List<ShapeUtil.Attribute> list = new List<ShapeUtil.Attribute>();
 			if (fullstyle.Length == 0)

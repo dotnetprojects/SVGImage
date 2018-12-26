@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Resources;
+using DotNetProjects.SVGImage.SVG.FileLoaders;
 
 namespace SVGImage.SVG
 {
@@ -97,6 +98,16 @@ namespace SVGImage.SVG
 
         public static readonly DependencyProperty OverrideColorProperty =
             DependencyProperty.Register("OverrideColor", typeof(Color?), typeof(SVGImage), new PropertyMetadata(null));
+        
+        public IExternalFileLoader ExternalFileLoader
+        {
+            get { return (IExternalFileLoader)GetValue(ExternalFileLoaderProperty); }
+            set { SetValue(ExternalFileLoaderProperty, value); }
+        }
+
+        public static readonly DependencyProperty ExternalFileLoaderProperty =
+            DependencyProperty.Register("ExternalFileLoader", typeof(IExternalFileLoader), typeof(SVGImage), new PropertyMetadata(FileSystemLoader.Instance));
+
 
         private Drawing m_drawing;
         private TranslateTransform m_offsetTransform = new TranslateTransform();
@@ -126,6 +137,7 @@ namespace SVGImage.SVG
             if (this.IsInitialized || System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
+                _render.ExternalFileLoader = this.ExternalFileLoader;
                 _render.UseAnimations = false;
                 _render.OverrideColor = OverrideColor;
                 loadImage(_render);
@@ -157,6 +169,7 @@ namespace SVGImage.SVG
             if (this.IsInitialized || System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
+                _render.ExternalFileLoader = this.ExternalFileLoader;
                 _render.OverrideColor = OverrideColor;
                 _render.UseAnimations = false;
                 loadImage(_render);
@@ -172,6 +185,7 @@ namespace SVGImage.SVG
             if (loadImage != null)
             {
                 _render = new SVGRender();
+                _render.ExternalFileLoader = this.ExternalFileLoader;
                 _render.OverrideColor = OverrideColor;
                 _render.UseAnimations = this.UseAnimations;
                 loadImage(_render);
@@ -187,6 +201,7 @@ namespace SVGImage.SVG
                 this.InvalidateMeasure();
             this.RecalcImage();
         }
+
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             base.OnRenderSizeChanged(sizeInfo);

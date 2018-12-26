@@ -10,8 +10,7 @@ namespace SVGImage.SVG.Shapes
 
         public string hRef { get; set; }
 
-        public UseShape(SVG svg, XmlNode node)
-            : base(svg, node)
+        public UseShape(SVG svg, XmlNode node) : base(svg, node)
         {
             this.X = XmlUtil.AttrValue(node, "x", 0, svg.Size.Width);
             this.Y = XmlUtil.AttrValue(node, "y", 0, svg.Size.Height);

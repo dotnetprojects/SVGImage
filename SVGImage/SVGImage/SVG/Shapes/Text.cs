@@ -54,6 +54,7 @@ namespace SVGImage.SVG
 				DefaultStroke.Width = 0.1;
 			}
 		}
+
 		TSpan.Element ParseTSpan(SVG svg, string tspanText)
 		{
 			try
@@ -65,6 +66,7 @@ namespace SVGImage.SVG
 				return null;
 			}
 		}
+
 		public class TSpan
 		{
 			public class Element : Shape
@@ -134,6 +136,7 @@ namespace SVGImage.SVG
 				curPos = end;
 				return tag;
 			}
+
 			static Element Parse(SVG svg, string text, ref int curPos, Element parent, Element curTag)
 			{
 				Element tag = curTag;

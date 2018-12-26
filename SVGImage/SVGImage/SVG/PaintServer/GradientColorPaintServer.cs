@@ -35,14 +35,13 @@ namespace SVGImage.SVG.PaintServer
             {
                 if (childnode.Name == "stop")
                 {
-                    List<XmlAttribute> styleattr = new List<XmlAttribute>();
+                    var styleattr = new List<XmlUtil.StyleItem>();
                     string fullstyle = XmlUtil.AttrValue(childnode, SVGTags.sStyle, string.Empty);
                     if (fullstyle.Length > 0)
                     {
-                        foreach (ShapeUtil.Attribute styleitem in XmlUtil.SplitStyle(null, fullstyle)) styleattr.Add(new XmlUtil.StyleItem(childnode, styleitem.Name, styleitem.Value));
+                        foreach (ShapeUtil.Attribute styleitem in XmlUtil.SplitStyle(null, fullstyle)) styleattr.Add(new XmlUtil.StyleItem(styleitem.Name, styleitem.Value));
                     }
-                    foreach (XmlAttribute attr1 in styleattr) childnode.Attributes.Append(attr1);
-
+                    foreach (var attr1 in styleattr) childnode.Attributes.Append(new TempXmlAttribute(childnode, attr1.Name, attr1.Value));
 
                     double offset = XmlUtil.AttrValue(childnode, "offset", (double)0);
                     string s = XmlUtil.AttrValue(childnode, "stop-color", "#0");
@@ -58,6 +57,14 @@ namespace SVGImage.SVG.PaintServer
                     if (offset > 1) offset = offset / 100;
                     this.m_stops.Add(new GradientStop(color, offset));
                 }
+            }
+        }
+
+        public class TempXmlAttribute : XmlAttribute
+        {
+            public TempXmlAttribute(XmlNode owner, string name, string value) : base(string.Empty, name, string.Empty, owner.OwnerDocument)
+            {
+                this.Value = value;
             }
         }
     }

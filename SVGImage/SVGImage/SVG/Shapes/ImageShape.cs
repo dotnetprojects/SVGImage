@@ -40,11 +40,13 @@ namespace SVGImage.SVG.Shapes
                     }
                     else
                     {
+                        if (svg.ExternalFileLoader != null)
+                            b.StreamSource = svg.ExternalFileLoader.LoadFile(hRef, svg.Filename);
                         // filename given must be relative to the location of the svg file
-                        string svgpath = System.IO.Path.GetDirectoryName(svg.Filename);
-                        string filename = System.IO.Path.Combine(svgpath, hRef);
-                        if (File.Exists(filename))
-                            b.UriSource = new Uri(filename, UriKind.RelativeOrAbsolute);
+                        //string svgpath = System.IO.Path.GetDirectoryName(svg.Filename);
+                        //string filename = System.IO.Path.Combine(svgpath, hRef);
+                        //if (File.Exists(filename))
+                        //    b.UriSource = new Uri(filename, UriKind.RelativeOrAbsolute);
                     }
 
                     b.EndInit();
