@@ -98,7 +98,18 @@ namespace SVGImage.SVG
                         break;
                 }
             }
-            if (shape.Fill != null)
+
+            if (shape.Fill == null)
+            {
+                item.Brush = Brushes.Black;
+                if (OverrideColor != null)
+                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
+                GeometryGroup g = new GeometryGroup();
+                g.FillRule = FillRule.Nonzero;
+                g.Children.Add(geometry);
+                geometry = g;
+            }
+            else if (shape.Fill != null)
             {
                 item.Brush = shape.Fill.FillBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)

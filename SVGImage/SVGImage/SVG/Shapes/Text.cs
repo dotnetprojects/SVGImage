@@ -86,7 +86,7 @@ namespace SVGImage.SVG
 				public int StartIndex {get; set;}
 				public string Text {get; set;}
 				public Element End {get; set;}
-				public Element(Shape parent, string text) : base(null, (XmlNode)null, parent)
+				public Element(SVG svg, Shape parent, string text) : base(svg, (XmlNode)null, parent)
 				{
 					this.ElementType = eElementType.Text;
 					this.Text = text;
@@ -150,7 +150,7 @@ namespace SVGImage.SVG
 					{
 						// remaining pure text 
 						string s = text.Substring(curPos, text.Length - curPos);
-						tag.Children.Add(new Element(tag, s));
+						tag.Children.Add(new Element(svg, tag, s));
 						return tag;
 					}
 					if (next != null && next.StartIndex-prevPos > 0)
@@ -158,7 +158,7 @@ namespace SVGImage.SVG
 						// pure text between tspan elements
 						int diff = next.StartIndex-prevPos;
 						string s = text.Substring(prevPos, diff);
-						tag.Children.Add(new Element(tag, s));
+						tag.Children.Add(new Element(svg, tag, s));
 					}
 					if (next.Text.StartsWith("<tspan"))
 					{
