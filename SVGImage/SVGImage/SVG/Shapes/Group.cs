@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Xml;
 using DotNetProjects.SVGImage.SVG.Animation;
 using DotNetProjects.SVGImage.SVG.Shapes.Filter;
@@ -10,22 +9,11 @@ namespace SVGImage.SVG.Shapes
     {
         private List<Shape> m_elements = new List<Shape>();
 
-        public IList<Shape> Elements
-        {
-            get { return this.m_elements.AsReadOnly(); }
-        }
+        public IList<Shape> Elements => this.m_elements.AsReadOnly();
 
         public bool IsSwitch { get; set; }
 
-        private Shape AddChild(Shape shape)
-        {
-            this.m_elements.Add(shape);
-            shape.Parent = this;
-            return shape;
-        }
-
-        public Group(SVG svg, XmlNode node, Shape parent)
-            : base(svg, node)
+        public Group(SVG svg, XmlNode node, Shape parent) : base(svg, node)
         {
             // parent on group must be set before children are added
             var clp = XmlUtil.AttrValue(node, "clip-path", null);

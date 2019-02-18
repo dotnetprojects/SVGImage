@@ -479,7 +479,7 @@ namespace SVGImage.SVG
                             {
                                 s.Point1 = lastPoint + (Vector)c.CtrlPoint1;
 
-                                if (c.Command == 'q')
+                                if (c.Command == 'q' && lastq != null) // fix for horse svg! needed ?? or is it wrong in SVG?
                                 {
                                     // first control point is a mirrored point of last end control point
                                     //s.Point1 = lastPoint + new Vector(lastc.Point.X - dx, lastc.Point.Y - dy);

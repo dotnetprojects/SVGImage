@@ -215,13 +215,22 @@ namespace SVGImage.SVG
                     return true;
 				}
 				catch (FormatException)
-				{
-				}
+				{ }
 			}
 			return false;
 		}
-		
-		public static double AttrValue(ShapeUtil.Attribute attr)
+
+        public static double GetDoubleValue(string value, double percentageMaximum = 1)
+        {
+            double result = 0;
+            if (GetValueRespectingUnits(value, out result, percentageMaximum))
+            {
+                return result;
+            }
+            return 0;
+        }
+
+        public static double AttrValue(ShapeUtil.Attribute attr)
 		{
 			double result = 0;
 			GetValueRespectingUnits(attr.Value, out result, 1);
@@ -241,6 +250,7 @@ namespace SVGImage.SVG
 		    }
 			return defaultvalue;
 		}
+
 		public static string AttrValue(XmlNode node, string id, string defaultvalue)
 		{
 			if (node.Attributes == null)
@@ -250,6 +260,7 @@ namespace SVGImage.SVG
 				return attr.Value;
 			return defaultvalue;
 		}
+
 		public static string AttrValue(XmlNode node, string id)
 		{
 			return AttrValue(node, id, string.Empty);

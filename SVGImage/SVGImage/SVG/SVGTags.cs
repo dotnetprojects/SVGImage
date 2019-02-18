@@ -48,6 +48,8 @@
         public const string sShapeUse = "use";
         public const string sShapeImage = "image";
 
+        public const string sVisibility = "visibility";
+        
         public const string sSwitch = "switch";
 
         public const string sRequiredFeatures = "requiredFeatures";

@@ -9,8 +9,7 @@ namespace SVGImage.SVG.Shapes
 
         public Point P2 { get; private set; }
 
-        public LineShape(SVG svg, XmlNode node)
-            : base(svg, node)
+        public LineShape(SVG svg, XmlNode node) : base(svg, node)
         {
             double x1 = XmlUtil.AttrValue(node, "x1", 0, svg.Size.Width);
             double y1 = XmlUtil.AttrValue(node, "y1", 0, svg.Size.Height);

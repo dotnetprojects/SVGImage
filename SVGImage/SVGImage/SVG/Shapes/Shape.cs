@@ -35,6 +35,8 @@ namespace SVGImage.SVG.Shapes
 
         public string RequiredFeatures { get; set; }
 
+        public Visibility Visibility { get; set; }
+
         public virtual Stroke Stroke
         {
             get
@@ -80,7 +82,11 @@ namespace SVGImage.SVG.Shapes
             }
         }
 
-        public double Opacity { get; set; }
+        public double Opacity
+        {
+            get => Visibility == Visibility.Visible ? m_opacity : 0;
+            set => m_opacity = value;
+        }
 
         public virtual Transform Transform { get; private set; }
 
@@ -88,11 +94,11 @@ namespace SVGImage.SVG.Shapes
 
         //Used during render
         internal Shape RealParent;
+        private double m_opacity;
 
         public Shape Parent { get; set; }
 
-        public Shape(SVG svg, XmlNode node)
-            : this(svg, node, null)
+        public Shape(SVG svg, XmlNode node) : this(svg, node, null)
         {
         }
 
@@ -181,6 +187,10 @@ namespace SVGImage.SVG.Shapes
             {
                 this.Transform = ShapeUtil.ParseTransform(value.ToLower());
                 return;
+            }
+            if (name == SVGTags.sVisibility)
+            {
+                this.Visibility = value == "hidden" ? Visibility.Hidden : Visibility.Visible;
             }
             if (name == SVGTags.sStroke)
             {

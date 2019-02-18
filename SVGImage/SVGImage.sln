@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetProjects.SVGImage", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{6BDADE27-F4F1-4E84-8BB0-4D5989B4380B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVGImage.Design", "SVGImage.Design\SVGImage.Design.csproj", "{89EEDB4B-473C-4733-9FB9-A05DF3F67620}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetProjects.SVGImage.Design", "SVGImage.Design\DotNetProjects.SVGImage.Design.csproj", "{89EEDB4B-473C-4733-9FB9-A05DF3F67620}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {299F3503-8850-481B-BB27-017B8485B0F6}
 	EndGlobalSection
 EndGlobal

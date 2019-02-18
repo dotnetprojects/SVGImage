@@ -28,21 +28,52 @@ namespace SVGImage.SVG.Shapes
 
         public double RY { get; set; }
 
-        public RectangleShape(SVG svg, XmlNode node)
-            : base(svg, node)
+        public RectangleShape(SVG svg, XmlNode node) : base(svg, node)
         {
-            this.X = XmlUtil.AttrValue(node, "x", 0, svg.Size.Width);
-            this.Y = XmlUtil.AttrValue(node, "y", 0, svg.Size.Height);
-            this.Width = XmlUtil.AttrValue(node, "width", 0, svg.Size.Width);
-            this.Height = XmlUtil.AttrValue(node, "height", 0, svg.Size.Height);
-            this.RX = XmlUtil.AttrValue(node, "rx", 0, svg.Size.Width);
-            this.RY = XmlUtil.AttrValue(node, "ry", 0, svg.Size.Height);
-
             if (DefaultFill == null)
             {
                 DefaultFill = new Fill(svg);
                 DefaultFill.Color = svg.PaintServers.Parse("black");
             }
+        }
+
+        protected override void Parse(SVG svg, string name, string value)
+        {
+            if (name.Contains(":"))
+                name = name.Split(':')[1];
+
+            if (name == "x")
+            {
+                this.X = XmlUtil.GetDoubleValue(value, svg.Size.Width);
+                return;
+            }
+            if (name == "y")
+            {
+                this.Y = XmlUtil.GetDoubleValue(value, svg.Size.Height);
+                return;
+            }
+            if (name == "width")
+            {
+                this.Width = XmlUtil.GetDoubleValue(value, svg.Size.Width);
+                return;
+            }
+            if (name == "height")
+            {
+                this.Height = XmlUtil.GetDoubleValue(value, svg.Size.Height);
+                return;
+            }
+            if (name == "rx")
+            {
+                this.RX = XmlUtil.GetDoubleValue(value, svg.Size.Width);
+                return;
+            }
+            if (name == "ry")
+            {
+                this.RY = XmlUtil.GetDoubleValue(value, svg.Size.Height);
+                return;
+            }
+
+            base.Parse(svg, name, value);
         }
     }
 }
