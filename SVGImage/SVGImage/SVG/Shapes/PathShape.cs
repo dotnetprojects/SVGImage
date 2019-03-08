@@ -192,6 +192,9 @@ namespace SVGImage.SVG
         }
 
         public bool ClosePath { get; private set; }
+
+        public string Data { get; private set; }
+
         // http://apike.ca/prog_svg_paths.html
         public PathShape(SVG svg, XmlNode node, Shape parent) : base(svg, node, parent)
         {
@@ -203,6 +206,8 @@ namespace SVGImage.SVG
 
             this.ClosePath = false;
             string path = XmlUtil.AttrValue(node, "d", string.Empty);
+            this.Data = path;
+            /*
             CommandSplitter cmd = new CommandSplitter(path);
             string commandstring;
             char command;
@@ -272,6 +277,7 @@ namespace SVGImage.SVG
 
                 System.Diagnostics.Debug.Assert(false, string.Format("type '{0}' not supported", commandstring));
             }
+            */
         }
     }
 }
