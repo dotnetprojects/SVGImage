@@ -395,8 +395,10 @@ namespace SVGImage.SVG
                     PathShape.CurveTo lastc = null;
                     PathShape.QuadraticCurveTo lastq = null;
                     Point lastcirPoint = new Point(0, 0);
+                    PathGeometry path = PathGeometry.CreateFromGeometry(PathGeometry.Parse(r.Data));
+                    //PathGeometry path = new PathGeometry();
 
-                    PathGeometry path = new PathGeometry();
+                    /*
                     foreach (PathShape.PathElement element in r.Elements)
                     {
                         bool isRelative = element.IsRelative;
@@ -546,6 +548,7 @@ namespace SVGImage.SVG
                             continue;
                         }
                     }
+                    */
                     /*
                     if (r.Transform != null)
                         path.Transform = r.Transform;
