@@ -8,7 +8,7 @@
         <Authors>DotNetProjects</Authors>
         <Company>DotNetProjects</Company>
         <Product>DotNetProjects.SVGImage</Product>
-        <Copyright>2019 DotNetProjects</Copyright>
-        <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
+        <Copyright>2020 DotNetProjects</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 </Project>
