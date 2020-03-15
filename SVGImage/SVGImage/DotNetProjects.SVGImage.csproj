@@ -10,5 +10,7 @@
         <Product>DotNetProjects.SVGImage</Product>
         <Copyright>2020 DotNetProjects</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <FileVersion>3.0.0.0</FileVersion>
     </PropertyGroup>
 </Project>
