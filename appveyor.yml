@@ -16,7 +16,10 @@ dotnet_csproj:
   informational_version: '{version}'
 
 configuration: Debug
-  
+
+before_build:
+  - nuget restore
+
 build:
   project: SVGImage\SVGImage.sln
 
