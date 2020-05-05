@@ -32,7 +32,7 @@ namespace SVGImage.SVG
 
         public void AddShape(string id, Shape shape)
         {
-            System.Diagnostics.Debug.Assert(id.Length > 0 && this.m_shapes.ContainsKey(id) == false);
+            //System.Diagnostics.Debug.Assert(id.Length > 0 && this.m_shapes.ContainsKey(id) == false);
             this.m_shapes[id] = shape;
         }
 
