@@ -76,6 +76,8 @@ namespace SVGImage.SVG.PaintServer
             {
                 if (string.IsNullOrEmpty(value)) return null;
                 if (value == SVGTags.sNone) return null;
+                PaintServer result = null;
+                if (this.m_servers.TryGetValue(value, out result)) return value;
                 if (value == SVGTags.sInherit)
                 {
                     m_servers[value] = new InheritPaintServer(this);
@@ -87,8 +89,7 @@ namespace SVGImage.SVG.PaintServer
                     return value;
                 }
                 if (value[0] == '#') return this.ParseSolidColor(value);
-                PaintServer result = null;
-                if (this.m_servers.TryGetValue(value, out result)) return value;
+                
                 if (value.StartsWith("url"))
                 {
                     string id = ShapeUtil.ExtractBetween(value, '(', ')');
