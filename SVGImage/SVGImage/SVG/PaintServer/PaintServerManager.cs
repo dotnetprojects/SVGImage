@@ -78,12 +78,12 @@ namespace SVGImage.SVG.PaintServer
                 if (value == SVGTags.sNone) return null;
                 if (value == SVGTags.sInherit)
                 {
-                    new InheritPaintServer(this);
+                    m_servers[value] = new InheritPaintServer(this);
                     return value;
                 }
                 if (value == SVGTags.sCurrentColor)
                 {
-                    new CurrentColorPaintServer(this);
+                    m_servers[value] = new CurrentColorPaintServer(this);
                     return value;
                 }
                 if (value[0] == '#') return this.ParseSolidColor(value);
