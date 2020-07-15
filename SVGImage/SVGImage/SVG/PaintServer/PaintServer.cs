@@ -16,10 +16,5 @@ namespace SVGImage.SVG.PaintServer
         }
 
         public abstract Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds);
-
-        public Brush GetBrush()
-        {
-            return Brush;
-        }
     }
 }
