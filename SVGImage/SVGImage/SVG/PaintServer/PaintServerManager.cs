@@ -12,46 +12,89 @@ namespace SVGImage.SVG.PaintServer
 
         private Dictionary<string, PaintServer> m_servers = new Dictionary<string, PaintServer>();
 
-        public PaintServer Create(SVG svg, XmlNode node)
+        public string Create(SVG svg, XmlNode node)
         {
             if (node.Name == SVGTags.sLinearGradient)
             {
                 string id = XmlUtil.AttrValue(node, "id");
                 if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new LinearGradientColorPaintServerPaintServer(this, node);
-                return this.m_servers[id];
+                return id;
             }
             if (node.Name == SVGTags.sRadialGradient)
             {
                 string id = XmlUtil.AttrValue(node, "id");
                 if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new RadialGradientColorPaintServerPaintServer(this, node);
-                return this.m_servers[id];
+                return id;
             }
             if (node.Name == SVGTags.sPattern)
             {
                 string id = XmlUtil.AttrValue(node, "id");
                 if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new PatternPaintServer(this, svg, node);
-                return this.m_servers[id];
+                return id;
             }
             return null;
         }
 
-        public PaintServer Parse(string value)
+        public PaintServer GetServer(string serverKey)
+        {
+            PaintServer result;
+            if (serverKey != null && m_servers.TryGetValue(serverKey, out result)) return result;
+            else return null;
+        }
+
+        public Dictionary<string, PaintServer> GetServers()
+        {
+            return m_servers;
+        }
+
+        public bool CreateServerFromBrush(string key, Brush customBrush)
+        {
+            if (customBrush is SolidColorBrush)
+            {
+                m_servers[key] = new SolidColorPaintServer(this, customBrush);
+                return true;
+            }
+            else if (customBrush is LinearGradientBrush)
+            {
+                m_servers[key] = new LinearGradientColorPaintServerPaintServer(this, customBrush);
+                return true;
+            }
+            else if(customBrush is RadialGradientBrush)
+            {
+                m_servers[key] = new RadialGradientColorPaintServerPaintServer(this, customBrush);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public string Parse(string value)
         {
             try
             {
                 if (string.IsNullOrEmpty(value)) return null;
                 if (value == SVGTags.sNone) return null;
-                if (value == SVGTags.sInherit) return new InheritPaintServer(this);
-                if (value == SVGTags.sCurrentColor) return new CurrentColorPaintServer(this);
+                if (value == SVGTags.sInherit)
+                {
+                    new InheritPaintServer(this);
+                    return value;
+                }
+                if (value == SVGTags.sCurrentColor)
+                {
+                    new CurrentColorPaintServer(this);
+                    return value;
+                }
                 if (value[0] == '#') return this.ParseSolidColor(value);
                 PaintServer result = null;
-                if (this.m_servers.TryGetValue(value, out result)) return result;
+                if (this.m_servers.TryGetValue(value, out result)) return value;
                 if (value.StartsWith("url"))
                 {
                     string id = ShapeUtil.ExtractBetween(value, '(', ')');
                     if (id.Length > 0 && id[0] == '#') id = id.Substring(1);
                     this.m_servers.TryGetValue(id, out result);
-                    return result;
+                    return id;
                 }
 
                 if (value.StartsWith("rgb"))
@@ -100,17 +143,17 @@ namespace SVGImage.SVG.PaintServer
             return Colors.Black;
         }
 
-        private SolidColorPaintServer ParseSolidColor(string value)
+        private string ParseSolidColor(string value)
         {
             string id = "_solid" + value;
             PaintServer result;
-            if (this.m_servers.TryGetValue(id, out result)) return result as SolidColorPaintServer;
+            if (this.m_servers.TryGetValue(id, out result)) return id;
             result = new SolidColorPaintServer(this, ParseHexColor(value));
             this.m_servers[id] = result;
-            return result as SolidColorPaintServer;
+            return id;
         }
 
-        private SolidColorPaintServer ParseSolidRgbColor(string value)
+        private string ParseSolidRgbColor(string value)
         {
             value = value.Replace("\r", "").Replace("\n", "").Replace("\t", "").Replace(" ", "");
             if (value.StartsWith("rgb("))
@@ -140,17 +183,17 @@ namespace SVGImage.SVG.PaintServer
             return int.Parse(value);
         }
 
-        private SolidColorPaintServer ParseKnownColor(string value)
+        private string ParseKnownColor(string value)
         {
             LoadKnownColors();
             PaintServer result;
-            if (this.m_servers.TryGetValue(value, out result)) return result as SolidColorPaintServer;
+            if (this.m_servers.TryGetValue(value, out result)) return value;
             Color c;
             if (m_knownColors.TryGetValue(value, out c))
             {
                 result = new SolidColorPaintServer(this, c);
                 this.m_servers[value] = result;
-                return result as SolidColorPaintServer;
+                return value;
             }
             return null;
         }

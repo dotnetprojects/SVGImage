@@ -1,0 +1,6 @@
+<svg width="200px" height="200px" viewBox="0 0 200 200">
+<polygon style="fill-rule: nonzero; fill: yellow; stroke: black;"
+points="48,16 16,96 96,48 0,48 80,96" />
+<polygon style="fill-rule: evenodd; fill: #00ff00; stroke: black;"
+points="148,16 116,96 196,48 100,48 180,96" />
+</svg>

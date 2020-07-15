@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Media;
 using System.Xml;
 using DotNetProjects.SVGImage.SVG.FileLoaders;
 using SVGImage.SVG.PaintServer;
@@ -21,6 +22,7 @@ namespace SVGImage.SVG
         internal Dictionary<string, List<XmlUtil.StyleItem>> m_styles = new Dictionary<string, List<XmlUtil.StyleItem>>();
 
         private List<Shape> m_elements;
+        private Dictionary<string, Brush> m_customBrushes;
 
         public string Filename { get; private set; }
 
@@ -29,6 +31,22 @@ namespace SVGImage.SVG
         public Size Size { get; set; }
 
         public IExternalFileLoader ExternalFileLoader { get; set; }
+
+        public Dictionary<string, Brush> CustomBrushes
+        {
+            get => m_customBrushes;
+            set
+            {
+                m_customBrushes = value;
+                if (m_customBrushes != null)
+                {
+                    foreach (var brush in m_customBrushes)
+                    {
+                        PaintServers.CreateServerFromBrush(brush.Key, brush.Value);
+                    }
+                }
+            }
+        }
 
         public void AddShape(string id, Shape shape)
         {

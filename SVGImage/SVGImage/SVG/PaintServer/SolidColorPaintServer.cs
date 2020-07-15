@@ -13,12 +13,19 @@ namespace SVGImage.SVG.PaintServer
             this.Color = c;
         }
 
+        public SolidColorPaintServer(PaintServerManager owner, Brush newBrush) : base(owner)
+        {
+            Brush = newBrush;
+        }
+
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
+            if (Brush != null) return Brush;
             byte a = (byte)(255 * opacity / 100);
             Color c = this.Color;
             Color newcol = System.Windows.Media.Color.FromArgb(a, c.R, c.G, c.B);
-            return new SolidColorBrush(newcol);
+            Brush = new SolidColorBrush(newcol);
+            return Brush;
         }
     }
 }

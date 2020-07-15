@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -98,7 +99,41 @@ namespace SVGImage.SVG
 
         public static readonly DependencyProperty OverrideColorProperty =
             DependencyProperty.Register("OverrideColor", typeof(Color?), typeof(SVGImage), new PropertyMetadata(null));
-        
+
+        public Dictionary<string, Brush> CustomBrushes
+        {
+            get { return (Dictionary<string, Brush>)GetValue(CustomBrushesProperty); }
+            set { SetValue(CustomBrushesProperty, value); }
+        }
+
+        public static readonly DependencyProperty CustomBrushesProperty =
+            DependencyProperty.Register(nameof(CustomBrushes),
+                typeof(Dictionary<string, Brush>),
+                typeof(SVGImage),
+                new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.AffectsRender, CustomBrushesPropertyChanged));
+
+        private static void CustomBrushesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SVGImage svgImage && e.NewValue is Dictionary<string, Brush> newBrushes)
+            {
+                if (svgImage._render.CustomBrushes != null)
+                {
+                    Dictionary<string, Brush> newCustomBrushes = new Dictionary<string, Brush>(svgImage._render.CustomBrushes);
+                    foreach (var brush in newBrushes)
+                    {
+                        newCustomBrushes[brush.Key] = brush.Value;
+                    }
+                    svgImage._render.CustomBrushes = newCustomBrushes;
+                }
+                else
+                {
+                    svgImage._render.CustomBrushes = newBrushes;
+                }
+
+                svgImage.ReRenderSvg();
+            }
+        }
+
         public IExternalFileLoader ExternalFileLoader
         {
             get { return (IExternalFileLoader)GetValue(ExternalFileLoaderProperty); }
@@ -140,6 +175,7 @@ namespace SVGImage.SVG
                 _render.ExternalFileLoader = this.ExternalFileLoader;
                 _render.UseAnimations = false;
                 _render.OverrideColor = OverrideColor;
+                _render.CustomBrushes = CustomBrushes;
                 loadImage(_render);
                 loadImage = null;
             }
@@ -171,6 +207,7 @@ namespace SVGImage.SVG
                 _render = new SVGRender();
                 _render.ExternalFileLoader = this.ExternalFileLoader;
                 _render.OverrideColor = OverrideColor;
+                _render.CustomBrushes = CustomBrushes;
                 _render.UseAnimations = false;
                 loadImage(_render);
                 loadImage = null;
@@ -187,9 +224,16 @@ namespace SVGImage.SVG
                 _render = new SVGRender();
                 _render.ExternalFileLoader = this.ExternalFileLoader;
                 _render.OverrideColor = OverrideColor;
+                _render.CustomBrushes = CustomBrushes;
                 _render.UseAnimations = this.UseAnimations;
                 loadImage(_render);
                 loadImage = null;
+                var brushesFromSVG = new Dictionary<string, Brush>();
+                foreach (var server in _render.SVG.PaintServers.GetServers())
+                {
+                    brushesFromSVG[server.Key] = server.Value.GetBrush(100, null, null, Rect.Empty);
+                }
+                CustomBrushes = brushesFromSVG;
             }
         }
 

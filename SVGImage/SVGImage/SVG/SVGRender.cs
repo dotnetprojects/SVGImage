@@ -26,6 +26,21 @@ namespace SVGImage.SVG
 
         public Color? OverrideColor { get; set; }
 
+        private Dictionary<string, Brush> m_customBrushes;
+
+        public Dictionary<string, Brush> CustomBrushes
+        {
+            get => m_customBrushes;
+            set
+            {
+                m_customBrushes = value;
+                if (this.SVG != null)
+                {
+                    this.SVG.CustomBrushes = value;
+                }
+            }
+        }
+
         public IExternalFileLoader ExternalFileLoader { get; set; }
 
         public DrawingGroup LoadDrawing(string filename)
@@ -58,7 +73,7 @@ namespace SVGImage.SVG
             Stroke stroke = shape.Stroke;
             if (stroke != null)
             {
-                var brush = stroke.StrokeBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds, stroke.Color);
+                var brush = stroke.StrokeBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
                     brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 item.Pen = new Pen(brush, stroke.Width);

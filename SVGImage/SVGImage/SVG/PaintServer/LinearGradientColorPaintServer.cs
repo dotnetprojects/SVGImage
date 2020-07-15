@@ -14,8 +14,6 @@ namespace SVGImage.SVG.PaintServer
 
         public double Y2 { get; private set; }
 
-        private Brush brush = null;
-
         public LinearGradientColorPaintServerPaintServer(PaintServerManager owner, XmlNode node)
             : base(owner, node)
         {
@@ -26,9 +24,13 @@ namespace SVGImage.SVG.PaintServer
             this.Y2 = XmlUtil.AttrValue(node, "y2", double.NaN);
         }
 
+        public LinearGradientColorPaintServerPaintServer(PaintServerManager owner, Brush newBrush) : base(owner)
+        {
+            Brush = newBrush;
+        }
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            if (this.brush != null) return this.brush;
+            if (this.Brush != null) return this.Brush;
 
             LinearGradientBrush b = new LinearGradientBrush();
             foreach (GradientStop stop in this.Stops) b.GradientStops.Add(stop);
@@ -60,7 +62,7 @@ namespace SVGImage.SVG.PaintServer
                 if (double.IsNaN(this.X2) == false) b.EndPoint = new System.Windows.Point(this.X2, this.Y2);
             }
 
-            this.brush = b;
+            this.Brush = b;
 
             return b;
         }

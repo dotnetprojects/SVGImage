@@ -29,7 +29,7 @@ namespace SVGImage.SVG.Shapes
 
         internal Geometry geometryElement;
 
-        public virtual PaintServer.PaintServer Color { get; set; }
+        public virtual string PaintServerKey { get; set; }
 
         public string RequiredExtensions { get; set; }
 
@@ -194,7 +194,7 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sStroke)
             {
-                this.GetStroke(svg).Color = svg.PaintServers.Parse(value);
+                this.GetStroke(svg).PaintServerKey = svg.PaintServers.Parse(value);
                 return;
             }
             if (name == SVGTags.sStrokeWidth)
@@ -271,12 +271,12 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sFill)
             {
-                this.GetFill(svg).Color = svg.PaintServers.Parse(value);
+                this.GetFill(svg).PaintServerKey = svg.PaintServers.Parse(value);
                 return;
             }
             if (name == SVGTags.sColor)
             {
-                this.Color = svg.PaintServers.Parse(value);
+                this.PaintServerKey = svg.PaintServers.Parse(value);
                 return;
             }
             if (name == SVGTags.sFillOpacity)

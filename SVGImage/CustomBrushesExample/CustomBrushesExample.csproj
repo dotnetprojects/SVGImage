@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{415F8D63-FC4E-431A-B90E-54D9FA88EB82}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CustomBrushesExample</RootNamespace>
+    <AssemblyName>CustomBrushesExample</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BrushDictionary.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SVGImage\DotNetProjects.SVGImage.csproj">
+      <Project>{5569522d-5c29-451e-8730-f119f0408bca}</Project>
+      <Name>DotNetProjects.SVGImage</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\171.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\2.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\3.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\4.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\5.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\6.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\aa.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\acid1.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\acid1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\acid2.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\alphachannel.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bb.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\brush.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clipping.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clipping_css.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\computer-aj_aj_ashton_01.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dialog-information.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dialog-information_on-test1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dialog-information_on.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dialog-information_red-test1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dialog-information_red.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\error.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example lingrad01.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example radgrad01.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.10.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.11.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.12.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.13.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.14.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.2.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.4.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.5.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.6.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.7.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.8.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example3.9.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example4.5.1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example4.5.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example4.6.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example4.8.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example6.3.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example7.10.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example7.11.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example7.12.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example7.13.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example7.14.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example7.7.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example7.9.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example8.1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example8.1.test01.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example8.2.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example8.3.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\example8.4.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\filter.svg">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\horse.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Human_body_proportions2_svg.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\jesper.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\jktest.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Layout1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Layout2.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\molumen_red_square_error_warning_icon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\molumen_red_square_error_warning_icon_1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\network-transmit-receive[1].svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\peterm_penguin_with_a_shirt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\raupen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rect.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\router_andy_fitzsimon_r[1].svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Soccer_ball_animated.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Soccer_Simple.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\software-update-urgent[1].svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\switch_cisco_nico_[1].svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\television_comic_2[1].svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\test_3.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\test_4.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\test1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tiger.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tombigel_green_router.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tranberry_locked_exclamation_mark_-_padlock.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\PlantUnitFertilizer.svg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
