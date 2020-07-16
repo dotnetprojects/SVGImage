@@ -186,7 +186,7 @@ namespace SVGImage.SVG
             foreach (Shape shape in elements)
             {
                 shape.RealParent = null;
-                if (!shape.display)
+                if (!shape.Display)
                 {
                     continue;
                 }

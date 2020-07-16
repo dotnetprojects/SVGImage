@@ -37,7 +37,7 @@ namespace SVGImage.SVG.Shapes
 
         public Visibility Visibility { get; set; }
 
-        public bool display = true;
+        public bool Display = true;
 
         public virtual Stroke Stroke
         {
@@ -172,7 +172,7 @@ namespace SVGImage.SVG.Shapes
 
             if (name == SVGTags.sDisplay && value == "none")
             {
-                this.display = false;
+                this.Display = false;
             }
 
             if (name == SVGTags.sClass)
