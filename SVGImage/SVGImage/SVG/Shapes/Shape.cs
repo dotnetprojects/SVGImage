@@ -170,7 +170,7 @@ namespace SVGImage.SVG.Shapes
             if (name.Contains(":"))
                 name = name.Split(':')[1];
 
-            if(name == SVGTags.sDisplay && value == "none")
+            if (name == SVGTags.sDisplay && value == "none")
             {
                 this.display = false;
             }

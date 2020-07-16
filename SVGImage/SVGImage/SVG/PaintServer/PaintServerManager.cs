@@ -70,7 +70,7 @@ namespace SVGImage.SVG.PaintServer
             {
                 m_servers[key] = new PatternPaintServer(this, customBrush);
             }
-            else
+            else if(customBrush != null)
             {
                 m_servers[key] = new PaintServer(this, customBrush);
             }

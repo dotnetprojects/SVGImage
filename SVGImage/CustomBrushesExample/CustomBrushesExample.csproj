@@ -341,8 +341,5 @@
   <ItemGroup>
     <Resource Include="Images\tranberry_locked_exclamation_mark_-_padlock.svg" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Images\PlantUnitFertilizer.svg" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
