@@ -130,6 +130,7 @@ namespace SVGImage.SVG
                     svgImage._render.CustomBrushes = newBrushes;
                 }
 
+                svgImage.InvalidateVisual();
                 svgImage.ReRenderSvg();
             }
         }
@@ -231,7 +232,7 @@ namespace SVGImage.SVG
                 var brushesFromSVG = new Dictionary<string, Brush>();
                 foreach (var server in _render.SVG.PaintServers.GetServers())
                 {
-                    brushesFromSVG[server.Key] = server.Value.GetBrush(100, null, null, Rect.Empty);
+                    brushesFromSVG[server.Key] = server.Value.GetBrush();
                 }
                 CustomBrushes = brushesFromSVG;
             }

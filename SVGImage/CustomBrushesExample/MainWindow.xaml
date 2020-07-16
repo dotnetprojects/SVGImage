@@ -9,6 +9,28 @@
     </Window.DataContext>
     <Window.Resources>
         <local:BrushDictionary x:Key="MyBrushes">
+            <DrawingBrush x:Key="rulerPattern">
+                <DrawingBrush.Drawing>
+                    <GeometryDrawing Brush="Yellow">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="50,25,25,25" />
+                                <RectangleGeometry Rect="25,50,25,25" />
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="5">
+                                <Pen.Brush>
+                                    <LinearGradientBrush>
+                                        <GradientStop Offset="0.0" Color="Blue" />
+                                        <GradientStop Offset="1.0" Color="Black" />
+                                    </LinearGradientBrush>
+                                </Pen.Brush>
+                            </Pen>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingBrush.Drawing>
+            </DrawingBrush>
             <LinearGradientBrush x:Key="hill" StartPoint="0.5,0" EndPoint="0.5,1">
                 <GradientStop Color="Yellow" Offset="0.0" />
                 <GradientStop Color="Red" Offset="0.25" />

@@ -69,8 +69,8 @@ namespace SVGImage.SVG
 							{
 								return checkPaintServer.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
 							}
-							p = p.RealParent ?? p.Parent;
 						}
+						p = p.RealParent ?? p.Parent;
 					}
 					return null;
 				}

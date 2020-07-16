@@ -185,6 +185,12 @@ namespace SVGImage.SVG
 
             foreach (Shape shape in elements)
             {
+                shape.RealParent = null;
+                if (!shape.display)
+                {
+                    continue;
+                }
+
                 if (isSwitch)
                 {
                     if (grp.Children.Count > 0)

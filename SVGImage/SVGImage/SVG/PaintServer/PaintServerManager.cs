@@ -35,6 +35,11 @@ namespace SVGImage.SVG.PaintServer
             return null;
         }
 
+        public void AddServer(string key, PaintServer server)
+        {
+            m_servers[key] = server;
+        }
+
         public PaintServer GetServer(string serverKey)
         {
             PaintServer result;
@@ -47,26 +52,27 @@ namespace SVGImage.SVG.PaintServer
             return m_servers;
         }
 
-        public bool CreateServerFromBrush(string key, Brush customBrush)
+        public void CreateServerFromBrush(string key, Brush customBrush)
         {
             if (customBrush is SolidColorBrush)
             {
                 m_servers[key] = new SolidColorPaintServer(this, customBrush);
-                return true;
             }
             else if (customBrush is LinearGradientBrush)
             {
                 m_servers[key] = new LinearGradientColorPaintServerPaintServer(this, customBrush);
-                return true;
             }
             else if(customBrush is RadialGradientBrush)
             {
                 m_servers[key] = new RadialGradientColorPaintServerPaintServer(this, customBrush);
-                return true;
+            }
+            else if(customBrush is DrawingBrush)
+            {
+                m_servers[key] = new PatternPaintServer(this, customBrush);
             }
             else
             {
-                return false;
+                m_servers[key] = new PaintServer(this, customBrush);
             }
         }
 
