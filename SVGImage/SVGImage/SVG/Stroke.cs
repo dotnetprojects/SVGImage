@@ -22,7 +22,7 @@ namespace SVGImage.SVG
 			bevel,
 		}
 
-		public PaintServer.PaintServer Color {get; set;}
+		public string PaintServerKey {get; set;}
 
 		public double Width {get; set;}
 
@@ -36,37 +36,47 @@ namespace SVGImage.SVG
 
 		public Stroke(SVG svg)
 		{
-			this.Color = new SolidColorPaintServer(svg.PaintServers, Colors.Black);
+
 			this.Width = 1;
 			this.LineCap = eLineCap.butt;
 			this.LineJoin = eLineJoin.miter;
 			this.Opacity = 100;
 		}
 
-		public Brush StrokeBrush(SVG svg, SVGRender svgRender, Shape shape, double elementOpacity, Rect bounds, PaintServer.PaintServer parent)
+		public Brush StrokeBrush(SVG svg, SVGRender svgRender, Shape shape, double elementOpacity, Rect bounds)
 		{
-		    if (this.Color != null)
-		    {
-		        if (this.Color is CurrentColorPaintServer)
-		        {
-		            return shape.Color.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
-		        }
-                if (this.Color is InheritPaintServer)
-		        {
-		            var p = shape.RealParent ?? shape.Parent;
-		            while (p != null)
-		            {
-		                if (p.Fill != null && !(p.Stroke.Color is InheritPaintServer))
-		                    return p.Stroke.Color.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
-		                p = p.RealParent ?? p.Parent;
-		            }
+			var paintServer = svg.PaintServers.GetServer(PaintServerKey);
+			if (paintServer != null)
+			{
+				if (paintServer is CurrentColorPaintServer)
+				{
+					var shapePaintServer = svg.PaintServers.GetServer(shape.PaintServerKey);
+					if (shapePaintServer != null)
+					{
+						return shapePaintServer.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
 
-		            return null;
-		        }
-                return this.Color.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
-		    }
-
-		    return null;
+					}
+				}
+				if (paintServer is InheritPaintServer)
+				{
+					var p = shape.RealParent ?? shape.Parent;
+					while (p != null)
+					{
+						if (p.Stroke != null)
+						{
+							var checkPaintServer = svg.PaintServers.GetServer(p.Stroke.PaintServerKey);
+							if (!(checkPaintServer is InheritPaintServer))
+							{
+								return checkPaintServer.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
+							}
+						}
+						p = p.RealParent ?? p.Parent;
+					}
+					return null;
+				}
+				return paintServer.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
+			}
+			return null;
 		}
 	}
 }

@@ -16,8 +16,6 @@ namespace SVGImage.SVG.PaintServer
 
         public double R { get; private set; }
 
-        private Brush brush = null;
-
         public RadialGradientColorPaintServerPaintServer(PaintServerManager owner, XmlNode node)
             : base(owner, node)
         {
@@ -30,9 +28,14 @@ namespace SVGImage.SVG.PaintServer
             this.Normalize();
         }
 
+        public RadialGradientColorPaintServerPaintServer(PaintServerManager owner, Brush newBrush) : base(owner)
+        {
+            Brush = newBrush;
+        }
+
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            if (this.brush != null) return this.brush;
+            if (this.Brush != null) return this.Brush;
 
             RadialGradientBrush b = new RadialGradientBrush();
             foreach (GradientStop stop in this.Stops) b.GradientStops.Add(stop);
@@ -71,7 +74,7 @@ namespace SVGImage.SVG.PaintServer
             }
             if (this.Transform != null) b.Transform = this.Transform;
 
-            this.brush = b;
+            this.Brush = b;
 
             return b;
         }

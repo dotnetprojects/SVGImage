@@ -13,6 +13,7 @@ namespace SVGImage.SVG.PaintServer
         //patternTransform
 
         private List<Shape> m_elements;
+        private Dictionary<string, PaintServer> m_pattternPaintServers;
 
         public double X { get; private set; }
 
@@ -34,21 +35,34 @@ namespace SVGImage.SVG.PaintServer
             {
                 this.PatternTransform = ShapeUtil.ParseTransform(transform.ToLower());
             }
-
-            m_elements = SVG.Parse(new SVG(), node);
+            var tempSVG = new SVG();
+            m_elements = SVG.Parse(tempSVG, node);
+            m_pattternPaintServers = tempSVG.PaintServers.GetServers();
             this.X = XmlUtil.AttrValue(node, "x", 0, svg.Size.Width);
             this.Y = XmlUtil.AttrValue(node, "y", 0, svg.Size.Height);
             this.Width = XmlUtil.AttrValue(node, "width", 1, svg.Size.Width);
             this.Height = XmlUtil.AttrValue(node, "height", 1, svg.Size.Height);
         }
 
+        public PatternPaintServer(PaintServerManager owner, Brush newBrush) : base(owner)
+        {
+            Brush = newBrush;
+        }
+
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
+            if (Brush != null) return Brush;
+            foreach(var server in m_pattternPaintServers)
+            {
+                svgRender.SVG.PaintServers.AddServer(server.Key, server.Value);
+            }
+            
             var db = new DrawingBrush() {Drawing = svgRender.LoadGroup(m_elements, null, false)};
             db.TileMode = TileMode.Tile;
             db.Transform = PatternTransform;
             db.Viewport = new Rect(X, Y, Width / bounds.Width, Height/ bounds.Height);
             db.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
+            Brush = db;
             return db;
         }
     }

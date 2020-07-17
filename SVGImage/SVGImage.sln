@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.25302.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetProjects.SVGImage", "SVGImage\DotNetProjects.SVGImage.csproj", "{5569522D-5C29-451E-8730-F119F0408BCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{6BDADE27-F4F1-4E84-8BB0-4D5989B4380B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetProjects.SVGImage.Design", "SVGImage.Design\DotNetProjects.SVGImage.Design.csproj", "{89EEDB4B-473C-4733-9FB9-A05DF3F67620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomBrushesExample", "CustomBrushesExample\CustomBrushesExample.csproj", "{415F8D63-FC4E-431A-B90E-54D9FA88EB82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{89EEDB4B-473C-4733-9FB9-A05DF3F67620}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89EEDB4B-473C-4733-9FB9-A05DF3F67620}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89EEDB4B-473C-4733-9FB9-A05DF3F67620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{415F8D63-FC4E-431A-B90E-54D9FA88EB82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{415F8D63-FC4E-431A-B90E-54D9FA88EB82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{415F8D63-FC4E-431A-B90E-54D9FA88EB82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{415F8D63-FC4E-431A-B90E-54D9FA88EB82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -29,13 +29,15 @@ namespace SVGImage.SVG.Shapes
 
         internal Geometry geometryElement;
 
-        public virtual PaintServer.PaintServer Color { get; set; }
+        public virtual string PaintServerKey { get; set; }
 
         public string RequiredExtensions { get; set; }
 
         public string RequiredFeatures { get; set; }
 
         public Visibility Visibility { get; set; }
+
+        public bool Display = true;
 
         public virtual Stroke Stroke
         {
@@ -168,6 +170,11 @@ namespace SVGImage.SVG.Shapes
             if (name.Contains(":"))
                 name = name.Split(':')[1];
 
+            if (name == SVGTags.sDisplay && value == "none")
+            {
+                this.Display = false;
+            }
+
             if (name == SVGTags.sClass)
             {
                 var classes = value.Split(' ');
@@ -194,7 +201,7 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sStroke)
             {
-                this.GetStroke(svg).Color = svg.PaintServers.Parse(value);
+                this.GetStroke(svg).PaintServerKey = svg.PaintServers.Parse(value);
                 return;
             }
             if (name == SVGTags.sStrokeWidth)
@@ -271,12 +278,12 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sFill)
             {
-                this.GetFill(svg).Color = svg.PaintServers.Parse(value);
+                this.GetFill(svg).PaintServerKey = svg.PaintServers.Parse(value);
                 return;
             }
             if (name == SVGTags.sColor)
             {
-                this.Color = svg.PaintServers.Parse(value);
+                this.PaintServerKey = svg.PaintServers.Parse(value);
                 return;
             }
             if (name == SVGTags.sFillOpacity)

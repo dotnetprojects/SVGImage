@@ -1,0 +1,87 @@
+<svg
+	xmlns:svg="http://www.w3.org/2000/svg"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="112"
+	height="480"
+  viewBox="0 0 112 480"
+	version="1.1"
+	shape-rendering="crispEdges">
+
+<g id="layer1">
+
+	
+
+		<defs>
+			<pattern id="stripe-1-1" width="2" height="1" patternUnits="userSpaceOnUse">
+				<rect width='2' height='1' fill='white' />
+				<rect x='0' y='0' width='1' height='1' fill='black' />
+			</pattern>
+			<pattern id="stripe-2-2" width="4" height="1" patternUnits="userSpaceOnUse">
+				<rect width='4' height='1' fill='white' />
+				<rect x='0' y='0' width='2' height='1' fill='black' />
+			</pattern>
+			<pattern id="stripe-3-3" width="6" height="1" patternUnits="userSpaceOnUse">
+				<rect width='6' height='1' fill='white' />
+				<rect x='0' y='0' width='3' height='1' fill='black' />
+			</pattern>
+			<pattern id="stripe-4-4" width="8" height="1" patternUnits="userSpaceOnUse">
+				<rect width='8' height='1' fill='white' />
+				<rect x='0' y='0' width='4' height='1' fill='black' />
+			</pattern>
+			<pattern id="stripe-5-5" width="10" height="1" patternUnits="userSpaceOnUse">
+				<rect width='10' height='1' fill='white' />
+				<rect x='0' y='0' width='5' height='1' fill='black' />
+			</pattern>
+			<pattern id="stripe-6-6" width="12" height="1" patternUnits="userSpaceOnUse">
+				<rect width='12' height='1' fill='white' />
+				<rect x='0' y='0' width='6' height='1' fill='black' />
+			</pattern>
+		</defs>
+
+	<rect
+		style="fill: url(#stripe-6-6)"
+		id="left-lines-0"
+		width="112"
+		height="80"
+		x="0"
+		y="0"/>
+	<rect
+		style="fill: url(#stripe-5-5)"
+		id="left-lines-1"
+		width="112"
+		height="80"
+		x="0"
+		y="80"/>
+	<rect
+		style="fill: black"
+		id="left-lines-2"
+		width="112"
+		height="80"
+		x="0"
+		y="160"/>
+	<rect
+		style="fill: url(#stripe-3-3)"
+		id="left-lines-3"
+		width="112"
+		height="80"
+		x="0"
+		y="240"/>
+	<rect
+		style="fill: url(#stripe-2-2)"
+		id="left-lines-4"
+		width="112"
+		height="80"
+		x="0"
+		y="320"/>
+	<rect
+		style="fill: url(#stripe-1-1)"
+		id="left-lines-5"
+		width="112"
+		height="80"
+		x="0"
+		y="400"/>
+
+
+  </g>
+</svg>
