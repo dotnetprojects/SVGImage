@@ -46,7 +46,7 @@ namespace SVGImage.SVG
 			if (DefaultFill == null)
 			{
 				DefaultFill = new Fill(svg);
-				DefaultFill.Color = svg.PaintServers.Parse("black");
+				DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
 			}
 			if (DefaultStroke == null)
 			{

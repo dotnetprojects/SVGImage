@@ -27,7 +27,8 @@ namespace SVGImage.SVG.PaintServer
             if (node.ChildNodes.Count == 0 && XmlUtil.AttrValue(node, "xlink:href", string.Empty).Length > 0)
             {
                 string refid = XmlUtil.AttrValue(node, "xlink:href", string.Empty);
-                GradientColorPaintServer refcol = owner.Parse(refid.Substring(1)) as GradientColorPaintServer;
+                string paintServerKey = owner.Parse(refid.Substring(1));
+                GradientColorPaintServer refcol = owner.GetServers()[paintServerKey] as GradientColorPaintServer;
                 if (refcol == null) return;
                 this.m_stops = new List<GradientStop>(refcol.m_stops);
             }
@@ -58,6 +59,11 @@ namespace SVGImage.SVG.PaintServer
                     this.m_stops.Add(new GradientStop(color, offset));
                 }
             }
+        }
+
+        public GradientColorPaintServer(PaintServerManager owner) : base(owner)
+        {
+
         }
 
         public class TempXmlAttribute : XmlAttribute

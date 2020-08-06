@@ -85,5 +85,7 @@
         public const string sPattern = "pattern";
         public const string sPatternUnits = "patternUnits";
         public const string sPatternTransform = "patternTransform";
+
+        public const string sDisplay = "display";
     }
 }
