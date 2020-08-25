@@ -80,6 +80,7 @@ namespace SVGImage.SVG
 				return value.Substring(start);
 			return value.Substring(start, end - start);
 		}
+
 		public class StringSplitter
 		{
 			string m_value;
@@ -145,6 +146,7 @@ namespace SVGImage.SVG
 				return new Point(x,y);
 			}
 		}
+
 		public class Attribute
 		{
 			public string Name {get; set;}
@@ -160,6 +162,7 @@ namespace SVGImage.SVG
 			}
 
 		}
+
 		public static Attribute ReadNextAttr(string inputstring, ref int startpos)
 		{
 			if (inputstring[startpos] != ' ')

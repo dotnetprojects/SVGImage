@@ -1,94 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6BDADE27-F4F1-4E84-8BB0-4D5989B4380B}</ProjectGuid>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
     <RootNamespace>Example</RootNamespace>
     <AssemblyName>Example</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <AppDesigner Include="Properties\" />
+    <ProjectReference Include="..\SVGImage\DotNetProjects.SVGImage.csproj"/>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\aa.svg" />
@@ -146,30 +77,30 @@
     <Resource Include="Images\test_4.svg" />
     <Resource Include="Images\tombigel_green_router.svg" />
     <Resource Include="Images\tranberry_locked_exclamation_mark_-_padlock.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Human_body_proportions2_svg.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\horse.svg" />
     <Resource Include="Images\Soccer_ball_animated.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Soccer_Simple.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SVGImage\DotNetProjects.SVGImage.csproj">
-      <Project>{5569522d-5c29-451e-8730-f119f0408bca}</Project>
-      <Name>DotNetProjects.SVGImage</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Layout1.svg" />
     <Resource Include="Images\Layout2.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\alphachannel.svg" />
     <Resource Include="Images\clipping_css.svg" />
+    <Resource Include="Images\clipping.svg" />
+    <Resource Include="Images\171.svg" />
+    <Resource Include="Images\filter.svg"/>
+    <Resource Include="Images\bb.svg" />
+    <Resource Include="Images\raupen.jpg" />
+    <Resource Include="Images\tiger.svg" />
+    <Resource Include="Images\1.svg" />
+    <Resource Include="Images\2.svg" />
+    <Resource Include="Images\3.svg" />
+    <Resource Include="Images\4.svg" />
+    <Resource Include="Images\5.svg" />
+    <Resource Include="Images\6.svg" />
+    <Resource Include="Images\acid1.svg" />
+    <Resource Include="Images\acid2.svg" />
+    <Resource Include="Images\acid1.css" />
+    <Resource Include="Images\error.svg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="raupen.jpg">
@@ -177,51 +108,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\clipping.svg" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\171.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\filter.svg">
-      <SubType>Designer</SubType>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\bb.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\raupen.jpg" />
-    <Resource Include="Images\tiger.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\1.svg" />
-    <Resource Include="Images\2.svg" />
-    <Resource Include="Images\3.svg" />
-    <Resource Include="Images\4.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\5.svg" />
-    <Resource Include="Images\6.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\acid1.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\acid2.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\acid1.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\error.svg" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
