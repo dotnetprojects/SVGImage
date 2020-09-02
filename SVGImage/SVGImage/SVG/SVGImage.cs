@@ -116,20 +116,22 @@ namespace SVGImage.SVG
         {
             if (d is SVGImage svgImage && e.NewValue is Dictionary<string, Brush> newBrushes)
             {
-                if (svgImage._render.CustomBrushes != null)
+                if(svgImage._render != null)
                 {
-                    Dictionary<string, Brush> newCustomBrushes = new Dictionary<string, Brush>(svgImage._render.CustomBrushes);
-                    foreach (var brush in newBrushes)
+                    if (svgImage._render.CustomBrushes != null)
                     {
-                        newCustomBrushes[brush.Key] = brush.Value;
+                        Dictionary<string, Brush> newCustomBrushes = new Dictionary<string, Brush>(svgImage._render.CustomBrushes);
+                        foreach (var brush in newBrushes)
+                        {
+                            newCustomBrushes[brush.Key] = brush.Value;
+                        }
+                        svgImage._render.CustomBrushes = newCustomBrushes;
                     }
-                    svgImage._render.CustomBrushes = newCustomBrushes;
+                    else
+                    {
+                        svgImage._render.CustomBrushes = newBrushes;
+                    }
                 }
-                else
-                {
-                    svgImage._render.CustomBrushes = newBrushes;
-                }
-
                 svgImage.InvalidateVisual();
                 svgImage.ReRenderSvg();
             }
