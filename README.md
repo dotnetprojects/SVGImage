@@ -1,17 +1,26 @@
-SVGImage
-========
+## SVGImage
+This is an SVG Image View Control for WPF applications.
 
-This is a SVGImage Control for WPF
+Initially forked from: [SVGImage Control - CodeProject Article](https://www.codeproject.com/Articles/92434/SVGImage-Control)
 
-Initialy it's forked from: http://www.codeproject.com/Articles/92434/SVGImage-Control
-
-But it's extended with
+Besides the bug fixes, new features are added including the following:
   - Mask/Clip support
-  - support of styles.
-  - simple Animation support.
-  
-Licence changed to MIT (with grant from the initial author)
+  - Support of styles.
+  - Simple Animation support.
 
-Sample App:
+## Framework support
+The SVGImage control library targets the following frameworks
+* .NET Framework, Version 4.0
+* .NET Framework, Version 4.5
+* .NET Framework, Version 4.6
+* .NET Framework, Version 4.7
+* .NET Framework, Version 4.8
+* .NET Core, Version 3.1
 
-![](https://github.com/dotnetprojects/SVGImage/blob/master/sample.png)
+## License
+The SVGImage control library is relicensed under [MIT License](https://github.com/dotnetprojects/SVGImage/blob/master/LICENSE),
+with permission from the original author.
+
+## Sample Application
+
+![](Docs/sample.png)
