@@ -1,2 +1,2 @@
 ## About Tests
-This the test samples directory.
+This is the test samples directory.
