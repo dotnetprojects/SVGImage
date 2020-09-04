@@ -20,14 +20,26 @@ namespace SVGImage.SVG
             foreach (var transform in transforms.OrderBy(x => x.StartsWith(SVGTags.sTranslate))) // to check why ordering is needed (see acid.svg)
             {
                 if (!string.IsNullOrEmpty(transform))
-                    tg.Children.Add(ParseTransformInternal(transform + ")"));
+                {
+					var transObj = ParseTransformInternal(transform + ")");
+					if (transObj != null)
+                    {
+						tg.Children.Add(transObj);
+                    }
+                }
             }
             return tg;
 		}
 
 	    private static Transform ParseTransformInternal(string value)
 	    {
-	        string type = ExtractUntil(value, '(').TrimStart(',');
+			if (string.IsNullOrWhiteSpace(value))
+            {
+				return null;
+            }
+			value = value.Trim();
+
+			string type = ExtractUntil(value, '(').TrimStart(',');
 	        string v1 = ExtractBetween(value, '(', ')');
 
 	        ShapeUtil.StringSplitter split = new ShapeUtil.StringSplitter(v1);
