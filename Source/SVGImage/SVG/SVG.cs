@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Xml;
 using System.Linq;
 using System.Text;
@@ -91,6 +92,13 @@ namespace SVGImage.SVG
             }
         }
 
+        internal IDictionary<string, List<XmlUtil.StyleItem>> Styles
+        {
+            get {
+                return m_styles;
+            }
+        }
+
         public void AddShape(string id, Shape shape)
         {
             //System.Diagnostics.Debug.Assert(id.Length > 0 && this.m_shapes.ContainsKey(id) == false);
@@ -147,6 +155,24 @@ namespace SVGImage.SVG
             }
             this.Filename = filePath;
 
+            // Provide a support for the .svgz files...
+            UriBuilder fileUrl = new UriBuilder(filePath);
+            if (string.Equals(fileUrl.Scheme, "file"))
+            {
+                string fileExt = Path.GetExtension(filePath);
+                if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                {
+                    using (var fileStream = File.OpenRead(fileUrl.Uri.LocalPath))
+                    {
+                        using (var zipStream = new GZipStream(fileStream, CompressionMode.Decompress))
+                        {
+                            this.Load(zipStream);
+                        }
+                    }
+                    return;
+                }
+            }
+
             XmlDocument doc = new XmlDocument();
             doc.XmlResolver = null;
             doc.Load(filePath);
@@ -156,7 +182,12 @@ namespace SVGImage.SVG
 
         public void Load(Uri fileUri)
         {
-            var filePath = fileUri.IsFile ? fileUri.LocalPath : fileUri.ToString();
+            if (fileUri == null || !fileUri.IsAbsoluteUri)
+            {
+                return;
+            }
+
+            var filePath = fileUri.IsFile ? fileUri.LocalPath : fileUri.AbsoluteUri;
 
             if (string.IsNullOrWhiteSpace(filePath))
             {
