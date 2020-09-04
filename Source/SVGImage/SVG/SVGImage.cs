@@ -1,10 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Resources;
+
 using DotNetProjects.SVGImage.SVG.FileLoaders;
 
 namespace SVGImage.SVG
@@ -144,7 +147,8 @@ namespace SVGImage.SVG
         }
 
         public static readonly DependencyProperty ExternalFileLoaderProperty =
-            DependencyProperty.Register("ExternalFileLoader", typeof(IExternalFileLoader), typeof(SVGImage), new PropertyMetadata(FileSystemLoader.Instance));
+            DependencyProperty.Register("ExternalFileLoader", typeof(IExternalFileLoader), 
+                typeof(SVGImage), new PropertyMetadata(FileSystemLoader.Instance));
 
 
         private Drawing m_drawing;
@@ -172,7 +176,7 @@ namespace SVGImage.SVG
                 this.SetImage(render.LoadDrawing(svgFilename));
             };
 
-            if (this.IsInitialized || System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            if (this.IsInitialized || DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
                 _render.ExternalFileLoader = this.ExternalFileLoader;
@@ -205,7 +209,7 @@ namespace SVGImage.SVG
                 this.SetImage(render.LoadDrawing(stream));
             };
 
-            if (this.IsInitialized || System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            if (this.IsInitialized || DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
                 _render.ExternalFileLoader = this.ExternalFileLoader;
@@ -399,7 +403,7 @@ namespace SVGImage.SVG
                 result.Width = constraint.Width;
             if (constraint.Height > 0 && constraint.Height < result.Height)
                 result.Height = constraint.Height;
-            //Console.WriteLine("MasureOverride({0}), SizeType = {1}, result {2}", constraint.ToString(), SizeType.ToString(), result.ToString());
+
             return result;
         }
         protected override Size ArrangeOverride(Size arrangeBounds)
@@ -414,7 +418,7 @@ namespace SVGImage.SVG
                 result.Width = arrangeBounds.Width;
             if (arrangeBounds.Height > 0 && arrangeBounds.Height < result.Height)
                 result.Height = arrangeBounds.Height;
-            //Console.WriteLine("ArrangeOverride({0}), SizeType = {1}, result {2}", arrangeBounds.ToString(), SizeType.ToString(), result.ToString());
+
             return result;
         }
 

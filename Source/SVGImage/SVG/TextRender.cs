@@ -69,10 +69,7 @@ namespace SVGImage.SVG
 				if (child.ElementType == TextShape.TSpan.Element.eElementType.Tag)
 					BuildTextSpan(gp, textStyle, child, ref x, ref y);
 			}
-
 		}
-
-
 
 		static Geometry BuildGlyphRun(TextStyle textStyle, string text, double x, double y, ref double totalwidth)
 		{

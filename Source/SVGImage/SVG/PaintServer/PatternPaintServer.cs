@@ -12,8 +12,8 @@ namespace SVGImage.SVG.PaintServer
         //patternUnits
         //patternTransform
 
-        private List<Shape> m_elements;
-        private Dictionary<string, PaintServer> m_pattternPaintServers;
+        private IList<Shape> m_elements;
+        private IDictionary<string, PaintServer> m_pattternPaintServers;
 
         public double X { get; private set; }
 
@@ -35,8 +35,9 @@ namespace SVGImage.SVG.PaintServer
             {
                 this.PatternTransform = ShapeUtil.ParseTransform(transform.ToLower());
             }
-            var tempSVG = new SVG();
-            m_elements = SVG.Parse(tempSVG, node);
+            var tempSVG = new SVG(node, svg.ExternalFileLoader);
+            m_elements = tempSVG.Elements;
+
             m_pattternPaintServers = tempSVG.PaintServers.GetServers();
             this.X = XmlUtil.AttrValue(node, "x", 0, svg.Size.Width);
             this.Y = XmlUtil.AttrValue(node, "y", 0, svg.Size.Height);

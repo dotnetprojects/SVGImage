@@ -17,9 +17,9 @@ namespace DotNetProjects.SVGImage.SVG.FileLoaders
             var path = Environment.CurrentDirectory;
             if (!string.IsNullOrEmpty(svgFilename))
             {
-                path = System.IO.Path.GetDirectoryName(svgFilename);
+                path = Path.GetDirectoryName(svgFilename);
             }
-            string filename = System.IO.Path.Combine(path, hRef);
+            string filename = Path.Combine(path, hRef);
             if (File.Exists(filename))
                 return File.OpenRead(filename);
             return null;
