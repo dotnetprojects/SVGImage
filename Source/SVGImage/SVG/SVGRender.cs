@@ -30,6 +30,8 @@ namespace SVGImage.SVG
         public bool UseAnimations { get; set; }
 
         public Color? OverrideColor { get; set; }
+       
+        public double? OverrideStrokeWidth { get; set; }
 
         private Dictionary<string, Brush> m_customBrushes;
 
@@ -102,6 +104,10 @@ namespace SVGImage.SVG
             Stroke stroke = shape.Stroke;
             if (stroke != null)
             {
+                if(OverrideStrokeWidth.HasValue)
+                {
+                    stroke.Width = OverrideStrokeWidth.Value;
+                }
                 var brush = stroke.StrokeBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
                     brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
