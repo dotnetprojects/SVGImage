@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
          xmlns:local="clr-namespace:CustomBrushesExample" WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="540" Width="720" Background="Wheat">
+        Title="SVGImage - Custom Brushes" Height="540" Width="720" Background="Wheat" ResizeMode="NoResize" Margin="3">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -75,8 +75,8 @@
                            VerticalAlignment="Top"/>
             
         </StackPanel>
-        <Button Grid.Row="1" Grid.ColumnSpan="2" Height="60" VerticalAlignment="Bottom" 
-                Content="Press to change a random part of the image above to red, white and blue." Click="Button_Click"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Height="60" VerticalAlignment="Bottom" FontSize="16"
+                Content="Click to change a random part of the image above to red, white and blue." Click="Button_Click"/>
 
 
     </Grid>

@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="ClipArtViewer.SizeTypeForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:svgc="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+             xmlns:local="clr-namespace:ClipArtViewer"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid Grid.Column="1" Grid.Row="1" ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Margin="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center">ContentToSizeNoStretch Fixed Size</Label>
+                <svgc:SVGImage x:Name="m_canvas1" Grid.Row="1"
+                              Width="140" Height="95"
+                              SizeType="ContentToSizeNoStretch"
+                              HorizontalContentAlignment="Center" 
+                              VerticalContentAlignment="Center" Padding="2" BorderThickness="0.5" BorderBrush="BlueViolet" ></svgc:SVGImage>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1" Margin="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center">ContentToSizeNoStretch</Label>
+                <svgc:SVGImage x:Name="m_canvas2" Grid.Row="1"
+                               SizeType="ContentToSizeNoStretch"
+                                HorizontalContentAlignment="Center" 
+                                VerticalContentAlignment="Center"></svgc:SVGImage>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" Margin="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center">ContentToSize</Label>
+                <svgc:SVGImage x:Name="m_canvas3" Grid.Row="1"
+                                SizeType="ContentToSizeStretch"></svgc:SVGImage>
+
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1" Margin="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center">SizeToContent</Label>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <svgc:SVGImage x:Name="m_canvas4" SizeType="SizeToContent" BorderThickness="0.5" BorderBrush="Goldenrod">
+                        <svgc:SVGImage.Background>
+                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                <GradientStop Color="#FF5DD46F" Offset="0.943" />
+                                <GradientStop Color="#96BCDEBC" Offset="0" />
+                            </LinearGradientBrush>
+                        </svgc:SVGImage.Background>
+                    </svgc:SVGImage>
+                    <svgc:SVGImage x:Name="m_canvas5" 
+                            SizeType="SizeToContent" Background="#B4F5F5DC"></svgc:SVGImage>
+                </StackPanel>
+
+            </Grid>
+            
+        </Grid>
+
+    </Grid>
+</UserControl>

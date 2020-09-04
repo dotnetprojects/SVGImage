@@ -18,6 +18,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Example.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\SVGImage\DotNetProjects.SVGImage.csproj" />
   </ItemGroup>

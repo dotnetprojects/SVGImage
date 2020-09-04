@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "ClipArtViewer/1.0.0": {
+        "dependencies": {
+          "DotNetProjects.SVGImage": "3.0.0"
+        },
+        "runtime": {
+          "ClipArtViewer.dll": {}
+        }
+      },
+      "DotNetProjects.SVGImage/3.0.0": {
+        "runtime": {
+          "DotNetProjects.SVGImage.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ClipArtViewer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DotNetProjects.SVGImage/3.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
