@@ -18,10 +18,10 @@ dotnet_csproj:
 configuration: Debug
 
 before_build:
-  - nuget restore SVGImage\SVGImage.sln
+  - nuget restore Source\SVGImage.sln
 
 build:
-  project: SVGImage\SVGImage.sln
+  project: Source\SVGImage.sln
 
 test: off
 

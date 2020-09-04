@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-
-<svg xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="240px" height="240px" viewBox="0 0 240 240">
-  <ellipse cx="154" cy="154" rx="150" ry="120" style="fill: #999999;"/>
-  <ellipse cx="152" cy="152" rx="150" ry="120" style="fill: #cceeff;"/>
-  <image xlink:href="CodeProjectLogo.jpg" x="72" y="92" width="160" height="120"/>
-</svg>
