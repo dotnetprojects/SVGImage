@@ -109,7 +109,7 @@
                 <svg1:SVGImage Source="/Example;component/Images/5.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
             </UniformGrid>
         </TabItem>
-        <TabItem Header="Animations/Clipping" Height="40" Width="245" x:Name="tabAnimation" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
+        <TabItem Header="Animation/Clipping" Height="40" Width="245" x:Name="tabAnimation" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
             <Grid Background="Wheat">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -136,7 +136,7 @@
                 <svg1:SVGImage Grid.Row="1" Source="/Example;component/Images/Human_body_proportions2_svg.svg" Margin="3" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             </Grid>
         </TabItem>
-        <TabItem Header="Markup Icons" Height="40" Width="245" x:Name="tabIcons" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
+        <TabItem Header="SVG Icons" Height="40" Width="245" x:Name="tabIcons" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
             <Grid Background="Wheat" ShowGridLines="True">
                 <Grid.RowDefinitions>
                     <RowDefinition/>

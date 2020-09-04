@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
+using System.Xml;
 using System.Linq;
 using System.Text;
+using System.Globalization;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+
 using System.Windows;
 using System.Windows.Media;
-using System.Xml;
+
 using DotNetProjects.SVGImage.SVG.FileLoaders;
 using SVGImage.SVG.PaintServer;
 using SVGImage.SVG.Shapes;
@@ -17,12 +19,54 @@ namespace SVGImage.SVG
 {
     public class SVG
     {
-        internal Dictionary<string, Shape> m_shapes = new Dictionary<string, Shape>();
-
-        internal Dictionary<string, List<XmlUtil.StyleItem>> m_styles = new Dictionary<string, List<XmlUtil.StyleItem>>();
+        internal Dictionary<string, Shape> m_shapes;
+        internal Dictionary<string, List<XmlUtil.StyleItem>> m_styles;
 
         private List<Shape> m_elements;
         private Dictionary<string, Brush> m_customBrushes;
+
+        public SVG()
+        {
+            this.Size     = new Size(300, 150);
+            this.Filename = "";
+            m_shapes = new Dictionary<string, Shape>();
+            m_styles = new Dictionary<string, List<XmlUtil.StyleItem>>();
+        }
+
+        public SVG(IExternalFileLoader externalFileLoader)
+            : this()
+        {
+            this.ExternalFileLoader = externalFileLoader;
+        }
+
+        public SVG(string filename) : this(filename, FileSystemLoader.Instance)
+        {
+        }
+
+        public SVG(string filename, IExternalFileLoader externalFileLoader)
+            : this()
+        {
+            this.ExternalFileLoader = externalFileLoader;
+            this.Load(filename);
+        }
+
+        public SVG(Stream stream) : this(stream, FileSystemLoader.Instance)
+        {
+        }
+
+        public SVG(Stream stream, IExternalFileLoader externalFileLoader)
+            : this()
+        {
+            this.ExternalFileLoader = externalFileLoader;
+            this.Load(stream);
+        }
+
+        public SVG(XmlNode svgTag, IExternalFileLoader externalFileLoader)
+            : this()
+        {
+            this.ExternalFileLoader = externalFileLoader;
+            this.Load(svgTag);
+        }
 
         public string Filename { get; private set; }
 
@@ -35,8 +79,7 @@ namespace SVGImage.SVG
         public Dictionary<string, Brush> CustomBrushes
         {
             get => m_customBrushes;
-            set
-            {
+            set {
                 m_customBrushes = value;
                 if (m_customBrushes != null)
                 {
@@ -56,6 +99,11 @@ namespace SVGImage.SVG
 
         public Shape GetShape(string id)
         {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+
             Shape shape = null;
             this.m_shapes.TryGetValue(id, out shape);
             return shape;
@@ -63,70 +111,172 @@ namespace SVGImage.SVG
 
         public PaintServerManager PaintServers { get; } = new PaintServerManager();
 
-        public SVG()
+        public IList<Shape> Elements 
         {
-            Size = new Size(300, 150);
+            get {
+                if (m_elements == null)
+                {
+                    return new List<Shape>();
+                }
+
+                return m_elements.AsReadOnly();
+            }
         }
 
-        public SVG(string filename) : this(filename, FileSystemLoader.Instance)
+        public void LoadXml(string fileXml)
         {
-        }
+            this.Filename = "";
+            if (string.IsNullOrWhiteSpace(fileXml))
+            {
+                return;
+            }
 
-        public SVG(string filename, IExternalFileLoader externalFileLoader)
-        {
-            this.ExternalFileLoader = externalFileLoader;
-            Size = new Size(300, 150);
-            this.Filename = filename;
             XmlDocument doc = new XmlDocument();
             doc.XmlResolver = null;
-            doc.Load(filename);
-            LoadExternalStyles(doc);
-            XmlNode n = doc.GetElementsByTagName("svg")[0];
-            this.m_elements = Parse(this, n);
+            doc.LoadXml(fileXml);
+
+            this.Load(doc);
         }
 
-        public SVG(Stream stream) : this(stream, FileSystemLoader.Instance)
+        public void Load(string filePath)
         {
+            if (string.IsNullOrWhiteSpace(filePath) || File.Exists(filePath) == false)
+            {
+                this.Filename = "";
+                return;
+            }
+            this.Filename = filePath;
+
+            XmlDocument doc = new XmlDocument();
+            doc.XmlResolver = null;
+            doc.Load(filePath);
+
+            this.Load(doc);
         }
 
-        public SVG(Stream stream, IExternalFileLoader externalFileLoader)
+        public void Load(Uri fileUri)
         {
-            this.ExternalFileLoader = externalFileLoader;
-            Size = new Size(300, 150);
-            this.Filename = "none";
+            var filePath = fileUri.IsFile ? fileUri.LocalPath : fileUri.ToString();
+
+            if (string.IsNullOrWhiteSpace(filePath))
+            {
+                this.Filename = "";
+                return;
+            }
+            if (fileUri.IsFile)
+            {
+                if (File.Exists(filePath) == false)
+                {
+                    this.Filename = "";
+                    return;
+                }
+            }
+
+            this.Filename = filePath;
+            XmlDocument doc = new XmlDocument();
+            doc.XmlResolver = null;
+            doc.Load(filePath);
+
+            this.Load(doc);
+        }
+
+        public void Load(Stream stream)
+        {
+            if (stream == null)
+            {
+                return;
+            }
+
             XmlDocument doc = new XmlDocument();
             doc.XmlResolver = null;
             doc.Load(stream);
-            LoadExternalStyles(doc);
-            XmlNode n = doc.GetElementsByTagName("svg")[0];
-            this.m_elements = Parse(this, n);
+
+            this.Load(doc);
         }
 
-        public IList<Shape> Elements => this.m_elements.AsReadOnly();
-
-        private void LoadExternalStyles(XmlDocument doc)
+        public void Load(XmlReader xmlReader)
         {
-            if (ExternalFileLoader != null)
+            if (xmlReader == null)
             {
-                var cssUrlNodes = (from XmlNode childNode in doc.ChildNodes
-                    where childNode.NodeType == XmlNodeType.ProcessingInstruction && childNode.Name == "xml-stylesheet"
-                    select (XmlProcessingInstruction) childNode).ToList();
+                return;
+            }
 
-                if (cssUrlNodes.Count > 0)
+            XmlDocument doc = new XmlDocument();
+            doc.XmlResolver = null;
+            doc.Load(xmlReader);
+
+            this.Load(doc);
+        }
+
+        public void Load(TextReader txtReader)
+        {
+            if (txtReader == null)
+            {
+                return;
+            }
+
+            XmlDocument doc = new XmlDocument();
+            doc.XmlResolver = null;
+            doc.Load(txtReader);
+
+            this.Load(doc);
+        }
+
+        private void Load(XmlDocument svgDocument)
+        {
+            if (svgDocument == null)
+            {
+                return;
+            }
+            this.LoadStyles(svgDocument);
+
+            var svgTags = svgDocument.GetElementsByTagName("svg");
+            if (svgTags == null || svgTags.Count == 0)
+            {
+                return;
+            }
+
+            XmlNode svgTag = svgTags[0];
+
+            m_elements = this.Parse(svgTag);
+        }
+
+        private void Load(XmlNode svgTag)
+        {
+            if (svgTag == null)
+            {
+                return;
+            }
+            this.LoadStyles(svgTag);
+
+            m_elements = this.Parse(svgTag);
+        }
+
+        private void LoadStyles(XmlNode doc)
+        {
+            if (ExternalFileLoader == null)
+            {
+                return;
+            }
+
+            var cssUrlNodes = (from XmlNode childNode in doc.ChildNodes
+                where childNode.NodeType == XmlNodeType.ProcessingInstruction && childNode.Name == "xml-stylesheet"
+                select (XmlProcessingInstruction) childNode).ToList();
+
+            if (cssUrlNodes.Count != 0)
+            {
+                foreach (var node in cssUrlNodes)
                 {
-                    foreach (var node in cssUrlNodes)
+                    var url = Regex.Match(node.Data, "href=\"(?<url>.*?)\"").Groups["url"].Value;
+                    var stream = ExternalFileLoader.LoadFile(url, this.Filename);
+                    if (stream != null)
                     {
-                        var url = Regex.Match(node.Data, "href=\"(?<url>.*?)\"").Groups["url"].Value;
-                        var stream = ExternalFileLoader.LoadFile(url, this.Filename);
-                        if (stream != null)
+                        using (stream)
                         {
-                            using (stream)
+                            using (var reader = new StreamReader(stream, Encoding.UTF8))
                             {
-                                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
-                                {
-                                    var style = reader.ReadToEnd();
-                                    StyleParser.ParseStyle(this, style);
-                                }
+                                var style = reader.ReadToEnd();
+                                StyleParser.ParseStyle(this, style);
                             }
                         }
                     }
@@ -134,23 +284,26 @@ namespace SVGImage.SVG
             }
         }
 
-        internal static List<Shape> Parse(SVG svg, XmlNode node)
+        private List<Shape> Parse(XmlNode node)
         {
             var vb = node.Attributes.GetNamedItem("viewBox");
             if (vb != null)
             {
                 var cord = vb.Value.Split(' ');
                 var cult = CultureInfo.InvariantCulture;
-                svg.ViewBox = new Rect(double.Parse(cord[0], cult), double.Parse(cord[1], cult), double.Parse(cord[2], cult), double.Parse(cord[3], cult));
+                this.ViewBox = new Rect(double.Parse(cord[0], cult), 
+                    double.Parse(cord[1], cult), double.Parse(cord[2], cult), double.Parse(cord[3], cult));
             }
 
-            svg.Size = new Size(XmlUtil.AttrValue(node, "width", 300), XmlUtil.AttrValue(node, "height", 150));
+            this.Size = new Size(XmlUtil.AttrValue(node, "width", 300), XmlUtil.AttrValue(node, "height", 150));
             
             var lstElements = new List<Shape>();
             if (node == null || (node.Name != SVGTags.sSvg && node.Name != SVGTags.sPattern))
                 throw new FormatException("Not a valide SVG node");
+
             foreach (XmlNode childnode in node.ChildNodes)
-                Group.AddToList(svg, lstElements, childnode, null);
+                Group.AddToList(this, lstElements, childnode, null);
+
             return lstElements;
         }
     }

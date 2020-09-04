@@ -1,12 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.IO;
+using System.Xml;
 using System.Linq;
+using System.Collections.Generic;
+
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+
 using DotNetProjects.SVGImage.SVG;
 using DotNetProjects.SVGImage.SVG.Animation;
 using DotNetProjects.SVGImage.SVG.FileLoaders;
+
 using SVGImage.SVG.Shapes;
 
 namespace SVGImage.SVG
@@ -46,6 +51,30 @@ namespace SVGImage.SVG
         public DrawingGroup LoadDrawing(string filename)
         {
             this.SVG = new SVG(filename, ExternalFileLoader);
+            return this.CreateDrawing(this.SVG);
+        }
+
+        public DrawingGroup LoadXmlDrawing(string fileXml)
+        {
+            this.SVG = new SVG(this.ExternalFileLoader);
+            this.SVG.LoadXml(fileXml);
+
+            return this.CreateDrawing(this.SVG);
+        }
+
+        public DrawingGroup LoadDrawing(TextReader txtReader)
+        {
+            this.SVG = new SVG(this.ExternalFileLoader);
+            this.SVG.Load(txtReader);
+
+            return this.CreateDrawing(this.SVG);
+        }
+
+        public DrawingGroup LoadDrawing(XmlReader xmlReader)
+        {
+            this.SVG = new SVG(this.ExternalFileLoader);
+            this.SVG.Load(xmlReader);
+
             return this.CreateDrawing(this.SVG);
         }
 
