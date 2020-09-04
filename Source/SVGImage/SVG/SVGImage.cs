@@ -103,6 +103,29 @@ namespace SVGImage.SVG
         public static readonly DependencyProperty OverrideColorProperty =
             DependencyProperty.Register("OverrideColor", typeof(Color?), typeof(SVGImage), new PropertyMetadata(null));
 
+        public double? OverrideStrokeWidth
+        {
+            get { return (double?)GetValue(OverrideStrokeWidthProperty); }
+            set { SetValue(OverrideStrokeWidthProperty, value); }
+        }
+
+        public static readonly DependencyProperty OverrideStrokeWidthProperty =
+           DependencyProperty.Register(nameof(OverrideStrokeWidth),
+               typeof(double?),
+               typeof(SVGImage),
+               new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.AffectsRender, OverrideStrokeWidthPropertyChanged));
+
+        private static void OverrideStrokeWidthPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SVGImage svgImage && e.NewValue is double newStrokeWidth && svgImage._render != null)
+            {
+                svgImage._render.OverrideStrokeWidth = newStrokeWidth;
+                svgImage.InvalidateVisual();
+                svgImage.ReRenderSvg();
+            }
+        }
+
+
         public Dictionary<string, Brush> CustomBrushes
         {
             get { return (Dictionary<string, Brush>)GetValue(CustomBrushesProperty); }
@@ -183,6 +206,7 @@ namespace SVGImage.SVG
                 _render.UseAnimations = false;
                 _render.OverrideColor = OverrideColor;
                 _render.CustomBrushes = CustomBrushes;
+                _render.OverrideStrokeWidth = OverrideStrokeWidth;
                 loadImage(_render);
                 loadImage = null;
             }
@@ -215,6 +239,7 @@ namespace SVGImage.SVG
                 _render.ExternalFileLoader = this.ExternalFileLoader;
                 _render.OverrideColor = OverrideColor;
                 _render.CustomBrushes = CustomBrushes;
+                _render.OverrideStrokeWidth = OverrideStrokeWidth;
                 _render.UseAnimations = false;
                 loadImage(_render);
                 loadImage = null;
@@ -232,6 +257,7 @@ namespace SVGImage.SVG
                 _render.ExternalFileLoader = this.ExternalFileLoader;
                 _render.OverrideColor = OverrideColor;
                 _render.CustomBrushes = CustomBrushes;
+                _render.OverrideStrokeWidth = OverrideStrokeWidth;
                 _render.UseAnimations = this.UseAnimations;
                 loadImage(_render);
                 loadImage = null;
