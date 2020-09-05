@@ -18,6 +18,9 @@ using Group = SVGImage.SVG.Shapes.Group;
 
 namespace SVGImage.SVG
 {
+    /// <summary>
+    /// This is the class that reads and parses the XML file.
+    /// </summary>
     public class SVG
     {
         internal Dictionary<string, Shape> m_shapes;

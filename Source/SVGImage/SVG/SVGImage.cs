@@ -12,13 +12,37 @@ using DotNetProjects.SVGImage.SVG.FileLoaders;
 
 namespace SVGImage.SVG
 {
+    /// <summary>
+    /// This is the SVG image view control. 
+    /// The image control can either load the image from a file <see cref="SetImage(string)"/> or by 
+    /// setting the <see cref="Drawing"/> object through <see cref="SetImage(Drawing)"/>, which allows 
+    /// multiple controls to share the same drawing instance.
+    /// </summary>
     public class SVGImage : Control
     {
+        /// <summary>
+        /// This controls how the image is stretched to fill the control,
+        /// </summary>
         public enum eSizeType
         {
+            /// <summary>
+            /// The image is not scaled. The image location is translated so the top left corner 
+            /// of the image bounding box is moved to the top left corner of the image control.
+            /// </summary>
             None,
+            /// <summary>
+            /// The image is scaled to fit the control without any stretching. 
+            /// Either X or Y direction will be scaled to fill the entire width or height.
+            /// </summary>
             ContentToSizeNoStretch,
+            /// <summary>
+            /// The image will be stretched to fill the entire width and height.
+            /// </summary>
             ContentToSizeStretch,
+            /// <summary>
+            /// The control will be resized to fit the un-scaled image. If the image is larger than the 
+            /// maximum size for the control, the control is set to maximum size and the image is scaled.
+            /// </summary>
             SizeToContent,
         }
 
@@ -374,6 +398,7 @@ namespace SVGImage.SVG
                 return;
             }
         }
+
         void SizeToContentNoStretch(HorizontalAlignment hAlignment, VerticalAlignment vAlignment)
         {
             Rect r = this.m_drawing.Bounds;
@@ -417,6 +442,7 @@ namespace SVGImage.SVG
                 }
             }
         }
+
         protected override Size MeasureOverride(Size constraint)
         {
             Size result = base.MeasureOverride(constraint);
@@ -432,6 +458,7 @@ namespace SVGImage.SVG
 
             return result;
         }
+
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
             Size result = base.ArrangeOverride(arrangeBounds);
@@ -447,6 +474,5 @@ namespace SVGImage.SVG
 
             return result;
         }
-
     }
 }

@@ -21,6 +21,14 @@
   <PropertyGroup>
     <ApplicationIcon>Example.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">$(DefineConstants);DOTNET45;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">$(DefineConstants);DOTNET46;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">$(DefineConstants);DOTNET48;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\SVGImage\DotNetProjects.SVGImage.csproj" />
   </ItemGroup>
@@ -47,6 +55,10 @@
     <Resource Include="Images\acid1.css" />
     <Resource Include="Images\Human_body_proportions2_svg.svg" />
     <Resource Include="Images\example8.1.test01.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\alphachannel.svg" />
+    <Resource Include="Resources\television_comic.svg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="raupen.jpg">
