@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Xml;
+using System.Diagnostics;
+
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
@@ -44,8 +46,10 @@ namespace SVGImage.SVG.Shapes
                     b.EndInit();
                     this.ImageSource = b;
                 }
-                catch(Exception ex)
-                { }
+                catch (Exception ex)
+                {
+                    Trace.TraceError(ex.Message);
+                }
             }
         }
     }

@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace SVGImage.SVG
 {
-	public class ShapeUtil
+	public static class ShapeUtil
 	{
 		public static Transform ParseTransform(string value)
 		{
