@@ -56,6 +56,8 @@ namespace ClipArtViewer
             get { return m_items; }
         }
 
+        private bool _isShown;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -63,11 +65,15 @@ namespace ClipArtViewer
             this.Loaded += OnMainWindowLoaded;
         }
 
-        private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+        protected override void OnContentRendered(EventArgs e)
         {
-            txtLogger.Document.Blocks.Clear();
-            txtLogger.SetValue(Block.LineHeightProperty, 1.0);
-            Trace.Listeners.Add(new TextBoxTraceListener(txtLogger));
+            base.OnContentRendered(e);
+
+            if (_isShown)
+            {
+                return;
+            }
+            _isShown = true;
 
             // default path
             string appPath = Process.GetCurrentProcess().MainModule.FileName;
@@ -83,6 +89,13 @@ namespace ClipArtViewer
             DataContext = this;
 
             tabPages.SelectedIndex = 0;
+        }
+
+        private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            txtLogger.Document.Blocks.Clear();
+            txtLogger.SetValue(Block.LineHeightProperty, 1.0);
+            Trace.Listeners.Add(new TextBoxTraceListener(txtLogger));
         }
 
         void ListFiles()
