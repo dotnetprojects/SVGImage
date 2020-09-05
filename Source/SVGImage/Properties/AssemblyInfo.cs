@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Markup;
 
 //In order to begin building localizable applications, set 
 //<UICulture>CultureYouAreCodingWith</UICulture> in your .csproj file
@@ -18,3 +19,13 @@
                                               //(used if a resource is not found in the page, 
                                               // app, or any theme specific resource dictionaries)
 )]
+
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG.Shapes")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "DotNetProjects.SVGImage.SVG.Shapes.Filter")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG.PaintServer")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "DotNetProjects.SVGImage.SVG.FileLoaders")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "DotNetProjects.SVGImage.SVG.Animation")]
+
+[assembly: XmlnsPrefix("https://github.com/dotnetprojects/SVGImage", "svg")]
