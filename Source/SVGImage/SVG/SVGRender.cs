@@ -460,11 +460,11 @@ namespace SVGImage.SVG
                 if (shape is PathShape)
                 {
                     PathShape r = shape as PathShape;
-                    PathFigure p = null;
+//                    PathFigure p = null;
                     Point lastPoint = new Point(0, 0);
 
-                    PathShape.CurveTo lastc = null;
-                    PathShape.QuadraticCurveTo lastq = null;
+//                    PathShape.CurveTo lastc = null;
+//                    PathShape.QuadraticCurveTo lastq = null;
                     Point lastcirPoint = new Point(0, 0);
                     PathGeometry path = PathGeometry.CreateFromGeometry(PathGeometry.Parse(r.Data));
                     //PathGeometry path = new PathGeometry();
