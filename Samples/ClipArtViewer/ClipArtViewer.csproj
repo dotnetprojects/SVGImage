@@ -7,6 +7,8 @@
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
     <RootNamespace>ClipArtViewer</RootNamespace>
     <AssemblyName>ClipArtViewer</AssemblyName>
+    <AppConfig Condition="'$(TargetFramework)' == 'net40'">App.net40.config</AppConfig>
+    <AutoUnifyAssemblyReferences Condition="'$(TargetFramework)' == 'net40'">false</AutoUnifyAssemblyReferences>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -45,5 +47,62 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net40\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net40\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net45\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net45\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net46\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net46\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net47\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net47\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net48\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net48\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\netstandard2.1\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\netcoreapp3.0\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\netstandard2.1\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\netcoreapp3.1\Notifications.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

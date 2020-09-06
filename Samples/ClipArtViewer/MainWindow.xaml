@@ -144,8 +144,8 @@
             </TabItem>
             <TabItem Header="Error Logging" Height="28" Width="250" x:Name="tabLogging" IsSelected="True">
                 <RichTextBox x:Name="txtLogger" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="12"
-                             Margin="3" IsReadOnly="True" AllowDrop="False" VerticalScrollBarVisibility="Auto" 
-                             IsUndoEnabled="False" HorizontalScrollBarVisibility="Auto" AcceptsReturn="True"/>
+                             Margin="3" IsReadOnly="True" AllowDrop="False" VerticalScrollBarVisibility="Visible" 
+                             IsUndoEnabled="False" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True"/>
             </TabItem>
         </TabControl>
     </DockPanel>
