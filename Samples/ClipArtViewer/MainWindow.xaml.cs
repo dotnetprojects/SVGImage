@@ -8,8 +8,12 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Interop;
 
 using SVGImage.SVG;
+
+using ShellFileDialogs;
+using Notification.Wpf;
 
 namespace ClipArtViewer
 {
@@ -57,12 +61,14 @@ namespace ClipArtViewer
         }
 
         private bool _isShown;
+        private TextBoxTraceListener _listener;
 
         public MainWindow()
         {
             InitializeComponent();
 
             this.Loaded += OnMainWindowLoaded;
+            this.Closing += OnMainWindowClosing;
         }
 
         protected override void OnContentRendered(EventArgs e)
@@ -95,7 +101,24 @@ namespace ClipArtViewer
         {
             txtLogger.Document.Blocks.Clear();
             txtLogger.SetValue(Block.LineHeightProperty, 1.0);
-            Trace.Listeners.Add(new TextBoxTraceListener(txtLogger));
+
+            if (_listener == null)
+            {
+                _listener = new TextBoxTraceListener(txtLogger);
+                Trace.Listeners.Add(_listener);
+            }
+
+            Trace.WriteLine("");
+        }
+
+        private void OnMainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_listener != null)
+            {
+                Trace.Listeners.Remove(_listener);
+                _listener.Dispose();
+                _listener = null;
+            }
         }
 
         void ListFiles()
@@ -105,7 +128,19 @@ namespace ClipArtViewer
             {
                 return;
             }
+
+            if (m_items.Count != 0)
+            {
+                m_items.Clear();
+                m_filelist.Items.Refresh();
+            }
+
             string[] files = Directory.GetFiles(path, "*.svg");
+            if (files == null || files.Length == 0)
+            {
+                return;
+            }
+
             foreach (string file in files)
                 m_items.Add(new SVGItem(file));
 
@@ -132,7 +167,15 @@ namespace ClipArtViewer
 
         private void OnBrowseButtonClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Not implemented yet!", "ClipArtViewer", MessageBoxButton.OK, MessageBoxImage.Information);
+            var sampleDir = Path.GetFullPath(SamplesDir);
+            IntPtr windowHandle = new WindowInteropHelper(this).Handle;
+            string selectedDirectory = FolderBrowserDialog.ShowDialog(windowHandle,
+                "Select the location of the SVG files", Path.GetDirectoryName(sampleDir));
+            if (selectedDirectory != null)
+            {
+                this.SvgPath = selectedDirectory;
+                ListFiles();
+            }
         }
     }
 
@@ -178,7 +221,7 @@ namespace ClipArtViewer
                     return;
                 }
                 _isLogged = true;
-                Trace.WriteLine("Exception Loading: " + this.FullPath);
+                Trace.TraceError("Exception Loading: " + this.FullPath);
                 Trace.WriteLine(ex.ToString());
                 Trace.WriteLine(string.Empty);
             }
@@ -187,11 +230,22 @@ namespace ClipArtViewer
 
     public class TextBoxTraceListener : TraceListener
     {
+        private delegate void AppendTextDelegate(string message);
+
+        private const string AppTitle = "ClipArtViewer";
+        private const string AppName = "ClipArtViewer.exe";
+
         private RichTextBox _textBox;
+        private NotificationManager _notifyIcon;
+
+        private AppendTextDelegate _appendText;
 
         public TextBoxTraceListener(RichTextBox textBox)
         {
-            _textBox = textBox;
+            _textBox    = textBox;
+            _notifyIcon = new NotificationManager();
+
+            _appendText = new AppendTextDelegate(AppendText);
         }
 
         public override void Write(string message)
@@ -202,7 +256,7 @@ namespace ClipArtViewer
             }
             else
             {
-                _textBox.Dispatcher.Invoke(new AppendTextDelegate(AppendText), message);
+                _textBox.Dispatcher.Invoke(_appendText, message);
             }
         }
 
@@ -210,19 +264,64 @@ namespace ClipArtViewer
         {
             if (_textBox.Dispatcher.CheckAccess())
             {
-                AppendText(message);
+                AppendText(message + Environment.NewLine);
             }
             else
             {
-                _textBox.Dispatcher.Invoke(new AppendTextDelegate(AppendText), message);
+                _textBox.Dispatcher.Invoke(_appendText, message + Environment.NewLine);
             }
         }
 
-        private delegate void AppendTextDelegate(string message);
-
         private void AppendText(string message)
         {
-            _textBox.AppendText(message + Environment.NewLine);
+            if (_textBox == null || message == null)
+            {
+                return;
+            }
+
+            if (message.StartsWith(AppName, StringComparison.OrdinalIgnoreCase))
+            {
+                message = message.Remove(0, AppName.Length + 1);
+            }
+
+            if (message.StartsWith("Error", StringComparison.OrdinalIgnoreCase))
+            {
+                _textBox.AppendText(message);
+                if (_notifyIcon != null)
+                {
+                    _notifyIcon.Show(AppTitle, "There is an error, see the Error Logging page for more information.",
+                        NotificationType.Error, "", TimeSpan.FromSeconds(5));
+                }
+            }
+            else if (message.StartsWith("Warn", StringComparison.OrdinalIgnoreCase))
+            {
+                _textBox.AppendText(message);
+                if (_notifyIcon != null)
+                {
+                    _notifyIcon.Show(AppTitle, "There is a warning, see the Error Logging page for more information.",
+                        NotificationType.Warning, "", TimeSpan.FromSeconds(5));
+                }
+            }
+            else
+            {
+                _textBox.AppendText(message);
+            }
+
+            _textBox.ScrollToEnd();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (_notifyIcon != null)
+            {
+                //_notifyIcon.Visible = false;
+                _notifyIcon.Close();
+            }
+
+            _textBox    = null;
+            _notifyIcon = null;
+
+            base.Dispose(disposing);
         }
     }
 }

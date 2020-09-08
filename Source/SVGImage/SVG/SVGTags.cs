@@ -1,6 +1,6 @@
 ﻿namespace SVGImage.SVG
 {
-    class SVGTags
+    static class SVGTags
     {
         public const string sSvg = "svg";
         public const string sNsSvg = "http://www.w3.org/2000/svg";
