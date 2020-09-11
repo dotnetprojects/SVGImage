@@ -20,11 +20,11 @@ namespace SVGImage.SVG.PaintServer
             : base(owner, node)
         {
             System.Diagnostics.Debug.Assert(node.Name == SVGTags.sRadialGradient);
-            this.CX = XmlUtil.AttrValue(node, "cx", double.NaN);
-            this.CY = XmlUtil.AttrValue(node, "cy", double.NaN);
-            this.FX = XmlUtil.AttrValue(node, "fx", double.NaN);
-            this.FY = XmlUtil.AttrValue(node, "fy", double.NaN);
-            this.R = XmlUtil.AttrValue(node, "r", double.NaN);
+            this.CX = XmlUtil.AttrValue(node, "cx", 0.5);
+            this.CY = XmlUtil.AttrValue(node, "cy", 0.5);
+            this.FX = XmlUtil.AttrValue(node, "fx", this.CX);
+            this.FY = XmlUtil.AttrValue(node, "fy", this.CY);
+            this.R = XmlUtil.AttrValue(node, "r", 0.5);
             this.Normalize();
         }
 
@@ -47,6 +47,7 @@ namespace SVGImage.SVG.PaintServer
 
             if (this.GradientUnits == SVGTags.sUserSpaceOnUse)
             {
+                
                 b.Center = new System.Windows.Point(this.CX, this.CY);
                 b.GradientOrigin = new System.Windows.Point(this.FX, this.FY);
                 b.RadiusX = this.R;
