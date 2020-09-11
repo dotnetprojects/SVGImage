@@ -47,7 +47,6 @@ namespace SVGImage.SVG.PaintServer
 
             if (this.GradientUnits == SVGTags.sUserSpaceOnUse)
             {
-                
                 b.Center = new System.Windows.Point(this.CX, this.CY);
                 b.GradientOrigin = new System.Windows.Point(this.FX, this.FY);
                 b.RadiusX = this.R;
