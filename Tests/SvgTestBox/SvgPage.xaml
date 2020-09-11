@@ -121,7 +121,7 @@
                     </DrawingBrush>
                 </local:ZoomBorder.Background>
                 
-                <svgc:SVGImage x:Name="svgDrawing" SizeType="ContentToSizeNoStretch" HorizontalContentAlignment="Center"/>
+                <svgc:SVGImage x:Name="svgDrawing" SizeType="ContentToSizeNoStretch" HorizontalContentAlignment="Center" UseAnimations="True"/>
                 
             </local:ZoomBorder>
         </DockPanel>

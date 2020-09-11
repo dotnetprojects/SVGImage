@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<options>
+    <option name="HidePathsRoot" type="Boolean">false</option>
+    <option name="SelectedValuePath" type="String"></option>
+    <testSuites>
+        <testSuite isDefault="false" isSelected="false">
+            <property name="Version">1.0</property>
+            <property name="Description">SVG 1.1 First Edition Test Suite: 13 December 2006</property>
+            <property name="SuiteName">SvgTestSuite10</property>
+            <property name="SuiteDirName">Svg10</property>
+            <property name="TestFileName">SvgTestSuite10.xml</property>
+            <property name="ResultFileName">SvgTestResults10.xml</property>
+            <property name="WebSuitePath">https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/Svg10.zip</property>
+            <property name="LocalSuitePath">D:\Visual Studio\Workspaces\SVGImage\Tests\SvgTestSuites\Output\W3cSvgTestSuites\Svg10</property>
+        </testSuite>
+        <testSuite isDefault="true" isSelected="true">
+            <property name="Version">1.1</property>
+            <property name="Description">SVG 1.1 Second Edition Test Suite: 16 August 2011</property>
+            <property name="SuiteName">SvgTestSuite11</property>
+            <property name="SuiteDirName">Svg11</property>
+            <property name="TestFileName">SvgTestSuite11.xml</property>
+            <property name="ResultFileName">SvgTestResults11.xml</property>
+            <property name="WebSuitePath">https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/Svg11.zip</property>
+            <property name="LocalSuitePath">D:\Visual Studio\Workspaces\SVGImage\Tests\SvgTestSuites\Output\W3cSvgTestSuites\Svg11</property>
+        </testSuite>
+        <testSuite isDefault="false" isSelected="false">
+            <property name="Version">1.2</property>
+            <property name="Description">SVG 1.2 Tiny Test Suite: 12 September 2008</property>
+            <property name="SuiteName">SvgTestSuite12</property>
+            <property name="SuiteDirName">Svg12</property>
+            <property name="TestFileName">SvgTestSuite12.xml</property>
+            <property name="ResultFileName">SvgTestResults12.xml</property>
+            <property name="WebSuitePath">https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/Svg12.zip</property>
+            <property name="LocalSuitePath">D:\Visual Studio\Workspaces\SVGImage\Tests\SvgTestSuites\Output\W3cSvgTestSuites\Svg12</property>
+        </testSuite>
+    </testSuites>
+</options>
