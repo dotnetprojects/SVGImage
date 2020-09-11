@@ -16,13 +16,20 @@ using SVGImage.SVG.Shapes;
 
 namespace SVGImage.SVG
 {
-    // http://www.w3.org/TR/SVGTiny12/
-    // http://commons.oreilly.com/wiki/index.php/SVG_Essentials
+    /// <summary>
+    /// This is the class that creates the WPF Drawing object based on the information from the <see cref="SVG"/> class.
+    /// </summary>
+    /// <seealso href="http://www.w3.org/TR/SVGTiny12/"/>
+    /// <seealso href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials"/>
     public class SVGRender
     {
-        public SVGRender()
+        public SVGRender() : this(FileSystemLoader.Instance)
         {
-            ExternalFileLoader = FileSystemLoader.Instance;
+        }
+
+        public SVGRender(IExternalFileLoader fileLoader)
+        {
+            ExternalFileLoader = (fileLoader != null) ? fileLoader : FileSystemLoader.Instance;
         }
 
         public SVG SVG { get; private set; }
@@ -60,6 +67,14 @@ namespace SVGImage.SVG
         {
             this.SVG = new SVG(this.ExternalFileLoader);
             this.SVG.LoadXml(fileXml);
+
+            return this.CreateDrawing(this.SVG);
+        }
+
+        public DrawingGroup LoadDrawing(Uri fileUri)
+        {
+            this.SVG = new SVG(this.ExternalFileLoader);
+            this.SVG.Load(fileUri);
 
             return this.CreateDrawing(this.SVG);
         }
@@ -445,11 +460,11 @@ namespace SVGImage.SVG
                 if (shape is PathShape)
                 {
                     PathShape r = shape as PathShape;
-                    PathFigure p = null;
+//                    PathFigure p = null;
                     Point lastPoint = new Point(0, 0);
 
-                    PathShape.CurveTo lastc = null;
-                    PathShape.QuadraticCurveTo lastq = null;
+//                    PathShape.CurveTo lastc = null;
+//                    PathShape.QuadraticCurveTo lastq = null;
                     Point lastcirPoint = new Point(0, 0);
                     PathGeometry path = PathGeometry.CreateFromGeometry(PathGeometry.Parse(r.Data));
                     //PathGeometry path = new PathGeometry();

@@ -139,9 +139,59 @@
         <TabItem Header="SVG Icons" Height="40" Width="245" x:Name="tabIcons" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
             <Grid Background="Wheat" ShowGridLines="True">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
+                <UniformGrid Grid.Row="0" Columns="3" Rows="1" Margin="15">
+                    <Image Source="{svg1:SvgIcon Source=/Resources/alphachannel.svg, AppName=Example}" Stretch="Uniform"/>
+                    <Image Source="{svg1:SvgIcon Source=/Resources/television_comic.svg, AppName=Example}" Stretch="Uniform"/>
+                    <Image Source="{svg1:SvgIcon Source=/Images/tombigel_green_router.svg, AppName=Example}" Stretch="Uniform"/>
+                </UniformGrid>
+                <ListView Grid.Row="1" Margin="15" x:Name="IconView" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                    Background="PaleGoldenrod" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <Border Background="White"
+                                            CornerRadius="8"
+                                            BorderThickness="6"
+                                            x:Name="IconBorder"
+                                            Margin="8,4,8,4" >
+                                            <ContentPresenter />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="true">
+                                                <Setter TargetName="IconBorder" Property="BitmapEffect">
+                                                    <Setter.Value>
+                                                        <OuterGlowBitmapEffect GlowSize="10" GlowColor="DeepSkyBlue"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter TargetName="IconBorder" Property="BorderBrush" Value="DeepSkyBlue"/>
+                                                <Setter TargetName="IconBorder" Property="BorderThickness" Value="6"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                            <!--<UniformGrid HorizontalAlignment="Stretch"/>-->
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="8,8,8,8" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Image Source="{Binding Path=ImageUri, Converter={svg1:SvgIconConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="96" Height="96" />
+                                <TextBlock Text="{Binding ImageTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="96" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>                    
             </Grid>
         </TabItem>
     </TabControl>

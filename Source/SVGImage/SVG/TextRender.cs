@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Media;
 using System.Windows;
+using System.Reflection;
 
 namespace SVGImage.SVG
 {
-	class TextRender
+	static class TextRender
 	{
+		private static int dpiX = 0;
+		private static int dpiY = 0;
+
 		static public GeometryGroup BuildTextGeometry(TextShape shape)
 		{
 			return BuildGlyphRun(shape, 0, 0);
@@ -76,6 +80,15 @@ namespace SVGImage.SVG
             if (string.IsNullOrEmpty(text))
                 return new GeometryGroup();
 
+			if (dpiX == 0 || dpiY == 0)
+            {
+				var sysPara = typeof(SystemParameters);
+				var dpiXProperty = sysPara.GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
+				var dpiYProperty = sysPara.GetProperty("Dpi", BindingFlags.NonPublic | BindingFlags.Static);
+
+				dpiX = (int)dpiXProperty.GetValue(null, null);
+				dpiY = (int)dpiYProperty.GetValue(null, null);
+            }
 			double fontSize = textStyle.FontSize;
 			GlyphRun glyphs = null;
 			Typeface font = new Typeface(new FontFamily(textStyle.FontFamily), 
@@ -87,7 +100,13 @@ namespace SVGImage.SVG
 			double baseline = y;
 			if (font.TryGetGlyphTypeface(out glyphFace))
 			{
+#if DOTNET40 || DOTNET45 || DOTNET46
 				glyphs = new GlyphRun();
+#else
+				var dpiScale = new DpiScale(dpiX, dpiY);
+
+				glyphs = new GlyphRun((float)dpiScale.PixelsPerDip);
+#endif
 				((System.ComponentModel.ISupportInitialize)glyphs).BeginInit();
 				glyphs.GlyphTypeface = glyphFace;
 				glyphs.FontRenderingEmSize = fontSize;
