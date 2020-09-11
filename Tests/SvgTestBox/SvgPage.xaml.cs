@@ -748,6 +748,7 @@ namespace SvgTestBox
 
                 var svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+                svgRender.UseAnimations = true;
 
                 var drawingGroup = svgRender.LoadDrawing(filePath);
 
@@ -794,6 +795,7 @@ namespace SvgTestBox
 
                 var svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+                svgRender.UseAnimations = true;
 
                 return svgRender.LoadDrawing(fileUri);
             }
@@ -807,6 +809,7 @@ namespace SvgTestBox
 
                 var svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+                svgRender.UseAnimations = true;
 
                 return svgRender.LoadDrawing(stream);
             }
