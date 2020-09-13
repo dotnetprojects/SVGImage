@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using System.Xml;
+
+using System.Windows;
 using System.Windows.Media;
-using System.Xml;
 
 namespace SVGImage.SVG.PaintServer
 {
@@ -40,15 +41,15 @@ namespace SVGImage.SVG.PaintServer
             RadialGradientBrush b = new RadialGradientBrush();
             foreach (GradientStop stop in this.Stops) b.GradientStops.Add(stop);
 
-            b.GradientOrigin = new System.Windows.Point(0.5, 0.5);
-            b.Center = new System.Windows.Point(0.5, 0.5);
+            b.GradientOrigin = new Point(0.5, 0.5);
+            b.Center = new Point(0.5, 0.5);
             b.RadiusX = 0.5;
             b.RadiusY = 0.5;
 
             if (this.GradientUnits == SVGTags.sUserSpaceOnUse)
             {
-                b.Center = new System.Windows.Point(this.CX, this.CY);
-                b.GradientOrigin = new System.Windows.Point(this.FX, this.FY);
+                b.Center = new Point(this.CX, this.CY);
+                b.GradientOrigin = new Point(this.FX, this.FY);
                 b.RadiusX = this.R;
                 b.RadiusY = this.R;
                 b.MappingMode = BrushMappingMode.Absolute;
@@ -58,12 +59,12 @@ namespace SVGImage.SVG.PaintServer
                 double scale = 1d / 100d;
                 if (double.IsNaN(this.CX) == false && double.IsNaN(this.CY) == false)
                 {
-                    //b.GradientOrigin = new System.Windows.Point(this.CX*scale, this.CY*scale);
-                    b.Center = new System.Windows.Point(this.CX /* *scale */, this.CY /* *scale */);
+                    //b.GradientOrigin = new Point(this.CX*scale, this.CY*scale);
+                    b.Center = new Point(this.CX /* *scale */, this.CY /* *scale */);
                 }
                 if (double.IsNaN(this.FX) == false && double.IsNaN(this.FY) == false)
                 {
-                    b.GradientOrigin = new System.Windows.Point(this.FX * scale, this.FY * scale);
+                    b.GradientOrigin = new Point(this.FX * scale, this.FY * scale);
                 }
                 if (double.IsNaN(this.R) == false)
                 {

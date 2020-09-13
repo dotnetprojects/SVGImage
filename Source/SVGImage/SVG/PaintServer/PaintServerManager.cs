@@ -37,11 +37,21 @@ namespace SVGImage.SVG.PaintServer
 
         public void AddServer(string key, PaintServer server)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return;
+            }
+
             m_servers[key] = server;
         }
 
         public PaintServer GetServer(string serverKey)
         {
+            if (string.IsNullOrWhiteSpace(serverKey))
+            {
+                return null;
+            }
+
             PaintServer result;
             if (serverKey != null && m_servers.TryGetValue(serverKey, out result)) return result;
             else return null;

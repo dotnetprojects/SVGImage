@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using System.Xml;
+
+using System.Windows;
 using System.Windows.Media;
-using System.Xml;
 
 namespace SVGImage.SVG.PaintServer
 {
@@ -28,6 +29,7 @@ namespace SVGImage.SVG.PaintServer
         {
             Brush = newBrush;
         }
+
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
             if (this.Brush != null) return this.Brush;
@@ -36,21 +38,21 @@ namespace SVGImage.SVG.PaintServer
             foreach (GradientStop stop in this.Stops) b.GradientStops.Add(stop);
 
             b.MappingMode = BrushMappingMode.RelativeToBoundingBox;
-            b.StartPoint = new System.Windows.Point(0, 0);
-            b.EndPoint = new System.Windows.Point(1, 0);
+            b.StartPoint = new Point(0, 0);
+            b.EndPoint = new Point(1, 0);
             
             if (this.GradientUnits == SVGTags.sUserSpaceOnUse)
             {
                 Transform tr = this.Transform as Transform;
                 if (tr != null)
                 {
-                    b.StartPoint = tr.Transform(new System.Windows.Point(this.X1, this.Y1));
-                    b.EndPoint = tr.Transform(new System.Windows.Point(this.X2, this.Y2));
+                    b.StartPoint = tr.Transform(new Point(this.X1, this.Y1));
+                    b.EndPoint = tr.Transform(new Point(this.X2, this.Y2));
                 }
                 else
                 {
-                    b.StartPoint = new System.Windows.Point(this.X1, this.Y1);
-                    b.EndPoint = new System.Windows.Point(this.X2, this.Y2);
+                    b.StartPoint = new Point(this.X1, this.Y1);
+                    b.EndPoint = new Point(this.X2, this.Y2);
                 }
                 this.Transform = null;
                 b.MappingMode = BrushMappingMode.Absolute;
@@ -58,8 +60,8 @@ namespace SVGImage.SVG.PaintServer
             else
             {
                 this.Normalize();
-                if (double.IsNaN(this.X1) == false) b.StartPoint = new System.Windows.Point(this.X1, this.Y1);
-                if (double.IsNaN(this.X2) == false) b.EndPoint = new System.Windows.Point(this.X2, this.Y2);
+                if (double.IsNaN(this.X1) == false) b.StartPoint = new Point(this.X1, this.Y1);
+                if (double.IsNaN(this.X2) == false) b.EndPoint = new Point(this.X2, this.Y2);
             }
 
             this.Brush = b;
