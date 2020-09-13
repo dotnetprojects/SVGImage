@@ -93,8 +93,6 @@ namespace ClipArtViewer
 
             ListFiles();
             DataContext = this;
-
-            tabPages.SelectedIndex = 0;
         }
 
         private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
@@ -109,6 +107,9 @@ namespace ClipArtViewer
             }
 
             Trace.WriteLine("");
+
+            m_filelist.SelectedIndex = 0;
+            tabPages.SelectedIndex = 0;
         }
 
         private void OnMainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
