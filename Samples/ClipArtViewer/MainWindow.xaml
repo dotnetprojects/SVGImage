@@ -109,9 +109,10 @@
                 <Grid Margin="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="330"/>
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <ListBox Name="m_filelist" Grid.Row="1" ItemsSource="{Binding Path=Items}" Margin="3" Padding="3">
+                    <ListBox Name="m_filelist" Grid.Row="1" ItemsSource="{Binding Path=Items}" Margin="3, 3, 9, 3" Padding="3">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="5">
@@ -127,8 +128,10 @@
                             </ContextMenu>
                         </ListBox.ContextMenu>
                     </ListBox>
-
-                    <TabControl Grid.Column="1" Grid.Row="1" Margin="3" x:Name="tabControl" 
+                    
+                    <GridSplitter Grid.Column="0" Name="gridSplitter1" Width="8" Background="LightGray" />
+                    
+                    <TabControl Grid.Column="2" Grid.Row="1" Margin="3" x:Name="tabControl" 
                                 SelectionChanged="OnTabControlSelectionChanged" Style="{DynamicResource TabControl.Style.TopTabStripPlacement}">
                         <TabItem Header="Size Type" Height="36" Width="120" x:Name="tabSizeType" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
                             <local:SizeTypeForm x:Name="m_sizeTypeForm" ImageSource="{Binding ElementName=m_filelist, Path=SelectedItem.SVGImage}"/>

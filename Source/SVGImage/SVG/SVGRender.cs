@@ -364,10 +364,27 @@ namespace SVGImage.SVG
                 if (shape is RectangleShape)
                 {
                     RectangleShape r = shape as RectangleShape;
-                    RectangleGeometry rect = new RectangleGeometry(new Rect(r.X < 0 ? 0 : r.X, r.Y < 0 ? 0 : r.Y, r.X < 0 ? r.Width + r.X : r.Width, r.Y < 0 ? r.Height + r.Y : r.Height));
-                    rect.RadiusX = r.RX;
-                    rect.RadiusY = r.RY;
-                    if (rect.RadiusX == 0 && rect.RadiusY > 0) rect.RadiusX = rect.RadiusY;
+                    //RectangleGeometry rect = new RectangleGeometry(new Rect(r.X < 0 ? 0 : r.X, r.Y < 0 ? 0 : r.Y, r.X < 0 ? r.Width + r.X : r.Width, r.Y < 0 ? r.Height + r.Y : r.Height));
+                    double dx     = r.X;
+                    double dy     = r.Y;
+                    double width  = r.Width;
+                    double height = r.Height;
+                    double rx     = r.RX;
+                    double ry     = r.RY;
+                    if (width <= 0 || height <= 0)
+                    {
+                        continue;
+                    }
+                    if (rx <= 0 && ry > 0)
+                    {
+                        rx = ry;
+                    }
+                    else if (rx > 0 && ry <= 0)
+                    {
+                        ry = rx;
+                    }
+
+                    RectangleGeometry rect = new RectangleGeometry(new Rect(dx, dy, width, height), rx, ry);
                     var di = this.NewDrawingItem(shape, rect);
                     AddDrawingToGroup(grp, shape, di);
                     continue;
