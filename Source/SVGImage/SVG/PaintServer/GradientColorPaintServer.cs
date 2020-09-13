@@ -28,7 +28,7 @@ namespace SVGImage.SVG.PaintServer
             {
                 string refid = XmlUtil.AttrValue(node, "xlink:href", string.Empty);
                 string paintServerKey = owner.Parse(refid.Substring(1));
-                GradientColorPaintServer refcol = owner.GetServers()[paintServerKey] as GradientColorPaintServer;
+                GradientColorPaintServer refcol = owner.GetServer(paintServerKey) as GradientColorPaintServer;
                 if (refcol == null) return;
                 this.m_stops = new List<GradientStop>(refcol.m_stops);
             }
