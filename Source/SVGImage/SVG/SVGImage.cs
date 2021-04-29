@@ -458,6 +458,13 @@ namespace SVGImage.SVG
             if (constraint.Height > 0 && constraint.Height < result.Height)
                 result.Height = constraint.Height;
 
+            // Check for empty size...
+            if (result.IsEmpty)
+            {
+                if (this.m_drawing != null && !this.m_drawing.Bounds.Size.IsEmpty)
+                    result = this.m_drawing.Bounds.Size;
+            }
+
             return result;
         }
 
