@@ -57,6 +57,7 @@ namespace SVGImage.SVG
         {
             SVGImage ctrl = d as SVGImage;
             ctrl.RecalcImage();
+            ctrl.InvalidateVisual();
         }
 
         public eSizeType SizeType
@@ -301,6 +302,7 @@ namespace SVGImage.SVG
             if (this.m_drawing != null && this.SizeType == eSizeType.SizeToContent)
                 this.InvalidateMeasure();
             this.RecalcImage();
+            this.InvalidateVisual();
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)

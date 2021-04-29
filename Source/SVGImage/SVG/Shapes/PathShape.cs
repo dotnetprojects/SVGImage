@@ -200,7 +200,7 @@ namespace SVGImage.SVG
             if (DefaultFill == null)
             {
                 DefaultFill = new Fill(svg);
-                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
+//                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
             }
 
             this.ClosePath = false;
