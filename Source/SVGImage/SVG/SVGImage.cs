@@ -1,11 +1,14 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
+using System.IO.Compression;
+using System.Reflection;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Markup;
+using System.Windows.Controls;
 using System.Windows.Resources;
 
 using DotNetProjects.SVGImage.SVG.FileLoaders;
@@ -18,7 +21,7 @@ namespace SVGImage.SVG
     /// setting the <see cref="Drawing"/> object through <see cref="SetImage(Drawing)"/>, which allows 
     /// multiple controls to share the same drawing instance.
     /// </summary>
-    public class SVGImage : Control
+    public class SVGImage : Control, IUriContext
     {
         /// <summary>
         /// This controls how the image is stretched to fill the control,
@@ -46,18 +49,80 @@ namespace SVGImage.SVG
             SizeToContent,
         }
 
+        private Uri _baseUri;
+
+        private Drawing m_drawing;
+        private SVGRender _render;
+
+        private ScaleTransform m_scaleTransform;
+        private TranslateTransform m_offsetTransform;
+
+        private Action<SVGRender> _loadImage;
+
+        /// <summary>
+        /// Identifies the <see cref="UriSource"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty UriSourceProperty =
+            DependencyProperty.Register("UriSource", typeof(Uri), typeof(SVGImage),
+                new FrameworkPropertyMetadata(null, OnUriSourceChanged));
+
         public static DependencyProperty SizeTypeProperty = DependencyProperty.Register("SizeType",
-            typeof(eSizeType),
-            typeof(SVGImage),
-            new FrameworkPropertyMetadata(eSizeType.ContentToSizeNoStretch,
+            typeof(eSizeType), typeof(SVGImage), new FrameworkPropertyMetadata(eSizeType.ContentToSizeNoStretch,
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 new PropertyChangedCallback(OnSizeTypeChanged)));
 
-        static void OnSizeTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source",
+            typeof(string), typeof(SVGImage), new FrameworkPropertyMetadata(null,
+                FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
+                new PropertyChangedCallback(OnSourceChanged)));
+
+        public static readonly DependencyProperty FileSourceProperty = DependencyProperty.Register("FileSource",
+            typeof(string), typeof(SVGImage), new PropertyMetadata(OnFileSourceChanged));
+
+        public static DependencyProperty ImageSourcePoperty = DependencyProperty.Register("ImageSource",
+            typeof(Drawing), typeof(SVGImage), new FrameworkPropertyMetadata(null,
+                FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
+                new PropertyChangedCallback(OnImageSourceChanged)));
+
+        public static readonly DependencyProperty OverrideStrokeWidthProperty = DependencyProperty.Register(nameof(OverrideStrokeWidth),
+               typeof(double?), typeof(SVGImage), new FrameworkPropertyMetadata(default,
+                   FrameworkPropertyMetadataOptions.AffectsRender, OverrideStrokeWidthPropertyChanged));
+
+        public static readonly DependencyProperty OverrideColorProperty = DependencyProperty.Register("OverrideColor",
+            typeof(Color?), typeof(SVGImage), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty CustomBrushesProperty = DependencyProperty.Register(nameof(CustomBrushes),
+                typeof(Dictionary<string, Brush>), typeof(SVGImage), new FrameworkPropertyMetadata(default,
+                    FrameworkPropertyMetadataOptions.AffectsRender, CustomBrushesPropertyChanged));
+
+        public static readonly DependencyProperty UseAnimationsProperty = DependencyProperty.Register("UseAnimations",
+            typeof(bool), typeof(SVGImage), new PropertyMetadata(true));
+
+        public static readonly DependencyProperty ExternalFileLoaderProperty = DependencyProperty.Register("ExternalFileLoader",
+            typeof(IExternalFileLoader), typeof(SVGImage), new PropertyMetadata(FileSystemLoader.Instance));
+
+        static SVGImage()
         {
-            SVGImage ctrl = d as SVGImage;
-            ctrl.RecalcImage();
-            ctrl.InvalidateVisual();
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SVGImage), new FrameworkPropertyMetadata(typeof(SVGImage)));
+            ClipToBoundsProperty.OverrideMetadata(typeof(SVGImage), new FrameworkPropertyMetadata(true));
+            SnapsToDevicePixelsProperty.OverrideMetadata(typeof(SVGImage), new FrameworkPropertyMetadata(true));
+        }
+
+        public SVGImage()
+        {
+            this.ClipToBounds        = true;
+            this.SnapsToDevicePixels = true;
+
+            m_offsetTransform        = new TranslateTransform();
+            m_scaleTransform         = new ScaleTransform();
+        }
+
+        public SVG SVG
+        {
+            get
+            {
+                return _render?.SVG;
+            }
         }
 
         public eSizeType SizeType
@@ -72,38 +137,12 @@ namespace SVGImage.SVG
             set { SetValue(SourceProperty, value); }
         }
 
-        public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register("Source", typeof(string), typeof(SVGImage), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(OnSourceChanged)));
-        static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            StreamResourceInfo resource = Application.GetResourceStream(new Uri(e.NewValue.ToString(), UriKind.Relative));
-            ((SVGImage)d).SetImage(resource.Stream);
-        }
-
         public string FileSource
         {
             get { return (string)GetValue(FileSourceProperty); }
             set { SetValue(FileSourceProperty, value); }
         }
 
-        public static readonly DependencyProperty FileSourceProperty =
-            DependencyProperty.Register("FileSource", typeof(string), typeof(SVGImage), new PropertyMetadata(OnFileSourceChanged));
-        static void OnFileSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((SVGImage)d).SetImage(new FileStream(e.NewValue.ToString(), FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
-        }
-
-        public static DependencyProperty ImageSourcePoperty = DependencyProperty.Register("ImageSource",
-            typeof(Drawing),
-            typeof(SVGImage),
-            new FrameworkPropertyMetadata(null,
-                FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
-                new PropertyChangedCallback(OnImageSourceChanged)));
-
-        static void OnImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((SVGImage)d).SetImage(e.NewValue as Drawing);
-        }
         public Drawing ImageSource
         {
             get { return (Drawing)this.GetValue(ImageSourcePoperty); }
@@ -116,17 +155,11 @@ namespace SVGImage.SVG
             set { SetValue(UseAnimationsProperty, value); }
         }
 
-        public static readonly DependencyProperty UseAnimationsProperty =
-            DependencyProperty.Register("UseAnimations", typeof(bool), typeof(SVGImage), new PropertyMetadata(true));
-
         public Color? OverrideColor
         {
             get { return (Color?)GetValue(OverrideColorProperty); }
             set { SetValue(OverrideColorProperty, value); }
         }
-
-        public static readonly DependencyProperty OverrideColorProperty =
-            DependencyProperty.Register("OverrideColor", typeof(Color?), typeof(SVGImage), new PropertyMetadata(null));
 
         public double? OverrideStrokeWidth
         {
@@ -134,58 +167,10 @@ namespace SVGImage.SVG
             set { SetValue(OverrideStrokeWidthProperty, value); }
         }
 
-        public static readonly DependencyProperty OverrideStrokeWidthProperty =
-           DependencyProperty.Register(nameof(OverrideStrokeWidth),
-               typeof(double?),
-               typeof(SVGImage),
-               new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.AffectsRender, OverrideStrokeWidthPropertyChanged));
-
-        private static void OverrideStrokeWidthPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is SVGImage svgImage && e.NewValue is double newStrokeWidth && svgImage._render != null)
-            {
-                svgImage._render.OverrideStrokeWidth = newStrokeWidth;
-                svgImage.InvalidateVisual();
-                svgImage.ReRenderSvg();
-            }
-        }
-
-
         public Dictionary<string, Brush> CustomBrushes
         {
             get { return (Dictionary<string, Brush>)GetValue(CustomBrushesProperty); }
             set { SetValue(CustomBrushesProperty, value); }
-        }
-
-        public static readonly DependencyProperty CustomBrushesProperty =
-            DependencyProperty.Register(nameof(CustomBrushes),
-                typeof(Dictionary<string, Brush>),
-                typeof(SVGImage),
-                new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.AffectsRender, CustomBrushesPropertyChanged));
-
-        private static void CustomBrushesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is SVGImage svgImage && e.NewValue is Dictionary<string, Brush> newBrushes)
-            {
-                if(svgImage._render != null)
-                {
-                    if (svgImage._render.CustomBrushes != null)
-                    {
-                        Dictionary<string, Brush> newCustomBrushes = new Dictionary<string, Brush>(svgImage._render.CustomBrushes);
-                        foreach (var brush in newBrushes)
-                        {
-                            newCustomBrushes[brush.Key] = brush.Value;
-                        }
-                        svgImage._render.CustomBrushes = newCustomBrushes;
-                    }
-                    else
-                    {
-                        svgImage._render.CustomBrushes = newBrushes;
-                    }
-                }
-                svgImage.InvalidateVisual();
-                svgImage.ReRenderSvg();
-            }
         }
 
         public IExternalFileLoader ExternalFileLoader
@@ -194,32 +179,68 @@ namespace SVGImage.SVG
             set { SetValue(ExternalFileLoaderProperty, value); }
         }
 
-        public static readonly DependencyProperty ExternalFileLoaderProperty =
-            DependencyProperty.Register("ExternalFileLoader", typeof(IExternalFileLoader), 
-                typeof(SVGImage), new PropertyMetadata(FileSystemLoader.Instance));
-
-
-        private Drawing m_drawing;
-        private TranslateTransform m_offsetTransform = new TranslateTransform();
-        private ScaleTransform m_scaleTransform = new ScaleTransform();
-        private SVGRender _render;
-
-        static SVGImage()
+        /// <summary>
+        /// Gets or sets the path to the SVG file to load into this <see cref="Canvas"/>.
+        /// </summary>
+        /// <value>
+        /// A <see cref="System.Uri"/> specifying the path to the SVG source file.
+        /// The file can be located on a computer, network or assembly resources.
+        /// Settings this to <see langword="null"/> will close any opened diagram.
+        /// </value>
+        /// <remarks>
+        /// This is the same as the <see cref="Source"/> property, and added for consistency.
+        /// </remarks>
+        /// <seealso cref="UriSource"/>
+        /// <seealso cref="StreamSource"/>
+        public Uri UriSource
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(SVGImage), new FrameworkPropertyMetadata(typeof(SVGImage)));
-            ClipToBoundsProperty.OverrideMetadata(typeof(SVGImage), new FrameworkPropertyMetadata(true));
-            SnapsToDevicePixelsProperty.OverrideMetadata(typeof(SVGImage), new FrameworkPropertyMetadata(true));
+            get {
+                return (Uri)GetValue(UriSourceProperty);
+            }
+            set {
+                this.SetValue(UriSourceProperty, value);
+            }
         }
 
-        public SVGImage()
+        /// <summary>
+        /// Gets or sets the base URI of the current application context.
+        /// </summary>
+        /// <value>
+        /// The base URI of the application context.
+        /// </value>
+        public Uri BaseUri
         {
-            this.ClipToBounds = true;
-            this.SnapsToDevicePixels = true;
+            get {
+                return _baseUri;
+            }
+            set {
+                _baseUri = value;
+            }
+        }
+
+        public void ReRenderSvg()
+        {
+            if (_render != null)
+            {
+                this.SetImage(_render.CreateDrawing(_render.SVG));
+            }
+            else if (this.IsInitialized && _loadImage != null)
+            {
+                _render = new SVGRender();
+                _render.ExternalFileLoader  = this.ExternalFileLoader;
+                _render.OverrideColor       = OverrideColor;
+                _render.CustomBrushes       = CustomBrushes;
+                _render.OverrideStrokeWidth = OverrideStrokeWidth;
+                _render.UseAnimations       = this.UseAnimations;
+
+                _loadImage(_render);
+                _loadImage = null;
+            }
         }
 
         public void SetImage(string svgFilename)
         {
-            loadImage = (render) =>
+            _loadImage = (render) =>
             {
                 this.SetImage(render.LoadDrawing(svgFilename));
             };
@@ -227,33 +248,20 @@ namespace SVGImage.SVG
             if (this.IsInitialized || DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
-                _render.ExternalFileLoader = this.ExternalFileLoader;
-                _render.UseAnimations = false;
-                _render.OverrideColor = OverrideColor;
-                _render.CustomBrushes = CustomBrushes;
+                _render.ExternalFileLoader  = this.ExternalFileLoader;
+                _render.UseAnimations       = false;
+                _render.OverrideColor       = OverrideColor;
+                _render.CustomBrushes       = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
-                loadImage(_render);
-                loadImage = null;
-            }
-        }
 
-        public SVG SVG
-        {
-            get
-            {
-                return _render?.SVG;
+                _loadImage(_render);
+                _loadImage = null;
             }
-        }
-
-        public void ReRenderSvg()
-        {
-            if (_render != null)
-                this.SetImage(_render.CreateDrawing(_render.SVG));
         }
 
         public void SetImage(Stream stream)
         {
-            loadImage = (render) =>
+            _loadImage = (render) =>
             {
                 this.SetImage(render.LoadDrawing(stream));
             };
@@ -261,37 +269,36 @@ namespace SVGImage.SVG
             if (this.IsInitialized || DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
-                _render.ExternalFileLoader = this.ExternalFileLoader;
-                _render.OverrideColor = OverrideColor;
-                _render.CustomBrushes = CustomBrushes;
+                _render.ExternalFileLoader  = this.ExternalFileLoader;
+                _render.OverrideColor       = OverrideColor;
+                _render.CustomBrushes       = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
-                _render.UseAnimations = false;
-                loadImage(_render);
-                loadImage = null;
+                _render.UseAnimations       = false;
+
+                _loadImage(_render);
+                _loadImage = null;
             }
         }
 
-        private Action<SVGRender> loadImage = null;
-
-        protected override void OnInitialized(EventArgs e)
+        public void SetImage(Uri uriSource)
         {
-            base.OnInitialized(e);
-            if (loadImage != null)
+            _loadImage = (render) =>
+            {
+                Uri svgUri = this.ResolveUri(uriSource);
+                this.SetImage(this.LoadDrawing(svgUri));
+            };
+
+            if (this.IsInitialized || DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
-                _render.ExternalFileLoader = this.ExternalFileLoader;
-                _render.OverrideColor = OverrideColor;
-                _render.CustomBrushes = CustomBrushes;
+                _render.ExternalFileLoader  = this.ExternalFileLoader;
+                _render.OverrideColor       = OverrideColor;
+                _render.CustomBrushes       = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
-                _render.UseAnimations = this.UseAnimations;
-                loadImage(_render);
-                loadImage = null;
-                var brushesFromSVG = new Dictionary<string, Brush>();
-                foreach (var server in _render.SVG.PaintServers.GetServers())
-                {
-                    brushesFromSVG[server.Key] = server.Value.GetBrush();
-                }
-                CustomBrushes = brushesFromSVG;
+                _render.UseAnimations       = false;
+
+                _loadImage(_render);
+                _loadImage = null;
             }
         }
 
@@ -303,6 +310,30 @@ namespace SVGImage.SVG
                 this.InvalidateMeasure();
             this.RecalcImage();
             this.InvalidateVisual();
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            if (_loadImage != null)
+            {
+                _render = new SVGRender();
+                _render.ExternalFileLoader  = this.ExternalFileLoader;
+                _render.OverrideColor       = OverrideColor;
+                _render.CustomBrushes       = CustomBrushes;
+                _render.OverrideStrokeWidth = OverrideStrokeWidth;
+                _render.UseAnimations       = this.UseAnimations;
+
+                _loadImage(_render);
+                _loadImage = null;
+                var brushesFromSVG = new Dictionary<string, Brush>();
+                foreach (var server in _render.SVG.PaintServers.GetServers())
+                {
+                    brushesFromSVG[server.Key] = server.Value.GetBrush();
+                }
+                CustomBrushes = brushesFromSVG;
+            }
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
@@ -327,6 +358,45 @@ namespace SVGImage.SVG
             dc.DrawDrawing(this.m_drawing);
             dc.Pop();
             dc.Pop();
+        }
+
+        protected override Size MeasureOverride(Size constraint)
+        {
+            Size result = base.MeasureOverride(constraint);
+            if (this.SizeType == eSizeType.SizeToContent)
+            {
+                if (this.m_drawing != null && !this.m_drawing.Bounds.Size.IsEmpty)
+                    result = this.m_drawing.Bounds.Size;
+            }
+            if (constraint.Width > 0 && constraint.Width < result.Width)
+                result.Width = constraint.Width;
+            if (constraint.Height > 0 && constraint.Height < result.Height)
+                result.Height = constraint.Height;
+
+            // Check for empty size...
+            if (result.IsEmpty)
+            {
+                if (this.m_drawing != null)
+                    result = this.m_drawing.Bounds.Size;
+            }
+
+            return result;
+        }
+
+        protected override Size ArrangeOverride(Size arrangeBounds)
+        {
+            Size result = base.ArrangeOverride(arrangeBounds);
+            if (this.SizeType == eSizeType.SizeToContent)
+            {
+                if (this.m_drawing != null && !this.m_drawing.Bounds.Size.IsEmpty)
+                    result = this.m_drawing.Bounds.Size;
+            }
+            if (arrangeBounds.Width > 0 && arrangeBounds.Width < result.Width)
+                result.Width = arrangeBounds.Width;
+            if (arrangeBounds.Height > 0 && arrangeBounds.Height < result.Height)
+                result.Height = arrangeBounds.Height;
+
+            return result;
         }
 
         void RecalcImage()
@@ -445,36 +515,264 @@ namespace SVGImage.SVG
             }
         }
 
-        protected override Size MeasureOverride(Size constraint)
+        Uri ResolveUri(Uri svgSource)
         {
-            Size result = base.MeasureOverride(constraint);
-            if (this.SizeType == eSizeType.SizeToContent)
+            if (svgSource == null)
             {
-                if (this.m_drawing != null && !this.m_drawing.Bounds.Size.IsEmpty)
-                    result = this.m_drawing.Bounds.Size;
+                return null;
             }
-            if (constraint.Width > 0 && constraint.Width < result.Width)
-                result.Width = constraint.Width;
-            if (constraint.Height > 0 && constraint.Height < result.Height)
-                result.Height = constraint.Height;
 
-            return result;
+            if (svgSource.IsAbsoluteUri)
+            {
+                return svgSource;
+            }
+
+            // Try getting a local file in the same directory....
+            string svgPath = svgSource.ToString();
+            if (svgPath[0] == '\\' || svgPath[0] == '/')
+            {
+                svgPath = svgPath.Substring(1);
+            }
+            svgPath = svgPath.Replace('/', '\\');
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+
+            if (File.Exists(localFile))
+            {
+                return new Uri(localFile);
+            }
+
+            // Try getting it as resource file...
+            if (_baseUri != null)
+            {
+                return new Uri(_baseUri, svgSource);
+            }
+
+            string asmName = assembly.GetName().Name;
+            string uriString = string.Format("pack://application:,,,/{0};component/{1}",
+                asmName, svgPath);
+
+            return new Uri(uriString);
         }
 
-        protected override Size ArrangeOverride(Size arrangeBounds)
+        /// <summary>
+        /// This converts the SVG resource specified by the Uri to <see cref="DrawingGroup"/>.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="Uri"/> specifying the source of the SVG resource.</param>
+        /// <returns>A <see cref="DrawingGroup"/> of the converted SVG resource.</returns>
+        DrawingGroup LoadDrawing(Uri svgSource)
         {
-            Size result = base.ArrangeOverride(arrangeBounds);
-            if (this.SizeType == eSizeType.SizeToContent)
+            string scheme = null;
+            // A little hack to display preview in design mode: The design mode Uri is not absolute.
+            bool designTime = DesignerProperties.GetIsInDesignMode(new DependencyObject());
+            if (designTime && svgSource.IsAbsoluteUri == false)
             {
-                if (this.m_drawing != null && !this.m_drawing.Bounds.Size.IsEmpty)
-                    result = this.m_drawing.Bounds.Size;
+                scheme = "pack";
             }
-            if (arrangeBounds.Width > 0 && arrangeBounds.Width < result.Width)
-                result.Width = arrangeBounds.Width;
-            if (arrangeBounds.Height > 0 && arrangeBounds.Height < result.Height)
-                result.Height = arrangeBounds.Height;
+            else
+            {
+                scheme = svgSource.Scheme;
+            }
+            if (string.IsNullOrWhiteSpace(scheme))
+            {
+                return null;
+            }
 
-            return result;
+            switch (scheme)
+            {
+                case "file":
+                //case "ftp":
+                case "https":
+                case "http":
+                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor))
+                    {
+                        DrawingGroup drawGroup = reader.Read(svgSource, _render);
+
+                        if (drawGroup != null)
+                        {
+                            return drawGroup;
+                        }
+                    }
+                    break;
+                case "pack":
+                    StreamResourceInfo svgStreamInfo = null;
+                    if (svgSource.ToString().IndexOf("siteoforigin", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        svgStreamInfo = Application.GetRemoteStream(svgSource);
+                    }
+                    else
+                    {
+                        svgStreamInfo = Application.GetResourceStream(svgSource);
+                    }
+
+                    Stream svgStream = (svgStreamInfo != null) ? svgStreamInfo.Stream : null;
+
+                    if (svgStream != null)
+                    {
+                        string fileExt = Path.GetExtension(svgSource.ToString());
+                        bool isCompressed = !string.IsNullOrWhiteSpace(fileExt) &&
+                            string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase);
+
+                        if (isCompressed)
+                        {
+                            using (svgStream)
+                            {
+                                using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
+                                {
+                                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor))
+                                    {
+                                        DrawingGroup drawGroup = reader.Read(zipStream, _render);
+
+                                        if (drawGroup != null)
+                                        {
+                                            return drawGroup;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (svgStream)
+                            {
+                                using (FileSvgReader reader = new FileSvgReader(this.OverrideColor))
+                                {
+                                    DrawingGroup drawGroup = reader.Read(svgStream, _render);
+
+                                    if (drawGroup != null)
+                                    {
+                                        return drawGroup;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case "data":
+                    var sourceData = svgSource.OriginalString.Replace(" ", "");
+
+                    int nColon = sourceData.IndexOf(":", StringComparison.OrdinalIgnoreCase);
+                    int nSemiColon = sourceData.IndexOf(";", StringComparison.OrdinalIgnoreCase);
+                    int nComma = sourceData.IndexOf(",", StringComparison.OrdinalIgnoreCase);
+
+                    string sMimeType = sourceData.Substring(nColon + 1, nSemiColon - nColon - 1);
+                    string sEncoding = sourceData.Substring(nSemiColon + 1, nComma - nSemiColon - 1);
+
+                    if (string.Equals(sMimeType.Trim(), "image/svg+xml", StringComparison.OrdinalIgnoreCase)
+                        && string.Equals(sEncoding.Trim(), "base64", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string sContent = FileSvgReader.RemoveWhitespace(sourceData.Substring(nComma + 1));
+                        byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
+                            0, sContent.Length);
+                        bool isGZiped = sContent.StartsWith(FileSvgReader.GZipSignature, StringComparison.Ordinal);
+                        if (isGZiped)
+                        {
+                            using (var stream = new MemoryStream(imageBytes))
+                            {
+                                using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
+                                {
+                                    using (var reader = new FileSvgReader(this.OverrideColor))
+                                    {
+                                        DrawingGroup drawGroup = reader.Read(zipStream, _render);
+                                        if (drawGroup != null)
+                                        {
+                                            return drawGroup;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (var stream = new MemoryStream(imageBytes))
+                            {
+                                using (var reader = new FileSvgReader(this.OverrideColor))
+                                {
+                                    DrawingGroup drawGroup = reader.Read(stream, _render);
+                                    if (drawGroup != null)
+                                    {
+                                        return drawGroup;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+
+            return null;
         }
+
+        private static void OnUriSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            SVGImage svgImage= obj as SVGImage;
+            if (svgImage == null)
+            {
+                return;
+            }
+
+            var sourceUri = (Uri)args.NewValue;
+            svgImage.SetImage(sourceUri);
+        }
+
+        static void OnSizeTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            SVGImage ctrl = d as SVGImage;
+            ctrl.RecalcImage();
+            ctrl.InvalidateVisual();
+        }
+
+        static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            StreamResourceInfo resource = Application.GetResourceStream(new Uri(e.NewValue.ToString(), UriKind.Relative));
+            ((SVGImage)d).SetImage(resource.Stream);
+        }
+
+        static void OnFileSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((SVGImage)d).SetImage(new FileStream(e.NewValue.ToString(), FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+        }
+
+        static void OnImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((SVGImage)d).SetImage(e.NewValue as Drawing);
+        }
+
+        private static void OverrideStrokeWidthPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SVGImage svgImage && e.NewValue is double newStrokeWidth && svgImage._render != null)
+            {
+                svgImage._render.OverrideStrokeWidth = newStrokeWidth;
+                svgImage.InvalidateVisual();
+                svgImage.ReRenderSvg();
+            }
+        }
+
+        private static void CustomBrushesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SVGImage svgImage && e.NewValue is Dictionary<string, Brush> newBrushes)
+            {
+                if (svgImage._render != null)
+                {
+                    if (svgImage._render.CustomBrushes != null)
+                    {
+                        Dictionary<string, Brush> newCustomBrushes = new Dictionary<string, Brush>(svgImage._render.CustomBrushes);
+                        foreach (var brush in newBrushes)
+                        {
+                            newCustomBrushes[brush.Key] = brush.Value;
+                        }
+                        svgImage._render.CustomBrushes = newCustomBrushes;
+                    }
+                    else
+                    {
+                        svgImage._render.CustomBrushes = newBrushes;
+                    }
+                }
+                svgImage.InvalidateVisual();
+                svgImage.ReRenderSvg();
+            }
+        }
+
     }
 }
