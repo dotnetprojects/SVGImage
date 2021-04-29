@@ -24,6 +24,12 @@ namespace DotNetProjects.SVGImage.SVG.FileLoaders
             if (File.Exists(filename))
                 return File.OpenRead(filename);
 
+            // For the issue #43 : Environment.CurrentDirectory prevents msix packaging
+            path = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            filename = Path.Combine(path, hRef);
+            if (File.Exists(filename))
+                return File.OpenRead(filename);
+
             Trace.TraceWarning("Unresolved URI: " + hRef);
 
             return null;
