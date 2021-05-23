@@ -88,8 +88,11 @@ namespace SVGImage.SVG
                typeof(double?), typeof(SVGImage), new FrameworkPropertyMetadata(default,
                    FrameworkPropertyMetadataOptions.AffectsRender, OverrideStrokeWidthPropertyChanged));
 
-        public static readonly DependencyProperty OverrideColorProperty = DependencyProperty.Register("OverrideColor",
-            typeof(Color?), typeof(SVGImage), new PropertyMetadata(null));
+        public static readonly DependencyProperty OverrideColorProperty =
+            DependencyProperty.Register("OverrideColor",
+                typeof(Color?),
+                typeof(SVGImage),
+                new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.AffectsRender, OverrideColorPropertyChanged));
 
         public static readonly DependencyProperty CustomBrushesProperty = DependencyProperty.Register(nameof(CustomBrushes),
                 typeof(Dictionary<string, Brush>), typeof(SVGImage), new FrameworkPropertyMetadata(default,
@@ -737,6 +740,16 @@ namespace SVGImage.SVG
         static void OnImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((SVGImage)d).SetImage(e.NewValue as Drawing);
+        }
+
+        private static void OverrideColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SVGImage svgImage && e.NewValue is Color newColor && svgImage._render != null)
+            {
+                svgImage._render.OverrideColor = newColor;
+                svgImage.InvalidateVisual();
+                svgImage.ReRenderSvg();
+            }
         }
 
         private static void OverrideStrokeWidthPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
