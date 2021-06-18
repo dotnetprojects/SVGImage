@@ -728,8 +728,8 @@ namespace SVGImage.SVG
 
         static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            StreamResourceInfo resource = Application.GetResourceStream(new Uri(e.NewValue.ToString(), UriKind.Relative));
-            ((SVGImage)d).SetImage(resource.Stream);
+            StreamResourceInfo resource = e.NewValue != null ? Application.GetResourceStream(new Uri(e.NewValue.ToString(), UriKind.Relative)) : null;
+            ((SVGImage)d).SetImage(resource != null ? resource.Stream : null);
         }
 
         static void OnFileSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
