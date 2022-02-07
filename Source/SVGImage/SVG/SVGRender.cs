@@ -132,7 +132,7 @@ namespace SVGImage.SVG
                     item.Pen.DashCap = PenLineCap.Flat;
                     DashStyle ds = new DashStyle();
                     double scale = 1 / stroke.Width;
-                    foreach (int dash in stroke.StrokeArray) ds.Dashes.Add(dash * scale);
+                    foreach (var dash in stroke.StrokeArray) ds.Dashes.Add(dash * scale);
                     item.Pen.DashStyle = ds;
                 }
                 switch (stroke.LineCap)
