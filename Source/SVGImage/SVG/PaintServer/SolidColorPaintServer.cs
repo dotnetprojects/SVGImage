@@ -23,7 +23,7 @@ namespace SVGImage.SVG.PaintServer
             if (Brush != null) return Brush;
             byte a = (byte)(255 * opacity / 100);
             Color c = this.Color;
-            Color newcol = System.Windows.Media.Color.FromArgb(a, c.R, c.G, c.B);
+            Color newcol = Color.FromArgb(a, c.R, c.G, c.B);
             Brush = new SolidColorBrush(newcol);
             return Brush;
         }

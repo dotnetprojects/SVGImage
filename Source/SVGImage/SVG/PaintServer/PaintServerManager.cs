@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using System.Windows.Media;
 using System.Xml;
 
@@ -176,12 +177,25 @@ namespace SVGImage.SVG.PaintServer
             if (value.StartsWith("rgb("))
             {
                 var newVal = value.Substring(4, value.Length - 5).Split(',');
-                return ParseSolidColor("#" + ParseColorNumber(newVal[0]).ToString("x") + ParseColorNumber(newVal[1]).ToString("x") + ParseColorNumber(newVal[2]).ToString("x"));
+                int alpha = 255;
+                StringBuilder sb = new StringBuilder();
+                sb.AppendFormat("#{0:X2}", alpha);
+                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[0]));
+                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[1]));
+                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[2]));
+                return ParseSolidColor(sb.ToString());
+                //return ParseSolidColor("#" + ParseColorNumber(newVal[0]).ToString("x") + ParseColorNumber(newVal[1]).ToString("x") + ParseColorNumber(newVal[2]).ToString("x"));
             }
             if (value.StartsWith("rgba("))
             {
                 var newVal = value.Substring(5, value.Length - 6).Split(',');
-                return ParseSolidColor("#" + ParseColorNumber(newVal[0]).ToString("x") + ParseColorNumber(newVal[1]).ToString("x") + ParseColorNumber(newVal[2]).ToString("x") + ParseColorNumber(newVal[3]).ToString("x"));
+                StringBuilder sb = new StringBuilder();
+                sb.AppendFormat("#{0:X2}", ParseColorNumber(newVal[0]));
+                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[1]));
+                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[2]));
+                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[3]));
+                return ParseSolidColor(sb.ToString());
+                //return ParseSolidColor("#" + ParseColorNumber(newVal[0]).ToString("x") + ParseColorNumber(newVal[1]).ToString("x") + ParseColorNumber(newVal[2]).ToString("x") + ParseColorNumber(newVal[3]).ToString("x"));
             }
 
             return null;
