@@ -139,5 +139,15 @@ namespace Example
             }
 #endif
         }
+
+        private void SVGImage_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var rnd = new Random().Next(0, 3);
+
+            OverrideColorTest.OverrideColor =
+                rnd == 0 ? System.Windows.Media.Colors.White :
+                rnd == 1 ? System.Windows.Media.Colors.Magenta :
+                System.Windows.Media.Colors.Black;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <options>
     <option name="HidePathsRoot" type="Boolean">false</option>
-    <option name="SelectedValuePath" type="String"></option>
+    <option name="SelectedValuePath" type="String">Colors/color-prop-05-t</option>
     <testSuites>
         <testSuite isDefault="false" isSelected="false">
             <property name="Version">1.0</property>

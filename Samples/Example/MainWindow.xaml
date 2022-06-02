@@ -107,6 +107,7 @@
                 <svg1:SVGImage Source="/Example;component/Images/3.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/4.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/5.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
+                <svg1:SVGImage Source="/Example;component/Images/rect.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" OverrideColor="Black" x:Name="OverrideColorTest" MouseDoubleClick="SVGImage_MouseDoubleClick" />
             </UniformGrid>
         </TabItem>
         <TabItem Header="Animation/Clipping" Height="40" Width="245" x:Name="tabAnimation" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
@@ -119,11 +120,11 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <svg1:SVGImage Grid.Row="0" Grid.Column="0" Source="/Example;component/Images/Soccer_ball_animated.svg" UseAnimations="True" Margin="3" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                <svg1:SVGImage Grid.Row="0" Grid.Column="0" UriSource="/Images/Soccer_ball_animated.svg" UseAnimations="True" Margin="3" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                 <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Margin="3" VerticalAlignment="Center" Height="165" Width="252">
-                    <svg1:SVGImage Source="/Example;component/Images/Soccer_ball_animated.svg" SizeType="SizeToContent" UseAnimations="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                    <svg1:SVGImage UriSource="/Images/Soccer_ball_animated.svg" SizeType="SizeToContent" UseAnimations="True" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                 </Button>
-                <svg1:SVGImage Grid.RowSpan="2" Grid.Column="1" Source="/Example;component/Images/clipping_css.svg" Margin="3" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                <svg1:SVGImage Grid.RowSpan="2" Grid.Column="1" UriSource="/Images/clipping_css.svg" Margin="3" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
             </Grid>
         </TabItem>
         <TabItem Header="Others" Height="40" Width="245" x:Name="tabOthers" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
@@ -132,8 +133,8 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <svg1:SVGImage Grid.Row="0" Source="/Example;component/Images/error.svg" Margin="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                <svg1:SVGImage Grid.Row="1" Source="/Example;component/Images/Human_body_proportions2_svg.svg" Margin="3" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <svg1:SVGImage Grid.Row="0" UriSource="/Images/error.svg" Margin="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <svg1:SVGImage Grid.Row="1" UriSource="/Images/Human_body_proportions2_svg.svg" Margin="3" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             </Grid>
         </TabItem>
         <TabItem Header="SVG Icons" Height="40" Width="245" x:Name="tabIcons" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
