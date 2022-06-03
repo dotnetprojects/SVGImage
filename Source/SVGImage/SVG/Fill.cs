@@ -26,9 +26,20 @@ namespace SVGImage.SVG
             this.Opacity = 100;
         }
 
+        public bool IsEmpty(SVG svg)
+        {
+            if (svg == null) return true;
+
+            if (!svg.PaintServers.ContainsServer(this.PaintServerKey))
+            {
+                return true;
+            }
+            return svg.PaintServers.GetServer(this.PaintServerKey) == null;
+        }
+
         public Brush FillBrush(SVG svg, SVGRender svgRender, Shape shape, double elementOpacity, Rect bounds)
         {
-            var paintServer = svg.PaintServers.GetServer(PaintServerKey);
+            var paintServer = svg.PaintServers.GetServer(this.PaintServerKey);
             if(paintServer != null)
             {
                 if(paintServer is CurrentColorPaintServer)
