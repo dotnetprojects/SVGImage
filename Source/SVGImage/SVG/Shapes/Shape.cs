@@ -9,13 +9,13 @@ namespace SVGImage.SVG.Shapes
 {
     public class Shape : ClipArtElement
     {
-        private Fill m_fill;
+        protected Fill m_fill;
 
-        private Stroke m_stroke;
+        protected Stroke m_stroke;
 
-        private TextStyle m_textstyle;
+        protected TextStyle m_textstyle;
 
-        private string m_localStyle;
+        protected string m_localStyle;
 
         internal Clip m_clip = null;
 
@@ -52,6 +52,10 @@ namespace SVGImage.SVG.Shapes
                 }
                 return null;
             }
+            set
+            {
+                m_stroke = value;
+            }
         }
 
         public virtual Fill Fill
@@ -66,6 +70,10 @@ namespace SVGImage.SVG.Shapes
                     parent = parent.Parent;
                 }
                 return null;
+            }
+            set
+            {
+                m_fill = value;
             }
         }
 
