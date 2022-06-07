@@ -734,7 +734,14 @@ namespace SVGImage.SVG
 
         static void OnFileSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((SVGImage)d).SetImage(new FileStream(e.NewValue.ToString(), FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+            if (e.NewValue != null)
+            {
+                ((SVGImage)d).SetImage(new FileStream(e.NewValue.ToString(), FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+            }
+            else
+            {
+                ((SVGImage)d).SetImage((Drawing)null);
+            }
         }
 
         static void OnImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
