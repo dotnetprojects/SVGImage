@@ -716,7 +716,15 @@ namespace SVGImage.SVG
             }
 
             var sourceUri = (Uri)args.NewValue;
-            svgImage.SetImage(sourceUri);
+            if (sourceUri != null)
+            {
+                svgImage.SetImage(sourceUri);    
+            }
+            else
+            {
+                svgImage.SetImage((Drawing)null);
+            }
+            
         }
 
         static void OnSizeTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
