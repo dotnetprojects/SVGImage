@@ -477,173 +477,19 @@ namespace SVGImage.SVG
                 if (shape is PathShape)
                 {
                     PathShape r = shape as PathShape;
-//                    PathFigure p = null;
-                    Point lastPoint = new Point(0, 0);
-
-//                    PathShape.CurveTo lastc = null;
-//                    PathShape.QuadraticCurveTo lastq = null;
-                    Point lastcirPoint = new Point(0, 0);
-                    PathGeometry path = PathGeometry.CreateFromGeometry(PathGeometry.Parse(r.Data));
-                    //PathGeometry path = new PathGeometry();
-
-                    /*
-                    foreach (PathShape.PathElement element in r.Elements)
+                    var svg = this.SVG;
+                    if (r.Fill == null || r.Fill.IsEmpty(svg))
                     {
-                        bool isRelative = element.IsRelative;
-                        if (element is PathShape.MoveTo)
+                        if (r.Stroke == null || r.Stroke.IsEmpty(svg))
                         {
-                            p = new PathFigure();
-                            p.IsClosed = r.ClosePath;
-                            if (isRelative) p.StartPoint = lastPoint + (Vector)((PathShape.MoveTo)element).Point;
-                            else p.StartPoint = ((PathShape.MoveTo)element).Point;
-                            lastPoint = p.StartPoint;
-                            path.Figures.Add(p);
-                            continue;
-                        }
-                        if (element is PathShape.LineTo)
-                        {
-                            PathShape.LineTo lineto = element as PathShape.LineTo;
-                            foreach (Point point in lineto.Points)
-                            {
-                                if (isRelative)
-                                {
-                                    Point newpoint = lastPoint + (Vector)point;
-                                    lastPoint = newpoint;
-                                    p.Segments.Add(new LineSegment(newpoint, true));
-                                }
-                                else
-                                {
-                                    if (lineto.PositionType == PathShape.LineTo.eType.Point) lastPoint = point;
-                                    if (lineto.PositionType == PathShape.LineTo.eType.Horizontal) lastPoint = new Point(point.X, lastPoint.Y);
-                                    if (lineto.PositionType == PathShape.LineTo.eType.Vertical) lastPoint = new Point(lastPoint.X, point.Y);
-                                    p.Segments.Add(new LineSegment(lastPoint, true));
-                                }
-                            }
-                            continue;
-                        }
-                        if (element is PathShape.CurveTo)
-                        {
-                            PathShape.CurveTo c = element as PathShape.CurveTo;
-                            Point startPoint = lastPoint;
-                            BezierSegment s = new BezierSegment();
-                            if (isRelative)
-                            {
-                                s.Point1 = lastPoint + (Vector)c.CtrlPoint1;
-
-                                if (c.Command == 's')
-                                {
-                                    // first control point is a mirrored point of last end control point
-                                    //s.Point1 = lastPoint + new Vector(lastc.Point.X - dx, lastc.Point.Y - dy);
-                                    //s.Point1 = new Point(lastctrlpoint.X+2, lastctrlpoint.Y+2);
-
-                                    double dx = lastc.CtrlPoint2.X - lastc.Point.X;
-                                    double dy = lastc.CtrlPoint2.Y - lastc.Point.Y;
-                                    s.Point1 = new Point(lastcirPoint.X - dx, lastcirPoint.Y - dy);
-                                    //s.Point1 = lastctrlpoint;
-                                }
-
-                                s.Point2 = lastPoint + (Vector)c.CtrlPoint2;
-                                s.Point3 = lastPoint + (Vector)c.Point;
-                            }
-                            else
-                            {
-                                if (c.Command == 's')
-                                {
-                                    // first control point is a mirrored point of last end control point
-                                    //s.Point1 = lastPoint + new Vector(lastc.Point.X - dx, lastc.Point.Y - dy);
-                                    //s.Point1 = new Point(lastctrlpoint.X+2, lastctrlpoint.Y+2);
-
-                                    double dx = lastc.CtrlPoint2.X - lastc.Point.X;
-                                    double dy = lastc.CtrlPoint2.Y - lastc.Point.Y;
-                                    s.Point1 = new Point(lastcirPoint.X - dx, lastcirPoint.Y - dy);
-                                }
-                                else s.Point1 = c.CtrlPoint1;
-                                s.Point2 = c.CtrlPoint2;
-                                s.Point3 = c.Point;
-                            }
-                            lastPoint = s.Point3;
-                            p.Segments.Add(s);
-
-                            lastc = c;
-                            lastcirPoint = s.Point3;
-
-                            //debugPoints.Add(new ControlLine(startPoint, s.Point1));
-                            //debugPoints.Add(new ControlLine(s.Point3, s.Point2));
-                            continue;
-                        }
-                        if (element is PathShape.QuadraticCurveTo)
-                        {
-                            PathShape.QuadraticCurveTo c = element as PathShape.QuadraticCurveTo;
-                            Point startPoint = lastPoint;
-                            QuadraticBezierSegment s = new QuadraticBezierSegment();
-                            if (isRelative)
-                            {
-                                s.Point1 = lastPoint + (Vector)c.CtrlPoint1;
-
-                                if (c.Command == 'q' && lastq != null) // fix for horse svg! needed ?? or is it wrong in SVG?
-                                {
-                                    // first control point is a mirrored point of last end control point
-                                    //s.Point1 = lastPoint + new Vector(lastc.Point.X - dx, lastc.Point.Y - dy);
-                                    //s.Point1 = new Point(lastctrlpoint.X+2, lastctrlpoint.Y+2);
-
-                                    double dx = lastq.CtrlPoint1.X - lastq.Point.X;
-                                    double dy = lastq.CtrlPoint1.Y - lastq.Point.Y;
-                                    s.Point1 = new Point(lastcirPoint.X - dx, lastcirPoint.Y - dy);
-                                    //s.Point1 = lastctrlpoint;
-                                }
-
-                                s.Point2 = lastPoint + (Vector)c.Point;
-                            }
-                            else
-                            {
-                                if (c.Command == 'q')
-                                {
-                                    // first control point is a mirrored point of last end control point
-                                    //s.Point1 = lastPoint + new Vector(lastc.Point.X - dx, lastc.Point.Y - dy);
-                                    //s.Point1 = new Point(lastctrlpoint.X+2, lastctrlpoint.Y+2);
-
-                                    double dx = lastq.CtrlPoint1.X - lastq.Point.X;
-                                    double dy = lastq.CtrlPoint1.Y - lastq.Point.Y;
-                                    s.Point1 = new Point(lastcirPoint.X - dx, lastcirPoint.Y - dy);
-                                }
-                                else s.Point1 = c.CtrlPoint1;
-                                s.Point2 = c.Point;
-                            }
-                            lastPoint = s.Point2;
-                            p.Segments.Add(s);
-
-                            lastq = c;
-                            lastcirPoint = s.Point2;
-
-                            //debugPoints.Add(new ControlLine(startPoint, s.Point1));
-                            //debugPoints.Add(new ControlLine(s.Point3, s.Point2));
-                            continue;
-                        }
-                        if (element is PathShape.EllipticalArcTo)
-                        {
-                            PathShape.EllipticalArcTo c = element as PathShape.EllipticalArcTo;
-                            ArcSegment s = new ArcSegment();
-                            if (isRelative) s.Point = lastPoint + new Vector(c.X, c.Y);
-                            else s.Point = new Point(c.X, c.Y);
-
-                            s.Size = new Size(c.RX, c.RY);
-                            s.RotationAngle = c.AxisRotation;
-                            s.SweepDirection = SweepDirection.Counterclockwise;
-                            if (c.Clockwise) s.SweepDirection = SweepDirection.Clockwise;
-                            s.IsLargeArc = c.LargeArc;
-                            lastPoint = s.Point;
-                            p.Segments.Add(s);
-                            continue;
+                            var fill = new Fill(svg);
+                            fill.PaintServerKey = this.SVG.PaintServers.Parse("black");
+                            r.Fill = fill;
                         }
                     }
-                    */
-                    /*
-                    if (r.Transform != null)
-                        path.Transform = r.Transform;
-                    */
+                    PathGeometry path = PathGeometry.CreateFromGeometry(PathGeometry.Parse(r.Data));
                     var di = this.NewDrawingItem(shape, path);
                     AddDrawingToGroup(grp, shape, di);
-                    //}
                 }
             }
 

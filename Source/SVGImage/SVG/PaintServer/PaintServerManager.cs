@@ -36,6 +36,16 @@ namespace SVGImage.SVG.PaintServer
             return null;
         }
 
+        public bool ContainsServer(string serverKey)
+        {
+            if (string.IsNullOrWhiteSpace(serverKey))
+            {
+                return false;
+            }
+
+            return m_servers.ContainsKey(serverKey);
+        }
+
         public void AddServer(string key, PaintServer server)
         {
             if (string.IsNullOrWhiteSpace(key))
