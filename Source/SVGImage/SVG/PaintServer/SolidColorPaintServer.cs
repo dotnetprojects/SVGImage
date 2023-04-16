@@ -20,8 +20,15 @@ namespace SVGImage.SVG.PaintServer
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            if (Brush != null) return Brush;
             byte a = (byte)(255 * opacity / 100);
+            if (Brush != null && Brush is SolidColorBrush s)
+            {
+                if (opacity < 100)
+                {
+                    return new SolidColorBrush(Color.FromArgb(a, s.Color.R, s.Color.G, s.Color.B));
+                }
+                return Brush;
+            }
             Color c = this.Color;
             Color newcol = Color.FromArgb(a, c.R, c.G, c.B);
             Brush = new SolidColorBrush(newcol);
