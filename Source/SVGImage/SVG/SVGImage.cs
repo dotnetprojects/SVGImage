@@ -73,7 +73,7 @@ namespace SVGImage.SVG
                 new FrameworkPropertyMetadata(null, OnUriSourceChanged));
 
         public static DependencyProperty SizeTypeProperty = DependencyProperty.Register("SizeType",
-            typeof(eSizeType), typeof(SVGImage), new FrameworkPropertyMetadata(eSizeType.ViewBoxToSizeNoStretch,
+            typeof(eSizeType), typeof(SVGImage), new FrameworkPropertyMetadata(eSizeType.ContentToSizeStretch,
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 new PropertyChangedCallback(OnSizeTypeChanged)));
 
@@ -124,9 +124,6 @@ namespace SVGImage.SVG
 
             m_offsetTransform        = new TranslateTransform();
             m_scaleTransform         = new ScaleTransform();
-
-            this.SetValue(HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
-            this.SetValue(VerticalContentAlignmentProperty, VerticalAlignment.Center);
         }
 
         public SVG SVG
