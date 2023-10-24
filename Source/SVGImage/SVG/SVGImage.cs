@@ -73,7 +73,7 @@ namespace SVGImage.SVG
                 new FrameworkPropertyMetadata(null, OnUriSourceChanged));
 
         public static DependencyProperty SizeTypeProperty = DependencyProperty.Register("SizeType",
-            typeof(eSizeType), typeof(SVGImage), new FrameworkPropertyMetadata(eSizeType.ContentToSizeStretch,
+            typeof(eSizeType), typeof(SVGImage), new FrameworkPropertyMetadata(eSizeType.ContentToSizeNoStretch,
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 new PropertyChangedCallback(OnSizeTypeChanged)));
 
