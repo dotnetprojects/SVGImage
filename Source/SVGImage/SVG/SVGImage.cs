@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Resources;
 
 using DotNetProjects.SVGImage.SVG.FileLoaders;
+using System.Runtime.CompilerServices;
 
 namespace SVGImage.SVG
 {
@@ -47,6 +48,11 @@ namespace SVGImage.SVG
             /// maximum size for the control, the control is set to maximum size and the image is scaled.
             /// </summary>
             SizeToContent,
+            /// <summary>
+            /// Not the content of the image but its viewbox is scaled to fit the control without any stretching.
+            /// Either X or Y direction will be scaled to fill the entire width or height.
+            /// </summary>
+            ViewBoxToSizeNoStretch,
         }
 
         private Uri _baseUri;
@@ -443,6 +449,11 @@ namespace SVGImage.SVG
                 this.SizeToContentNoStretch(this.HorizontalContentAlignment, this.VerticalContentAlignment);
                 return;
             }
+            if (this.SizeType == eSizeType.ViewBoxToSizeNoStretch)
+            {
+                this.SizeToViewBoxNoStretch(this.HorizontalContentAlignment, this.VerticalContentAlignment);
+                return;
+            }
             if (this.SizeType == eSizeType.ContentToSizeStretch)
             {
                 double xscale = this.ActualWidth / r.Width;
@@ -477,6 +488,62 @@ namespace SVGImage.SVG
         void SizeToContentNoStretch(HorizontalAlignment hAlignment, VerticalAlignment vAlignment)
         {
             Rect r = this.m_drawing.Bounds;
+            double xscale = this.ActualWidth / r.Width;
+            double yscale = this.ActualHeight / r.Height;
+            double scale = xscale;
+            if (scale > yscale)
+                scale = yscale;
+
+            this.m_scaleTransform.CenterX = r.Left;
+            this.m_scaleTransform.CenterY = r.Top;
+            this.m_scaleTransform.ScaleX = scale;
+            this.m_scaleTransform.ScaleY = scale;
+
+            this.m_offsetTransform.X = -r.Left;
+            if (scale < xscale)
+            {
+                switch (this.HorizontalContentAlignment)
+                {
+                    case System.Windows.HorizontalAlignment.Center:
+                        double width = r.Width * scale;
+                        this.m_offsetTransform.X = this.ActualWidth / 2 - width / 2 - r.Left;
+                        break;
+                    case System.Windows.HorizontalAlignment.Right:
+                        this.m_offsetTransform.X = this.ActualWidth - r.Right * scale;
+                        break;
+                }
+            }
+            this.m_offsetTransform.Y = -r.Top;
+            if (scale < yscale)
+            {
+                switch (this.VerticalContentAlignment)
+                {
+                    case System.Windows.VerticalAlignment.Center:
+                        double height = r.Height * scale;
+                        this.m_offsetTransform.Y = this.ActualHeight / 2 - height / 2 - r.Top;
+                        break;
+                    case System.Windows.VerticalAlignment.Bottom:
+                        this.m_offsetTransform.Y = this.ActualHeight - r.Height * scale - r.Top;
+                        break;
+                }
+            }
+        }
+
+        void SizeToViewBoxNoStretch(HorizontalAlignment hAlignment, VerticalAlignment vAlignment)
+        {
+            if (!this.SVG.ViewBox.HasValue)
+            {
+                SizeToContentNoStretch(hAlignment, vAlignment);
+                return;
+            }
+
+            Rect r = this.m_drawing.Bounds;
+
+            if (this.SVG.ViewBox.HasValue)
+            {
+                r = this.SVG.ViewBox.Value;
+            }
+
             double xscale = this.ActualWidth / r.Width;
             double yscale = this.ActualHeight / r.Height;
             double scale = xscale;
