@@ -1,5 +1,11 @@
 # Your GitHub workflow file under .github/workflows/
+name: DocFX
 
+on:
+  push:
+    branches:
+      - master
+      
 jobs:
   publish-docs:
     runs-on: ubuntu-latest
@@ -14,6 +20,12 @@ jobs:
     - run: dotnet tool update -g docfx
     - run: docfx Docs/docfx.json
 
+    - name: Upload DocFX packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: docfx_site
+        path: ${{ github.workspace }}/Docs/_site
+          
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
