@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Xml;
-using SVGImage.SVG;
-using SVGImage.SVG.Shapes;
 
-namespace DotNetProjects.SVGImage.SVG.Animation
+namespace SVGImage.SVG.Animation
 {
+    using Utils;
+    using Shapes;
+
     public class AnimateTransform : AnimationBase
     {
         public string AttributeName { get; set; }
@@ -19,10 +20,11 @@ namespace DotNetProjects.SVGImage.SVG.Animation
 
         public string RepeatType { get; set; }
 
-        public AnimateTransform(global::SVGImage.SVG.SVG svg, XmlNode node, Shape parent)
+        public AnimateTransform(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)
         {
-            this.Type = (AnimateTransformType)Enum.Parse(typeof(AnimateTransformType), XmlUtil.AttrValue(node, "type", "translate"), true);
+            this.Type = (AnimateTransformType)Enum.Parse(typeof(AnimateTransformType), 
+                XmlUtil.AttrValue(node, "type", "translate"), true);
             this.From = XmlUtil.AttrValue(node, "from", null);
             this.To = XmlUtil.AttrValue(node, "to", null);
             this.AttributeName = XmlUtil.AttrValue(node, "attributeName", null);

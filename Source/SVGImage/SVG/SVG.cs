@@ -11,20 +11,21 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
-using DotNetProjects.SVGImage.SVG.FileLoaders;
-using SVGImage.SVG.PaintServer;
-using SVGImage.SVG.Shapes;
-using Group = SVGImage.SVG.Shapes.Group;
-
 namespace SVGImage.SVG
 {
+    using FileLoaders;
+    using PaintServers;
+    using Shapes;
+    using Utils;
+    using Group = Shapes.Group;
+
     /// <summary>
     /// This is the class that reads and parses the XML file.
     /// </summary>
     public class SVG
     {
         internal Dictionary<string, Shape> m_shapes;
-        internal Dictionary<string, List<XmlUtil.StyleItem>> m_styles;
+        internal Dictionary<string, List<StyleItem>> m_styles;
 
         private List<Shape> m_elements;
         private Dictionary<string, Brush> m_customBrushes;
@@ -34,7 +35,7 @@ namespace SVGImage.SVG
             this.Size     = new Size(300, 150);
             this.Filename = "";
             m_shapes = new Dictionary<string, Shape>();
-            m_styles = new Dictionary<string, List<XmlUtil.StyleItem>>();
+            m_styles = new Dictionary<string, List<StyleItem>>();
         }
 
         public SVG(IExternalFileLoader externalFileLoader)
@@ -95,7 +96,7 @@ namespace SVGImage.SVG
             }
         }
 
-        internal IDictionary<string, List<XmlUtil.StyleItem>> Styles
+        internal IDictionary<string, List<StyleItem>> Styles
         {
             get {
                 return m_styles;

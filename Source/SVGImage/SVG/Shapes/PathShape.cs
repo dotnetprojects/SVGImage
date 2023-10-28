@@ -3,9 +3,25 @@ using SVGImage.SVG.Shapes;
 
 namespace SVGImage.SVG
 {
-    public class PathShape : Shape
+    using Utils;
+
+    public sealed class PathShape : Shape
     {
         static Fill DefaultFill = null;
+
+        // http://apike.ca/prog_svg_paths.html
+        public PathShape(SVG svg, XmlNode node, Shape parent) : base(svg, node, parent)
+        {
+            if (DefaultFill == null)
+            {
+                DefaultFill = new Fill(svg);
+                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
+            }
+
+            this.ClosePath = false;
+            string path = XmlUtil.AttrValue(node, "d", string.Empty);
+            this.Data = path;
+        }
 
         public override Fill Fill
         {
@@ -21,19 +37,5 @@ namespace SVGImage.SVG
         public bool ClosePath { get; private set; }
 
         public string Data { get; private set; }
-
-        // http://apike.ca/prog_svg_paths.html
-        public PathShape(SVG svg, XmlNode node, Shape parent) : base(svg, node, parent)
-        {
-            if (DefaultFill == null)
-            {
-                DefaultFill = new Fill(svg);
-                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
-            }
-
-            this.ClosePath = false;
-            string path = XmlUtil.AttrValue(node, "d", string.Empty);
-            this.Data = path;
-        }
     }
 }

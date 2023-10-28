@@ -23,4 +23,4 @@ with permission from the original author.
 
 ## Sample Application
 
-![](Docs/sample.png)
+![](Docs/images/sample.png)

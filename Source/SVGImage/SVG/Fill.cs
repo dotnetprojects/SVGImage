@@ -1,12 +1,12 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-using SVGImage.SVG.PaintServer;
-using SVGImage.SVG.Shapes;
-
 namespace SVGImage.SVG
 {
-    public class Fill
+    using PaintServers;
+    using Shapes;
+
+    public sealed class Fill
     {
         public enum eFillRule
         {
@@ -59,7 +59,7 @@ namespace SVGImage.SVG
                         if(p.Fill != null)
                         {
                             var checkPaintServer = svg.PaintServers.GetServer(p.Fill.PaintServerKey);
-                            if(!(checkPaintServer is InheritPaintServer))
+                            if(checkPaintServer != null && !(checkPaintServer is InheritPaintServer))
                             {
                                 return checkPaintServer.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
                             }

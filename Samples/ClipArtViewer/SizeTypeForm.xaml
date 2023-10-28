@@ -11,6 +11,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -69,6 +70,32 @@
                             SizeType="SizeToContent" Background="#B4F5F5DC"></svgc:SVGImage>
                 </StackPanel>
 
+            </Grid>
+            
+            <Grid Grid.Row="2" Grid.Column="0" Margin="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center">None</Label>
+                <svgc:SVGImage x:Name="m_canvas6" Grid.Row="1"
+                              Width="140" Height="95"
+                              SizeType="None"
+                              HorizontalContentAlignment="Center" 
+                              VerticalContentAlignment="Center" Padding="2" BorderThickness="0.5" BorderBrush="BlueViolet" ></svgc:SVGImage>
+            </Grid>
+            
+            <Grid Grid.Row="2" Grid.Column="1" Margin="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center">ViewBoxToSizeNoStretch</Label>
+                <svgc:SVGImage x:Name="m_canvas7" Grid.Row="1"
+                              Width="140" Height="95"
+                              SizeType="ViewBoxToSizeNoStretch"
+                              HorizontalContentAlignment="Center" 
+                              VerticalContentAlignment="Center" Padding="2" BorderThickness="0.5" BorderBrush="BlueViolet" ></svgc:SVGImage>
             </Grid>
             
         </Grid>

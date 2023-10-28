@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetProjects.SVGImage", "SVGImage\DotNetProjects.SVGImage.csproj", "{5569522D-5C29-451E-8730-F119F0408BCA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetProjects.SVGImage.Design", "SVGImage.Design\DotNetProjects.SVGImage.Design.csproj", "{89EEDB4B-473C-4733-9FB9-A05DF3F67620}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{7584CC1F-793C-4C14-B47F-33A8D20E740D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "..\Samples\Example\Example.csproj", "{B90648B8-0235-4891-B902-FC3D8797686D}"
@@ -33,10 +31,6 @@ Global
 		{5569522D-5C29-451E-8730-F119F0408BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5569522D-5C29-451E-8730-F119F0408BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5569522D-5C29-451E-8730-F119F0408BCA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89EEDB4B-473C-4733-9FB9-A05DF3F67620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89EEDB4B-473C-4733-9FB9-A05DF3F67620}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89EEDB4B-473C-4733-9FB9-A05DF3F67620}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89EEDB4B-473C-4733-9FB9-A05DF3F67620}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B90648B8-0235-4891-B902-FC3D8797686D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B90648B8-0235-4891-B902-FC3D8797686D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B90648B8-0235-4891-B902-FC3D8797686D}.Release|Any CPU.ActiveCfg = Release|Any CPU

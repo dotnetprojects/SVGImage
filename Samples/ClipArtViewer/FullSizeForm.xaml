@@ -22,6 +22,7 @@
                 <system:String>ContentToSizeNoStretch</system:String>
                 <system:String>ContentToSizeStretch</system:String>
                 <system:String>SizeToContent</system:String>
+                <system:String>ViewBoxToSizeNoStretch</system:String>
             </ComboBox>
             <Label>SizeType</Label>
             </StackPanel>

@@ -2,6 +2,8 @@
 
 namespace SVGImage.SVG.Shapes
 {
+    using Utils;
+
     public class UseShape : Shape
     {
         public double X { get; set; }

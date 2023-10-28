@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace DotNetProjects.SVGImage.SVG.FileLoaders
+namespace SVGImage.SVG.FileLoaders
 {
     public interface IExternalFileLoader
     {

@@ -1,4 +1,4 @@
-﻿namespace DotNetProjects.SVGImage.SVG.Animation
+﻿namespace SVGImage.SVG.Animation
 {
     public enum AnimateTransformType
     {

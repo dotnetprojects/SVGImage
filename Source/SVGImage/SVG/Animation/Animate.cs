@@ -1,9 +1,10 @@
 ﻿using System.Xml;
-using SVGImage.SVG;
-using SVGImage.SVG.Shapes;
 
-namespace DotNetProjects.SVGImage.SVG.Animation
+namespace SVGImage.SVG.Animation
 {
+    using Utils;
+    using Shapes;
+
     public class Animate : AnimationBase
     {
         public string AttributeName { get; set; }
@@ -18,7 +19,7 @@ namespace DotNetProjects.SVGImage.SVG.Animation
 
         public string hRef { get; set; }
 
-        public Animate(global::SVGImage.SVG.SVG svg, XmlNode node, Shape parent)
+        public Animate(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)
         {
             this.From = XmlUtil.AttrValue(node, "from", null);

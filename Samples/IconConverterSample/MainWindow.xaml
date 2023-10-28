@@ -6,7 +6,7 @@
         xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
         xmlns:local="clr-namespace:IconConverterSample"
         mc:Ignorable="d"
-        Title="SharpVectors: SvgImageBinding Sample (SvgIconConverter Demo) - C#" Height="720" Width="960" 
+        Title="SVGImage: SvgImageBinding Sample (SvgIconConverter Demo) - C#" Height="720" Width="960" 
         Background="#444444" WindowStartupLocation="CenterScreen" Icon="IconConverterSample.ico">
     <DockPanel LastChildFill="True" Margin="4">
         <TabControl TabStripPlacement="Top" FontSize="14" Margin="6" Grid.Row="0" Grid.Column="2" Background="#444444">

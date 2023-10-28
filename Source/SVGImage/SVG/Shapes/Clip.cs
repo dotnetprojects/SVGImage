@@ -4,14 +4,14 @@ using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    public class Clip : Group
+    public sealed class Clip : Group
     {
+        private Geometry clpGeo;
+
         public Clip(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)
         {
         }
-
-        private Geometry clpGeo = null;
 
         public Geometry ClipGeometry
         {

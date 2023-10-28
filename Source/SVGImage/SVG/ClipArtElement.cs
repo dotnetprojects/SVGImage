@@ -2,16 +2,20 @@
 
 namespace SVGImage.SVG
 {
+    using Utils;
+
     public class ClipArtElement
     {
-        public string Id { get; protected set; }
+        private string _id;
 
         public ClipArtElement(XmlNode node)
         {
             if (node == null)
-                this.Id = "<null>";
+                _id = "<null>";
             else
-                this.Id = XmlUtil.AttrValue(node, "id");
+                _id = XmlUtil.AttrValue(node, "id");
         }
+
+        public string Id { get => _id; }
     }
 }

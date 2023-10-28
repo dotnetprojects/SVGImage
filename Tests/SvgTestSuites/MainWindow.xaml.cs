@@ -18,7 +18,7 @@ using System.Windows.Resources;
 using System.Windows.Markup;
 
 using SVGImage.SVG;
-using DotNetProjects.SVGImage.SVG.FileLoaders;
+using SVGImage.SVG.FileLoaders;
 
 using IoPath = System.IO.Path;
 

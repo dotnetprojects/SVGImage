@@ -1,0 +1,77 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "SVGImage/DotNetProjects.SVGImage.csproj"
+          ],
+          "src": "../Source/",
+          "properties": {
+            "TargetFramework": "netcoreapp3.1"
+          }          
+        }
+      ],
+      "dest": "api",
+      "outputFormat": "mref",
+      "includePrivateMembers": false,
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false,
+      "noRestore": false,
+      "namespaceLayout": "flattened",
+      "memberLayout": "samePage",
+      "enumSortOrder": "alphabetic",
+      "allowCompilationErrors": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
+      {
+        "files": [
+          "articles/**.md",
+          "articles/**/toc.yml",
+          "toc.yml",
+          "*.md"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "globalMetadata": {
+      "_appName": "SVGImage",
+      "_appTitle": "SVGImage Documentation",
+      "_appLogoPath": "images/dotnetprojects.png",
+      "_appFaviconPath": "images/dotnetprojects.png",	  
+      "_enableDiagrams": true,
+      "_enableSearch": true,
+      "_appFooter": "<div class=\"d-flex flex-column flex-sm-row justify-content-between pt-1\"><p> &copy; 2010 - 2023 DotNetProjects</p><p>Made with <a href=\"https://dotnet.github.io/docfx\">DocFX</a></p></div>",
+      "_gitContribute": {
+        "repo": "https://github.com/dotnetprojects/SVGImage",
+		"branch": "master"
+      },
+      "_gitUrlPattern": "github"
+    },    
+    "output": "_site",
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": [
+      "default",
+      "modern",
+      "template"
+    ],
+    "postProcessors": [],
+    "keepFileLink": false,
+    "disableGitFeatures": false
+  }
+}
