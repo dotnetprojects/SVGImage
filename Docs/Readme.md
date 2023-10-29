@@ -8,6 +8,9 @@ Besides the bug fixes, new features are added including the following:
   - Support of styles.
   - Simple Animation support.
 
+## Documentations
+For the User Manual and API References see [Documentation](http://dotnetprojects.github.io/SVGImage/).
+
 ## Framework support
 The SVGImage control library targets the following frameworks
 * .NET Framework, Version 4.0
