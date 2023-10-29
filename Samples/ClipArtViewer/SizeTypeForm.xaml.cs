@@ -19,6 +19,11 @@ namespace ClipArtViewer
             ((SizeTypeForm)d).SetImage(e.NewValue as Drawing);
         }
 
+        public SizeTypeForm()
+        {
+            InitializeComponent();
+        }
+
         public Drawing ImageSource
         {
             get { return (Drawing)GetValue(ImageSourcePoperty); }
@@ -35,11 +40,6 @@ namespace ClipArtViewer
 
             m_canvas6.SetImage(drawing);
             m_canvas7.SetImage(drawing);
-        }
-
-        public SizeTypeForm()
-        {
-            InitializeComponent();
         }
     }
 }

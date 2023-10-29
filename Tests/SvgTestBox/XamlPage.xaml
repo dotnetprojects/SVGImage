@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:SvgTestBox"
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-    xmlns:svgc="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+    xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
     mc:Ignorable="d" 
     Title="XamlPage">
     <DockPanel LastChildFill="True">
@@ -56,9 +56,9 @@
                 <Image Source="{svgc:SvgIcon Source=/Images/Space.svg, AppName=SvgTestBox}" Height="24" Width="24"/>
             </CheckBox>
             <ComboBox x:Name="highlightingComboBox" Width="120"
-				    SelectedItem="{Binding SyntaxHighlighting, ElementName=textEditor}"
-				    ItemsSource="{Binding Source={x:Static avalonEdit:HighlightingManager.Instance}, Path=HighlightingDefinitions}"
-				    SelectionChanged="OnHighlightingSelectionChanged"/>
+                    SelectedItem="{Binding SyntaxHighlighting, ElementName=textEditor}"
+                    ItemsSource="{Binding Source={x:Static avalonEdit:HighlightingManager.Instance}, Path=HighlightingDefinitions}"
+                    SelectionChanged="OnHighlightingSelectionChanged"/>
             <Separator/>
             <TextBox x:Name="searchTextBox" Width="200" KeyUp="OnSearchTextBoxKeyUp" />
             <Button Click="OnSearchTextClick" ToolTip="Search">

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:local="clr-namespace:ClipArtViewer"
-        xmlns:svgc="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+        xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
         Title="SVGImage - by Jesper Kristiansen" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" 
         mc:Ignorable="d" Height="960" Width="1080" Margin="3">
     <Window.Resources>

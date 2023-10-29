@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:svgc="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+             xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
              xmlns:local="clr-namespace:ClipArtViewer"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -81,8 +81,7 @@
                 <svgc:SVGImage x:Name="m_canvas6" Grid.Row="1"
                               Width="140" Height="95"
                               SizeType="None"
-                              HorizontalContentAlignment="Center" 
-                              VerticalContentAlignment="Center" Padding="2" BorderThickness="0.5" BorderBrush="BlueViolet" ></svgc:SVGImage>
+                              Padding="2" BorderThickness="0.5" BorderBrush="BlueViolet" ></svgc:SVGImage>
             </Grid>
             
             <Grid Grid.Row="2" Grid.Column="1" Margin="3">
@@ -94,8 +93,7 @@
                 <svgc:SVGImage x:Name="m_canvas7" Grid.Row="1"
                               Width="140" Height="95"
                               SizeType="ViewBoxToSizeNoStretch"
-                              HorizontalContentAlignment="Center" 
-                              VerticalContentAlignment="Center" Padding="2" BorderThickness="0.5" BorderBrush="BlueViolet" ></svgc:SVGImage>
+                              Padding="2" BorderThickness="0.5" BorderBrush="BlueViolet" ></svgc:SVGImage>
             </Grid>
             
         </Grid>

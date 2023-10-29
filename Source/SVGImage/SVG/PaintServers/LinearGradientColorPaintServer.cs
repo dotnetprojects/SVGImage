@@ -8,17 +8,9 @@ namespace SVGImage.SVG.PaintServers
 {
     using Utils;
 
-    public class LinearGradientColorPaintServerPaintServer : GradientColorPaintServer
+    public sealed class LinearGradientColorPaintServer : GradientColorPaintServer
     {
-        public double X1 { get; private set; }
-
-        public double Y1 { get; private set; }
-
-        public double X2 { get; private set; }
-
-        public double Y2 { get; private set; }
-
-        public LinearGradientColorPaintServerPaintServer(PaintServerManager owner, XmlNode node)
+        public LinearGradientColorPaintServer(PaintServerManager owner, XmlNode node)
             : base(owner, node)
         {
             Debug.Assert(node.Name == SVGTags.sLinearGradient);
@@ -28,10 +20,19 @@ namespace SVGImage.SVG.PaintServers
             this.Y2 = XmlUtil.AttrValue(node, "y2", double.NaN);
         }
 
-        public LinearGradientColorPaintServerPaintServer(PaintServerManager owner, Brush newBrush) : base(owner)
+        public LinearGradientColorPaintServer(PaintServerManager owner, Brush newBrush) 
+            : base(owner)
         {
             Brush = newBrush;
         }
+
+        public double X1 { get; private set; }
+
+        public double Y1 { get; private set; }
+
+        public double X2 { get; private set; }
+
+        public double Y2 { get; private set; }
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {

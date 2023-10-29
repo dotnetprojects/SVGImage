@@ -90,5 +90,19 @@ namespace SVGImage.SVG.Utils
                 return value;
             return 0.1;
         }
+
+        public static XmlAttribute CreateAttr(XmlNode owner, string name, string value)
+        {
+            return new TempXmlAttribute(owner, name, value);
+        }
+
+        internal sealed class TempXmlAttribute : XmlAttribute
+        {
+            public TempXmlAttribute(XmlNode owner, string name, string value)
+                : base(string.Empty, name, string.Empty, owner.OwnerDocument)
+            {
+                this.Value = value;
+            }
+        }
     }
 }

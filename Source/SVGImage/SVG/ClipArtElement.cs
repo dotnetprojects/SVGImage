@@ -4,11 +4,11 @@ namespace SVGImage.SVG
 {
     using Utils;
 
-    public class ClipArtElement
+    public abstract class ClipArtElement
     {
         private string _id;
 
-        public ClipArtElement(XmlNode node)
+        protected ClipArtElement(XmlNode node)
         {
             if (node == null)
                 _id = "<null>";

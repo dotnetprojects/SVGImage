@@ -8,19 +8,9 @@ namespace SVGImage.SVG.PaintServers
 {
     using Utils;
 
-    public class RadialGradientColorPaintServerPaintServer : GradientColorPaintServer
+    public sealed class RadialGradientColorPaintServer : GradientColorPaintServer
     {
-        public double CX { get; private set; }
-
-        public double CY { get; private set; }
-
-        public double FX { get; private set; }
-
-        public double FY { get; private set; }
-
-        public double R { get; private set; }
-
-        public RadialGradientColorPaintServerPaintServer(PaintServerManager owner, XmlNode node)
+        public RadialGradientColorPaintServer(PaintServerManager owner, XmlNode node)
             : base(owner, node)
         {
             Debug.Assert(node.Name == SVGTags.sRadialGradient);
@@ -32,10 +22,21 @@ namespace SVGImage.SVG.PaintServers
             this.Normalize();
         }
 
-        public RadialGradientColorPaintServerPaintServer(PaintServerManager owner, Brush newBrush) : base(owner)
+        public RadialGradientColorPaintServer(PaintServerManager owner, Brush newBrush) 
+            : base(owner)
         {
             Brush = newBrush;
         }
+
+        public double CX { get; private set; }
+
+        public double CY { get; private set; }
+
+        public double FX { get; private set; }
+
+        public double FY { get; private set; }
+
+        public double R { get; private set; }
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {

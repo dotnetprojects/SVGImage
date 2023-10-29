@@ -6,12 +6,12 @@ namespace SVGImage.SVG.Animation
     using Utils;
     using Shapes;
 
-    public class AnimationBase : Shape
+    public abstract class AnimationBase : Shape
     {
         //https://www.mediaevent.de/tutorial/svg-animate-attribute.html
         public TimeSpan Duration { get; set; }
 
-        public AnimationBase(SVG svg, XmlNode node, Shape parent)
+        protected AnimationBase(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)
         {
             var d = XmlUtil.AttrValue(node, "dur", "");

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net6.0-windows;net7.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <Description>DotNetProjects.SVGImage</Description>
     <RootNamespace>SVGImage.SVG</RootNamespace>	  
@@ -11,9 +11,9 @@
     <Product>DotNetProjects.SVGImage</Product>
     <Copyright>2020-2023 DotNetProjects</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
-    <Version>3.0.0</Version>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <FileVersion>5.0.0.0</FileVersion>
+    <Version>5.0.0</Version>
     <OutputType>Library</OutputType>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
@@ -50,6 +50,8 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">$(DefineConstants);DOTNET48;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net6'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
+	<DefineConstants Condition="$(TargetFramework.StartsWith('net7'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
   </PropertyGroup>
     
   <ItemGroup>

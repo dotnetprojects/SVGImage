@@ -36,6 +36,8 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">$(DefineConstants);DOTNET48;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net6'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
+	<DefineConstants Condition="$(TargetFramework.StartsWith('net7'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
@@ -85,20 +87,28 @@
       <HintPath>..\Libs\net48\Notifications.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
-    <Reference Include="ShellFileDialogs">
-      <HintPath>..\Libs\netstandard2.1\ShellFileDialogs.dll</HintPath>
-    </Reference>
-    <Reference Include="Notifications.Wpf">
-      <HintPath>..\Libs\netcoreapp3.0\Notifications.Wpf.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
     <Reference Include="ShellFileDialogs">
       <HintPath>..\Libs\netstandard2.1\ShellFileDialogs.dll</HintPath>
     </Reference>
     <Reference Include="Notifications.Wpf">
       <HintPath>..\Libs\netcoreapp3.1\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0-windows'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\Libs\net6.0\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\Libs\net6.0-windows\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0-windows'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\Libs\net7.0\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\Libs\net7.0-windows\Notifications.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

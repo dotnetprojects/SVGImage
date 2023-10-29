@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace SVGImage.SVG.PaintServers
 {
-    public class CurrentColorPaintServer : PaintServer
+    public sealed class CurrentColorPaintServer : PaintServer
     {
         public CurrentColorPaintServer(PaintServerManager owner)
             : base(owner)

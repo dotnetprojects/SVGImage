@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:svgc="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+             xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
             xmlns:local="clr-namespace:ClipArtViewer"
              mc:Ignorable="d" 

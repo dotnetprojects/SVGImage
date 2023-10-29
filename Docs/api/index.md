@@ -12,7 +12,7 @@ The SVG animation elements namespace.
 A namespace defining interfaces for loading external documents and resources.
 
 #### [SVGImage.SVG.Filters](xref:SVGImage.SVG.Filters)
-A namespace defining some of the SVG filters/
+A namespace defining some of the SVG filters.
 
 #### [SVGImage.SVG.PaintServers](xref:SVGImage.SVG.PaintServers)
 The namespace defining SVG paint servers.

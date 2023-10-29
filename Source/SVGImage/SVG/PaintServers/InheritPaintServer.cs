@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace SVGImage.SVG.PaintServers
 {
-    public class InheritPaintServer : PaintServer
+    public sealed class InheritPaintServer : PaintServer
     {
         public InheritPaintServer(PaintServerManager owner)
             : base(owner)

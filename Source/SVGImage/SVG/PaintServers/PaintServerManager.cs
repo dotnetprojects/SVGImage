@@ -1,15 +1,16 @@
 using System;
+using System.Xml;
+using System.Text;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
+
 using System.Windows.Media;
-using System.Xml;
 
 namespace SVGImage.SVG.PaintServers
 {
     using Utils;
 
-    public class PaintServerManager
+    public sealed class PaintServerManager
     {
         private static Dictionary<string, Color> m_knownColors = null;
 
@@ -20,13 +21,13 @@ namespace SVGImage.SVG.PaintServers
             if (node.Name == SVGTags.sLinearGradient)
             {
                 string id = XmlUtil.AttrValue(node, "id");
-                if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new LinearGradientColorPaintServerPaintServer(this, node);
+                if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new LinearGradientColorPaintServer(this, node);
                 return id;
             }
             if (node.Name == SVGTags.sRadialGradient)
             {
                 string id = XmlUtil.AttrValue(node, "id");
-                if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new RadialGradientColorPaintServerPaintServer(this, node);
+                if (this.m_servers.ContainsKey(id) == false) this.m_servers[id] = new RadialGradientColorPaintServer(this, node);
                 return id;
             }
             if (node.Name == SVGTags.sPattern)
@@ -83,11 +84,11 @@ namespace SVGImage.SVG.PaintServers
             }
             else if (customBrush is LinearGradientBrush)
             {
-                m_servers[key] = new LinearGradientColorPaintServerPaintServer(this, customBrush);
+                m_servers[key] = new LinearGradientColorPaintServer(this, customBrush);
             }
             else if(customBrush is RadialGradientBrush)
             {
-                m_servers[key] = new RadialGradientColorPaintServerPaintServer(this, customBrush);
+                m_servers[key] = new RadialGradientColorPaintServer(this, customBrush);
             }
             else if(customBrush is DrawingBrush)
             {

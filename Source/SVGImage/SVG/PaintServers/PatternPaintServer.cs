@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System.Xml;
+using System.Collections.Generic;
+
 using System.Windows;
 using System.Windows.Media;
-using System.Xml;
 
 namespace SVGImage.SVG.PaintServers
 {
     using Utils;
     using Shapes;
 
-    public class PatternPaintServer : PaintServer
+    public sealed class PatternPaintServer : PaintServer
     {
         //x="0" y="0" width="2" height="12"
         //patternUnits
@@ -16,18 +17,6 @@ namespace SVGImage.SVG.PaintServers
 
         private IList<Shape> m_elements;
         private IDictionary<string, PaintServer> m_pattternPaintServers;
-
-        public double X { get; private set; }
-
-        public double Y { get; private set; }
-
-        public double Width { get; private set; }
-
-        public double Height { get; private set; }
-
-        public Transform PatternTransform { get; protected set; }
-
-        public string PatternUnits { get; private set; }
 
         public PatternPaintServer(PaintServerManager owner, SVG svg, XmlNode node) : base(owner)
         {
@@ -51,6 +40,18 @@ namespace SVGImage.SVG.PaintServers
         {
             Brush = newBrush;
         }
+
+        public double X { get; private set; }
+
+        public double Y { get; private set; }
+
+        public double Width { get; private set; }
+
+        public double Height { get; private set; }
+
+        public Transform PatternTransform { get; private set; }
+
+        public string PatternUnits { get; private set; }
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {

@@ -6,7 +6,7 @@ namespace SVGImage.SVG.Animation
     using Utils;
     using Shapes;
 
-    public class AnimateTransform : AnimationBase
+    public sealed class AnimateTransform : AnimationBase
     {
         public string AttributeName { get; set; }
 

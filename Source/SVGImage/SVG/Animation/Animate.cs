@@ -5,20 +5,8 @@ namespace SVGImage.SVG.Animation
     using Utils;
     using Shapes;
 
-    public class Animate : AnimationBase
+    public sealed class Animate : AnimationBase
     {
-        public string AttributeName { get; set; }
-
-        public string From { get; set; }
-
-        public string To { get; set; }
-
-        public string RepeatType { get; set; }
-
-        public string Values { get; set; }
-
-        public string hRef { get; set; }
-
         public Animate(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)
         {
@@ -31,5 +19,18 @@ namespace SVGImage.SVG.Animation
             this.hRef = XmlUtil.AttrValue(node, "xlink:href", string.Empty);
             if (this.hRef.StartsWith("#")) this.hRef = this.hRef.Substring(1);
         }
+
+        public string AttributeName { get; set; }
+
+        public string From { get; set; }
+
+        public string To { get; set; }
+
+        public string RepeatType { get; set; }
+
+        public string Values { get; set; }
+
+        public string hRef { get; set; }
+
     }
 }

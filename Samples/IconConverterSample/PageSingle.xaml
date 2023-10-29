@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:IconConverterSample"
-      xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+      xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="580" d:DesignWidth="920" Title="PageSingle" x:Name="PageSingleTest" Background="#444444">
@@ -18,11 +18,11 @@
             <TextBox x:Name="inputBox" TextWrapping="Wrap" Text="" TextAlignment="Left" DockPanel.Dock="Top" IsReadOnly="True" Background="#808080"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <!-- Binding to Local file name: Relative Path -->
-                <Image Source="{Binding ElementName=PageSingleTest, Path=LocalFileName, Converter={svg1:SvgIconConverter}, Mode=OneWay}" Height="256" HorizontalAlignment="Right"/>
+                <Image Source="{Binding ElementName=PageSingleTest, Path=LocalFileName, Converter={svgc:SvgIconConverter}, Mode=OneWay}" Height="256" HorizontalAlignment="Right"/>
                 <!-- Binding to resource file -->
-                <Image Source="{Binding Converter={svg1:SvgIconConverter}, ConverterParameter=/Resources/Hypocolius.svg, Mode=OneWay}" Height="256" Margin="20, 0"/>
+                <Image Source="{Binding Converter={svgc:SvgIconConverter}, ConverterParameter=/Resources/Hypocolius.svg, Mode=OneWay}" Height="256" Margin="20, 0"/>
                 <!-- Binding to TextBox content: Absolute or Relative -->
-                <Image Source="{Binding ElementName=inputBox, Path=Text, Converter={svg1:SvgIconConverter}, Mode=OneWay}" Height="256"/>
+                <Image Source="{Binding ElementName=inputBox, Path=Text, Converter={svgc:SvgIconConverter}, Mode=OneWay}" Height="256"/>
             </StackPanel>
         </DockPanel>
 
@@ -30,7 +30,7 @@
                       BorderThickness="1" BorderBrush="Gray" Background="Gray"/>
         <DockPanel Name="viewerFrame" LastChildFill="True" Margin="0,3,0,0" Grid.Row="2">
             <!-- Binding to Web resource file -->
-            <Image Source="{Binding Converter={svg1:SvgIconConverter}, ConverterParameter=https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/compass.svg, Mode=OneWay}" Width="256" Height="256"/>
+            <Image Source="{Binding Converter={svgc:SvgIconConverter}, ConverterParameter=https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/compass.svg, Mode=OneWay}" Width="256" Height="256"/>
         </DockPanel>
     </Grid>
 </Page>

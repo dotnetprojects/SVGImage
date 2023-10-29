@@ -1,8 +1,8 @@
 ﻿<Window x:Class="CustomBrushesExample.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
-         xmlns:local="clr-namespace:CustomBrushesExample" WindowStartupLocation="CenterScreen"
+        xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
+        xmlns:local="clr-namespace:CustomBrushesExample" WindowStartupLocation="CenterScreen"
         Title="SVGImage - Custom Brushes" Height="540" Width="720" Background="Wheat" ResizeMode="NoResize" Margin="3">
     <Window.DataContext>
         <local:MainWindowViewModel/>
@@ -51,7 +51,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="10" HorizontalAlignment="Center">
             <TextBlock FontSize="40" Foreground="Black">Starting Image</TextBlock>
-            <svg1:SVGImage 
+            <svgc:SVGImage 
                            x:Name="StartingImage" SizeType="SizeToContent"
                            Source="/CustomBrushesExample;component/Images/test_3.svg" 
                            Margin="20" 
@@ -63,7 +63,7 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Center">
             <TextBlock FontSize="40" Foreground="Black" HorizontalAlignment="Right">Changed Image</TextBlock>
-            <svg1:SVGImage 
+            <svgc:SVGImage 
                            x:Name="ChangedImage" SizeType="SizeToContent"
                            Source="/CustomBrushesExample;component/Images/test_3.svg" 
                            CustomBrushes="{Binding MyBrushes, Mode=TwoWay}"

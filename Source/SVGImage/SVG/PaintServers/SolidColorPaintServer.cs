@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace SVGImage.SVG.PaintServers
 {
-    public class SolidColorPaintServer : PaintServer
+    public sealed class SolidColorPaintServer : PaintServer
     {
         public Color Color { get; set; }
 
@@ -13,7 +13,8 @@ namespace SVGImage.SVG.PaintServers
             this.Color = c;
         }
 
-        public SolidColorPaintServer(PaintServerManager owner, Brush newBrush) : base(owner)
+        public SolidColorPaintServer(PaintServerManager owner, Brush newBrush) 
+            : base(owner)
         {
             Brush = newBrush;
         }
