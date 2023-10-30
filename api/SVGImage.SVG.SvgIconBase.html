@@ -1,0 +1,575 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SvgIconBase
+ | SVGImage Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SvgIconBase
+ | SVGImage Documentation ">
+      
+      <link rel="icon" href="../images/dotnetprojects.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dotnetprojects/SVGImage/new/master/apiSpec/new?filename=SVGImage_SVG_SvgIconBase.md&amp;value=---%0Auid%3A%20SVGImage.SVG.SvgIconBase%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/dotnetprojects.png" alt="SVGImage">
+            SVGImage
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SVGImage.SVG.SvgIconBase">
+
+
+
+  <h1 id="SVGImage_SVG_SvgIconBase" data-uid="SVGImage.SVG.SvgIconBase" class="text-break">
+    Class SvgIconBase
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SVGImage.html">SVGImage</a>.<a class="xref" href="SVGImage.SVG.html">SVG</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>DotNetProjects.SVGImage.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>This is an <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/abstract">abstract</a> implementation of a markup extension that enables the creation
+of <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a> from SVG sources.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class SvgIconBase : MarkupExtension</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.markup.markupextension">MarkupExtension</a></div>
+      <div><span class="xref">SvgIconBase</span></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="SVGImage.SVG.SvgIconConverterExtension.html">SvgIconConverterExtension</a></div>
+      <div><a class="xref" href="SVGImage.SVG.SvgIconExtension.html">SvgIconExtension</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.markup.markupextension.providevalue">MarkupExtension.ProvideValue(IServiceProvider)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="SVGImage_SVG_SvgIconBase__ctor_" data-uid="SVGImage.SVG.SvgIconBase.#ctor*"></a>
+
+  <h3 id="SVGImage_SVG_SvgIconBase__ctor" data-uid="SVGImage.SVG.SvgIconBase.#ctor">
+  SvgIconBase()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SVGImage.SVG.SvgIconBase.html">SvgIconBase</a>
+class with the default parameters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SvgIconBase()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="SVGImage_SVG_SvgIconBase__appName" data-uid="SVGImage.SVG.SvgIconBase._appName">
+  _appName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected string _appName</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="SVGImage_SVG_SvgIconBase__culture" data-uid="SVGImage.SVG.SvgIconBase._culture">
+  _culture
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CultureInfo _culture</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo">CultureInfo</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="SVGImage_SVG_SvgIconBase_AppName_" data-uid="SVGImage.SVG.SvgIconBase.AppName*"></a>
+
+  <h3 id="SVGImage_SVG_SvgIconBase_AppName" data-uid="SVGImage.SVG.SvgIconBase.AppName">
+  AppName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the project or application name of the target assembly.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AppName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string specifying the application project name.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="SVGImage_SVG_SvgIconBase_AppName_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This is optional and is only used to resolve the resource Uri at the design time.</p>
+</div>
+
+
+
+
+  <a id="SVGImage_SVG_SvgIconBase_CultureInfo_" data-uid="SVGImage.SVG.SvgIconBase.CultureInfo*"></a>
+
+  <h3 id="SVGImage_SVG_SvgIconBase_CultureInfo" data-uid="SVGImage.SVG.SvgIconBase.CultureInfo">
+  CultureInfo
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the main culture information used for rendering texts.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CultureInfo CultureInfo { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo">CultureInfo</a></dt>
+    <dd><p>An instance of the <a class="xref" href="SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase_CultureInfo">CultureInfo</a> specifying the main
+culture information for texts. The default is the English culture.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="SVGImage_SVG_SvgIconBase_CultureInfo_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+This is the culture information passed to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.formattedtext">FormattedText</a>
+class instance for the text rendering.
+</p>
+<p>
+The library does not currently provide any means of splitting texts
+into its multi-language parts.
+</p>
+</div>
+
+
+
+
+  <a id="SVGImage_SVG_SvgIconBase_OverrideColor_" data-uid="SVGImage.SVG.SvgIconBase.OverrideColor*"></a>
+
+  <h3 id="SVGImage_SVG_SvgIconBase_OverrideColor" data-uid="SVGImage.SVG.SvgIconBase.OverrideColor">
+  OverrideColor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color? OverrideColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.color">Color</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="SVGImage_SVG_SvgIconBase_GetAppName_" data-uid="SVGImage.SVG.SvgIconBase.GetAppName*"></a>
+
+  <h3 id="SVGImage_SVG_SvgIconBase_GetAppName" data-uid="SVGImage.SVG.SvgIconBase.GetAppName">
+  GetAppName()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L277"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void GetAppName()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_SvgIconBase_GetDrawing_" data-uid="SVGImage.SVG.SvgIconBase.GetDrawing*"></a>
+
+  <h3 id="SVGImage_SVG_SvgIconBase_GetDrawing_System_Uri_" data-uid="SVGImage.SVG.SvgIconBase.GetDrawing(System.Uri)">
+  GetDrawing(Uri)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>This converts the SVG resource specified by the Uri to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual DrawingGroup GetDrawing(Uri svgSource)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>svgSource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a> specifying the source of the SVG resource.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> of the converted SVG resource.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_SvgIconBase_GetEntryAssembly_" data-uid="SVGImage.SVG.SvgIconBase.GetEntryAssembly*"></a>
+
+  <h3 id="SVGImage_SVG_SvgIconBase_GetEntryAssembly" data-uid="SVGImage.SVG.SvgIconBase.GetEntryAssembly">
+  GetEntryAssembly()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L294"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Assembly GetEntryAssembly()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.assembly">Assembly</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_SvgIconBase_GetExecutingAssembly_" data-uid="SVGImage.SVG.SvgIconBase.GetExecutingAssembly*"></a>
+
+  <h3 id="SVGImage_SVG_SvgIconBase_GetExecutingAssembly" data-uid="SVGImage.SVG.SvgIconBase.GetExecutingAssembly">
+  GetExecutingAssembly()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L357"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Assembly GetExecutingAssembly()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.assembly">Assembly</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_SvgIconBase_GetImage_" data-uid="SVGImage.SVG.SvgIconBase.GetImage*"></a>
+
+  <h3 id="SVGImage_SVG_SvgIconBase_GetImage_System_Uri_" data-uid="SVGImage.SVG.SvgIconBase.GetImage(System.Uri)">
+  GetImage(Uri)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>This converts the SVG resource specified by the Uri to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual DrawingImage GetImage(Uri svgSource)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>svgSource</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a> specifying the source of the SVG resource.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a></dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a> of the converted SVG resource.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="SVGImage_SVG_SvgIconBase_GetImage_System_Uri__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This uses the <a class="xref" href="SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase_GetDrawing_System_Uri_">GetDrawing(Uri)</a> method to convert the SVG resource to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>,
+which is then wrapped in <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a>.</p>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dotnetprojects/SVGImage/blob/master/Source\SVGImage\SVG\SvgIconBase.cs/#L23" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2020 - 2023 DotNetProjects</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

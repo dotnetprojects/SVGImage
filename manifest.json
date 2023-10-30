@@ -1,0 +1,698 @@
+{
+  "source_base_path": "D:/a/SVGImage/SVGImage/Docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Readme.md",
+      "output": {
+        ".html": {
+          "relative_path": "Readme.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Animation.Animate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Animation.Animate.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Animation.AnimateColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Animation.AnimateColor.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Animation.AnimateMotion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Animation.AnimateMotion.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Animation.AnimateTransform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Animation.AnimateTransform.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Animation.AnimateTransformType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Animation.AnimateTransformType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Animation.AnimationBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Animation.AnimationBase.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Animation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Animation.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.ClipArtElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.ClipArtElement.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.FileLoaders.FileSystemLoader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.FileLoaders.FileSystemLoader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.FileLoaders.IExternalFileLoader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.FileLoaders.IExternalFileLoader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.FileLoaders.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.FileLoaders.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Fill.eFillRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Fill.eFillRule.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Fill.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Fill.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Filters.Filter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Filters.Filter.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Filters.FilterBaseFe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Filters.FilterBaseFe.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Filters.FilterFeGaussianBlur.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Filters.FilterFeGaussianBlur.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Filters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Filters.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.CurrentColorPaintServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.CurrentColorPaintServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.GradientColorPaintServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.GradientColorPaintServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.InheritPaintServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.InheritPaintServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.LinearGradientColorPaintServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.LinearGradientColorPaintServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.PaintServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.PaintServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.PaintServerManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.PaintServerManager.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.PatternPaintServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.PatternPaintServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.RadialGradientColorPaintServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.RadialGradientColorPaintServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.SolidColorPaintServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.SolidColorPaintServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PaintServers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PaintServers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.PathShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.PathShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.SVG.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.SVG.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.SVGImage.eSizeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.SVGImage.eSizeType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.SVGImage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.SVGImage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.SVGRender.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.SVGRender.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.CircleShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.CircleShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.Clip.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.Clip.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.EllipseShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.EllipseShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.Group.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.Group.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.ImageShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.ImageShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.LineShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.LineShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.PolygonShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.PolygonShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.PolylineShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.PolylineShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.RectangleShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.RectangleShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.Shape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.Shape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.UseShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.UseShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Stroke.eLineCap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Stroke.eLineCap.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Stroke.eLineJoin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Stroke.eLineJoin.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Stroke.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Stroke.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.StyleItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.StyleItem.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.SvgIconBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.SvgIconBase.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.SvgIconConverterExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.SvgIconConverterExtension.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.SvgIconExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.SvgIconExtension.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.TextShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.TextShape.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.TextSpan.eElementType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.TextSpan.eElementType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.TextSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.TextSpan.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.TextStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.TextStyle.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Visibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Visibility.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/license.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/license.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html"
+        },
+        ".json": {
+          "relative_path": "articles/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/dotnetprojects.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/dotnetprojects.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/sample.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/sample.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

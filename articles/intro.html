@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Introduction | SVGImage Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Introduction | SVGImage Documentation ">
+      
+      <link rel="icon" href="../images/dotnetprojects.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dotnetprojects/SVGImage/blob/master/Docs\articles\intro.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/dotnetprojects.png" alt="SVGImage">
+            SVGImage
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h2 id="introduction">Introduction</h2>
+
+<p>SVG (Scalable Vector Graphic) is an XML based graphic format.</p>
+<p>This little project started out as a simple <code>SVG</code> to <code>XAML</code> converter. I looked at some simple SVG files and noticed
+the similarity to <code>XAML</code> defined graphic, and decided to write a converter. However, I soon realized that SVG is a
+very complex format, and at the same time, I found no good reason for converting to <code>XAML</code> just to show the image
+on the screen, so instead, I started working on the <code>SVG</code>, <code>SVGRender</code> and the <code>SVGImage</code> classes.</p>
+<ul>
+<li>The <code>SVG</code> class is the class that reads and parses the XML file.</li>
+<li><code>SVGRender</code> is the class that creates the WPF Drawing object based on the information from the SVG class.</li>
+<li><code>SVGImage</code> is the image control. The image control can either
+<ul>
+<li>load the image from a filename <code>SetImage(filename)</code></li>
+<li>or by setting the Drawing object through <code>SetImage(Drawing)</code>,
+which allows multiple controls to share the same drawing instance.</li>
+</ul>
+</li>
+</ul>
+<p>The control only has a couple of properties, <code>SizeType</code> and <code>ImageSource</code>.</p>
+<ul>
+<li><code>SizeType</code> - controls how the image is stretched to fill the control
+<ul>
+<li><code>None</code>: The image is not scaled. The image location is translated so the top left corner of the image bounding box is moved to the top left corner of the image control.</li>
+<li><code>ContentToSizeNoStretch</code>: The image is scaled to fit the control without any stretching. Either X or Y direction will be scaled to fill the entire width or height.</li>
+<li><code>ContentToSizeStretch</code>: The image will be stretched to fill the entire width and height.</li>
+<li><code>SizeToContent</code>: The control will be resized to fit the un-scaled image. If the image is larger than the max size for the control, the control is set to max size and the image is scaled.</li>
+<li><code>ViewBoxToSizeNoStretch</code>: Not the content of the image but its viewbox is scaled to fit the control without any stretching.Either <code>X</code> or <code>Y</code> direction will be scaled to fill the entire width or height.</li>
+</ul>
+</li>
+</ul>
+<p>For <code>None</code> and <code>ContentToSizeNoStretch</code>, the Horizontal/VerticalContentAlignment properties can be used to position the image within the control.</p>
+<ul>
+<li><code>ImageSource</code> - This property is the same as <code>SetImage(drawing)</code>, and is exposed to allow for the source to be set through binding.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dotnetprojects/SVGImage/blob/master/Docs\articles\intro.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2020 - 2023 DotNetProjects</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
