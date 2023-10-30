@@ -2,7 +2,9 @@
 
 namespace SVGImage.SVG.Shapes
 {
-    public class UseShape : Shape
+    using Utils;
+
+    public sealed class UseShape : Shape
     {
         public double X { get; set; }
 
@@ -11,7 +13,8 @@ namespace SVGImage.SVG.Shapes
         public string hRef { get; set; }
 
         public UseShape(SVG svg, XmlNode node) : base(svg, node)
-        { }
+        { 
+        }
 
         protected override void Parse(SVG svg, string name, string value)
         {

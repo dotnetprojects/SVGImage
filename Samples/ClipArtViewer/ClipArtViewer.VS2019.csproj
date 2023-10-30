@@ -1,0 +1,101 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1</TargetFrameworks>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <RootNamespace>ClipArtViewer</RootNamespace>
+    <AssemblyName>ClipArtViewer</AssemblyName>
+    <AppConfig Condition="'$(TargetFramework)' == 'net40'">App.net40.config</AppConfig>
+    <AutoUnifyAssemblyReferences Condition="'$(TargetFramework)' == 'net40'">false</AutoUnifyAssemblyReferences>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>Output\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>Output\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ClipArtViewer.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\SVGImage\DotNetProjects.SVGImage.VS2019.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net40\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net40\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net45\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net45\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net46\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net46\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net47\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net47\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net48\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net48\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\netstandard2.1\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\netcoreapp3.1\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

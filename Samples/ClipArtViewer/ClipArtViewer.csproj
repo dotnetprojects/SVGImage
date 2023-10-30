@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net6.0-windows;net7.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -9,6 +9,7 @@
     <AssemblyName>ClipArtViewer</AssemblyName>
     <AppConfig Condition="'$(TargetFramework)' == 'net40'">App.net40.config</AppConfig>
     <AutoUnifyAssemblyReferences Condition="'$(TargetFramework)' == 'net40'">false</AutoUnifyAssemblyReferences>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -89,20 +90,28 @@
       <HintPath>..\..\Tests\Libs\net48\Notifications.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
-    <Reference Include="ShellFileDialogs">
-      <HintPath>..\..\Tests\Libs\netstandard2.1\ShellFileDialogs.dll</HintPath>
-    </Reference>
-    <Reference Include="Notifications.Wpf">
-      <HintPath>..\..\Tests\Libs\netcoreapp3.0\Notifications.Wpf.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
     <Reference Include="ShellFileDialogs">
       <HintPath>..\..\Tests\Libs\netstandard2.1\ShellFileDialogs.dll</HintPath>
     </Reference>
     <Reference Include="Notifications.Wpf">
       <HintPath>..\..\Tests\Libs\netcoreapp3.1\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0-windows'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net6.0\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net6.0-windows\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0-windows'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net7.0\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net7.0-windows\Notifications.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 using Microsoft.Win32;
@@ -22,8 +23,7 @@ using ICSharpCode.AvalonEdit.Search;
 using ICSharpCode.AvalonEdit.Indentation;
 
 using SVGImage.SVG;
-using DotNetProjects.SVGImage.SVG.FileLoaders;
-using System.Windows.Markup;
+using SVGImage.SVG.FileLoaders;
 
 namespace SvgTestBox
 {

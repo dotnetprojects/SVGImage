@@ -2,9 +2,20 @@
 
 namespace SVGImage.SVG.Shapes
 {
-    public class RectangleShape : Shape
+    using Utils;
+
+    public sealed class RectangleShape : Shape
     {
         private static Fill DefaultFill = null;
+
+        public RectangleShape(SVG svg, XmlNode node) : base(svg, node)
+        {
+            if (DefaultFill == null)
+            {
+                DefaultFill = new Fill(svg);
+                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
+            }
+        }
 
         public override Fill Fill
         {
@@ -27,15 +38,6 @@ namespace SVGImage.SVG.Shapes
         public double RX { get; set; }
 
         public double RY { get; set; }
-
-        public RectangleShape(SVG svg, XmlNode node) : base(svg, node)
-        {
-            if (DefaultFill == null)
-            {
-                DefaultFill = new Fill(svg);
-                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
-            }
-        }
 
         protected override void Parse(SVG svg, string name, string value)
         {

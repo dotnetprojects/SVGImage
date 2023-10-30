@@ -1,12 +1,12 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-using SVGImage.SVG.PaintServer;
-using SVGImage.SVG.Shapes;
-
 namespace SVGImage.SVG
 {
-    public class Stroke
+    using PaintServers;
+    using Shapes;
+
+    public sealed class Stroke
     {
         public enum eLineCap
         {

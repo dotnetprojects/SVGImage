@@ -12,10 +12,10 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Resources;
 
-using DotNetProjects.SVGImage.SVG.FileLoaders;
-
 namespace SVGImage.SVG
 {
+    using FileLoaders;
+
     /// <summary>
     /// This is an <see langword="abstract"/> implementation of a markup extension that enables the creation
     /// of <see cref="DrawingImage"/> from SVG sources.

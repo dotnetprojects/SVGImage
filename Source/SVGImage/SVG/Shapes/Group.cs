@@ -1,17 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
-using DotNetProjects.SVGImage.SVG.Animation;
-using DotNetProjects.SVGImage.SVG.Shapes.Filter;
 
 namespace SVGImage.SVG.Shapes
 {
+    using Animation;
+    using Filters;
+    using Utils;
+
     public class Group : Shape
     {
         private List<Shape> m_elements = new List<Shape>();
-
-        public IList<Shape> Elements => this.m_elements.AsReadOnly();
-
-        public bool IsSwitch { get; set; }
 
         public Group(SVG svg, XmlNode node, Shape parent) : base(svg, node)
         {
@@ -33,6 +31,10 @@ namespace SVGImage.SVG.Shapes
                 if (shape != null) shape.Parent = this;
             }
         }
+
+        public IList<Shape> Elements => this.m_elements.AsReadOnly();
+
+        public bool IsSwitch { get; set; }
 
         public static Shape AddToList(SVG svg, List<Shape> list, XmlNode childnode, Shape parent)
         {

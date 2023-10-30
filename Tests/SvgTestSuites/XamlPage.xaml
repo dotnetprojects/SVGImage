@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-    xmlns:svgc="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+    xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
     Title="XamlPage" mc:Ignorable="d">
     <DockPanel LastChildFill="True">
         <ToolBar DockPanel.Dock="Top" Height="36">

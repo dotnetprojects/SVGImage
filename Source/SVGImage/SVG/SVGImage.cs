@@ -11,11 +11,10 @@ using System.Windows.Markup;
 using System.Windows.Controls;
 using System.Windows.Resources;
 
-using DotNetProjects.SVGImage.SVG.FileLoaders;
-using System.Runtime.CompilerServices;
-
 namespace SVGImage.SVG
 {
+    using FileLoaders;
+
     /// <summary>
     /// This is the SVG image view control. 
     /// The image control can either load the image from a file <see cref="SetImage(string)"/> or by 
@@ -95,9 +94,7 @@ namespace SVGImage.SVG
                    FrameworkPropertyMetadataOptions.AffectsRender, OverrideStrokeWidthPropertyChanged));
 
         public static readonly DependencyProperty OverrideColorProperty =
-            DependencyProperty.Register("OverrideColor",
-                typeof(Color?),
-                typeof(SVGImage),
+            DependencyProperty.Register("OverrideColor", typeof(Color?), typeof(SVGImage),
                 new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.AffectsRender, OverrideColorPropertyChanged));
 
         public static readonly DependencyProperty CustomBrushesProperty = DependencyProperty.Register(nameof(CustomBrushes),
@@ -200,7 +197,6 @@ namespace SVGImage.SVG
         /// This is the same as the <see cref="Source"/> property, and added for consistency.
         /// </remarks>
         /// <seealso cref="UriSource"/>
-        /// <seealso cref="StreamSource"/>
         public Uri UriSource
         {
             get {
@@ -408,6 +404,44 @@ namespace SVGImage.SVG
             return result;
         }
 
+        bool EnsureView(Rect r)
+        {
+            var drawingGroup = this.m_drawing as DrawingGroup;
+            if (drawingGroup == null)
+            {
+                return false;
+            }
+
+            if (r.X < 0 || r.Y < 0)
+            {
+                drawingGroup = drawingGroup.Clone();
+                drawingGroup.Transform = new TranslateTransform(-r.X, -r.Y);
+                if (this.SVG != null)
+                {
+                    var size = this.SVG.Size;
+                    if (size.Width != 300 && size.Height != 150)
+                    {
+                        var width = size.Width;
+                        double height = size.Height;
+
+                        var bounds = drawingGroup.Bounds;
+                        var scaleX = width / bounds.Width;
+                        var scaleY = height / bounds.Height;
+                        var matrix = new Matrix();
+                        matrix.Translate(-bounds.X, -bounds.Y);
+                        matrix.Scale(scaleX, scaleY);
+
+                        drawingGroup.Transform = new MatrixTransform(matrix);
+                    }
+                }
+
+                this.m_drawing = drawingGroup;
+
+                return true;
+            }
+            return false;
+        }
+
         void RecalcImage()
         {
             if (this.m_drawing == null)
@@ -416,6 +450,11 @@ namespace SVGImage.SVG
             Rect r = this.m_drawing.Bounds;
             if (this.SizeType == eSizeType.None)
             {
+                if (this.EnsureView(r))
+                {
+                    r = this.m_drawing.Bounds;
+                }
+
                 this.m_scaleTransform.ScaleX = 1;
                 this.m_scaleTransform.ScaleY = 1;
                 switch (this.HorizontalContentAlignment)
@@ -531,7 +570,7 @@ namespace SVGImage.SVG
 
         void SizeToViewBoxNoStretch(HorizontalAlignment hAlignment, VerticalAlignment vAlignment)
         {
-            if (!this.SVG.ViewBox.HasValue)
+            if (this.SVG == null || !this.SVG.ViewBox.HasValue)
             {
                 SizeToContentNoStretch(hAlignment, vAlignment);
                 return;
@@ -803,7 +842,8 @@ namespace SVGImage.SVG
 
         static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            StreamResourceInfo resource = e.NewValue != null ? Application.GetResourceStream(new Uri(e.NewValue.ToString(), UriKind.Relative)) : null;
+            var sourceUri = new Uri(e.NewValue.ToString(), UriKind.Relative);
+            var resource = e.NewValue != null ? Application.GetResourceStream(sourceUri) : null;
             ((SVGImage)d).SetImage(resource != null ? resource.Stream : null);
         }
 
@@ -811,7 +851,8 @@ namespace SVGImage.SVG
         {
             if (e.NewValue != null)
             {
-                ((SVGImage)d).SetImage(new FileStream(e.NewValue.ToString(), FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+                var stream = new FileStream(e.NewValue.ToString(), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                ((SVGImage)d).SetImage(stream);
             }
             else
             {
@@ -852,7 +893,7 @@ namespace SVGImage.SVG
                 {
                     if (svgImage._render.CustomBrushes != null)
                     {
-                        Dictionary<string, Brush> newCustomBrushes = new Dictionary<string, Brush>(svgImage._render.CustomBrushes);
+                        var newCustomBrushes = new Dictionary<string, Brush>(svgImage._render.CustomBrushes);
                         foreach (var brush in newBrushes)
                         {
                             newCustomBrushes[brush.Key] = brush.Value;

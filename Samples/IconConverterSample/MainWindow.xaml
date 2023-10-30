@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+        xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
         xmlns:local="clr-namespace:IconConverterSample"
         mc:Ignorable="d"
-        Title="SharpVectors: SvgImageBinding Sample (SvgIconConverter Demo) - C#" Height="720" Width="960" 
+        Title="SVGImage: SvgImageBinding Sample (SvgIconConverter Demo) - C#" Height="720" Width="960" 
         Background="#444444" WindowStartupLocation="CenterScreen" Icon="IconConverterSample.ico">
     <DockPanel LastChildFill="True" Margin="4">
         <TabControl TabStripPlacement="Top" FontSize="14" Margin="6" Grid.Row="0" Grid.Column="2" Background="#444444">
@@ -38,7 +38,7 @@
             <TabItem Name="tabSingle" Background="#444444">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="3">
-                        <Image Source="{Binding Converter={svg1:SvgIconConverter AppName=IconConverterSample}, ConverterParameter=/Resources/Binding.svg, Mode=OneWay}" Width="24" Height="24"/>
+                        <Image Source="{Binding Converter={svgc:SvgIconConverter AppName=IconConverterSample}, ConverterParameter=/Resources/Binding.svg, Mode=OneWay}" Width="24" Height="24"/>
                         <TextBlock Text="Binding Demo" Margin="6,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
@@ -48,7 +48,7 @@
             <TabItem Name="tabMultiple" Background="#444444">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="3">
-                        <Image Source="{Binding Converter={svg1:SvgIconConverter AppName=IconConverterSample}, ConverterParameter=/Resources/ListView.svg, Mode=OneWay}" Width="24" Height="24"/>
+                        <Image Source="{Binding Converter={svgc:SvgIconConverter AppName=IconConverterSample}, ConverterParameter=/Resources/ListView.svg, Mode=OneWay}" Width="24" Height="24"/>
                         <TextBlock Text="Icon Viewer" Margin="6,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
@@ -58,7 +58,7 @@
             <TabItem Name="tabOther" Background="#444444">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="3">
-                        <Image Source="{Binding Converter={svg1:SvgIconConverter AppName=IconConverterSample}, ConverterParameter=/Resources/ListView.svg, Mode=OneWay}" Width="24" Height="24"/>
+                        <Image Source="{Binding Converter={svgc:SvgIconConverter AppName=IconConverterSample}, ConverterParameter=/Resources/ListView.svg, Mode=OneWay}" Width="24" Height="24"/>
                         <TextBlock Text="Ink Canvas" Margin="6,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>

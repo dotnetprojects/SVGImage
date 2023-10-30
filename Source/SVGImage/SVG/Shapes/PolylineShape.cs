@@ -4,15 +4,15 @@ using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    public class PolylineShape : Shape
-    {
-        public Point[] Points { get; private set; }
+    using Utils;
 
+    public sealed class PolylineShape : Shape
+    {
         public PolylineShape(SVG svg, XmlNode node)
             : base(svg, node)
         {
             string points = XmlUtil.AttrValue(node, SVGTags.sPoints, string.Empty);
-            ShapeUtil.StringSplitter split = new ShapeUtil.StringSplitter(points);
+            StringSplitter split = new StringSplitter(points);
             List<Point> list = new List<Point>();
             while (split.More)
             {
@@ -20,5 +20,7 @@ namespace SVGImage.SVG.Shapes
             }
             this.Points = list.ToArray();
         }
+
+        public Point[] Points { get; private set; }
     }
 }

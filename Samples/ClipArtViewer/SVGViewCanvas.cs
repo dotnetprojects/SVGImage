@@ -218,7 +218,6 @@ namespace ClipArtViewer
             dg.Children.Add(gd);
 
             return dg;
-
         }
 
         static double InchToScreen(double inchValue)

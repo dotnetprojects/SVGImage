@@ -4,21 +4,11 @@ using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    public class PolygonShape : Shape
+    using Utils;
+
+    public sealed class PolygonShape : Shape
     {
         private static Fill DefaultFill = null;
-
-        public override Fill Fill
-        {
-            get
-            {
-                Fill f = base.Fill;
-                if (f == null) f = DefaultFill;
-                return f;
-            }
-        }
-
-        public Point[] Points { get; private set; }
 
         public PolygonShape(SVG svg, XmlNode node)
             : base(svg, node)
@@ -30,13 +20,25 @@ namespace SVGImage.SVG.Shapes
             }
 
             string points = XmlUtil.AttrValue(node, SVGTags.sPoints, string.Empty);
-            ShapeUtil.StringSplitter split = new ShapeUtil.StringSplitter(points);
+            var split = new StringSplitter(points);
             List<Point> list = new List<Point>();
             while (split.More)
             {
                 list.Add(split.ReadNextPoint());
             }
             this.Points = list.ToArray();
+        }
+
+        public Point[] Points { get; private set; }
+
+        public override Fill Fill
+        {
+            get
+            {
+                Fill f = base.Fill;
+                if (f == null) f = DefaultFill;
+                return f;
+            }
         }
     }
 }

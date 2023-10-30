@@ -1,6 +1,6 @@
-﻿namespace DotNetProjects.SVGImage.SVG
+﻿namespace SVGImage.SVG
 {
-    public static class SVGFeatures
+    internal static class SVGFeatures
     {
         public static readonly string[] Features = new[]
         {

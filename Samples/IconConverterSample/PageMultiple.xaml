@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:IconConverterSample"
-      xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+      xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageMultiple">
@@ -48,7 +48,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="8,8,8,8" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <Image Source="{Binding Path=ImageUri, Converter={svg1:SvgIconConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="96" Height="96" />
+                        <Image Source="{Binding Path=ImageUri, Converter={svgc:SvgIconConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="96" Height="96" />
                         <TextBlock Text="{Binding ImageTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="96" />
                     </StackPanel>
                 </DataTemplate>

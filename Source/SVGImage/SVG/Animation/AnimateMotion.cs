@@ -1,11 +1,12 @@
 ﻿using System.Xml;
-using SVGImage.SVG.Shapes;
 
-namespace DotNetProjects.SVGImage.SVG.Animation
+namespace SVGImage.SVG.Animation
 {
-    public class AnimateMotion : AnimationBase
+    using Shapes;
+
+    public sealed class AnimateMotion : AnimationBase
     {
-        public AnimateMotion(global::SVGImage.SVG.SVG svg, XmlNode node, Shape parent)
+        public AnimateMotion(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)
         {
         }

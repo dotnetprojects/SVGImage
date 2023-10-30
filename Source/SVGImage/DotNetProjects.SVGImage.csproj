@@ -1,31 +1,48 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net6.0-windows;net7.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <Description>DotNetProjects.SVGImage</Description>
+    <RootNamespace>SVGImage.SVG</RootNamespace>	  
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>DotNetProjects.SVGImage</PackageId>
     <Authors>DotNetProjects</Authors>
     <Company>DotNetProjects</Company>
     <Product>DotNetProjects.SVGImage</Product>
-    <Copyright>2020 DotNetProjects</Copyright>
+    <Copyright>2020-2023 DotNetProjects</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
-    <Version>3.0.0</Version>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <FileVersion>5.0.0.0</FileVersion>
+    <Version>5.0.0</Version>
     <OutputType>Library</OutputType>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
+    
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryUrl>https://github.com/dotnetprojects/SVGImage.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/dotnetprojects/SVGImage</PackageProjectUrl>
+    <PackageIcon>images\dotnetprojects.png</PackageIcon>
+    <PackageTags>svg wpf svg-icons svg-to-png svg-to-xaml svgimage svgimage-control</PackageTags>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+  </PropertyGroup>	
+    
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+    
   <PropertyGroup>
     <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">$(DefineConstants);DOTNET45;NETFULL</DefineConstants>
@@ -33,5 +50,26 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">$(DefineConstants);DOTNET48;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net6'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
+	<DefineConstants Condition="$(TargetFramework.StartsWith('net7'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
   </PropertyGroup>
+    
+  <ItemGroup>
+      <None Include="..\..\Docs\Readme.md">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+      </None>	  
+  </ItemGroup>
+    
+  <ItemGroup>
+      <None Include="..\..\Docs\images\dotnetprojects.png">
+          <Pack>True</Pack>
+          <PackagePath>images</PackagePath>
+      </None>	  
+  </ItemGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+  </ItemGroup>
+
 </Project>

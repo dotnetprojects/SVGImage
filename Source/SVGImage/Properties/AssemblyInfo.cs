@@ -22,10 +22,9 @@ using System.Windows.Markup;
 
 [assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG")]
 [assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG.Shapes")]
-[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "DotNetProjects.SVGImage.SVG.Shapes.Filter")]
-[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG.PaintServer")]
-[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "DotNetProjects.SVGImage.SVG.FileLoaders")]
-[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG")]
-[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "DotNetProjects.SVGImage.SVG.Animation")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG.Filters")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG.PaintServers")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG.FileLoaders")]
+[assembly: XmlnsDefinition("https://github.com/dotnetprojects/SVGImage", "SVGImage.SVG.Animation")]
 
 [assembly: XmlnsPrefix("https://github.com/dotnetprojects/SVGImage", "svg")]

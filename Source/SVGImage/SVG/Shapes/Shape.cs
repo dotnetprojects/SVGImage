@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Windows.Media;
 using System.Xml;
 using System.Windows;
-using DotNetProjects.SVGImage.SVG.Shapes.Filter;
 
 namespace SVGImage.SVG.Shapes
 {
+    using Utils;
+    using Filters;
+
     public class Shape : ClipArtElement
     {
         protected Fill m_fill;
@@ -19,6 +21,43 @@ namespace SVGImage.SVG.Shapes
 
         internal Clip m_clip = null;
 
+        internal Geometry geometryElement;
+
+        public bool Display = true;
+
+        //Used during render
+        internal Shape RealParent;
+        private double m_opacity;
+
+        public Shape(SVG svg, XmlNode node) : this(svg, node, null)
+        {
+        }
+
+        public Shape(SVG svg, XmlNode node, Shape parent) : base(node)
+        {
+            this.Opacity = 1;
+            this.Parent = parent;
+            this.ParseAtStart(svg, node);
+            if (node != null)
+            {
+                foreach (XmlAttribute attr in node.Attributes)
+                    this.Parse(svg, attr.Name, attr.Value);
+            }
+            ParseLocalStyle(svg);
+        }
+
+        public Shape(SVG svg, List<StyleItem> attrs, Shape parent) : base(null)
+        {
+            this.Opacity = 1;
+            this.Parent = parent;
+            if (attrs != null)
+            {
+                foreach (StyleItem attr in attrs)
+                    this.Parse(svg, attr.Name, attr.Value);
+            }
+            ParseLocalStyle(svg);
+        }
+
         internal Clip Clip
         {
             get
@@ -27,8 +66,6 @@ namespace SVGImage.SVG.Shapes
             }
         }
 
-        internal Geometry geometryElement;
-
         public virtual string PaintServerKey { get; set; }
 
         public string RequiredExtensions { get; set; }
@@ -36,8 +73,6 @@ namespace SVGImage.SVG.Shapes
         public string RequiredFeatures { get; set; }
 
         public Visibility Visibility { get; set; }
-
-        public bool Display = true;
 
         public virtual Stroke Stroke
         {
@@ -100,42 +135,9 @@ namespace SVGImage.SVG.Shapes
 
         public virtual Transform Transform { get; private set; }
 
-        internal virtual Filter Filter { get; private set; }
-
-        //Used during render
-        internal Shape RealParent;
-        private double m_opacity;
-
         public Shape Parent { get; set; }
 
-        public Shape(SVG svg, XmlNode node) : this(svg, node, null)
-        {
-        }
-
-        public Shape(SVG svg, XmlNode node, Shape parent) : base(node)
-        {
-            this.Opacity = 1;
-            this.Parent = parent;
-            this.ParseAtStart(svg, node);
-            if (node != null)
-            {
-                foreach (XmlAttribute attr in node.Attributes)
-                    this.Parse(svg, attr.Name, attr.Value);
-            }
-            ParseLocalStyle(svg);
-        }
-
-        public Shape(SVG svg, List<ShapeUtil.Attribute> attrs, Shape parent) : base(null)
-        {
-            this.Opacity = 1;
-            this.Parent = parent;
-            if (attrs != null)
-            {
-                foreach (ShapeUtil.Attribute attr in attrs)
-                    this.Parse(svg, attr.Name, attr.Value);
-            }
-            ParseLocalStyle(svg);
-        }
+        internal virtual Filter Filter { get; private set; }
 
         protected virtual void ParseAtStart(SVG svg, XmlNode node)
         {
@@ -169,7 +171,7 @@ namespace SVGImage.SVG.Shapes
         protected virtual void ParseLocalStyle(SVG svg)
         {
             if (!string.IsNullOrEmpty(this.m_localStyle))
-                foreach (ShapeUtil.Attribute item in XmlUtil.SplitStyle(svg, this.m_localStyle))
+                foreach (StyleItem item in StyleParser.SplitStyle(svg, this.m_localStyle))
                     this.Parse(svg, item.Name, item.Value);
         }
 
@@ -229,7 +231,7 @@ namespace SVGImage.SVG.Shapes
                     this.GetStroke(svg).StrokeArray = null;
                     return;
                 }
-                ShapeUtil.StringSplitter sp = new ShapeUtil.StringSplitter(value);
+                StringSplitter sp = new StringSplitter(value);
                 List<double> a = new List<double>();
                 while (sp.More)
                 {
@@ -321,7 +323,7 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sFontSize)
             {
-                this.GetTextStyle(svg).FontSize = XmlUtil.AttrValue(new ShapeUtil.Attribute(name, value));
+                this.GetTextStyle(svg).FontSize = XmlUtil.AttrValue(new StyleItem(name, value));
                 return;
             }
             if (name == SVGTags.sFontWeight)
@@ -355,17 +357,17 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == "word-spacing")
             {
-                this.GetTextStyle(svg).WordSpacing = XmlUtil.AttrValue(new ShapeUtil.Attribute(name, value));
+                this.GetTextStyle(svg).WordSpacing = XmlUtil.AttrValue(new StyleItem(name, value));
                 return;
             }
             if (name == "letter-spacing")
             {
-                this.GetTextStyle(svg).LetterSpacing = XmlUtil.AttrValue(new ShapeUtil.Attribute(name, value));
+                this.GetTextStyle(svg).LetterSpacing = XmlUtil.AttrValue(new StyleItem(name, value));
                 return;
             }
             if (name == "baseline-shift")
             {
-                //GetTextStyle(svg).BaseLineShift = XmlUtil.AttrValue(new ShapeUtil.Attribute(name, value));
+                //GetTextStyle(svg).BaseLineShift = XmlUtil.AttrValue(new Attribute(name, value));
                 this.GetTextStyle(svg).BaseLineShift = value;
                 return;
             }

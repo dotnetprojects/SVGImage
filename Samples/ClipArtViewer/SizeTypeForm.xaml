@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:svgc="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+             xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
              xmlns:local="clr-namespace:ClipArtViewer"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid Grid.Column="1" Grid.Row="1" ShowGridLines="True">
             <Grid.RowDefinitions>
+                <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
@@ -69,6 +70,30 @@
                             SizeType="SizeToContent" Background="#B4F5F5DC"></svgc:SVGImage>
                 </StackPanel>
 
+            </Grid>
+            
+            <Grid Grid.Row="2" Grid.Column="0" Margin="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center">None</Label>
+                <svgc:SVGImage x:Name="m_canvas6" Grid.Row="1"
+                              Width="140" Height="95"
+                              SizeType="None"
+                              Padding="2" BorderThickness="0.5" BorderBrush="BlueViolet" ></svgc:SVGImage>
+            </Grid>
+            
+            <Grid Grid.Row="2" Grid.Column="1" Margin="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalAlignment="Center">ViewBoxToSizeNoStretch</Label>
+                <svgc:SVGImage x:Name="m_canvas7" Grid.Row="1"
+                              Width="140" Height="95"
+                              SizeType="ViewBoxToSizeNoStretch"
+                              Padding="2" BorderThickness="0.5" BorderBrush="BlueViolet" ></svgc:SVGImage>
             </Grid>
             
         </Grid>

@@ -4,7 +4,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-    xmlns:svgc="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
+    xmlns:svgc="https://github.com/dotnetprojects/SVGImage"
     xmlns:local="clr-namespace:SvgTestBox"
     mc:Ignorable="d" 
     Title="SvgPage" Background="White" d:DesignHeight="450" d:DesignWidth="800"

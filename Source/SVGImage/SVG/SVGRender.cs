@@ -8,14 +8,12 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-using DotNetProjects.SVGImage.SVG;
-using DotNetProjects.SVGImage.SVG.Animation;
-using DotNetProjects.SVGImage.SVG.FileLoaders;
-
-using SVGImage.SVG.Shapes;
-
 namespace SVGImage.SVG
 {
+    using Animation;
+    using Shapes;
+    using FileLoaders;
+
     /// <summary>
     /// This is the class that creates the WPF Drawing object based on the information from the <see cref="SVG"/> class.
     /// </summary>
@@ -125,7 +123,8 @@ namespace SVGImage.SVG
                 }
                 var brush = stroke.StrokeBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
-                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
+                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
+                        OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 item.Pen = new Pen(brush, stroke.Width);
                 if (stroke.StrokeArray != null)
                 {
@@ -168,7 +167,8 @@ namespace SVGImage.SVG
             {
                 item.Brush = Brushes.Black;
                 if (OverrideColor != null)
-                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
+                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
+                        OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
                 g.FillRule = FillRule.Nonzero;
                 g.Children.Add(geometry);
@@ -178,7 +178,8 @@ namespace SVGImage.SVG
             {
                 item.Brush = shape.Fill.FillBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
-                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
+                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
+                        OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
                 g.FillRule = FillRule.Nonzero;
                 if (shape.Fill.FillRule == Fill.eFillRule.evenodd) g.FillRule = FillRule.EvenOdd;
@@ -219,7 +220,8 @@ namespace SVGImage.SVG
                 item.Pen = new Pen(Brushes.LightGray, size / 2);
                 g.Children.Add(new LineGeometry(this.Start, this.Ctrl));
 
-                g.Children.Add(new RectangleGeometry(new Rect(this.Start.X - size / 2, this.Start.Y - size / 2, size, size)));
+                var rect = new Rect(this.Start.X - size / 2, this.Start.Y - size / 2, size, size);
+                g.Children.Add(new RectangleGeometry(rect));
                 g.Children.Add(new EllipseGeometry(this.Ctrl, size, size));
 
                 item.Geometry = g;
@@ -300,7 +302,8 @@ namespace SVGImage.SVG
                             else if (animate.AttributeName == "cx")
                             {
                                 var animation = new PointAnimationUsingKeyFrames() { Duration = animate.Duration };
-                                foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(new Point(double.Parse(_), ((EllipseGeometry)g).Center.Y))))
+                                foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(
+                                    new Point(double.Parse(_), ((EllipseGeometry)g).Center.Y))))
                                 {
                                     animation.KeyFrames.Add(d);
                                 }
@@ -310,7 +313,8 @@ namespace SVGImage.SVG
                             else if (animate.AttributeName == "cy")
                             {
                                 var animation = new PointAnimationUsingKeyFrames() { Duration = animate.Duration };
-                                foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(new Point(((EllipseGeometry)g).Center.X, double.Parse(_)))))
+                                foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(
+                                    new Point(((EllipseGeometry)g).Center.X, double.Parse(_)))))
                                 {
                                     animation.KeyFrames.Add(d);
                                 }
@@ -341,7 +345,9 @@ namespace SVGImage.SVG
                             subgroup.ClipGeometry = currentUsedShape.Clip.ClipGeometry;
                         subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
                         if (useshape.Transform != null)
-                            subgroup.Transform = new TransformGroup() {Children = new TransformCollection() { subgroup.Transform, useshape.Transform } };
+                            subgroup.Transform = new TransformGroup() {
+                                Children = new TransformCollection() { subgroup.Transform, useshape.Transform } 
+                            };
                         grp.Children.Add(subgroup);
                         currentUsedShape.Parent = oldparent;
                     }
@@ -349,7 +355,7 @@ namespace SVGImage.SVG
                 }
                 if (shape is Clip)
                 {
-                    DrawingGroup subgroup = this.LoadGroup((shape as Clip).Elements, null, false);
+                    var subgroup = this.LoadGroup((shape as Clip).Elements, null, false);
                     if (shape.Transform != null)
                         subgroup.Transform = shape.Transform;
                     grp.Children.Add(subgroup);
@@ -357,14 +363,13 @@ namespace SVGImage.SVG
                 }
                 if (shape is Group groupShape)
                 {
-                    DrawingGroup subgroup = this.LoadGroup((shape as Group).Elements, null, groupShape.IsSwitch);
+                    var subgroup = this.LoadGroup((shape as Group).Elements, null, groupShape.IsSwitch);
                     AddDrawingToGroup(grp, shape, subgroup);
                     continue;
                 }
                 if (shape is RectangleShape)
                 {
                     RectangleShape r = shape as RectangleShape;
-                    //RectangleGeometry rect = new RectangleGeometry(new Rect(r.X < 0 ? 0 : r.X, r.Y < 0 ? 0 : r.Y, r.X < 0 ? r.Width + r.X : r.Width, r.Y < 0 ? r.Height + r.Y : r.Height));
                     double dx     = r.X;
                     double dy     = r.Y;
                     double width  = r.Width;
@@ -384,7 +389,7 @@ namespace SVGImage.SVG
                         ry = rx;
                     }
 
-                    RectangleGeometry rect = new RectangleGeometry(new Rect(dx, dy, width, height), rx, ry);
+                    var rect = new RectangleGeometry(new Rect(dx, dy, width, height), rx, ry);
                     var di = this.NewDrawingItem(shape, rect);
                     AddDrawingToGroup(grp, shape, di);
                     continue;
@@ -448,7 +453,7 @@ namespace SVGImage.SVG
                 if (shape is ImageShape)
                 {
                     ImageShape image = shape as ImageShape;
-                    ImageDrawing i = new ImageDrawing(image.ImageSource, new Rect(image.X, image.Y, image.Width, image.Height));
+                    var i = new ImageDrawing(image.ImageSource, new Rect(image.X, image.Y, image.Width, image.Height));
                     AddDrawingToGroup(grp, shape, i);
                     continue;
                 }
@@ -459,7 +464,7 @@ namespace SVGImage.SVG
                     {
                         foreach (Geometry gm in gp.Children)
                         {
-                            TextShape.TSpan.Element tspan = TextRender.GetElement(gm);
+                            TextSpan tspan = TextRender.GetElement(gm);
                             if (tspan != null)
                             {
                                 var di = this.NewDrawingItem(tspan, gm);

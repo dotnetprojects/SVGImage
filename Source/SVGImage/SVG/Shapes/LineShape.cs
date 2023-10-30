@@ -3,12 +3,10 @@ using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    public class LineShape : Shape
+    using Utils;
+
+    public sealed class LineShape : Shape
     {
-        public Point P1 { get; private set; }
-
-        public Point P2 { get; private set; }
-
         public LineShape(SVG svg, XmlNode node) : base(svg, node)
         {
             double x1 = XmlUtil.AttrValue(node, "x1", 0, svg.Size.Width);
@@ -18,5 +16,9 @@ namespace SVGImage.SVG.Shapes
             this.P1 = new Point(x1, y1);
             this.P2 = new Point(x2, y2);
         }
+
+        public Point P1 { get; private set; }
+
+        public Point P2 { get; private set; }
     }
 }
