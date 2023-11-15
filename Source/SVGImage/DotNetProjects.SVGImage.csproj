@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net6.0-windows;net7.0-windows</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <Description>DotNetProjects.SVGImage</Description>
     <RootNamespace>SVGImage.SVG</RootNamespace>	  
@@ -41,6 +41,7 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>1591</NoWarn>
   </PropertyGroup>
     
   <PropertyGroup>
@@ -52,6 +53,7 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net6'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
 	<DefineConstants Condition="$(TargetFramework.StartsWith('net7'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
+	<DefineConstants Condition="$(TargetFramework.StartsWith('net8'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
   </PropertyGroup>
     
   <ItemGroup>

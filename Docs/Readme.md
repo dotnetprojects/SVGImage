@@ -19,7 +19,7 @@ The SVGImage control library targets the following frameworks
 * .NET Framework, Version 4.7
 * .NET Framework, Version 4.8
 * .NET Core, Version 3.1
-* .NET 6 ~ 7
+* .NET 6 ~ 8
 
 ## License
 The SVGImage control library is relicensed under [MIT License](https://github.com/dotnetprojects/SVGImage/blob/master/LICENSE),
