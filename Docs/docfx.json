@@ -8,7 +8,7 @@
           ],
           "src": "../Source/",
           "properties": {
-            "TargetFramework": "netcoreapp3.1"
+            "TargetFramework": "net7.0"
           }          
         }
       ],
