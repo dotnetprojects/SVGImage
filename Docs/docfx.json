@@ -8,7 +8,7 @@
           ],
           "src": "../Source/",
           "properties": {
-            "TargetFramework": "net7.0"
+            "TargetFramework": "net7.0-windows"
           }          
         }
       ],
