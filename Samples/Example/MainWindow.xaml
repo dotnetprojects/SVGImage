@@ -107,8 +107,7 @@
                 <svg1:SVGImage Source="/Example;component/Images/3.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/4.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/5.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
-                <svg1:SVGImage Source="/Example;component/Images/rect.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" OverrideColor="Black" x:Name="OverrideColorTest" MouseDoubleClick="SVGImage_MouseDoubleClick" />
-                <svg1:SVGImage Source="/Example;component/Images/rect.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" OverrideStrokeColor="Yellow" x:Name="OverrideStrokeColorTest" MouseDoubleClick="SVGImage_StrokeColor_MouseDoubleClick" />
+                <svg1:SVGImage Source="/Example;component/Images/2.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" x:Name="OverrideColorTest" MouseDoubleClick="SVGImage_MouseDoubleClick" />
             </UniformGrid>
         </TabItem>
         <TabItem Header="Animation/Clipping" Height="40" Width="245" x:Name="tabAnimation" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
