@@ -150,11 +150,11 @@ namespace Example
                 System.Windows.Media.Colors.Black;
         }
 
-        private void SVGImage_Stroke_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void SVGImage_StrokeColor_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var rnd = new Random().Next(0, 3);
 
-            OverrideStrokeTest.OverrideStrokeColor =
+            OverrideStrokeColorTest.OverrideStrokeColor =
                 rnd == 0 ? System.Windows.Media.Colors.White :
                 rnd == 1 ? System.Windows.Media.Colors.Magenta :
                 System.Windows.Media.Colors.Black;
