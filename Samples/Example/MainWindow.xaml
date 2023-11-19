@@ -92,7 +92,7 @@
     <TabControl Margin="6" x:Name="tabControl" Style="{DynamicResource TabControl.Style.TopTabStripPlacement}">
         <TabItem Header="SVG Rendering" Height="40" Width="245" x:Name="tabSizeType" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
             <UniformGrid Background="Wheat" Columns="4" Rows="4">
-                <svg1:SVGImage OverrideFill="Red" OverrideStroke="Yellow" Source="/Example;component/Images/171.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
+                <svg1:SVGImage Source="/Example;component/Images/171.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/6.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/acid1.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/bb.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
@@ -107,8 +107,8 @@
                 <svg1:SVGImage Source="/Example;component/Images/3.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/4.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/5.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
-                <svg1:SVGImage Source="/Example;component/Images/rect.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" OverrideFill="Black" x:Name="OverrideFillTest" MouseDoubleClick="SVGImage_Fill_MouseDoubleClick" />
-                <svg1:SVGImage Source="/Example;component/Images/rect.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" OverrideStroke="Black" x:Name="OverrideStrokeTest" MouseDoubleClick="SVGImage_Stroke_MouseDoubleClick" />
+                <svg1:SVGImage Source="/Example;component/Images/rect.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" OverrideColor="Black" x:Name="OverrideColorTest" MouseDoubleClick="SVGImage_MouseDoubleClick" />
+                <svg1:SVGImage Source="/Example;component/Images/rect.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" OverrideStrokeColor="Black" x:Name="OverrideStrokeTest" MouseDoubleClick="SVGImage_Stroke_MouseDoubleClick" />
             </UniformGrid>
         </TabItem>
         <TabItem Header="Animation/Clipping" Height="40" Width="245" x:Name="tabAnimation" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">

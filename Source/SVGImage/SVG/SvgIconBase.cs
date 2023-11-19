@@ -45,7 +45,7 @@ namespace SVGImage.SVG
 
         #region Public Properties        
 
-        public Color? OverrideFill { get; set; }
+        public Color? OverrideColor { get; set; }
         public Color? OverrideBrush { get; set; }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace SVGImage.SVG
                 //case "ftp":
                 case "https":
                 case "http":
-                    using (FileSvgReader reader = new FileSvgReader(this.OverrideFill, this.OverrideBrush))
+                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
                     {
                         DrawingGroup drawGroup = reader.Read(svgSource);
 
@@ -172,7 +172,7 @@ namespace SVGImage.SVG
                             {
                                 using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
                                 {
-                                    using (FileSvgReader reader = new FileSvgReader(this.OverrideFill, this.OverrideBrush))
+                                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
                                     {
                                         DrawingGroup drawGroup = reader.Read(zipStream);
 
@@ -188,7 +188,7 @@ namespace SVGImage.SVG
                         {
                             using (svgStream)
                             {
-                                using (FileSvgReader reader = new FileSvgReader(this.OverrideFill, this.OverrideBrush))
+                                using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
                                 {
                                     DrawingGroup drawGroup = reader.Read(svgStream);
 
@@ -224,7 +224,7 @@ namespace SVGImage.SVG
                             {
                                 using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
                                 {
-                                    using (var reader = new FileSvgReader(this.OverrideFill, this.OverrideBrush))
+                                    using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
                                     {
                                         DrawingGroup drawGroup = reader.Read(zipStream);
                                         if (drawGroup != null)
@@ -239,7 +239,7 @@ namespace SVGImage.SVG
                         {
                             using (var stream = new MemoryStream(imageBytes))
                             {
-                                using (var reader = new FileSvgReader(this.OverrideFill, this.OverrideBrush))
+                                using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
                                 {
                                     DrawingGroup drawGroup = reader.Read(stream);
                                     if (drawGroup != null)
@@ -379,18 +379,18 @@ namespace SVGImage.SVG
         public const string GZipSignature = "H4sI";
 
         private CultureInfo _culture;
-        private Color? _overrideFill;
-        private Color? _overrideStroke;
+        private Color? _overrideColor;
+        private Color? _overrideStrokeColor;
         private bool _isDisposed;
 
         public FileSvgReader()
         {                
         }
 
-        public FileSvgReader(Color? overrideFill, Color? overrideStroke)
+        public FileSvgReader(Color? overrideColor, Color? overrideStroke)
         {
-            _overrideFill = overrideFill;
-            _overrideStroke = overrideStroke;
+            _overrideColor = overrideColor;
+            _overrideStrokeColor = overrideStroke;
         }
 
         ~FileSvgReader()
@@ -418,25 +418,25 @@ namespace SVGImage.SVG
             }
         }
 
-        public Color? OverrideFill
+        public Color? OverrideColor
         { 
             get {
-                return _overrideFill;
+                return _overrideColor;
             }
             set {
-                _overrideFill = value;
+                _overrideColor = value;
             }
         }
 
-        public Color? OverrideStroke
+        public Color? OverrideStrokeColor
         {
             get
             {
-                return _overrideStroke;
+                return _overrideStrokeColor;
             }
             set
             {
-                _overrideStroke = value;
+                _overrideStrokeColor = value;
             }
         }
 
@@ -450,8 +450,8 @@ namespace SVGImage.SVG
             if (svgRender == null)
             {
                 svgRender = new SVGRender(new FileSystemLoader());
-                svgRender.OverrideFill = _overrideFill;
-                svgRender.OverrideStroke = _overrideStroke;
+                svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideStrokeColor = _overrideStrokeColor;
             }
 
             return svgRender.LoadDrawing(filepath);
@@ -467,8 +467,8 @@ namespace SVGImage.SVG
             if (svgRender == null)
             {
                 svgRender = new SVGRender(new FileSystemLoader());
-                svgRender.OverrideFill = _overrideFill;
-                svgRender.OverrideStroke = _overrideStroke;
+                svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideStrokeColor = _overrideStrokeColor;
             }
 
             return svgRender.LoadDrawing(fileUri);
@@ -484,8 +484,8 @@ namespace SVGImage.SVG
             if (svgRender == null)
             {
                 svgRender = new SVGRender(new FileSystemLoader());
-                svgRender.OverrideFill = _overrideFill;
-                svgRender.OverrideStroke = _overrideStroke;
+                svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideStrokeColor = _overrideStrokeColor;
             }
 
             return svgRender.LoadDrawing(stream);
