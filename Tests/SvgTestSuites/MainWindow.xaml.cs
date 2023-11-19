@@ -1541,7 +1541,8 @@ namespace SvgTestSuites
         {
             public const string GZipSignature = "H4sI";
 
-            private Color? _overrideColor;
+            private Color? _overrideFill;
+            private Color? _overrideStroke;
             private bool _isDisposed;
 
             private XamlPage _xamlPage;
@@ -1567,13 +1568,25 @@ namespace SvgTestSuites
                 }
             }
 
-            public Color? OverrideColor
+            public Color? OverrideFill
             {
                 get {
-                    return _overrideColor;
+                    return _overrideFill;
                 }
                 set {
-                    _overrideColor = value;
+                    _overrideFill = value;
+                }
+            }
+
+            public Color? OverrideStroke
+            {
+                get
+                {
+                    return _overrideStroke;
+                }
+                set
+                {
+                    _overrideStroke = value;
                 }
             }
 
@@ -1585,7 +1598,8 @@ namespace SvgTestSuites
                 }
 
                 var svgRender = new SVGRender(new FileSystemLoader());
-                svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideFill = _overrideFill;
+                svgRender.OverrideStroke = _overrideStroke;
                 svgRender.UseAnimations = true;
 
                 var drawingGroup = svgRender.LoadDrawing(filePath);
@@ -1627,7 +1641,8 @@ namespace SvgTestSuites
                 }
 
                 var svgRender = new SVGRender(new FileSystemLoader());
-                svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideFill = _overrideFill;
+                svgRender.OverrideStroke = _overrideStroke;
                 svgRender.UseAnimations = true;
 
                 return svgRender.LoadDrawing(fileUri);
@@ -1641,7 +1656,8 @@ namespace SvgTestSuites
                 }
 
                 var svgRender = new SVGRender(new FileSystemLoader());
-                svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideFill = _overrideFill;
+                svgRender.OverrideStroke = _overrideStroke;
                 svgRender.UseAnimations = true;
 
                 return svgRender.LoadDrawing(stream);
