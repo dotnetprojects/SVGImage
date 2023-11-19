@@ -46,7 +46,7 @@ namespace SVGImage.SVG
         #region Public Properties        
 
         public Color? OverrideColor { get; set; }
-        public Color? OverrideBrush { get; set; }
+        public Color? OverrideStrokeColor { get; set; }
 
         /// <summary>
         /// Gets or sets the main culture information used for rendering texts.
@@ -137,7 +137,7 @@ namespace SVGImage.SVG
                 //case "ftp":
                 case "https":
                 case "http":
-                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
+                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideStrokeColor))
                     {
                         DrawingGroup drawGroup = reader.Read(svgSource);
 
@@ -172,7 +172,7 @@ namespace SVGImage.SVG
                             {
                                 using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
                                 {
-                                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
+                                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideStrokeColor))
                                     {
                                         DrawingGroup drawGroup = reader.Read(zipStream);
 
@@ -188,7 +188,7 @@ namespace SVGImage.SVG
                         {
                             using (svgStream)
                             {
-                                using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
+                                using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideStrokeColor))
                                 {
                                     DrawingGroup drawGroup = reader.Read(svgStream);
 
@@ -224,7 +224,7 @@ namespace SVGImage.SVG
                             {
                                 using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
                                 {
-                                    using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
+                                    using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideStrokeColor))
                                     {
                                         DrawingGroup drawGroup = reader.Read(zipStream);
                                         if (drawGroup != null)
@@ -239,7 +239,7 @@ namespace SVGImage.SVG
                         {
                             using (var stream = new MemoryStream(imageBytes))
                             {
-                                using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideBrush))
+                                using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideStrokeColor))
                                 {
                                     DrawingGroup drawGroup = reader.Read(stream);
                                     if (drawGroup != null)
@@ -387,7 +387,7 @@ namespace SVGImage.SVG
         {                
         }
 
-        public FileSvgReader(Color? overrideColor, Color? overrideStroke)
+        public FileSvgReader(Color? overrideColor, Color? overrideStroke = null)
         {
             _overrideColor = overrideColor;
             _overrideStrokeColor = overrideStroke;
