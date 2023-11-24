@@ -1,6 +1,8 @@
 # configuration file for dotnet-releaser
 [msbuild]
 project = "./SVGImage/DotNetProjects.SVGImage.csproj"
+[changelog]
+publish = false # disable changelog publish.
 [github]
 user = "paulushub"
 repo = "SVGImage"
