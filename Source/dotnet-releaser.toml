@@ -4,5 +4,5 @@ project = "./SVGImage/DotNetProjects.SVGImage.csproj"
 [changelog]
 publish = false # disable changelog publish.
 [github]
-user = "paulushub"
+user = "jogibear9988"
 repo = "SVGImage"
