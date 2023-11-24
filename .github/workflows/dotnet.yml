@@ -23,7 +23,7 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore ./Source/SVGImage.sln
+      run: dotnet restore ./Source/SVGImage/DotNetProjects.SVGImage.csproj
       
     - name: GitVersion
       id: gitversion  # step id used as reference for output values
@@ -32,6 +32,7 @@ jobs:
     - name: Update project version
       uses: roryprimrose/set-vs-sdk-project-version@v1.0.6
       with:
+        projectFilter: 'DotNetProjects.SVGImage.csproj'
         version: ${{ steps.gitversion.outputs.NuGetVersionV2 }}
         assemblyVersion: ${{ steps.gitversion.outputs.AssemblySemVer }}
         fileVersion: ${{ steps.gitversion.outputs.MajorMinorPatch }}
