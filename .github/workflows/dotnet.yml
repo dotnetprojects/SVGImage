@@ -30,6 +30,18 @@ jobs:
       uses: roryprimrose/set-vs-sdk-project-version@v1.0.6
       with:
         projectFilter: './Source/SVGImage/*.SVGImage.csproj'
+        version:
+          description: 'Maps to the Version element'
+          required: false
+        assemblyVersion:
+          description: 'Maps to the AssemblyVersion element'
+          required: false
+        fileVersion:
+          description: 'Maps to the FileVersion element'
+          required: false
+        informationalVersion:
+          description: 'Maps to the InformationalVersion element'
+          required: false
 
     - name: Update project version
       uses: roryprimrose/set-vs-sdk-project-version@v1.0.6
