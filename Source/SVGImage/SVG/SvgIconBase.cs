@@ -117,7 +117,7 @@ namespace SVGImage.SVG
             string scheme = null;
             // A little hack to display preview in design mode: The design mode Uri is not absolute.
             bool designTime = DesignerProperties.GetIsInDesignMode(new DependencyObject());
-            if (designTime && svgSource.IsAbsoluteUri == false)
+            if (this.IsDesignMode() && svgSource.IsAbsoluteUri == false)
             {
                 scheme = "pack";
             }
@@ -293,8 +293,10 @@ namespace SVGImage.SVG
 
         protected Assembly GetEntryAssembly()
         {
-            string XDesProc = "XDesProc"; // WPF designer process
-            var comparer    = StringComparison.OrdinalIgnoreCase;
+            string XDesProc = "XDesProc";   // WPF designer process - Designer Isolation
+            string DevEnv = "DevEnv";     // WPF designer process - Surface Isolation
+            string WpfSurface = "WpfSurface"; // WPF designer process - New .NETCore
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
             Assembly asm = null;
             try
@@ -304,7 +306,9 @@ namespace SVGImage.SVG
                 if (asm != null)
                 {
                     var appName = asm.GetName().Name;
-                    if (string.Equals(appName, XDesProc, comparer))
+                    if (appName.StartsWith(XDesProc, comparer)
+                        || appName.StartsWith(DevEnv, comparer)
+                        || appName.StartsWith(WpfSurface, comparer))
                     {
                         asm = null;
                     }
@@ -312,14 +316,29 @@ namespace SVGImage.SVG
                 // Design time
                 if (asm == null)
                 {
+#if NETCORE
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
+                          let assmName = Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
+                          select assembly
+                          ).FirstOrDefault();
+#else
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
                           where !assembly.IsDynamic
                           let assmName = Path.GetFileName(assembly.CodeBase).Trim()
                           where assmName.EndsWith(".exe", comparer)
-                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
                           select assembly
                           ).FirstOrDefault();
+#endif
 
                     if (asm == null)
                     {
@@ -327,7 +346,7 @@ namespace SVGImage.SVG
                         if (asm != null)
                         {
                             var appName = asm.GetName().Name;
-                            if (string.Equals(appName, XDesProc, comparer))
+                            if (appName.StartsWith(XDesProc, comparer) || appName.StartsWith(DevEnv, comparer))
                             {
                                 asm = null;
                             }
@@ -339,14 +358,29 @@ namespace SVGImage.SVG
             {
                 if (asm == null)
                 {
+#if NETCORE
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
+                          let assmName = Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
+                          select assembly
+                          ).FirstOrDefault();
+#else
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
                           where !assembly.IsDynamic
                           let assmName = Path.GetFileName(assembly.CodeBase).Trim()
                           where assmName.EndsWith(".exe", comparer)
-                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
                           select assembly
                           ).FirstOrDefault();
+#endif
                 }
 
                 Trace.TraceError(ex.ToString());
@@ -359,13 +393,48 @@ namespace SVGImage.SVG
             Assembly asm = null;
             try
             {
+                var invalidAssemblies = new string[] { "DotNetProjects.SVGImage", "WpfSurface", "XDesProc", "DevEnv" };
+
                 asm = Assembly.GetExecutingAssembly();
+                string asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
+                if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
+                {
+                    return asm;
+                }
+                else
+                {
+                    asm = Assembly.GetEntryAssembly();
+                    asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
+                    if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return asm;
+                    }
+                }
+
+                return this.GetEntryAssembly();
             }
             catch
             {
                 asm = Assembly.GetEntryAssembly();
             }
             return asm;
+        }
+
+        protected bool IsDesignMode(IServiceProvider serviceProvider = null)
+        {
+            if (serviceProvider != null)
+            {
+                var pvt = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
+                if (pvt != null)
+                {
+                    var targetObject = pvt.TargetObject as DependencyObject;
+                    if (targetObject != null)
+                    {
+                        return DesignerProperties.GetIsInDesignMode(targetObject);
+                    }
+                }
+            }
+            return DesignerProperties.GetIsInDesignMode(new DependencyObject());
         }
 
         #endregion

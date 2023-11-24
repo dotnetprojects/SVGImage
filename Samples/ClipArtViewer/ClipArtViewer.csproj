@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net6.0-windows;net7.0-windows</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -17,11 +17,15 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <OutputPath>Output\</OutputPath>
+	<!-- NOTE: The target framework 'netcoreapp3.1' is out of support -->
+    <NoWarn>$(NoWarn);NETSDK1138</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <OutputPath>Output\</OutputPath>
+	<!-- NOTE: The target framework 'netcoreapp3.1' is out of support -->
+    <NoWarn>$(NoWarn);NETSDK1138</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ClipArtViewer.ico</ApplicationIcon>
@@ -112,6 +116,14 @@
     </Reference>
     <Reference Include="Notifications.Wpf">
       <HintPath>..\..\Tests\Libs\net7.0-windows\Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0-windows'">
+    <Reference Include="ShellFileDialogs">
+      <HintPath>..\..\Tests\Libs\net8.0\ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Notifications.Wpf">
+      <HintPath>..\..\Tests\Libs\net8.0-windows\Notifications.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@
           ],
           "src": "../Source/",
           "properties": {
-            "TargetFramework": "netcoreapp3.1"
+            "TargetFramework": "net8.0"
           }          
         }
       ],
@@ -55,6 +55,8 @@
       "_appFaviconPath": "images/dotnetprojects.png",	  
       "_enableDiagrams": true,
       "_enableSearch": true,
+      "pdf": true,
+      "pdfTocPage": true,
       "_appFooter": "<div class=\"d-flex flex-column flex-sm-row justify-content-between pt-1\"><p> &copy; 2020 - 2023 DotNetProjects</p><p>Made with <a href=\"https://dotnet.github.io/docfx\">DocFX</a></p></div>",
       "_gitContribute": {
         "repo": "https://github.com/dotnetprojects/SVGImage",
