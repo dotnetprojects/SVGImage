@@ -30,12 +30,14 @@ jobs:
       uses: roryprimrose/set-vs-sdk-project-version@v1.0.6
       with:
         projectFilter: './Source/SVGImage/*.SVGImage.csproj'
+        version: '5.0.118'        
 
     - name: Update project version
       uses: roryprimrose/set-vs-sdk-project-version@v1.0.6
       with:
         projectFilter: './Source/SVGImage/*.SVGImage.csproj'
-        version: ${{ steps.gitversion.outputs.NuGetVersionV2 }}
+        version: '5.0.118'
+        # version: ${{ steps.gitversion.outputs.NuGetVersionV2 }}        
         assemblyVersion: ${{ steps.gitversion.outputs.AssemblySemVer }}
         fileVersion: ${{ steps.gitversion.outputs.MajorMinorPatch }}
         informationalVersion: ${{ steps.gitversion.outputs.InformationalVersion }}
