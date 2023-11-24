@@ -21,18 +21,6 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore ./Source/SVGImage.sln
-      
-    - name: GitVersion
-      id: gitversion  # step id used as reference for output values
-      uses: roryprimrose/rungitversion@v1
-
-    - name: Update project version
-      uses: roryprimrose/set-vs-sdk-project-version@v1
-      with:
-        version: ${{ steps.gitversion.outputs.NuGetVersionV2 }}
-        assemblyVersion: ${{ steps.gitversion.outputs.AssemblySemVer }}
-        fileVersion: ${{ steps.gitversion.outputs.MajorMinorPatch }}
-        informationalVersion: ${{ steps.gitversion.outputs.InformationalVersion }}
     
     - name: Build, Test, Pack, Publish
       shell: bash
