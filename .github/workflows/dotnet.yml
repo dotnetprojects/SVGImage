@@ -1,0 +1,59 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        submodules: false
+        fetch-depth: 0
+
+    - name: Install .NET 8.0
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore ./Source/SVGImage/DotNetProjects.SVGImage.csproj
+      
+    - name: GitVersion
+      id: gitversion  # step id used as reference for output values
+      uses: roryprimrose/set-vs-sdk-project-version@v1.0.6
+      with:
+        projectFilter: './Source/SVGImage/*.SVGImage.csproj'
+        version:
+          description: 'Maps to the Version element'
+          required: false
+        assemblyVersion:
+          description: 'Maps to the AssemblyVersion element'
+          required: false
+        fileVersion:
+          description: 'Maps to the FileVersion element'
+          required: false
+        informationalVersion:
+          description: 'Maps to the InformationalVersion element'
+          required: false
+
+    - name: Update project version
+      uses: roryprimrose/set-vs-sdk-project-version@v1.0.6
+      with:
+        projectFilter: './Source/SVGImage/*.SVGImage.csproj'
+        version: ${{ steps.gitversion.outputs.NuGetVersionV2 }}
+        assemblyVersion: ${{ steps.gitversion.outputs.AssemblySemVer }}
+        fileVersion: ${{ steps.gitversion.outputs.MajorMinorPatch }}
+        informationalVersion: ${{ steps.gitversion.outputs.InformationalVersion }}
+
+    - name: Build, Test, Pack, Publish
+      shell: bash
+      run: |
+        dotnet tool install -g dotnet-releaser
+        dotnet-releaser run --nuget-token "${{secrets.NUGET_API_KEY}}" --github-token "${{secrets.GITHUB_TOKEN}}" Source/dotnet-releaser.toml
