@@ -20,7 +20,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore SVGImage
+      run: dotnet restore
       
     - name: GitVersion
       id: gitversion  # step id used as reference for output values
