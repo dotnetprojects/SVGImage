@@ -1,0 +1,6 @@
+# configuration file for dotnet-releaser
+[msbuild]
+project = "./SVGImage/DotNetProjects.SVGImage.csproj"
+[github]
+user = "paulushub"
+repo = "SVGImage"

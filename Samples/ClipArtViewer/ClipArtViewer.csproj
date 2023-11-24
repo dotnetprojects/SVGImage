@@ -17,11 +17,15 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <OutputPath>Output\</OutputPath>
+	<!-- NOTE: The target framework 'netcoreapp3.1' is out of support -->
+    <NoWarn>$(NoWarn);NETSDK1138</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <OutputPath>Output\</OutputPath>
+	<!-- NOTE: The target framework 'netcoreapp3.1' is out of support -->
+    <NoWarn>$(NoWarn);NETSDK1138</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ClipArtViewer.ico</ApplicationIcon>
