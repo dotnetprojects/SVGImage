@@ -1,8 +1,7 @@
 name: .NET
 
 on:
-  workflow_dispatch: # Allow running the workflow manually from the GitHub UI
-  push:
+  pull_request:
     branches: [ master ]
 
 defaults:
@@ -87,62 +86,3 @@ jobs:
     - name: Generate nuget package.
       run: dotnet pack DotNetProjects.SVGImage.csproj --configuration Release -o nupkg
       working-directory: ./Source/SVGImage
-        
-    - name: Publish to nuget
-      # run: find . -type f -name *.nupkg -print0 | xargs -0 -I pkg dotnet nuget push pkg -k $nuget_api_key -s "https://api.nuget.org/v3/index.json" --skip-duplicate
-      run: |
-        find . -type f -name *.nupkg -print0 | xargs -0 -I pkg dotnet nuget push pkg -k $nuget_api_key -s "https://api.nuget.org/v3/index.json" --skip-duplicate
-      env:
-        nuget_api_key: ${{ secrets.NUGET_API_KEY }}
-        working-directory: ./Source/SVGImage/nupkg
-         
-    - name: "Create release"
-      uses: "actions/github-script@v6"
-      id: createrelease
-      with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
-        script: |
-          try {
-            const response = await github.rest.repos.createRelease({
-              draft: false,
-              generate_release_notes: true,
-              name: "Release ${{ steps.gitversion.outputs.semVer }}",
-              owner: context.repo.owner,
-              prerelease: false,
-              repo: context.repo.repo,
-              tag_name: "${{ steps.gitversion.outputs.semVer }}",
-            });
-
-            core.exportVariable('RELEASE_ID', response.data.id);
-            core.exportVariable('RELEASE_UPLOAD_URL', response.data.upload_url);
-          } catch (error) {
-            core.setFailed(error.message);
-          }
-          
-    - name: Upload release artifacts
-      uses: actions/github-script@v6
-      env:
-        releaseId: ${{ env.RELEASE_ID }}
-        workingDirectory: ./Source/SVGImage/nupkg
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-            const releaseId = process.env.releaseId;
-            const workingDirectory = process.env.workingDirectory;
-            const fs = require('fs');
-            const dirPath = workingDirectory;
-            const path = require('path');
-            fs.readdir(dirPath, async (err,list) => {
-              if (err) throw err;
-              for (var i = 0; i < list.length; i++) {
-                  if (path.extname(list[i]) === '.nupkg' || path.extname(list[i]) === '.snupkg') {
-                      const uploadAssetResponse = await github.rest.repos.uploadReleaseAsset({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        release_id: releaseId,
-                        name: list[i],
-                        data: fs.readFileSync(path.join(dirPath, list[i]))
-                      });
-                  }
-              }
-            });
