@@ -103,7 +103,7 @@
                 <svg1:SVGImage Source="/Example;component/Images/example radgrad01.svg" RenderTransformOrigin="0.848,0.125" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/tiger.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/1.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
-                <svg1:SVGImage Source="/Example;component/Images/2.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
+                <svg1:SVGImage Source="/Example;component/Images/2.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" OverrideFillColor="DarkGreen" OverrideStrokeColor="DarkSalmon" x:Name="OverrideSeparateColorTest" MouseDoubleClick="SVGImage_MouseDoubleClickSeparateOverride" />
                 <svg1:SVGImage Source="/Example;component/Images/3.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/4.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/5.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
