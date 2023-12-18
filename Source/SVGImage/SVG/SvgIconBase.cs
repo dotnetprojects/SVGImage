@@ -46,6 +46,8 @@ namespace SVGImage.SVG
         #region Public Properties        
 
         public Color? OverrideColor { get; set; }
+        public Color? OverrideFillColor { get; set; }
+        public Color? OverrideStrokeColor { get; set; }
 
         /// <summary>
         /// Gets or sets the main culture information used for rendering texts.
@@ -136,7 +138,7 @@ namespace SVGImage.SVG
                 //case "ftp":
                 case "https":
                 case "http":
-                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor))
+                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                     {
                         DrawingGroup drawGroup = reader.Read(svgSource);
 
@@ -171,7 +173,7 @@ namespace SVGImage.SVG
                             {
                                 using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
                                 {
-                                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor))
+                                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                                     {
                                         DrawingGroup drawGroup = reader.Read(zipStream);
 
@@ -187,7 +189,7 @@ namespace SVGImage.SVG
                         {
                             using (svgStream)
                             {
-                                using (FileSvgReader reader = new FileSvgReader(this.OverrideColor))
+                                using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                                 {
                                     DrawingGroup drawGroup = reader.Read(svgStream);
 
@@ -223,7 +225,7 @@ namespace SVGImage.SVG
                             {
                                 using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
                                 {
-                                    using (var reader = new FileSvgReader(this.OverrideColor))
+                                    using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                                     {
                                         DrawingGroup drawGroup = reader.Read(zipStream);
                                         if (drawGroup != null)
@@ -238,7 +240,7 @@ namespace SVGImage.SVG
                         {
                             using (var stream = new MemoryStream(imageBytes))
                             {
-                                using (var reader = new FileSvgReader(this.OverrideColor))
+                                using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                                 {
                                     DrawingGroup drawGroup = reader.Read(stream);
                                     if (drawGroup != null)
@@ -448,15 +450,19 @@ namespace SVGImage.SVG
 
         private CultureInfo _culture;
         private Color? _overrideColor;
+        private Color? _overrideFillColor;
+        private Color? _overrideStrokeColor;
         private bool _isDisposed;
 
         public FileSvgReader()
         {                
         }
 
-        public FileSvgReader(Color? overrideColor)
+        public FileSvgReader(Color? overrideColor, Color? overrideFillColor, Color? overrideStrokeColor)
         {
             _overrideColor = overrideColor;
+            _overrideFillColor = overrideFillColor;
+            _overrideStrokeColor = overrideStrokeColor;
         }
 
         ~FileSvgReader()
@@ -494,6 +500,26 @@ namespace SVGImage.SVG
             }
         }
 
+        public Color? OverrideFillColor 
+        { 
+            get {
+                return _overrideFillColor;
+            }
+            set {
+                _overrideFillColor = value;
+            }
+        }
+
+        public Color? OverrideStrokeColor 
+        { 
+            get {
+                return _overrideStrokeColor;
+            }
+            set {
+                _overrideStrokeColor = value;
+            }
+        }
+
         public DrawingGroup Read(string filepath, SVGRender svgRender = null)
         {
             if (string.IsNullOrWhiteSpace(filepath))
@@ -505,6 +531,8 @@ namespace SVGImage.SVG
             {
                 svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideFillColor = _overrideFillColor;
+                svgRender.OverrideStrokeColor = _overrideStrokeColor;
             }
 
             return svgRender.LoadDrawing(filepath);
@@ -521,6 +549,8 @@ namespace SVGImage.SVG
             {
                 svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideFillColor = _overrideFillColor;
+                svgRender.OverrideStrokeColor = _overrideStrokeColor;
             }
 
             return svgRender.LoadDrawing(fileUri);
@@ -537,6 +567,8 @@ namespace SVGImage.SVG
             {
                 svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideFillColor = _overrideFillColor;
+                svgRender.OverrideStrokeColor = _overrideStrokeColor;
             }
 
             return svgRender.LoadDrawing(stream);

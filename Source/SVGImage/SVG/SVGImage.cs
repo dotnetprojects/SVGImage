@@ -97,6 +97,14 @@ namespace SVGImage.SVG
             DependencyProperty.Register("OverrideColor", typeof(Color?), typeof(SVGImage),
                 new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.AffectsRender, OverrideColorPropertyChanged));
 
+        public static readonly DependencyProperty OverrideFillColorProperty =
+            DependencyProperty.Register("OverrideFillColor", typeof(Color?), typeof(SVGImage),
+                new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.AffectsRender, OverrideFillColorPropertyChanged));
+
+        public static readonly DependencyProperty OverrideStrokeColorProperty =
+            DependencyProperty.Register("OverrideStrokeColor", typeof(Color?), typeof(SVGImage),
+                new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.AffectsRender, OverrideStrokeColorPropertyChanged));
+
         public static readonly DependencyProperty CustomBrushesProperty = DependencyProperty.Register(nameof(CustomBrushes),
                 typeof(Dictionary<string, Brush>), typeof(SVGImage), new FrameworkPropertyMetadata(default,
                     FrameworkPropertyMetadataOptions.AffectsRender, CustomBrushesPropertyChanged));
@@ -167,6 +175,18 @@ namespace SVGImage.SVG
             set { SetValue(OverrideColorProperty, value); }
         }
 
+        public Color? OverrideFillColor
+        {
+            get { return (Color?)GetValue(OverrideFillColorProperty); }
+            set { SetValue(OverrideFillColorProperty, value); }
+        }
+
+        public Color? OverrideStrokeColor
+        {
+            get { return (Color?)GetValue(OverrideStrokeColorProperty); }
+            set { SetValue(OverrideStrokeColorProperty, value); }
+        }
+
         public double? OverrideStrokeWidth
         {
             get { return (double?)GetValue(OverrideStrokeWidthProperty); }
@@ -234,6 +254,8 @@ namespace SVGImage.SVG
                 _render = new SVGRender();
                 _render.ExternalFileLoader  = this.ExternalFileLoader;
                 _render.OverrideColor       = OverrideColor;
+                _render.OverrideFillColor   = OverrideFillColor;
+                _render.OverrideStrokeColor = OverrideStrokeColor;
                 _render.CustomBrushes       = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
                 _render.UseAnimations       = this.UseAnimations;
@@ -256,6 +278,8 @@ namespace SVGImage.SVG
                 _render.ExternalFileLoader  = this.ExternalFileLoader;
                 _render.UseAnimations       = false;
                 _render.OverrideColor       = OverrideColor;
+                _render.OverrideFillColor   = OverrideFillColor;
+                _render.OverrideStrokeColor = OverrideStrokeColor;
                 _render.CustomBrushes       = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
 
@@ -276,6 +300,8 @@ namespace SVGImage.SVG
                 _render = new SVGRender();
                 _render.ExternalFileLoader  = this.ExternalFileLoader;
                 _render.OverrideColor       = OverrideColor;
+                _render.OverrideFillColor   = OverrideFillColor;
+                _render.OverrideStrokeColor = OverrideStrokeColor;
                 _render.CustomBrushes       = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
                 _render.UseAnimations       = false;
@@ -298,6 +324,8 @@ namespace SVGImage.SVG
                 _render = new SVGRender();
                 _render.ExternalFileLoader  = this.ExternalFileLoader;
                 _render.OverrideColor       = OverrideColor;
+                _render.OverrideFillColor   = OverrideFillColor;
+                _render.OverrideStrokeColor = OverrideStrokeColor;
                 _render.CustomBrushes       = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
                 _render.UseAnimations       = false;
@@ -326,6 +354,8 @@ namespace SVGImage.SVG
                 _render = new SVGRender();
                 _render.ExternalFileLoader  = this.ExternalFileLoader;
                 _render.OverrideColor       = OverrideColor;
+                _render.OverrideFillColor   = OverrideFillColor;
+                _render.OverrideStrokeColor = OverrideStrokeColor;
                 _render.CustomBrushes       = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
                 _render.UseAnimations       = this.UseAnimations;
@@ -694,7 +724,7 @@ namespace SVGImage.SVG
                 //case "ftp":
                 case "https":
                 case "http":
-                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor))
+                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                     {
                         DrawingGroup drawGroup = reader.Read(svgSource, _render);
 
@@ -729,7 +759,7 @@ namespace SVGImage.SVG
                             {
                                 using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
                                 {
-                                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor))
+                                    using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                                     {
                                         DrawingGroup drawGroup = reader.Read(zipStream, _render);
 
@@ -745,7 +775,7 @@ namespace SVGImage.SVG
                         {
                             using (svgStream)
                             {
-                                using (FileSvgReader reader = new FileSvgReader(this.OverrideColor))
+                                using (FileSvgReader reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                                 {
                                     DrawingGroup drawGroup = reader.Read(svgStream, _render);
 
@@ -781,7 +811,7 @@ namespace SVGImage.SVG
                             {
                                 using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
                                 {
-                                    using (var reader = new FileSvgReader(this.OverrideColor))
+                                    using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                                     {
                                         DrawingGroup drawGroup = reader.Read(zipStream, _render);
                                         if (drawGroup != null)
@@ -796,7 +826,7 @@ namespace SVGImage.SVG
                         {
                             using (var stream = new MemoryStream(imageBytes))
                             {
-                                using (var reader = new FileSvgReader(this.OverrideColor))
+                                using (var reader = new FileSvgReader(this.OverrideColor, this.OverrideFillColor, this.OverrideStrokeColor))
                                 {
                                     DrawingGroup drawGroup = reader.Read(stream, _render);
                                     if (drawGroup != null)
@@ -870,6 +900,26 @@ namespace SVGImage.SVG
             if (d is SVGImage svgImage && e.NewValue is Color newColor && svgImage._render != null)
             {
                 svgImage._render.OverrideColor = newColor;
+                svgImage.InvalidateVisual();
+                svgImage.ReRenderSvg();
+            }
+        }
+
+        private static void OverrideFillColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SVGImage svgImage && e.NewValue is Color newColor && svgImage._render != null)
+            {
+                svgImage._render.OverrideFillColor = newColor;
+                svgImage.InvalidateVisual();
+                svgImage.ReRenderSvg();
+            }
+        }
+
+        private static void OverrideStrokeColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SVGImage svgImage && e.NewValue is Color newColor && svgImage._render != null)
+            {
+                svgImage._render.OverrideStrokeColor = newColor;
                 svgImage.InvalidateVisual();
                 svgImage.ReRenderSvg();
             }

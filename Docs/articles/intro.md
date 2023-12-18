@@ -26,3 +26,9 @@ The control only has a couple of properties, `SizeType` and `ImageSource`.
 For `None` and `ContentToSizeNoStretch`, the Horizontal/VerticalContentAlignment properties can be used to position the image within the control.
 
 * `ImageSource` - This property is the same as `SetImage(drawing)`, and is exposed to allow for the source to be set through binding.
+
+The colors of an `SVGImage` can be overridden at run-time through some additional properties of the `SVGImage`:
+
+* `OverrideFillColor` - This property overrides all fill colors of an SVG image
+* `OverrideStrokeColor` - Overrides all stroke colors of an SVG image
+* `OverrideColor` - Overrides all colors of an SVG image. `OverrideFillColor` and `OverrideStrokeColor` take precedence over the `OverrideColor` property.
