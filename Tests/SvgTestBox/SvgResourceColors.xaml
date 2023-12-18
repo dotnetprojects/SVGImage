@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SvgTestBox"
         mc:Ignorable="d"
-        Title="Pick a Color" Height="400" Width="490" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+        Title="Pick a Color" Height="410" Width="490" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
     <Window.Resources>
         <Style x:Key="Item.FocusVisual">
             <Setter Property="Control.Template">

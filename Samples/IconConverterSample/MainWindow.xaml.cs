@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.IO;
-using System.Reflection;
 using System.IO.Compression;
 using System.Windows;
 
@@ -24,7 +23,7 @@ namespace IconConverterSample
             InitializeProtocol(); //For the web access
 
             // ICons credit: https://github.com/icons8/flat-color-icons
-            string workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string workingDir = Path.GetFullPath(PageMultiple.SamplesDir);
 
             string iconsPath = Path.Combine(workingDir, PageMultiple.IconZipFile);
             if (!File.Exists(iconsPath))
