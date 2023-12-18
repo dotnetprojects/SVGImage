@@ -121,23 +121,24 @@ namespace SVGImage.SVG
             Stroke stroke = shape.Stroke;
             if (stroke != null)
             {
-                if(OverrideStrokeWidth.HasValue)
+                var strokeWidth = stroke.Width;
+                if (OverrideStrokeWidth.HasValue)
                 {
-                    stroke.Width = OverrideStrokeWidth.Value;
+                    strokeWidth = OverrideStrokeWidth.Value;
                 }
                 var brush = stroke.StrokeBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
                     brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
                         OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 if (OverrideStrokeColor != null)
-                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
+                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity),
                         OverrideStrokeColor.Value.R, OverrideStrokeColor.Value.G, OverrideStrokeColor.Value.B));
-                item.Pen = new Pen(brush, stroke.Width);
+                item.Pen = new Pen(brush, strokeWidth);
                 if (stroke.StrokeArray != null)
                 {
                     item.Pen.DashCap = PenLineCap.Flat;
                     DashStyle ds = new DashStyle();
-                    double scale = 1 / stroke.Width;
+                    double scale = 1 / strokeWidth;
                     foreach (var dash in stroke.StrokeArray) ds.Dashes.Add(dash * scale);
                     item.Pen.DashStyle = ds;
                 }
@@ -177,7 +178,7 @@ namespace SVGImage.SVG
                     item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
                         OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 if (OverrideFillColor != null)
-                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
+                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity),
                         OverrideFillColor.Value.R, OverrideFillColor.Value.G, OverrideFillColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
                 g.FillRule = FillRule.Nonzero;
@@ -187,12 +188,15 @@ namespace SVGImage.SVG
             else if (shape.Fill != null)
             {
                 item.Brush = shape.Fill.FillBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
-                if (OverrideColor != null)
-                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
-                        OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
-                if (OverrideFillColor != null && shape.Fill.Opacity > 0.0)
-                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity),
-                        OverrideFillColor.Value.R, OverrideFillColor.Value.G, OverrideFillColor.Value.B));
+                if (item.Brush != null)
+                {
+                    if (OverrideColor != null)
+                        item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
+                            OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
+                    if (OverrideFillColor != null)
+                        item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity),
+                            OverrideFillColor.Value.R, OverrideFillColor.Value.G, OverrideFillColor.Value.B));
+                }
                 GeometryGroup g = new GeometryGroup();
                 g.FillRule = FillRule.Nonzero;
                 if (shape.Fill.FillRule == Fill.eFillRule.evenodd) g.FillRule = FillRule.EvenOdd;
