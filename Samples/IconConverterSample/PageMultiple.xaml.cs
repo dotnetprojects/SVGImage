@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.IO.Compression;
 
 namespace IconConverterSample
 {
@@ -43,8 +44,9 @@ namespace IconConverterSample
     /// </summary>
     public partial class PageMultiple : Page
     {
-        public const string IconZipFile = @"..\svg-icons.zip";
-        public const string IconFolder  = @"Svg-Icons";
+        public const string SamplesDir  = @"..\..\..\..\Tests";
+        public const string IconZipFile = "svg-icons.zip";
+        public const string IconFolder   = "Svg-Icons";
 
         public PageMultiple()
         {
@@ -56,15 +58,15 @@ namespace IconConverterSample
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
-            string workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string workingDir = Path.GetFullPath(SamplesDir);
 
-            string iconsPath = Path.Combine(workingDir, PageMultiple.IconZipFile);
+            string iconsPath = Path.Combine(workingDir, IconZipFile);
             if (!File.Exists(iconsPath))
             {
                 return;
             }
 
-            var iconsDir = new DirectoryInfo(Path.Combine(workingDir, PageMultiple.IconFolder));
+            var iconsDir = new DirectoryInfo(Path.Combine(workingDir, IconFolder));
             if (!iconsDir.Exists)
             {
                 return;

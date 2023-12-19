@@ -15,13 +15,13 @@ The respository includes
 * **Samples:** For sample applications
 * **Docs:** For the documentations (in markdown format).
 
-The command lines installation options are: For the version `5.0.118`
-* **.NET CLI:** dotnet add package DotNetProjects.SVGImage --version 5.0.118
-* **Package Manager:** NuGet\Install-Package DotNetProjects.SVGImage -Version 5.0.118
+The command lines installation options are: For the version `5.1.0`
+* **.NET CLI:** dotnet add package DotNetProjects.SVGImage --version 5.1.0
+* **Package Manager:** NuGet\Install-Package DotNetProjects.SVGImage -Version 5.1.0
 
-For reference in projects use: For the version `5.0.118`
+For reference in projects use: For the version `5.1.0`
 ```xml
-<PackageReference Include="DotNetProjects.SVGImage" Version="5.0.118" />
+<PackageReference Include="DotNetProjects.SVGImage" Version="5.1.0" />
 ```
 
 ## How to build

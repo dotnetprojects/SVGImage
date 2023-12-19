@@ -11,8 +11,7 @@ namespace IconConverterSample
     /// </summary>
     public partial class PageSingle : Page
     {
-        //private const string SvgFileName = @"..\Asian_Openbill.svg";
-        private const string SvgFileName = @"..\Sf_er_nkm.svg";
+        private const string SvgFileName = @"..\..\Resources\Hypocolius.svg";
 
         public static readonly DependencyProperty LocalFileNameProperty = DependencyProperty.Register("LocalFileName", 
             typeof(string), typeof(PageSingle), new PropertyMetadata(SvgFileName));
@@ -35,7 +34,7 @@ namespace IconConverterSample
         {
             string workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            string svgFilePath = Path.Combine(workingDir, SvgFileName);
+            string svgFilePath = Path.GetFullPath(Path.Combine(workingDir, SvgFileName));
             if (File.Exists(svgFilePath))
             {
                 inputBox.Text = svgFilePath;

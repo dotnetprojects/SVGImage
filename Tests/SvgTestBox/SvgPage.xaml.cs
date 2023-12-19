@@ -60,6 +60,14 @@ namespace SvgTestBox
 
         private readonly SearchPanel _searchPanel;
 
+        private Color? _selectedColor;
+        private Color? _selectedFillColor;
+        private Color? _selectedStrokeColor;
+        private double? _overrideStrokeWidth;
+        private SvgResourceColors _colorsDlg;
+        private SvgResourceColors _colorsFillDlg;
+        private SvgResourceColors _colorsStrokeDlg;
+
         #endregion
 
         #region Constructors and Destructor
@@ -104,6 +112,8 @@ namespace SvgTestBox
 
             this.Loaded += OnPageLoaded;
             this.SizeChanged += OnPageSizeChanged;
+
+            _selectedColor = null;
         }
 
         #endregion
@@ -311,6 +321,38 @@ namespace SvgTestBox
                 {
                     _fileReader = new FileSvgReader(_xamlPage);
                 }
+                if (chkColor.IsChecked.HasValue && chkColor.IsChecked.Value)
+                {
+                    _fileReader.OverrideColor = _selectedColor;
+                }
+                else
+                {
+                    _fileReader.OverrideColor = null;
+                }
+                if (chkFillColor.IsChecked.HasValue && chkFillColor.IsChecked.Value)
+                {
+                    _fileReader.OverrideFillColor = _selectedFillColor;
+                }
+                else
+                {
+                    _fileReader.OverrideFillColor = null;
+                }
+                if (chkStrokeColor.IsChecked.HasValue && chkStrokeColor.IsChecked.Value)
+                {
+                    _fileReader.OverrideStrokeColor = _selectedStrokeColor;
+                }
+                else
+                {
+                    _fileReader.OverrideStrokeColor = null;
+                }
+                if (chkStrokeWidth.IsChecked.HasValue && chkStrokeWidth.IsChecked.Value)
+                {
+                    _fileReader.OverrideStrokeWidth = _overrideStrokeWidth;
+                }
+                else
+                {
+                    _fileReader.OverrideStrokeWidth = null;
+                }
 
                 DrawingGroup drawing = _fileReader.Read(filePath, _directoryInfo);
                 if (drawing == null)
@@ -400,6 +442,202 @@ namespace SvgTestBox
         #endregion
 
         #region Private Event Handlers
+
+        private void OnColorChecked(object sender, RoutedEventArgs e)
+        {
+            if (chkColor.IsChecked.HasValue)
+            {
+                btnColor.IsEnabled = chkColor.IsChecked.Value;
+            }
+            else
+            {
+                btnColor.IsEnabled = false;
+            }
+
+            this.OnConvertInputClick(sender, e);
+        }
+
+        private void OnColorClicked(object sender, RoutedEventArgs e)
+        {
+            _colorsDlg = new SvgResourceColors();
+            _colorsDlg.Owner = Application.Current.MainWindow;
+            if (_selectedColor != null && _selectedColor.HasValue)
+            {
+                _colorsDlg.OriginalColor = _selectedColor.Value;
+            }
+
+            _colorsDlg.Closed += OnResourceColorClosed;
+
+            _colorsDlg.Show();
+        }
+        private void OnFillColorChecked(object sender, RoutedEventArgs e)
+        {
+            if (chkFillColor.IsChecked.HasValue)
+            {
+                btnFillColor.IsEnabled = chkFillColor.IsChecked.Value;
+            }
+            else
+            {
+                btnFillColor.IsEnabled = false;
+            }
+
+            this.OnConvertInputClick(sender, e);
+        }
+
+        private void OnFillColorClicked(object sender, RoutedEventArgs e)
+        {
+            _colorsFillDlg = new SvgResourceColors();
+            _colorsFillDlg.Owner = Application.Current.MainWindow;
+            if (_selectedFillColor != null && _selectedFillColor.HasValue)
+            {
+                _colorsFillDlg.OriginalColor = _selectedFillColor.Value;
+            }
+
+            _colorsFillDlg.Closed += OnResourceFillColorClosed;
+
+            _colorsFillDlg.Show();
+        }
+        private void OnStrokeColorChecked(object sender, RoutedEventArgs e)
+        {
+            if (chkStrokeColor.IsChecked.HasValue)
+            {
+                btnStrokeColor.IsEnabled = chkStrokeColor.IsChecked.Value;
+            }
+            else
+            {
+                btnStrokeColor.IsEnabled = false;
+            }
+
+            this.OnConvertInputClick(sender, e);
+        }
+
+        private void OnStrokeColorClicked(object sender, RoutedEventArgs e)
+        {
+            _colorsStrokeDlg = new SvgResourceColors();
+            _colorsStrokeDlg.Owner = Application.Current.MainWindow;
+            if (_selectedStrokeColor != null && _selectedStrokeColor.HasValue)
+            {
+                _colorsStrokeDlg.OriginalColor = _selectedStrokeColor.Value;
+            }
+
+            _colorsStrokeDlg.Closed += OnResourceStrokeColorClosed;
+
+            _colorsStrokeDlg.Show();
+        }
+
+        private void OnStrokeWidthChecked(object sender, RoutedEventArgs e)
+        {
+            if (chkStrokeWidth.IsChecked.HasValue)
+            {
+                cboStrokeWidth.IsEnabled = chkStrokeWidth.IsChecked.Value;
+            }
+            else
+            {
+                cboStrokeWidth.IsEnabled = false;
+            }
+
+            this.OnConvertInputClick(sender, e);
+        }
+
+        private void OnStrokeWidthChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cboStrokeWidth.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            try
+            {
+                _overrideStrokeWidth = double.Parse(cboStrokeWidth.SelectedValue.ToString());
+            } 
+            catch
+            {
+                _overrideStrokeWidth = null;
+            }
+
+            this.OnConvertInputClick(sender, e);
+        }
+
+        private void OnResourceColorClosed(object sender, EventArgs e)
+        {
+            if (_colorsDlg == null)
+            {
+                return;
+            }
+            _colorsDlg.Closed -= OnResourceColorClosed;
+
+            if (_colorsDlg.DialogResult == false)
+            {
+                return;
+            }
+            _selectedColor = _colorsDlg.SelectedColor;
+            if (_selectedColor != null && _selectedColor.HasValue)
+            {
+                btnColor.Background = new SolidColorBrush(_selectedColor.Value);
+            }
+            else
+            {
+                btnColor.Background = Brushes.Transparent;
+            }
+
+            _colorsDlg = null;
+
+            this.OnConvertInputClick(sender, null);
+        }
+
+        private void OnResourceFillColorClosed(object sender, EventArgs e)
+        {
+            if (_colorsFillDlg == null)
+            {
+                return;
+            }
+            _colorsFillDlg.Closed -= OnResourceFillColorClosed;
+
+            if (_colorsFillDlg.DialogResult == false)
+            {
+                return;
+            }
+            _selectedFillColor = _colorsFillDlg.SelectedColor;
+            if (_selectedFillColor != null && _selectedFillColor.HasValue)
+            {
+                btnFillColor.Background = new SolidColorBrush(_selectedFillColor.Value);
+            }
+            else
+            {
+                btnFillColor.Background = Brushes.Transparent;
+            }
+
+            _colorsFillDlg = null;
+
+            this.OnConvertInputClick(sender, null);
+        }
+
+        private void OnResourceStrokeColorClosed(object sender, EventArgs e)
+        {
+            if (_colorsStrokeDlg == null)
+            {
+                return;
+            }
+            _colorsStrokeDlg.Closed -= OnResourceStrokeColorClosed;
+
+            if (_colorsStrokeDlg.DialogResult == false)
+            {
+                return;
+            }
+            _selectedStrokeColor = _colorsStrokeDlg.SelectedColor;
+            if (_selectedStrokeColor != null && _selectedStrokeColor.HasValue)
+            {
+                btnStrokeColor.Background = new SolidColorBrush(_selectedStrokeColor.Value);
+            }
+            else
+            {
+                btnStrokeColor.Background = Brushes.Transparent;
+            }
+
+            _colorsStrokeDlg = null;
+
+            this.OnConvertInputClick(sender, null);
+        }
 
         private void OnOpenFileClick(object sender, RoutedEventArgs e)
         {
@@ -702,6 +940,9 @@ namespace SvgTestBox
             public const string GZipSignature = "H4sI";
 
             private Color? _overrideColor;
+            private Color? _overrideFillColor;
+            private Color? _overrideStrokeColor;
+            private double? _overrideStrokeWidth;
             private bool _isDisposed;
 
             private XamlPage _xamlPage;
@@ -739,6 +980,36 @@ namespace SvgTestBox
                 }
             }
 
+            public Color? OverrideFillColor
+            {
+                get {
+                    return _overrideFillColor;
+                }
+                set {
+                    _overrideFillColor = value;
+                }
+            }
+
+            public Color? OverrideStrokeColor
+            {
+                get {
+                    return _overrideStrokeColor;
+                }
+                set {
+                    _overrideStrokeColor = value;
+                }
+            }
+
+            public double? OverrideStrokeWidth 
+            { 
+                get {
+                    return _overrideStrokeWidth;
+                }
+                set {
+                    _overrideStrokeWidth = value;
+                }
+            }
+
             public DrawingGroup Read(string filePath, DirectoryInfo workingDir)
             {
                 if (string.IsNullOrWhiteSpace(filePath))
@@ -748,6 +1019,9 @@ namespace SvgTestBox
 
                 var svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+                svgRender.OverrideFillColor = _overrideFillColor;
+                svgRender.OverrideStrokeColor = _overrideStrokeColor;
+                svgRender.OverrideStrokeWidth = _overrideStrokeWidth;
                 svgRender.UseAnimations = true;
 
                 var drawingGroup = svgRender.LoadDrawing(filePath);

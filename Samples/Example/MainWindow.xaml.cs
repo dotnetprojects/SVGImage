@@ -2,7 +2,6 @@
 using System.IO;
 using System.IO.Compression;
 using System.Collections.Generic;
-
 using System.Windows;
 
 namespace Example
@@ -148,6 +147,25 @@ namespace Example
                 rnd == 0 ? System.Windows.Media.Colors.White :
                 rnd == 1 ? System.Windows.Media.Colors.Magenta :
                 System.Windows.Media.Colors.Black;
+        }
+
+        private void SVGImage_MouseDoubleClickSeparateOverride(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            System.Windows.Media.Color[] colors =
+            {
+                System.Windows.Media.Colors.White,
+                System.Windows.Media.Colors.Magenta,
+                System.Windows.Media.Colors.DarkGreen,
+                System.Windows.Media.Colors.DarkSalmon,
+                System.Windows.Media.Colors.DarkBlue,
+                System.Windows.Media.Colors.Black,
+            };
+            var ran = new Random();
+            var rndFill = ran.Next(0, colors.Length);
+            OverrideSeparateColorTest.OverrideFillColor = colors[rndFill];
+
+            var rndStroke = ran.Next(0, colors.Length);
+            OverrideSeparateColorTest.OverrideStrokeColor = colors[rndStroke];
         }
     }
 }
