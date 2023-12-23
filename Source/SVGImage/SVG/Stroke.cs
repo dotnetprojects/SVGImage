@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Media;
 
 namespace SVGImage.SVG
@@ -22,24 +23,102 @@ namespace SVGImage.SVG
             bevel,
         }
 
-        public string PaintServerKey { get; set; }
+        private SVG _svg;
 
-        public double Width { get; set; }
+        private bool _isDefault;
 
-        public double Opacity { get; set; }
+        private string _paintServerKey;
 
-        public eLineCap LineCap { get; set; }
+        private double _opacity;
 
-        public eLineJoin LineJoin { get; set; }
+        private double _width;
 
-        public double[] StrokeArray { get; set; }
+        private eLineCap _lineCap;
+
+        private eLineJoin _lineJoin;
+
+        private double[] _strokeArray;
 
         public Stroke(SVG svg)
         {
-            this.Width = 1;
-            this.LineCap = eLineCap.butt;
-            this.LineJoin = eLineJoin.miter;
-            this.Opacity = 100;
+            _svg = svg;
+            _isDefault = false;
+            _width = 1;
+            _lineCap = eLineCap.butt;
+            _lineJoin = eLineJoin.miter;
+            _opacity = 100;
+        }
+
+        public static Stroke CreateDefault(SVG svg, double width)
+        {
+            var stroke = new Stroke(svg);
+            stroke._width = width;
+
+            stroke._isDefault = true;
+
+            return stroke;
+        }
+
+        public SVG get => _svg;
+
+        public bool IsDefault
+        {
+            get => _isDefault;
+            set => _isDefault = value;
+        }
+
+        public string PaintServerKey
+        {
+            get => _paintServerKey;
+            set {
+                Debug.Assert(_isDefault == false);
+                _paintServerKey = value;
+            }
+        }
+
+        public double Opacity
+        {
+            get => _opacity;
+            set {
+                Debug.Assert(_isDefault == false);
+                _opacity = value;
+            }
+        }
+
+        public double Width
+        {
+            get => _width;
+            set {
+                Debug.Assert(_isDefault == false);
+                _width = value;
+            }
+        }
+
+        public eLineCap LineCap
+        {
+            get => _lineCap;
+            set {
+                Debug.Assert(_isDefault == false);
+                _lineCap = value;
+            }
+        }
+
+        public eLineJoin LineJoin
+        {
+            get => _lineJoin;
+            set {
+                Debug.Assert(_isDefault == false);
+                _lineJoin = value;
+            }
+        }
+
+        public double[] StrokeArray
+        {
+            get => _strokeArray;
+            set {
+                Debug.Assert(_isDefault == false);
+                _strokeArray = value;
+            }
         }
 
         public bool IsEmpty(SVG svg)

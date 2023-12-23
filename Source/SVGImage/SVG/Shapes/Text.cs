@@ -9,32 +9,9 @@ namespace SVGImage.SVG
 
     public sealed class TextShape : Shape
     {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public string Text { get; set; }
-        public TextSpan TextSpan {get; private set;}
-        static Fill DefaultFill = null;
-        static Stroke DefaultStroke = null;
-        public override Fill Fill 
-        { 
-            get 
-            {
-                Fill f = base.Fill;
-                if (f == null)
-                    f = DefaultFill;
-                return f;
-            }
-        }
-        public override Stroke Stroke
-        { 
-            get 
-            {
-                Stroke f = base.Stroke;
-                if (f == null)
-                    f = DefaultStroke;
-                return f;
-            }
-        }
+        private static Fill DefaultFill = null;
+        private static Stroke DefaultStroke = null;
+
         public TextShape(SVG svg, XmlNode node, Shape parent) 
             : base(svg, node, parent)
         {
@@ -47,13 +24,38 @@ namespace SVGImage.SVG
                 this.TextSpan = this.ParseTSpan(svg, node.InnerXml);
             if (DefaultFill == null)
             {
-                DefaultFill = new Fill(svg);
-                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
+                DefaultFill = Fill.CreateDefault(svg, "black");
             }
             if (DefaultStroke == null)
             {
-                DefaultStroke = new Stroke(svg);
-                DefaultStroke.Width = 0.1;
+                DefaultStroke = Stroke.CreateDefault(svg, 0.1);
+            }
+        }
+
+        public double X { get; set; }
+        public double Y { get; set; }
+        public string Text { get; set; }
+        public TextSpan TextSpan {get; private set;}
+
+        public override Fill Fill 
+        { 
+            get 
+            {
+                Fill f = base.Fill;
+                if (f == null)
+                    f = DefaultFill;
+                return f;
+            }
+        }
+
+        public override Stroke Stroke
+        { 
+            get 
+            {
+                Stroke f = base.Stroke;
+                if (f == null)
+                    f = DefaultStroke;
+                return f;
             }
         }
 

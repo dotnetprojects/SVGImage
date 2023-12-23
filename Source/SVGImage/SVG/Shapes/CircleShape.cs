@@ -8,8 +8,15 @@ namespace SVGImage.SVG.Shapes
 
     public sealed class CircleShape : Shape
     {
+        private static Fill DefaultFill = null;
+
         public CircleShape(SVG svg, XmlNode node) : base(svg, node)
         {
+            if (DefaultFill == null)
+            {
+                DefaultFill = Fill.CreateDefault(svg, "black");
+            }
+
             Rect? box = svg.ViewBox;
 
             this.CX = XmlUtil.AttrValue(node, "cx", 0, box.HasValue ? box.Value.Width : svg.Size.Width);
@@ -19,6 +26,15 @@ namespace SVGImage.SVG.Shapes
             if (box.HasValue)
                 diagRef = Math.Sqrt(box.Value.Width * box.Value.Width + box.Value.Height * box.Value.Height) / Math.Sqrt(2);
             this.R = XmlUtil.AttrValue(node, "r", 0, diagRef);
+        }
+
+        public override Fill Fill
+        {
+            get {
+                Fill f = base.Fill;
+                if (f == null) f = DefaultFill;
+                return f;
+            }
         }
 
         public double CX { get; set; }

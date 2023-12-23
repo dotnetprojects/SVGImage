@@ -11,9 +11,9 @@
 		<Product>DotNetProjects.SVGImage</Product>
 		<Copyright>2020-2023 DotNetProjects</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<AssemblyVersion>5.1.0.0</AssemblyVersion>
-		<FileVersion>5.1.0.0</FileVersion>
-		<Version>5.1.0</Version>
+		<AssemblyVersion>5.1.1.0</AssemblyVersion>
+		<FileVersion>5.1.1.0</FileVersion>
+		<Version>5.1.1</Version>
 		<OutputType>Library</OutputType>
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
@@ -31,7 +31,7 @@
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
 		<EnablePackageValidation>true</EnablePackageValidation>
 		<!-- NOTE: Detect breaking changes from a previous version -->
-		<PackageValidationBaselineVersion>5.0.118</PackageValidationBaselineVersion>
+		<PackageValidationBaselineVersion>5.1.0</PackageValidationBaselineVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

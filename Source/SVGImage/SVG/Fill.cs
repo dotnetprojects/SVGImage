@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Media;
 
 namespace SVGImage.SVG
@@ -14,16 +15,66 @@ namespace SVGImage.SVG
             evenodd
         }
 
-        public eFillRule FillRule { get; set;}
+        private SVG _svg;
 
-        public string PaintServerKey {get; set;}
+        private bool _isDefault;
 
-        public double Opacity {get; set;}
+        private eFillRule _fillRule;
+
+        private string _paintServerKey;
+
+        private double _opacity;
 
         public Fill(SVG svg)
         {
-            this.FillRule = eFillRule.nonzero;
-            this.Opacity = 100;
+            _fillRule = eFillRule.nonzero;
+            _opacity = 100;
+            _isDefault = false;
+            _svg = svg;
+        }
+
+        public static Fill CreateDefault(SVG svg, string fillColor)
+        {
+            var fill = new Fill(svg);
+            fill.PaintServerKey = svg.PaintServers.Parse(fillColor);
+
+            fill._isDefault = true;
+
+            return fill;
+        }
+
+        public SVG get => _svg;
+
+        public bool IsDefault
+        {
+            get => _isDefault;
+            set => _isDefault = value;
+        }
+
+        public eFillRule FillRule { 
+            get => _fillRule;
+            set {
+                Debug.Assert(_isDefault == false);
+                _fillRule = value;
+            }
+        }
+
+        public string PaintServerKey 
+        {
+            get => _paintServerKey; 
+            set {
+                Debug.Assert(_isDefault == false);
+                _paintServerKey = value;
+            }
+        }
+
+        public double Opacity 
+        {
+            get => _opacity;
+            set {
+                Debug.Assert(_isDefault == false);
+                _opacity = value;
+            }
         }
 
         public bool IsEmpty(SVG svg)

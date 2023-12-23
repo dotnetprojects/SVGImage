@@ -8,9 +8,16 @@ namespace SVGImage.SVG.Shapes
 
     public sealed class EllipseShape : Shape
     {
+        private static Fill DefaultFill = null;
+
         public EllipseShape(SVG svg, XmlNode node)
             : base(svg, node)
         {
+            if (DefaultFill == null)
+            {
+                DefaultFill = Fill.CreateDefault(svg, "black");
+            }
+
             Rect? box = svg.ViewBox;
 
             this.CX = XmlUtil.AttrValue(node, "cx", 0, box.HasValue ? box.Value.Width : svg.Size.Width);
@@ -21,6 +28,15 @@ namespace SVGImage.SVG.Shapes
                     + box.Value.Height * box.Value.Height) / Math.Sqrt(2);
             this.RX = XmlUtil.AttrValue(node, "rx", 0, diagRef);
             this.RY = XmlUtil.AttrValue(node, "ry", 0, diagRef);
+        }
+
+        public override Fill Fill
+        {
+            get {
+                Fill f = base.Fill;
+                if (f == null) f = DefaultFill;
+                return f;
+            }
         }
 
         public double CX { get; set; }
