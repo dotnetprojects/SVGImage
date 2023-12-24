@@ -244,7 +244,8 @@ namespace SVGImage.SVG.PaintServers
 
         private static void LoadKnownColors()
         {
-            if (m_knownColors == null) m_knownColors = new Dictionary<string, Color>();
+            if (m_knownColors == null) 
+                m_knownColors = new Dictionary<string, Color>(StringComparer.OrdinalIgnoreCase);
             if (m_knownColors.Count == 0)
             {
                 PropertyInfo[] propinfos = typeof(Colors).GetProperties(BindingFlags.Public | BindingFlags.Static);

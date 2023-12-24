@@ -14,8 +14,7 @@ namespace SVGImage.SVG
         {
             if (DefaultFill == null)
             {
-                DefaultFill = new Fill(svg);
-                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
+                DefaultFill = Fill.CreateDefault(svg, "black");
             }
 
             this.ClosePath = false;

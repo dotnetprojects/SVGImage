@@ -203,52 +203,13 @@ namespace SVGImage.SVG
                 g.Children.Add(geometry);
                 geometry = g;
             }
-            //if (shape.Transform != null) geometry.Transform = shape.Transform;
-
-            // for debugging, if neither stroke or fill is set then set default pen
-            //if (shape.Fill == null && shape.Stroke == null)
-            //	item.Pen = new Pen(Brushes.Blue, 1);
 
             item.Geometry = geometry;
             return item;
         }
 
-        
-
-        private class ControlLine
-        {
-            public Point Ctrl { get; private set; }
-
-            public Point Start { get; private set; }
-
-            public ControlLine(Point start, Point ctrl)
-            {
-                this.Start = start;
-                this.Ctrl = ctrl;
-            }
-
-            public GeometryDrawing Draw()
-            {
-                double size = 0.2;
-                GeometryDrawing item = new GeometryDrawing();
-                item.Brush = Brushes.Red;
-                GeometryGroup g = new GeometryGroup();
-
-                item.Pen = new Pen(Brushes.LightGray, size / 2);
-                g.Children.Add(new LineGeometry(this.Start, this.Ctrl));
-
-                var rect = new Rect(this.Start.X - size / 2, this.Start.Y - size / 2, size, size);
-                g.Children.Add(new RectangleGeometry(rect));
-                g.Children.Add(new EllipseGeometry(this.Ctrl, size, size));
-
-                item.Geometry = g;
-                return item;
-            }
-        }
-
         internal DrawingGroup LoadGroup(IList<Shape> elements, Rect? viewBox, bool isSwitch)
         {
-            List<ControlLine> debugPoints = new List<ControlLine>();
             DrawingGroup grp = new DrawingGroup();
             if (viewBox.HasValue) grp.ClipGeometry = new RectangleGeometry(viewBox.Value);
 
@@ -345,14 +306,14 @@ namespace SVGImage.SVG
                     continue;
                 }
 
-                if (shape is UseShape)
+                if (shape is UseShape useshape)
                 {
-                    UseShape useshape = shape as UseShape;
                     Shape currentUsedShape = this.SVG.GetShape(useshape.hRef);
                     if (currentUsedShape != null)
                     {
-                        currentUsedShape.RealParent = useshape;
                         Shape oldparent = currentUsedShape.Parent;
+                        //currentUsedShape.RealParent = useshape;
+                        currentUsedShape.Parent = useshape;
                         DrawingGroup subgroup;
                         if (currentUsedShape is Group)
                             subgroup = this.LoadGroup(((Group)currentUsedShape).Elements, null, false);
@@ -370,9 +331,9 @@ namespace SVGImage.SVG
                     }
                     continue;
                 }
-                if (shape is Clip)
+                if (shape is Clip clip)
                 {
-                    var subgroup = this.LoadGroup((shape as Clip).Elements, null, false);
+                    var subgroup = this.LoadGroup(clip.Elements, null, false);
                     if (shape.Transform != null)
                         subgroup.Transform = shape.Transform;
                     grp.Children.Add(subgroup);
@@ -384,15 +345,14 @@ namespace SVGImage.SVG
                     AddDrawingToGroup(grp, shape, subgroup);
                     continue;
                 }
-                if (shape is RectangleShape)
+                if (shape is RectangleShape rectShape)
                 {
-                    RectangleShape r = shape as RectangleShape;
-                    double dx     = r.X;
-                    double dy     = r.Y;
-                    double width  = r.Width;
-                    double height = r.Height;
-                    double rx     = r.RX;
-                    double ry     = r.RY;
+                    double dx     = rectShape.X;
+                    double dy     = rectShape.Y;
+                    double width  = rectShape.Width;
+                    double height = rectShape.Height;
+                    double rx     = rectShape.RX;
+                    double ry     = rectShape.RY;
                     if (width <= 0 || height <= 0)
                     {
                         continue;
@@ -411,72 +371,66 @@ namespace SVGImage.SVG
                     AddDrawingToGroup(grp, shape, di);
                     continue;
                 }
-                if (shape is LineShape)
+                if (shape is LineShape lineShape)
                 {
-                    LineShape r = shape as LineShape;
-                    LineGeometry line = new LineGeometry(r.P1, r.P2);
+                    LineGeometry line = new LineGeometry(lineShape.P1, lineShape.P2);
                     var di = this.NewDrawingItem(shape, line);
                     AddDrawingToGroup(grp, shape, di);
                     continue;
                 }
-                if (shape is PolylineShape)
+                if (shape is PolylineShape polyline)
                 {
-                    PolylineShape r = shape as PolylineShape;
                     PathGeometry path = new PathGeometry();
                     PathFigure p = new PathFigure();
                     path.Figures.Add(p);
                     p.IsClosed = false;
-                    p.StartPoint = r.Points[0];
-                    for (int index = 1; index < r.Points.Length; index++)
+                    p.StartPoint = polyline.Points[0];
+                    for (int index = 1; index < polyline.Points.Length; index++)
                     {
-                        p.Segments.Add(new LineSegment(r.Points[index], true));
+                        p.Segments.Add(new LineSegment(polyline.Points[index], true));
                     }
                     var di = this.NewDrawingItem(shape, path);
                     AddDrawingToGroup(grp, shape, di);
                     continue;
                 }
-                if (shape is PolygonShape)
+                if (shape is PolygonShape polygon)
                 {
-                    PolygonShape r = shape as PolygonShape;
                     PathGeometry path = new PathGeometry();
                     PathFigure p = new PathFigure();
                     path.Figures.Add(p);
                     p.IsClosed = true;
-                    p.StartPoint = r.Points[0];
-                    for (int index = 1; index < r.Points.Length; index++)
+                    p.StartPoint = polygon.Points[0];
+                    for (int index = 1; index < polygon.Points.Length; index++)
                     {
-                        p.Segments.Add(new LineSegment(r.Points[index], true));
+                        p.Segments.Add(new LineSegment(polygon.Points[index], true));
                     }
                     var di = this.NewDrawingItem(shape, path);
                     AddDrawingToGroup(grp, shape, di);
                     continue;
                 }
-                if (shape is CircleShape)
+                if (shape is CircleShape circle)
                 {
-                    CircleShape r = shape as CircleShape;
-                    EllipseGeometry c = new EllipseGeometry(new Point(r.CX, r.CY), r.R, r.R);
+                    EllipseGeometry c = new EllipseGeometry(new Point(circle.CX, circle.CY), circle.R, circle.R);
                     var di = this.NewDrawingItem(shape, c);
                     AddDrawingToGroup(grp, shape, di);
                     continue;
                 }
-                if (shape is EllipseShape)
+                if (shape is EllipseShape ellipse)
                 {
-                    EllipseShape r = shape as EllipseShape;
-                    EllipseGeometry c = new EllipseGeometry(new Point(r.CX, r.CY), r.RX, r.RY);
+                    EllipseGeometry c = new EllipseGeometry(new Point(ellipse.CX, ellipse.CY), ellipse.RX, ellipse.RY);
                     var di = this.NewDrawingItem(shape, c);
                     AddDrawingToGroup(grp, shape, di);
                     continue;
                 }
-                if (shape is ImageShape)
+                if (shape is ImageShape image)
                 {
-                    ImageShape image = shape as ImageShape;
                     var i = new ImageDrawing(image.ImageSource, new Rect(image.X, image.Y, image.Width, image.Height));
                     AddDrawingToGroup(grp, shape, i);
                     continue;
                 }
-                if (shape is TextShape)
+                if (shape is TextShape textShape)
                 {
-                    GeometryGroup gp = TextRender.BuildTextGeometry(shape as TextShape);
+                    GeometryGroup gp = TextRender.BuildTextGeometry(textShape);
                     if (gp != null)
                     {
                         foreach (Geometry gm in gp.Children)
@@ -496,33 +450,24 @@ namespace SVGImage.SVG
                     }
                     continue;
                 }
-                if (shape is PathShape)
+                if (shape is PathShape pathShape)
                 {
-                    PathShape r = shape as PathShape;
                     var svg = this.SVG;
-                    if (r.Fill == null || r.Fill.IsEmpty(svg))
+                    if (pathShape.Fill == null || pathShape.Fill.IsEmpty(svg))
                     {
-                        if (r.Stroke == null || r.Stroke.IsEmpty(svg))
+                        if (pathShape.Stroke == null || pathShape.Stroke.IsEmpty(svg))
                         {
                             var fill = new Fill(svg);
                             fill.PaintServerKey = this.SVG.PaintServers.Parse("black");
-                            r.Fill = fill;
+                            pathShape.Fill = fill;
                         }
                     }
-                    PathGeometry path = PathGeometry.CreateFromGeometry(PathGeometry.Parse(r.Data));
+                    var path = PathGeometry.CreateFromGeometry(PathGeometry.Parse(pathShape.Data));
                     var di = this.NewDrawingItem(shape, path);
                     AddDrawingToGroup(grp, shape, di);
                 }
             }
 
-
-            if (debugPoints != null)
-            {
-                foreach (ControlLine line in debugPoints)
-                {
-                    grp.Children.Add(line.Draw());
-                }
-            }
             return grp;
         }
 
