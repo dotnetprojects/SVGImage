@@ -2,6 +2,10 @@
 using System.Windows;
 using System.Windows.Markup;
 
+#if NETNEXT
+[assembly: System.Runtime.Versioning.SupportedOSPlatform("windows7.0")]
+#endif
+
 //In order to begin building localizable applications, set 
 //<UICulture>CultureYouAreCodingWith</UICulture> in your .csproj file
 //inside a <PropertyGroup>.  For example, if you are using US english

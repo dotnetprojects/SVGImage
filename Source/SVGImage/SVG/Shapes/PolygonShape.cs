@@ -15,8 +15,7 @@ namespace SVGImage.SVG.Shapes
         {
             if (DefaultFill == null)
             {
-                DefaultFill = new Fill(svg);
-                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
+                DefaultFill = Fill.CreateDefault(svg, "black");
             }
 
             string points = XmlUtil.AttrValue(node, SVGTags.sPoints, string.Empty);
