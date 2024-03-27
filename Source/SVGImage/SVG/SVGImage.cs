@@ -872,7 +872,7 @@ namespace SVGImage.SVG
 
         static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var sourceUri = new Uri(e.NewValue.ToString(), UriKind.Relative);
+            var sourceUri = e.NewValue != null ? new Uri(e.NewValue.ToString(), UriKind.Relative) : null;
             var resource = e.NewValue != null ? Application.GetResourceStream(sourceUri) : null;
             ((SVGImage)d).SetImage(resource != null ? resource.Stream : null);
         }
