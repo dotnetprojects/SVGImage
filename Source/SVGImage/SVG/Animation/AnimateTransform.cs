@@ -23,8 +23,9 @@ namespace SVGImage.SVG.Animation
         public AnimateTransform(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)
         {
-            this.Type = (AnimateTransformType)Enum.Parse(typeof(AnimateTransformType), 
-                XmlUtil.AttrValue(node, "type", "translate"), true);
+            var valTranslate = XmlUtil.AttrValue(node, "type", "translate");
+            if (Enum.TryParse<AnimateTransformType>(valTranslate, true, out var parsed))
+                this.Type = parsed;
             this.From = XmlUtil.AttrValue(node, "from", null);
             this.To = XmlUtil.AttrValue(node, "to", null);
             this.AttributeName = XmlUtil.AttrValue(node, "attributeName", null);

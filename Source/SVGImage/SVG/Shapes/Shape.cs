@@ -252,12 +252,14 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sStrokeLinecap)
             {
-                this.GetStroke(svg).LineCap = (Stroke.eLineCap)Enum.Parse(typeof(Stroke.eLineCap), value);
+                if (Enum.TryParse<Stroke.eLineCap>(value, true, out var parsed))
+                    this.GetStroke(svg).LineCap = parsed;
                 return;
             }
             if (name == SVGTags.sStrokeLinejoin)
             {
-                this.GetStroke(svg).LineJoin = (Stroke.eLineJoin)Enum.Parse(typeof(Stroke.eLineJoin), value);
+                if (Enum.TryParse<Stroke.eLineJoin>(value, true, out var parsed))
+                    this.GetStroke(svg).LineJoin = parsed;
                 return;
             }
             if (name == SVGTags.sFilterProperty)
@@ -303,7 +305,8 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sFillRule)
             {
-                this.GetFill(svg).FillRule = (Fill.eFillRule)Enum.Parse(typeof(Fill.eFillRule), value);
+                if (Enum.TryParse<Fill.eFillRule>(value, true, out var parsed))
+                    this.GetFill(svg).FillRule = parsed;
                 return;
             }
             if (name == SVGTags.sOpacity)
