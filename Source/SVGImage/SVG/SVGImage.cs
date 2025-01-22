@@ -163,6 +163,12 @@ namespace SVGImage.SVG
             set { this.SetValue(ImageSourcePoperty, value); }
         }
 
+        public Rect Bounds
+        {
+            get { return m_drawing.Bounds; }
+            set { }
+        }
+
         public bool UseAnimations
         {
             get { return (bool)GetValue(UseAnimationsProperty); }
