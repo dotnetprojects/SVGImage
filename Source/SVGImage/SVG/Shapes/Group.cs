@@ -111,8 +111,9 @@ namespace SVGImage.SVG.Shapes
 
             if (retVal != null)
             {
-                m_elements.Add(retVal);
-                if (retVal.Id.Length > 0 && !isDefinition)
+                if (!isDefinition)
+                    m_elements.Add(retVal);
+                if (retVal.Id.Length > 0)
                     svg.AddShape(retVal.Id, retVal);
             }
 
