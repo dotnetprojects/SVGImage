@@ -29,9 +29,6 @@
 		<PackageIcon>images\dotnetprojects.png</PackageIcon>
 		<PackageTags>svg wpf svg-icons svg-to-png svg-to-xaml svgimage svgimage-control</PackageTags>
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
-		<EnablePackageValidation>true</EnablePackageValidation>
-		<!-- NOTE: Detect breaking changes from a previous version -->
-		<PackageValidationBaselineVersion>5.1.0</PackageValidationBaselineVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

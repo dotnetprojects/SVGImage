@@ -109,10 +109,10 @@ namespace SVGImage.SVG.Shapes
                 retVal = new Group(svg, childnode, parent);
             }
 
-            if (retVal != null && !isDefinition)
+            if (retVal != null)
             {
                 m_elements.Add(retVal);
-                if (retVal.Id.Length > 0)
+                if (retVal.Id.Length > 0 && !isDefinition)
                     svg.AddShape(retVal.Id, retVal);
             }
 
