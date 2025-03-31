@@ -17,7 +17,6 @@ namespace SVGImage.SVG
     using PaintServers;
     using Shapes;
     using Utils;
-    using Group = Shapes.Group;
 
     /// <summary>
     /// This is the class that reads and parses the XML file.
@@ -27,12 +26,12 @@ namespace SVGImage.SVG
         internal Dictionary<string, Shape> m_shapes;
         internal Dictionary<string, List<StyleItem>> m_styles;
 
-        private List<Shape> m_elements;
+        private readonly List<Shape> m_elements = new List<Shape>();
         private Dictionary<string, Brush> m_customBrushes;
 
         public SVG()
         {
-            this.Size     = new Size(300, 150);
+            this.Size = new Size(300, 150);
             this.Filename = "";
             m_shapes = new Dictionary<string, Shape>();
             m_styles = new Dictionary<string, List<StyleItem>>();
@@ -84,7 +83,8 @@ namespace SVGImage.SVG
         public Dictionary<string, Brush> CustomBrushes
         {
             get => m_customBrushes;
-            set {
+            set
+            {
                 m_customBrushes = value;
                 if (m_customBrushes != null)
                 {
@@ -98,7 +98,8 @@ namespace SVGImage.SVG
 
         internal IDictionary<string, List<StyleItem>> Styles
         {
-            get {
+            get
+            {
                 return m_styles;
             }
         }
@@ -123,17 +124,7 @@ namespace SVGImage.SVG
 
         public PaintServerManager PaintServers { get; } = new PaintServerManager();
 
-        public IList<Shape> Elements 
-        {
-            get {
-                if (m_elements == null)
-                {
-                    return new List<Shape>();
-                }
-
-                return m_elements.AsReadOnly();
-            }
-        }
+        public IList<Shape> Elements => m_elements.AsReadOnly();
 
         public void LoadXml(string fileXml)
         {
@@ -273,7 +264,7 @@ namespace SVGImage.SVG
 
             XmlNode svgTag = svgTags[0];
 
-            m_elements = this.Parse(svgTag);
+            Parse(svgTag);
         }
 
         private void Load(XmlNode svgTag)
@@ -284,7 +275,7 @@ namespace SVGImage.SVG
             }
             this.LoadStyles(svgTag);
 
-            m_elements = this.Parse(svgTag);
+            Parse(svgTag);
         }
 
         private void LoadStyles(XmlNode doc)
@@ -295,8 +286,8 @@ namespace SVGImage.SVG
             }
 
             var cssUrlNodes = (from XmlNode childNode in doc.ChildNodes
-                where childNode.NodeType == XmlNodeType.ProcessingInstruction && childNode.Name == "xml-stylesheet"
-                select (XmlProcessingInstruction) childNode).ToList();
+                               where childNode.NodeType == XmlNodeType.ProcessingInstruction && childNode.Name == "xml-stylesheet"
+                               select (XmlProcessingInstruction)childNode).ToList();
 
             if (cssUrlNodes.Count != 0)
             {
@@ -319,27 +310,26 @@ namespace SVGImage.SVG
             }
         }
 
-        private List<Shape> Parse(XmlNode node)
+        private void Parse(XmlNode node)
         {
+            if (node == null || (node.Name != SVGTags.sSvg && node.Name != SVGTags.sPattern))
+                throw new FormatException("Not a valide SVG node");
+
             var vb = node.Attributes.GetNamedItem("viewBox");
             if (vb != null)
             {
                 var cord = vb.Value.Split(' ');
                 var cult = CultureInfo.InvariantCulture;
-                this.ViewBox = new Rect(double.Parse(cord[0], cult), 
+                this.ViewBox = new Rect(double.Parse(cord[0], cult),
                     double.Parse(cord[1], cult), double.Parse(cord[2], cult), double.Parse(cord[3], cult));
             }
 
             this.Size = new Size(XmlUtil.AttrValue(node, "width", 300), XmlUtil.AttrValue(node, "height", 150));
-            
-            var lstElements = new List<Shape>();
-            if (node == null || (node.Name != SVGTags.sSvg && node.Name != SVGTags.sPattern))
-                throw new FormatException("Not a valide SVG node");
 
-            foreach (XmlNode childnode in node.ChildNodes)
-                Group.AddToList(this, lstElements, childnode, null);
-
-            return lstElements;
+            // Since SVG has the same functionality as Group we treat it as such, and copy over the children.
+            // It might be more ideal if we would inherit from Group, but that also has its complications.
+            var svgGroup = new Group(this, node, null);
+            m_elements.AddRange(svgGroup.Elements);
         }
     }
 }

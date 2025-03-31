@@ -124,11 +124,11 @@ namespace SVGImage.SVG
 
         public SVGImage()
         {
-            this.ClipToBounds        = true;
+            this.ClipToBounds = true;
             this.SnapsToDevicePixels = true;
 
-            m_offsetTransform        = new TranslateTransform();
-            m_scaleTransform         = new ScaleTransform();
+            m_offsetTransform = new TranslateTransform();
+            m_scaleTransform = new ScaleTransform();
         }
 
         public SVG SVG
@@ -219,10 +219,12 @@ namespace SVGImage.SVG
         /// <seealso cref="UriSource"/>
         public Uri UriSource
         {
-            get {
+            get
+            {
                 return (Uri)GetValue(UriSourceProperty);
             }
-            set {
+            set
+            {
                 this.SetValue(UriSourceProperty, value);
             }
         }
@@ -235,10 +237,12 @@ namespace SVGImage.SVG
         /// </value>
         public Uri BaseUri
         {
-            get {
+            get
+            {
                 return _baseUri;
             }
-            set {
+            set
+            {
                 _baseUri = value;
             }
         }
@@ -252,13 +256,13 @@ namespace SVGImage.SVG
             else if (this.IsInitialized && _loadImage != null)
             {
                 _render = new SVGRender();
-                _render.ExternalFileLoader  = this.ExternalFileLoader;
-                _render.OverrideColor       = OverrideColor;
-                _render.OverrideFillColor   = OverrideFillColor;
+                _render.ExternalFileLoader = this.ExternalFileLoader;
+                _render.OverrideColor = OverrideColor;
+                _render.OverrideFillColor = OverrideFillColor;
                 _render.OverrideStrokeColor = OverrideStrokeColor;
-                _render.CustomBrushes       = CustomBrushes;
+                _render.CustomBrushes = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
-                _render.UseAnimations       = this.UseAnimations;
+                _render.UseAnimations = this.UseAnimations;
 
                 _loadImage(_render);
                 _loadImage = null;
@@ -275,12 +279,12 @@ namespace SVGImage.SVG
             if (this.IsInitialized || DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
-                _render.ExternalFileLoader  = this.ExternalFileLoader;
-                _render.UseAnimations       = false;
-                _render.OverrideColor       = OverrideColor;
-                _render.OverrideFillColor   = OverrideFillColor;
+                _render.ExternalFileLoader = this.ExternalFileLoader;
+                _render.UseAnimations = false;
+                _render.OverrideColor = OverrideColor;
+                _render.OverrideFillColor = OverrideFillColor;
                 _render.OverrideStrokeColor = OverrideStrokeColor;
-                _render.CustomBrushes       = CustomBrushes;
+                _render.CustomBrushes = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
 
                 _loadImage(_render);
@@ -298,13 +302,13 @@ namespace SVGImage.SVG
             if (this.IsInitialized || DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
-                _render.ExternalFileLoader  = this.ExternalFileLoader;
-                _render.OverrideColor       = OverrideColor;
-                _render.OverrideFillColor   = OverrideFillColor;
+                _render.ExternalFileLoader = this.ExternalFileLoader;
+                _render.OverrideColor = OverrideColor;
+                _render.OverrideFillColor = OverrideFillColor;
                 _render.OverrideStrokeColor = OverrideStrokeColor;
-                _render.CustomBrushes       = CustomBrushes;
+                _render.CustomBrushes = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
-                _render.UseAnimations       = false;
+                _render.UseAnimations = false;
 
                 _loadImage(_render);
                 _loadImage = null;
@@ -322,13 +326,13 @@ namespace SVGImage.SVG
             if (this.IsInitialized || DesignerProperties.GetIsInDesignMode(this))
             {
                 _render = new SVGRender();
-                _render.ExternalFileLoader  = this.ExternalFileLoader;
-                _render.OverrideColor       = OverrideColor;
-                _render.OverrideFillColor   = OverrideFillColor;
+                _render.ExternalFileLoader = this.ExternalFileLoader;
+                _render.OverrideColor = OverrideColor;
+                _render.OverrideFillColor = OverrideFillColor;
                 _render.OverrideStrokeColor = OverrideStrokeColor;
-                _render.CustomBrushes       = CustomBrushes;
+                _render.CustomBrushes = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
-                _render.UseAnimations       = false;
+                _render.UseAnimations = false;
 
                 _loadImage(_render);
                 _loadImage = null;
@@ -352,13 +356,13 @@ namespace SVGImage.SVG
             if (_loadImage != null)
             {
                 _render = new SVGRender();
-                _render.ExternalFileLoader  = this.ExternalFileLoader;
-                _render.OverrideColor       = OverrideColor;
-                _render.OverrideFillColor   = OverrideFillColor;
+                _render.ExternalFileLoader = this.ExternalFileLoader;
+                _render.OverrideColor = OverrideColor;
+                _render.OverrideFillColor = OverrideFillColor;
                 _render.OverrideStrokeColor = OverrideStrokeColor;
-                _render.CustomBrushes       = CustomBrushes;
+                _render.CustomBrushes = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
-                _render.UseAnimations       = this.UseAnimations;
+                _render.UseAnimations = this.UseAnimations;
 
                 _loadImage(_render);
                 _loadImage = null;
@@ -675,7 +679,14 @@ namespace SVGImage.SVG
             svgPath = svgPath.Replace('/', '\\');
 
             Assembly assembly = Assembly.GetExecutingAssembly();
-            string localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+
+#if (DOTNET40 || DOTNET45)
+            var appBaseDirectory = Path.GetDirectoryName(assembly.Location);
+#else
+            var appBaseDirectory = AppContext.BaseDirectory;
+#endif
+
+            string localFile = Path.Combine(appBaseDirectory, svgPath);
 
             if (File.Exists(localFile))
             {
@@ -845,7 +856,7 @@ namespace SVGImage.SVG
 
         private static void OnUriSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            SVGImage svgImage= obj as SVGImage;
+            SVGImage svgImage = obj as SVGImage;
             if (svgImage == null)
             {
                 return;
@@ -854,13 +865,13 @@ namespace SVGImage.SVG
             var sourceUri = (Uri)args.NewValue;
             if (sourceUri != null)
             {
-                svgImage.SetImage(sourceUri);    
+                svgImage.SetImage(sourceUri);
             }
             else
             {
                 svgImage.SetImage((Drawing)null);
             }
-            
+
         }
 
         static void OnSizeTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

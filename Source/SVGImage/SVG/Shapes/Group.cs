@@ -24,21 +24,23 @@ namespace SVGImage.SVG.Shapes
                 this.m_clip = result as Clip;
             }
 
-            this.Parent = parent;
+            Parent = parent;
             foreach (XmlNode childnode in node.ChildNodes)
             {
-                Shape shape = AddToList(svg, this.m_elements, childnode, this);
-                if (shape != null) shape.Parent = this;
+                Shape shape = AddToList(svg, childnode, this);
+                if (shape != null)
+                    shape.Parent = this;
             }
         }
 
-        public IList<Shape> Elements => this.m_elements.AsReadOnly();
+        public IList<Shape> Elements => m_elements.AsReadOnly();
 
         public bool IsSwitch { get; set; }
 
-        public static Shape AddToList(SVG svg, List<Shape> list, XmlNode childnode, Shape parent)
+        private Shape AddToList(SVG svg, XmlNode childnode, Shape parent, bool isDefinition = false)
         {
-            if (childnode.NodeType != XmlNodeType.Element) return null;
+            if (childnode.NodeType != XmlNodeType.Element)
+                return null;
 
             Shape retVal = null;
 
@@ -72,7 +74,7 @@ namespace SVGImage.SVG.Shapes
             else if (nodeName == SVGTags.sShapeGroup)
                 retVal = new Group(svg, childnode, parent);
             else if (nodeName == SVGTags.sSwitch)
-                retVal = new Group(svg, childnode, parent) {IsSwitch = true};
+                retVal = new Group(svg, childnode, parent) { IsSwitch = true };
             else if (nodeName == SVGTags.sShapeUse)
                 retVal = new UseShape(svg, childnode);
             else if (nodeName == SVGTags.sShapeImage)
@@ -99,7 +101,7 @@ namespace SVGImage.SVG.Shapes
             }
             else if (nodeName == SVGTags.sDefinitions)
             {
-                ReadDefs(svg, list, childnode);
+                ReadDefs(svg, childnode);
                 return null;
             }
             else if (nodeName == SVGTags.sSymbol)
@@ -109,7 +111,8 @@ namespace SVGImage.SVG.Shapes
 
             if (retVal != null)
             {
-                list.Add(retVal);
+                if (!isDefinition)
+                    m_elements.Add(retVal);
                 if (retVal.Id.Length > 0)
                     svg.AddShape(retVal.Id, retVal);
             }
@@ -122,9 +125,8 @@ namespace SVGImage.SVG.Shapes
             return retVal;
         }
 
-        private static void ReadDefs(SVG svg, List<Shape> list, XmlNode node)
+        private void ReadDefs(SVG svg, XmlNode node)
         {
-            list = new List<Shape>(); // temp list, not needed. 
             //ShapeGroups defined in the 'def' section is added the the 'Shapes' dictionary in SVG for later reference
             foreach (XmlNode childnode in node.ChildNodes)
             {
@@ -137,7 +139,7 @@ namespace SVGImage.SVG.Shapes
                     continue;
                 }
 
-                Group.AddToList(svg, list, childnode, null);
+                AddToList(svg, childnode, null, isDefinition: true);
             }
         }
 
