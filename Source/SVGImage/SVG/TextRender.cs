@@ -55,6 +55,17 @@ namespace SVGImage.SVG
         {
             foreach (TextSpan child in tspan.Children)
             {
+                double spanX = x;
+                double spanY = y;
+
+                // Absolute positioning if defined
+                if (child.X.HasValue) { spanX = child.X.Value; x = spanX; }
+                if (child.Y.HasValue) { spanY = child.Y.Value; y = spanY; }
+
+                // Relative positioning
+                if (child.DX.HasValue) { spanX += child.DX.Value; x = spanX; }
+                if (child.DY.HasValue) { spanY += child.DY.Value; y = spanY; }
+
                 if (child.ElementType == TextSpan.eElementType.Text)
                 {
                     string txt = child.Text;
@@ -62,9 +73,9 @@ namespace SVGImage.SVG
                     double baseline = y;
 
                     if (child.TextStyle.BaseLineShift == "sub")
-                        baseline += child.TextStyle.FontSize * 0.5; /* * cap height ? fontSize*/;
+                        baseline += child.TextStyle.FontSize * 0.5;
                     if (child.TextStyle.BaseLineShift == "super")
-                        baseline -= tspan.TextStyle.FontSize + (child.TextStyle.FontSize * 0.25)/*font.CapsHeight * fontSize*/;
+                        baseline -= tspan.TextStyle.FontSize + (child.TextStyle.FontSize * 0.25);
 
                     Geometry gm = BuildGlyphRun(child.TextStyle, txt, x, baseline, ref totalwidth);
                     TextRender.SetElement(gm, child);

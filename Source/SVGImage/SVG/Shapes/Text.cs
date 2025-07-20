@@ -6,6 +6,7 @@ namespace SVGImage.SVG
 {
     using Utils;
     using Shapes;
+    using System.Linq;
 
     public sealed class TextShape : Shape
     {
@@ -90,6 +91,11 @@ namespace SVGImage.SVG
         public int StartIndex {get; set;}
         public string Text {get; set;}
         public TextSpan End {get; set;}
+        public double? X { get; set; }
+        public double? Y { get; set; }
+        public double? DX { get; set; }
+        public double? DY { get; set; }
+
         public TextSpan(SVG svg, Shape parent, string text) : base(svg, (XmlNode)null, parent)
         {
             this.ElementType = eElementType.Text;
@@ -101,6 +107,20 @@ namespace SVGImage.SVG
             this.ElementType = eType;
             this.Text = string.Empty;
             this.Children = new List<TextSpan>();
+
+            if (!(attrs is null))
+            {
+                foreach (var attr in attrs)
+                {
+                    switch (attr.Name)
+                    {
+                        case "x": this.X = Double.Parse(attr.Value); break;
+                        case "y": this.Y = Double.Parse(attr.Value); break;
+                        case "dx": this.DX = Double.Parse(attr.Value); break;
+                        case "dy": this.DY = Double.Parse(attr.Value); break;
+                    }
+                }
+            }
         }
         public override string ToString()
         {
