@@ -88,7 +88,8 @@ namespace SVGImage.SVG.Shapes
             else if (nodeName == SVGTags.sAnimateTransform)
                 retVal = new AnimateTransform(svg, childnode, parent);
             else if (nodeName == SVGTags.sText)
-                retVal = new TextShape(svg, childnode, parent);
+                //retVal = new TextShape(svg, childnode, parent);
+                retVal = new Text(svg, childnode, parent);
             else if (nodeName == SVGTags.sLinearGradient)
             {
                 svg.PaintServers.Create(svg, childnode);

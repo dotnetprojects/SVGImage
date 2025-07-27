@@ -428,14 +428,15 @@ namespace SVGImage.SVG
                     AddDrawingToGroup(grp, shape, i);
                     continue;
                 }
-                if (shape is TextShape textShape)
+                if (shape is Text textShape)
                 {
-                    GeometryGroup gp = TextRender.BuildTextGeometry(textShape);
+                    TextRender2 textRender2 = new TextRender2();
+                    GeometryGroup gp = textRender2.BuildTextGeometry(textShape);
                     if (gp != null)
                     {
                         foreach (Geometry gm in gp.Children)
                         {
-                            TextSpan tspan = TextRender.GetElement(gm);
+                            TextSpan tspan = TextRender2.GetElement(gm);
                             if (tspan != null)
                             {
                                 var di = this.NewDrawingItem(tspan, gm);
