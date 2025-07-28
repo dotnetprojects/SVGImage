@@ -18,6 +18,18 @@ namespace SVGImage.SVG.Shapes
             _owner = owner;
             _orientation = orientation;
         }
+        /// <summary>
+        /// Creates a new instance of LengthPercentageOrNumberList with the specified owner and orientation.
+        /// </summary>
+        /// <param name="owner">
+        /// The element that the length list is associated with.
+        /// </param>
+        /// <param name="value">A string representation of a length list</param>
+        /// <param name="orientation">Used to establish the context of the lengths.
+        /// Should be <see cref="LengthOrientation.Horizontal"/> for inherntly horizontal values like 'x' and 'dx'.
+        /// Should be <see cref="LengthOrientation.Vertical"/> for inherntly vertical values like 'y' and 'dy'.
+        /// Should be <see cref="LengthOrientation.None"/> for other values.
+        /// </param>
         public LengthPercentageOrNumberList(Shape owner, string value, LengthOrientation orientation = LengthOrientation.None) : this(owner, orientation)
         {
             Parse(value);

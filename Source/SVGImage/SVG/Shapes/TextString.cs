@@ -6,14 +6,20 @@
 
     [DebuggerDisplay("{Text}")]
     /// <summary>
-    /// Text not wrapped in a tspan element.
+    /// The leaf of the Text tree
     /// </summary>
     public class TextString : ITextChild
     {
+        private static readonly Regex _trimmedWhitespace = new Regex(@"\s+", RegexOptions.Compiled | RegexOptions.Singleline);
+        /// <summary>
+        /// Represents the layout info for the string of text owned by this TextString.
+        /// </summary>
         public CharacterLayout[] Characters { get; set; }
         public Shape Parent { get; set; }
-        public int Index { get; set; }
-        private static readonly Regex _trimmedWhitespace = new Regex(@"\s+", RegexOptions.Compiled | RegexOptions.Singleline);
+        /// <summary>
+        /// The index of this TextString in the root TextShape. This is set by the <see cref="TextRender"/>.
+        /// </summary>
+        public int Index { get; internal set; }
         public TextString(Shape parent, string text)
         {
             Parent = parent;

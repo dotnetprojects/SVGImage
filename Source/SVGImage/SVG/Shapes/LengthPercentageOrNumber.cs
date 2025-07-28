@@ -9,6 +9,9 @@ namespace SVGImage.SVG.Shapes
         private static readonly Regex _lengthRegex = new Regex(@"(?<Value>\d+(?:\.\d+)?)\s*(?<Unit>%|\w+)?", RegexOptions.Compiled | RegexOptions.Singleline);
         private readonly LengthContext _context;
         private readonly double _value;
+        /// <summary>
+        /// Represents a length, percentage, or number value that has been resolved based on the context.
+        /// </summary>
         public double Value => ResolveValue();
 
         
@@ -130,15 +133,33 @@ namespace SVGImage.SVG.Shapes
             }
         }
         /// <summary>
-        /// 
+        /// Represents a length that may have a value that is context dependent.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="context">If null, units will be ignored</param>
+        /// <param name="value">The numerical part of the length that is related to the <paramref name="context"/></param>
+        /// <param name="context">If <see langword="null"/>, units will be ignored</param>
         public LengthPercentageOrNumber(double value, LengthContext context)
         {
             _context = context;
             _value = value;
         }
+        /// <summary>
+        /// Parses a string representation of a length, percentage, or number value into a <see cref="LengthPercentageOrNumber"/> instance.
+        /// </summary>
+        /// <param name="owner">
+        /// The element that the length is associated with.
+        /// </param>
+        /// <param name="value">A string representation of a length</param>
+        /// <param name="orientation">Used to establish the context of the length.
+        /// Should be <see cref="LengthOrientation.Horizontal"/> for inherntly horizontal values like 'x' and 'dx'.
+        /// Should be <see cref="LengthOrientation.Vertical"/> for inherntly vertical values like 'y' and 'dy'.
+        /// Should be <see cref="LengthOrientation.None"/> for other values.
+        /// </param>
+        /// <returns>
+        /// A <see cref="LengthPercentageOrNumber"/> instance that represents the parsed value.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the provided value is not a valid length, percentage, or number.
+        /// </exception>
         public static LengthPercentageOrNumber Parse(Shape owner, string value, LengthOrientation orientation = LengthOrientation.None)
         {
             var lengthMatch = _lengthRegex.Match(value.Trim());

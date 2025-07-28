@@ -8,6 +8,9 @@ namespace SVGImage.SVG
     using Shapes;
     using System.Linq;
 
+    /// <summary>
+    /// The original TextShape class.
+    /// </summary>
     public sealed class TextShape2 : Shape
     {
         public TextShape2(SVG svg, XmlNode node, Shape parent)

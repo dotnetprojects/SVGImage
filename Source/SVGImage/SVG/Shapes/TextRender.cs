@@ -8,10 +8,11 @@ namespace SVGImage.SVG.Shapes
     using System.Linq;
     using System.Windows.Markup;
 
+    /// <summary>
+    /// This class is responsible for rendering text shapes in SVG.
+    /// </summary>
     public sealed partial class TextRender : TextRenderBase
     {
-        
-
         public override GeometryGroup BuildTextGeometry(TextShape text)
         {
 
