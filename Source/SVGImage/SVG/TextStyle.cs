@@ -2,11 +2,17 @@
 
 namespace SVGImage.SVG
 {
+    using global::SVGImage.SVG.Utils;
     using Shapes;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Windows.Media;
-
     public sealed class TextStyle
     {
+        private static readonly FontResolver _fontResolver = new FontResolver(0);
         //This should be configurable in some way.
         private static readonly TextStyle _defaults = new TextStyle()
         {
@@ -48,7 +54,8 @@ namespace SVGImage.SVG
 
         public Typeface GetTypeface()
         {
-            return  new Typeface(new FontFamily(FontFamily),
+            var fontFamily = _fontResolver.ResolveFontFamily(FontFamily);
+            return new Typeface(fontFamily,
             Fontstyle,
             Fontweight,
             FontStretch.FromOpenTypeStretch(9),
@@ -70,7 +77,7 @@ namespace SVGImage.SVG
         public double FontSize { get => _fontSize ?? _defaults.FontSize; set => _fontSize = value; }
         public FontWeight Fontweight { get => _fontweight ?? _defaults.Fontweight; set => _fontweight = value; }
         public FontStyle Fontstyle { get => _fontstyle ?? _defaults.Fontstyle; set => _fontstyle = value; }
-        public TextDecorationCollection TextDecoration {get; set;}
+        public TextDecorationCollection TextDecoration { get; set; }
         public TextAlignment TextAlignment { get => _textAlignment ?? _defaults.TextAlignment; set => _textAlignment = value; }
         public double WordSpacing { get => _wordSpacing ?? _defaults.WordSpacing; set => _wordSpacing = value; }
         public double LetterSpacing { get => _letterSpacing ?? _defaults.LetterSpacing; set => _letterSpacing = value; }
@@ -101,9 +108,47 @@ namespace SVGImage.SVG
             result._wordSpacing = overrides._wordSpacing ?? baseStyle._wordSpacing;
             result._letterSpacing = overrides._letterSpacing ?? baseStyle._letterSpacing;
             result._baseLineShift = overrides._baseLineShift ?? baseStyle._baseLineShift;
+            if (overrides.TextDecoration != null)
+            {
+                //None was explicitly set
+                if (overrides.TextDecoration.Count <= 0)
+                {
+                    result.TextDecoration = new TextDecorationCollection();
+                }
+                //Copy overrides
+                else if (baseStyle.TextDecoration == null || baseStyle.TextDecoration.Count <= 0)
+                {
+                    result.TextDecoration = new TextDecorationCollection(overrides.TextDecoration.Select(CopyTextDecoration));
+                }
+                //merge with base style
+                else
+                {
+                    var merged = new List<TextDecoration>();
+                    merged.AddRange(baseStyle.TextDecoration.Select(CopyTextDecoration));
+                    merged.AddRange(overrides.TextDecoration.Select(CopyTextDecoration));
+                    result.TextDecoration = new TextDecorationCollection(merged);
+                }
+            }
+            else if (baseStyle.TextDecoration != null)
+            {
+                result.TextDecoration = new TextDecorationCollection(baseStyle.TextDecoration.Select(CopyTextDecoration));
+            }
+            else
+            {
+                result.TextDecoration = null;
+            }
             return result;
         }
-
+        /// <summary>
+        /// Does not clone the TextDecorationCollection, but creates a new instance with the same properties. This prevents issues with shared references in the TextDecorationCollection.
+        /// </summary>
+        /// <param name="textDecoration">The TextDecoration to copy.</param>
+        /// <returns>
+        /// A new TextDecoration instance with the same properties as the original.
+        /// </returns>
+        private static TextDecoration CopyTextDecoration(TextDecoration textDecoration)
+        {
+            return new TextDecoration(textDecoration.Location, textDecoration.Pen, textDecoration.PenOffset, textDecoration.PenOffsetUnit, textDecoration.PenThicknessUnit);
+        }
     }
-    
 }
