@@ -6,24 +6,14 @@ namespace SVGImage.SVG.Shapes
 
     public sealed class RectangleShape : Shape
     {
-        private static Fill DefaultFill = null;
 
         public RectangleShape(SVG svg, XmlNode node) : base(svg, node)
         {
-            if (DefaultFill == null)
-            {
-                DefaultFill = Fill.CreateDefault(svg, "black");
-            }
         }
 
-        public override Fill Fill
+        protected override Fill DefaultFill()
         {
-            get
-            {
-                Fill f = base.Fill;
-                if (f == null) f = DefaultFill;
-                return f;
-            }
+            return Fill.CreateDefault(Svg, "black");
         }
 
         public double X { get; set; }

@@ -71,7 +71,7 @@ namespace SVGImage.SVG
             DependencyProperty.Register("UriSource", typeof(Uri), typeof(SVGImage),
                 new FrameworkPropertyMetadata(null, OnUriSourceChanged));
 
-        public static DependencyProperty SizeTypeProperty = DependencyProperty.Register("SizeType",
+        public static readonly DependencyProperty SizeTypeProperty = DependencyProperty.Register("SizeType",
             typeof(eSizeType), typeof(SVGImage), new FrameworkPropertyMetadata(eSizeType.ContentToSizeNoStretch,
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 new PropertyChangedCallback(OnSizeTypeChanged)));
@@ -84,7 +84,7 @@ namespace SVGImage.SVG
         public static readonly DependencyProperty FileSourceProperty = DependencyProperty.Register("FileSource",
             typeof(string), typeof(SVGImage), new PropertyMetadata(OnFileSourceChanged));
 
-        public static DependencyProperty ImageSourcePoperty = DependencyProperty.Register("ImageSource",
+        public static readonly DependencyProperty ImageSourcePoperty = DependencyProperty.Register("ImageSource",
             typeof(Drawing), typeof(SVGImage), new FrameworkPropertyMetadata(null,
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
                 new PropertyChangedCallback(OnImageSourceChanged)));
@@ -247,6 +247,11 @@ namespace SVGImage.SVG
             }
         }
 
+
+
+        /// <summary>
+        /// Rerenders if CustomBrushesPropertyChanged, OverrideStrokeWidthPropertyChanged, OverrideStrokeColorPropertyChanged, OverrideFillColorPropertyChanged, OverrideColorPropertyChanged
+        /// </summary>
         public void ReRenderSvg()
         {
             if (_render != null)
@@ -364,7 +369,17 @@ namespace SVGImage.SVG
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
                 _render.UseAnimations = this.UseAnimations;
 
-                _loadImage(_render);
+                //This is to prevent double rendering because setting CustomBrushes = brushesFromSVG; invokes ReRenderSvg
+                //Not sure if it has any side effects
+                if (!String.IsNullOrEmpty(FileSource))
+                {
+                    _render.LoadDrawingWithoutRender(FileSource);
+                }
+                else
+                {
+                    _loadImage(_render);
+                }
+                //_loadImage(_render);
                 _loadImage = null;
                 var brushesFromSVG = new Dictionary<string, Brush>();
                 foreach (var server in _render.SVG.PaintServers.GetServers())

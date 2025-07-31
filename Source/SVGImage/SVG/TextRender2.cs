@@ -2,15 +2,15 @@
 using System.Windows.Media;
 using System.Windows;
 using System.Reflection;
+using SVGImage.SVG.Shapes;
+using System.Linq;
+using SVGImage.SVG.Utils;
 
 namespace SVGImage.SVG
 {
-    static class TextRender
+    public class TextRender2 : TextRenderBase
     {
-        private static int dpiX = 0;
-        private static int dpiY = 0;
-
-        static public GeometryGroup BuildTextGeometry(TextShape shape)
+        public override GeometryGroup BuildTextGeometry(TextShape shape)
         {
             return BuildGlyphRun(shape, 0, 0);
         }
@@ -20,60 +20,45 @@ namespace SVGImage.SVG
         static GeometryGroup BuildGlyphRun(TextShape shape, double xoffset, double yoffset)
         {
             GeometryGroup gp = new GeometryGroup();
-            double totalwidth = 0;
-            if (shape.TextSpan == null)
-            {
-                string txt = shape.Text;
-                gp.Children.Add(BuildGlyphRun(shape.TextStyle, txt, shape.X, shape.Y, ref totalwidth));
-                return gp;
-            }
             return BuildTextSpan(shape);
         }
 
         static GeometryGroup BuildTextSpan(TextShape shape)
         {
-            double x = shape.X;
-            double y = shape.Y;
+            double x = shape.X.FirstOrDefault().Value;
+            double y = shape.Y.FirstOrDefault().Value;
             GeometryGroup gp = new GeometryGroup();
-            BuildTextSpan(gp, shape.TextStyle, shape.TextSpan, ref x, ref y);
+            BuildTextSpan(gp, shape.TextStyle, shape, ref x, ref y);
             return gp;
         }
 
-        public static DependencyProperty TSpanElementProperty = DependencyProperty.RegisterAttached(
-            "TSpanElement", typeof(TextSpan), typeof(DependencyObject));
-        public static void SetElement(DependencyObject obj, TextSpan value)
-        {
-            obj.SetValue(TSpanElementProperty, value);
-        }
-        public static TextSpan GetElement(DependencyObject obj)
-        {
-            return (TextSpan)obj.GetValue(TSpanElementProperty);
-        }
+        
 
-        static void BuildTextSpan(GeometryGroup gp, TextStyle textStyle, 
-            TextSpan tspan, ref double x, ref double y)
+        static void BuildTextSpan(GeometryGroup gp, TextStyle textStyle,
+            TextShapeBase tspan, ref double x, ref double y)
         {
-            foreach (TextSpan child in tspan.Children)
+            foreach (ITextNode child in tspan.Children)
             {
-                if (child.ElementType == TextSpan.eElementType.Text)
+                if (child is TextString textString)
                 {
-                    string txt = child.Text;
+                    string txt = textString.Text;
                     double totalwidth = 0;
                     double baseline = y;
 
-                    if (child.TextStyle.BaseLineShift == "sub")
-                        baseline += child.TextStyle.FontSize * 0.5; /* * cap height ? fontSize*/;
-                    if (child.TextStyle.BaseLineShift == "super")
-                        baseline -= tspan.TextStyle.FontSize + (child.TextStyle.FontSize * 0.25)/*font.CapsHeight * fontSize*/;
+                    if (textString.TextStyle.BaseLineShift == "sub")
+                        baseline += textString.TextStyle.FontSize * 0.5; /* * cap height ? fontSize*/;
+                    if (textString.TextStyle.BaseLineShift == "super")
+                        baseline -= tspan.TextStyle.FontSize + (textString.TextStyle.FontSize * 0.25)/*font.CapsHeight * fontSize*/;
 
-                    Geometry gm = BuildGlyphRun(child.TextStyle, txt, x, baseline, ref totalwidth);
-                    TextRender.SetElement(gm, child);
+                    Geometry gm = BuildGlyphRun(textString.TextStyle, txt, x, baseline, ref totalwidth);
+                    TextRender2.SetElement(gm, textString);
                     gp.Children.Add(gm);
                     x += totalwidth;
-                    continue;
                 }
-                if (child.ElementType == TextSpan.eElementType.Tag)
-                    BuildTextSpan(gp, textStyle, child, ref x, ref y);
+                else if (child is TextShapeBase childTspan)
+                {
+                    BuildTextSpan(gp, textStyle, childTspan, ref x, ref y);
+                }
             }
         }
 
@@ -82,19 +67,10 @@ namespace SVGImage.SVG
             if (string.IsNullOrEmpty(text))
                 return new GeometryGroup();
 
-            if (dpiX == 0 || dpiY == 0)
-            {
-                var sysPara = typeof(SystemParameters);
-                var dpiXProperty = sysPara.GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
-                var dpiYProperty = sysPara.GetProperty("Dpi", BindingFlags.NonPublic | BindingFlags.Static);
-
-                dpiX = (int)dpiXProperty.GetValue(null, null);
-                dpiY = (int)dpiYProperty.GetValue(null, null);
-            }
             double fontSize = textStyle.FontSize;
             GlyphRun glyphs = null;
-            Typeface font = new Typeface(new FontFamily(textStyle.FontFamily), 
-                textStyle.Fontstyle, 
+            Typeface font = new Typeface(new FontFamily(textStyle.FontFamily),
+                textStyle.Fontstyle,
                 textStyle.Fontweight,
                 FontStretch.FromOpenTypeStretch(9),
                 new FontFamily("Arial Unicode MS"));
@@ -102,12 +78,10 @@ namespace SVGImage.SVG
             double baseline = y;
             if (font.TryGetGlyphTypeface(out glyphFace))
             {
-#if DOTNET40 || DOTNET45 || DOTNET46
-                glyphs = new GlyphRun();
+#if DPI_AWARE
+                glyphs = new GlyphRun((float)DpiUtil.PixelsPerDip);
 #else
-                var dpiScale = new DpiScale(dpiX, dpiY);
-
-                glyphs = new GlyphRun((float)dpiScale.PixelsPerDip);
+                glyphs = new GlyphRun();
 #endif
                 ((System.ComponentModel.ISupportInitialize)glyphs).BeginInit();
                 glyphs.GlyphTypeface = glyphFace;
@@ -116,7 +90,7 @@ namespace SVGImage.SVG
                 List<ushort> glyphIndices = new List<ushort>();
                 List<double> advanceWidths = new List<double>();
                 totalwidth = 0;
-                char[] charsToSkip = new char[] {'\t', '\r', '\n'};
+                char[] charsToSkip = new char[] { '\t', '\r', '\n' };
                 for (int i = 0; i < text.Length; ++i)
                 {
                     char textchar = text[i];
@@ -124,15 +98,15 @@ namespace SVGImage.SVG
                     //if (charsToSkip.Any<char>(item => item == codepoint))
                     //	continue;
                     ushort glyphIndex;
-                    if (glyphFace.CharacterToGlyphMap.TryGetValue(codepoint, out glyphIndex) == false)
+                    if (!glyphFace.CharacterToGlyphMap.TryGetValue(codepoint, out glyphIndex))
                         continue;
                     textChars.Add(textchar);
                     double glyphWidth = glyphFace.AdvanceWidths[glyphIndex];
                     glyphIndices.Add(glyphIndex);
                     advanceWidths.Add(glyphWidth * fontSize + textStyle.LetterSpacing);
                     if (char.IsWhiteSpace(textchar))
-                        advanceWidths[advanceWidths.Count-1] += textStyle.WordSpacing;
-                    totalwidth += advanceWidths[advanceWidths.Count-1];
+                        advanceWidths[advanceWidths.Count - 1] += textStyle.WordSpacing;
+                    totalwidth += advanceWidths[advanceWidths.Count - 1];
                 }
                 glyphs.Characters = textChars.ToArray();
                 glyphs.GlyphIndices = glyphIndices.ToArray();
@@ -171,7 +145,7 @@ namespace SVGImage.SVG
                 }
                 if (textStyle.TextDecoration[0].Location == TextDecorationLocation.OverLine)
                 {
-                    decorationPos =   baseline - fontSize;
+                    decorationPos = baseline - fontSize;
                     decorationThickness = font.StrikethroughThickness * fontSize;
                 }
                 Rect bounds = new Rect(gp.Bounds.Left, decorationPos, gp.Bounds.Width, decorationThickness);

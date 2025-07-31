@@ -7,30 +7,17 @@ namespace SVGImage.SVG
 
     public sealed class PathShape : Shape
     {
-        static Fill DefaultFill = null;
 
         // http://apike.ca/prog_svg_paths.html
         public PathShape(SVG svg, XmlNode node, Shape parent) : base(svg, node, parent)
         {
-            if (DefaultFill == null)
-            {
-                DefaultFill = Fill.CreateDefault(svg, "black");
-            }
-
             this.ClosePath = false;
             string path = XmlUtil.AttrValue(node, "d", string.Empty);
             this.Data = path;
         }
-
-        public override Fill Fill
+        protected override Fill DefaultFill()
         {
-            get
-            {
-                Fill f = base.Fill;
-                if (f == null)
-                    f = DefaultFill;
-                return f;
-            }
+            return Fill.CreateDefault(Svg, "black");
         }
 
         public bool ClosePath { get; private set; }

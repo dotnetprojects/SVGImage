@@ -8,9 +8,18 @@ namespace SVGImage.SVG.Shapes
 {
     using Utils;
     using Filters;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Windows.Shapes;
+    using System.Windows.Markup;
+    using System.Diagnostics;
+    using System.Text;
+    using System.Collections;
+    using System.Reflection;
 
     public class Shape : ClipArtElement
     {
+        private static readonly Regex _whiteSpaceRegex = new Regex(@"\s+");
         protected Fill m_fill;
 
         protected Stroke m_stroke;
@@ -22,8 +31,10 @@ namespace SVGImage.SVG.Shapes
         internal Clip m_clip = null;
 
         internal Geometry geometryElement;
+        private readonly SVG _svg;
+        public SVG Svg => _svg;
 
-        public bool Display = true;
+        public bool Display { get; private set; } = true;
 
         //Used during render
         internal Shape RealParent;
@@ -33,27 +44,45 @@ namespace SVGImage.SVG.Shapes
         {
         }
 
+        public Shape GetRoot()
+        {
+            Shape root = this;
+            while (root.Parent != null)
+            {
+                root = root.Parent;
+            }
+            return root;
+        }
+        
+
         public Shape(SVG svg, XmlNode node, Shape parent) : base(node)
         {
+            _svg = svg;
             this.Opacity = 1;
             this.Parent = parent;
             this.ParseAtStart(svg, node);
             if (node != null)
             {
+                _ = GetTextStyle(svg); // Ensure TextStyle is initialized
                 foreach (XmlAttribute attr in node.Attributes)
+                {
                     this.Parse(svg, attr.Name, attr.Value);
+                }
             }
             ParseLocalStyle(svg);
         }
 
         public Shape(SVG svg, List<StyleItem> attrs, Shape parent) : base(null)
         {
+            _svg = svg;
             this.Opacity = 1;
             this.Parent = parent;
             if (attrs != null)
             {
                 foreach (StyleItem attr in attrs)
+                {
                     this.Parse(svg, attr.Name, attr.Value);
+                }
             }
             ParseLocalStyle(svg);
         }
@@ -74,53 +103,65 @@ namespace SVGImage.SVG.Shapes
 
         public Visibility Visibility { get; set; }
 
-        public virtual Stroke Stroke
+        protected virtual Stroke DefaultStroke()
         {
-            get
+            var parent = this.Parent;
+            while (parent != null)
             {
-                if (this.m_stroke != null) return this.m_stroke;
-                var parent = this.Parent;
-                while (parent != null)
+                if (parent.Stroke != null)
                 {
-                    if (this.Parent.Stroke != null) return parent.Stroke;
-                    parent = parent.Parent;
+                    return parent.Stroke;
                 }
-                return null;
+
+                parent = parent.Parent;
             }
-            set
-            {
-                m_stroke = value;
-            }
+            return null;
         }
 
-        public virtual Fill Fill
+        public Stroke Stroke
         {
-            get
+            get => m_stroke ?? DefaultStroke();
+            set => m_stroke = value;
+        }
+
+        protected virtual Fill DefaultFill()
+        {
+            var parent = this.Parent;
+            while (parent != null)
             {
-                if (this.m_fill != null) return this.m_fill;
-                var parent = this.Parent;
-                while (parent != null)
+                if (parent.Fill != null)
                 {
-                    if (parent.Fill != null) return parent.Fill;
-                    parent = parent.Parent;
+                    return parent.Fill;
                 }
-                return null;
+
+                parent = parent.Parent;
             }
-            set
-            {
-                m_fill = value;
-            }
+            return null;
+        }
+
+        public Fill Fill
+        {
+            get => m_fill ?? DefaultFill();
+            set => m_fill = value;
         }
 
         public virtual TextStyle TextStyle
         {
             get
             {
-                if (this.m_textstyle != null) return this.m_textstyle;
+                if (this.m_textstyle != null)
+                {
+                    return this.m_textstyle;
+                }
+
                 var parent = this.Parent;
                 while (parent != null)
                 {
-                    if (parent.m_textstyle != null) return parent.m_textstyle;
+                    if (parent.m_textstyle != null)
+                    {
+                        return parent.m_textstyle;
+                    }
+
                     parent = parent.Parent;
                 }
                 return null;
@@ -144,8 +185,10 @@ namespace SVGImage.SVG.Shapes
             if (node != null)
             {
                 var name = node.Name;
-                if (name.Contains(":"))
+                if (name.Contains(':'))
+                {
                     name = name.Split(':')[1];
+                }
 
                 if (svg.m_styles.TryGetValue(name, out var attributes))
                 {
@@ -155,14 +198,11 @@ namespace SVGImage.SVG.Shapes
                     }
                 }
 
-                if (!string.IsNullOrEmpty(this.Id))
+                if (!string.IsNullOrEmpty(this.Id) && svg.m_styles.TryGetValue("#" + this.Id, out attributes))
                 {
-                    if (svg.m_styles.TryGetValue("#" + this.Id, out attributes))
+                    foreach (var xmlAttribute in attributes)
                     {
-                        foreach (var xmlAttribute in attributes)
-                        {
-                            Parse(svg, xmlAttribute.Name, xmlAttribute.Value);
-                        }
+                        Parse(svg, xmlAttribute.Name, xmlAttribute.Value);
                     }
                 }
             }
@@ -171,14 +211,20 @@ namespace SVGImage.SVG.Shapes
         protected virtual void ParseLocalStyle(SVG svg)
         {
             if (!string.IsNullOrEmpty(this.m_localStyle))
+            {
                 foreach (StyleItem item in StyleParser.SplitStyle(svg, this.m_localStyle))
+                {
                     this.Parse(svg, item.Name, item.Value);
+                }
+            }
         }
 
         protected virtual void Parse(SVG svg, string name, string value)
         {
-            if (name.Contains(":"))
+            if (name.Contains(':'))
+            {
                 name = name.Split(':')[1];
+            }
 
             if (name == SVGTags.sDisplay && value == "none")
             {
@@ -253,13 +299,19 @@ namespace SVGImage.SVG.Shapes
             if (name == SVGTags.sStrokeLinecap)
             {
                 if (Enum.TryParse<Stroke.eLineCap>(value, true, out var parsed))
+                {
                     this.GetStroke(svg).LineCap = parsed;
+                }
+
                 return;
             }
             if (name == SVGTags.sStrokeLinejoin)
             {
                 if (Enum.TryParse<Stroke.eLineJoin>(value, true, out var parsed))
+                {
                     this.GetStroke(svg).LineJoin = parsed;
+                }
+
                 return;
             }
             if (name == SVGTags.sFilterProperty)
@@ -268,7 +320,11 @@ namespace SVGImage.SVG.Shapes
                 {
                     Shape result;
                     string id = ShapeUtil.ExtractBetween(value, '(', ')');
-                    if (id.Length > 0 && id[0] == '#') id = id.Substring(1);
+                    if (id.Length > 0 && id[0] == '#')
+                    {
+                        id = id.Substring(1);
+                    }
+
                     svg.m_shapes.TryGetValue(id, out result);
                     this.Filter = result as Filter;
                     return;
@@ -281,7 +337,11 @@ namespace SVGImage.SVG.Shapes
                 {
                     Shape result;
                     string id = ShapeUtil.ExtractBetween(value, '(', ')');
-                    if (id.Length > 0 && id[0] == '#') id = id.Substring(1);
+                    if (id.Length > 0 && id[0] == '#')
+                    {
+                        id = id.Substring(1);
+                    }
+
                     svg.m_shapes.TryGetValue(id, out result);
                     this.m_clip = result as Clip;
                     return;
@@ -306,7 +366,10 @@ namespace SVGImage.SVG.Shapes
             if (name == SVGTags.sFillRule)
             {
                 if (Enum.TryParse<Fill.eFillRule>(value, true, out var parsed))
+                {
                     this.GetFill(svg).FillRule = parsed;
+                }
+
                 return;
             }
             if (name == SVGTags.sOpacity)
@@ -341,21 +404,58 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sTextDecoration)
             {
-                TextDecoration t = new TextDecoration();
-                if (value == "none") return;
-                if (value == "underline") t.Location = TextDecorationLocation.Underline;
-                if (value == "overline") t.Location = TextDecorationLocation.OverLine;
-                if (value == "line-through") t.Location = TextDecorationLocation.Strikethrough;
+                if (value == "none")
+                {
+                    return;
+                }
+                var textDecorations = _whiteSpaceRegex.Split(value);
                 TextDecorationCollection tt = new TextDecorationCollection();
-                tt.Add(t);
+                if (textDecorations.Length == 0 || textDecorations.Any(td => td.Equals("none", StringComparison.OrdinalIgnoreCase)))
+                {
+                    // If "none" is explicitly set, set TextDecoration to empty collection.
+                    // This distinguishes it from not setting TextDecoration at all, in which case it defaults to inherit.
+                    this.GetTextStyle(svg).TextDecoration = tt;
+                    return;
+                }
+                foreach (var textDecoration in textDecorations)
+                {
+                    TextDecoration t = new TextDecoration();
+                    if (value == "underline")
+                    {
+                        t.Location = TextDecorationLocation.Underline;
+                    }
+                    else if (value == "overline")
+                    {
+                        t.Location = TextDecorationLocation.OverLine;
+                    }
+                    else if (value == "line-through")
+                    {
+                        t.Location = TextDecorationLocation.Strikethrough;
+                    }
+                    tt.Add(t);
+                }
+
                 this.GetTextStyle(svg).TextDecoration = tt;
+
                 return;
             }
             if (name == SVGTags.sTextAnchor)
             {
-                if (value == "start") this.GetTextStyle(svg).TextAlignment = TextAlignment.Left;
-                if (value == "middle") this.GetTextStyle(svg).TextAlignment = TextAlignment.Center;
-                if (value == "end") this.GetTextStyle(svg).TextAlignment = TextAlignment.Right;
+                if (value == "start")
+                {
+                    this.GetTextStyle(svg).TextAlignment = TextAlignment.Left;
+                }
+
+                if (value == "middle")
+                {
+                    this.GetTextStyle(svg).TextAlignment = TextAlignment.Center;
+                }
+
+                if (value == "end")
+                {
+                    this.GetTextStyle(svg).TextAlignment = TextAlignment.Right;
+                }
+
                 return;
             }
             if (name == "word-spacing")
@@ -380,19 +480,31 @@ namespace SVGImage.SVG.Shapes
 
         private Stroke GetStroke(SVG svg)
         {
-            if (this.m_stroke == null) this.m_stroke = new Stroke(svg);
+            if (this.m_stroke == null)
+            {
+                this.m_stroke = new Stroke(svg);
+            }
+
             return this.m_stroke;
         }
 
         protected Fill GetFill(SVG svg)
         {
-            if (this.m_fill == null) this.m_fill = new Fill(svg);
+            if (this.m_fill == null)
+            {
+                this.m_fill = new Fill(svg);
+            }
+
             return this.m_fill;
         }
 
         protected TextStyle GetTextStyle(SVG svg)
         {
-            if (this.m_textstyle == null) this.m_textstyle = new TextStyle(svg, this);
+            if (this.m_textstyle == null)
+            {
+                this.m_textstyle = new TextStyle( this);
+            }
+
             return this.m_textstyle;
         }
 
@@ -401,4 +513,8 @@ namespace SVGImage.SVG.Shapes
             return this.GetType().Name + " (" + (Id ?? "") + ")";
         }
     }
+
+
+
+
 }

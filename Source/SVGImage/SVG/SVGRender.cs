@@ -65,6 +65,15 @@ namespace SVGImage.SVG
             return this.CreateDrawing(this.SVG);
         }
 
+        internal void LoadDrawingWithoutRender(string filename)
+        {
+            this.SVG = new SVG(filename, ExternalFileLoader);
+        }
+        internal void LoadDrawingWithoutRender(Stream stream)
+        {
+            this.SVG = new SVG(stream, ExternalFileLoader);
+        }
+
         public DrawingGroup LoadXmlDrawing(string fileXml)
         {
             this.SVG = new SVG(this.ExternalFileLoader);
@@ -430,13 +439,13 @@ namespace SVGImage.SVG
                 }
                 if (shape is TextShape textShape)
                 {
-                    GeometryGroup gp = TextRender.BuildTextGeometry(textShape);
+                    TextRender textRender2 = new TextRender();
+                    GeometryGroup gp = textRender2.BuildTextGeometry(textShape);
                     if (gp != null)
                     {
                         foreach (Geometry gm in gp.Children)
                         {
-                            TextSpan tspan = TextRender.GetElement(gm);
-                            if (tspan != null)
+                            if (TextRenderBase.GetElement(gm) is TextShapeBase tspan)
                             {
                                 var di = this.NewDrawingItem(tspan, gm);
                                 AddDrawingToGroup(grp, shape, di);
