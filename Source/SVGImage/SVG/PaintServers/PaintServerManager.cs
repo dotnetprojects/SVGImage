@@ -147,18 +147,24 @@ namespace SVGImage.SVG.PaintServers
             int start = 0;
             if (value[start] == '#') start++;
 
-            uint u = Convert.ToUInt32(value.Substring(start), 16);
+            ulong u;
             if (value.Length <= 4)
             {
+                uint @int = Convert.ToUInt32(value.Substring(start), 16);
                 uint newval = 0;
-                newval |= (u & 0x000f00) << 12;
-                newval |= (u & 0x000f00) << 8;
-                newval |= (u & 0x0000f0) << 8;
-                newval |= (u & 0x0000f0) << 4;
-                newval |= (u & 0x00000f) << 4;
-                newval |= (u & 0x00000f);
+                newval |= (@int & 0x000f00) << 12;
+                newval |= (@int & 0x000f00) << 8;
+                newval |= (@int & 0x0000f0) << 8;
+                newval |= (@int & 0x0000f0) << 4;
+                newval |= (@int & 0x00000f) << 4;
+                newval |= (@int & 0x00000f);
                 u = newval;
             }
+            else
+            {
+                u = Convert.ToUInt64(value.Substring(start), 16);
+            }
+
             byte a = (byte)((u & 0xff000000) >> 24);
             byte r = (byte)((u & 0x00ff0000) >> 16);
             byte g = (byte)((u & 0x0000ff00) >> 8);
@@ -218,7 +224,7 @@ namespace SVGImage.SVG.PaintServers
         {
             if (value.EndsWith("%"))
             {
-                var nr = int.Parse(value.Substring(0, value.Length - 1));
+                var nr = int.Parse(value.Substring(0, value.Length - 1)); //TODO: should this be double?
                 if (nr < 0)
                     nr = 255 - nr;
                 return nr * 255 / 100;

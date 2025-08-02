@@ -54,7 +54,7 @@ namespace SVGImage.SVG
 
         public Typeface GetTypeface()
         {
-            var fontFamily = _fontResolver.ResolveFontFamily(FontFamily);
+            var fontFamily = _fontResolver.ResolveFontFamily(FontFamily) ?? new FontFamily(_defaults.FontFamily);
             return new Typeface(fontFamily,
             Fontstyle,
             Fontweight,
