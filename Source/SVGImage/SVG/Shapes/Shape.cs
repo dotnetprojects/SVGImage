@@ -126,6 +126,11 @@ namespace SVGImage.SVG.Shapes
 
         protected virtual Fill DefaultFill()
         {
+            return null;
+        }
+
+        protected virtual Fill GetParentFill()
+        {
             var parent = this.Parent;
             while (parent != null)
             {
@@ -141,7 +146,7 @@ namespace SVGImage.SVG.Shapes
 
         public Fill Fill
         {
-            get => m_fill ?? DefaultFill();
+            get => m_fill ?? GetParentFill() ?? DefaultFill();
             set => m_fill = value;
         }
 
