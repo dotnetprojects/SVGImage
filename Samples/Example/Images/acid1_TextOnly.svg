@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+     <!--
+     
+       Description of Tests
+       ====================
+     
+       Test 1:  width/height specified on outermost svg element.  The HTML harness should override 
+                this width and height such that the image is contained within a 300x200 frame
+                http://www.w3.org/TR/SVG11/coords.html#ViewportSpace
+                
+       Test 2:  viewBox with negative x,y values.  Unitless coordinates in this file should be in the 
+                coordinate system established by the viewBox attribute, with 0,0 as the center 
+                http://www.w3.org/TR/SVG11/coords.html#ViewBoxAttribute
+                
+       Test 3:  foreign markup inside the title and desc elements.  This should not cause an issue
+                with rendering of the graphics.
+                http://www.w3.org/TR/SVG11/struct.html#DescriptionAndTitleElements
+                
+       Test 4:  percentage and unitless lengths for x-coordinate values (width), y-coordinate
+                values (height) and other length values which are calculated differently:
+                (radius = sqrt((w**2) + (h**2))/sqrt(2) = 1019,8039027185569660056448218046
+                http://www.w3.org/TR/SVG11/coords.html#Units
+                
+       Test 5:  other units (pt, pc, in, mm)
+                http://www.w3.org/TR/CSS21/syndata.html#x41
+       
+       Test 6:  #rrggbb and #rgb color formats
+                http://www.w3.org/TR/SVG11/types.html#DataTypeColor
+       
+       Test 7:  test inherited color and rgb() format
+                http://www.w3.org/TR/SVG11/painting.html#SpecifyingPaint
+                http://www.w3.org/TR/SVG11/types.html#DataTypeColor
+                http://www.w3.org/TR/REC-CSS2/syndata.html#value-def-color
+        
+       Test 8:  XML namespace prefixes
+                http://www.w3.org/TR/SVG11/struct.html#NewDocument
+       
+       Test 9:  use element referencing SVG element from defs elements
+                http://www.w3.org/TR/SVG11/struct.html#UseElement
+
+       Test 10: switch element with requiredFeatures and requiredExtensions attribute
+                http://www.w3.org/TR/SVG11/struct.html#SwitchElement
+                http://www.w3.org/TR/SVG11/struct.html#RequiredFeaturesAttribute
+                http://www.w3.org/TR/SVG11/struct.html#RequiredExtensionsAttribute
+
+       Test 11: transform attribute, multiple transformations
+                http://www.w3.org/TR/SVG11/coords.html#TransformAttribute
+       
+       Test 12: test path grammar (scientific notation, decimal number format, 
+                whitespace and precision)
+                http://www.w3.org/TR/SVG11/paths.html#PathDataBNF
+                http://www.w3.org/TR/SVG11/types.html#DataTypeDecimalNumber
+                http://www.w3.org/TR/SVG11/types.html#BasicDataTypes
+    
+       Test 13: symbol element, display attribute should have no effect
+                http://www.w3.org/TR/SVG11/struct.html#SymbolElement
+       
+       Test 14: nested svg elements.  x,y attributes on outermost svg have no effect.
+                http://www.w3.org/TR/SVG11/struct.html#SVGElement
+                
+       Test 15: image element referencing an external png and jpg files
+                http://www.w3.org/TR/SVG11/struct.html#ImageElement
+       
+       Test 16: CSS properties take precedence over presentational attributes
+                http://www.w3.org/TR/SVG11/styling.html#UsingPresentationAttributes
+       
+       Test 17: External CSS file testing type, attribute, class and id selectors
+                http://www.w3.org/TR/SVG11/styling.html#StylingWithCSS
+                http://www.w3.org/TR/CSS21/selector.html#type-selectors
+                http://www.w3.org/TR/CSS21/selector.html#attribute-selectors
+                http://www.w3.org/TR/CSS21/selector.html#class-html
+                http://www.w3.org/TR/CSS21/selector.html#id-selectors
+
+       Test 18: style element and CSS :hover pseudo-class
+                http://www.w3.org/TR/SVG11/styling.html#StyleElement
+                http://www.w3.org/TR/CSS21/selector.html#dynamic-pseudo-classes
+
+       Test 19: path element and moveto, cubic bezier, closepath commands
+                (absolute and relative coordinates)
+                http://www.w3.org/TR/SVG11/paths.html#PathElement
+                http://www.w3.org/TR/SVG11/paths.html#PathDataMovetoCommands
+                http://www.w3.org/TR/SVG11/paths.html#PathDataCubicBézierCommands
+                http://www.w3.org/TR/SVG11/paths.html#PathDataClosePathCommand
+
+       Test 20: basic shapes (circle, rect, ellipse, line)
+                http://www.w3.org/TR/SVG11/shapes.html#CircleElement
+                http://www.w3.org/TR/SVG11/shapes.html#RectElement
+                http://www.w3.org/TR/SVG11/shapes.html#EllipseElement
+                http://www.w3.org/TR/SVG11/shapes.html#LineElement
+
+       Test 21: test currentColor
+ 	        http://www.w3.org/TR/SVG11/painting.html#SpecifyingPaint
+
+       Test 22: test skewX, skewY, matrix and rotate transforms
+                http://www.w3.org/TR/SVG11/coords.html#SkewXDefined
+                http://www.w3.org/TR/SVG11/coords.html#SkewYDefined
+                http://www.w3.org/TR/SVG11/coords.html#TransformMatrixDefined
+                http://www.w3.org/TR/SVG11/coords.html#TransformAttribute
+                
+       Test 23: test cubic bezier, quadratic bezier, and elliptical arcs
+       
+       Test 24: Units (em)
+                http://www.w3.org/TR/SVG11/coords.html#UnitIdentifiers
+                
+       Test 25: Ensure baseline-shift is not inherited
+                http://www.w3.org/TR/SVG11/text.html#propdef-baseline-shift
+
+       Test 26: Verify text-anchor middle value
+                http://www.w3.org/TR/SVG11/text.html#TextAnchorProperty
+       
+ TODO:
+   - test clipping?  (SVG Basic feature, could be moved to SVG Acid 2 with opacity, gradients, etc)
+   - error handling of path data? http://www.w3.org/TR/SVG11/implnote.html#PathElementImplementationNotes
+   - error handling for invalid color value (#red for instance) http://www.w3.org/TR/SVG11/implnote.html#ErrorProcessing
+       - Safari has a bug on this that I'd like to highlight (fill="#red" results in a red fill)
+   
+
+QUESTIONS:
+   - is the following syntax ok:  rgb(%,num,%) or do they all have to be num or all have to be %?
+     It appears that Safari might handle mixing % with numbers but Opera does not.  I believe the CSS
+     spec makes it clear that it's all % or all numbers.  If it turns out to be valid syntax, then 
+     change #right-eye's fill to be rgb(109%,302,100%)
+
+     -->
+
+<!-- Test 17 -->
+<?xml-stylesheet href="acid1.css" type="text/css"?>
+
+<!-- Test 1 -->
+<!-- Test 2 -->
+<!-- Test 14 -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+     xmlns:svg="http://invalid-url/"
+     xmlns:SVG="http://www.w3.org/2000/svg" 
+     xmlns:scalable_vector_graphics="http://www.w3.org/2000/svg" 
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:xl="http://www.w3.org/1999/xlink"
+     xmlns:html="http://www.w3.org/1999/xhtml"
+     width="2000px" height="2000px" viewBox="-1000 -1000 2000 2000"
+     font-size="100" 
+     version="1.1">
+
+     <!-- Test 11 -->
+     <!-- Test 12 -->
+     <g id="top-group" transform="translate(0,1.E2),scale(.85)">
+       
+       <text font-family="Arial" font-size="100" fill="red" x="0" y="-500" 
+             text-anchor="middle">Hello     World!</text>
+       <!-- Test 25 -->
+       <text font-family="Arial" font-size="100" fill="blue" x="0" y="-500" 
+             text-anchor="middle"><tspan baseline-shift="sub" dy="-50">Hello 
+			 <tspan dy="50">   World!</tspan></tspan></text>
+       
+       <!-- Test 20 -->
+       <!-- Test 24 -->
+       <line x1="-3em" y1="-480" x2="3em" y2="-480" stroke="blue" stroke-width="5" fill="red" />
+       
+     </g> <!-- top-group -->
+
+</svg>

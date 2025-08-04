@@ -6,7 +6,7 @@ namespace SVGImage.SVG.Shapes
 
     public struct LengthPercentageOrNumber
     {
-        private static readonly Regex _lengthRegex = new Regex(@"(?<Value>\d+(?:\.\d+)?)\s*(?<Unit>%|\w+)?", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex _lengthRegex = new Regex(@"(?<Value>-?\d+(?:\.\d+)?)\s*(?<Unit>%|\w+)?", RegexOptions.Compiled | RegexOptions.Singleline);
         private readonly LengthContext _context;
         private readonly double _value;
         /// <summary>
@@ -180,12 +180,12 @@ namespace SVGImage.SVG.Shapes
             }
             else
             {
-                // Default to pixels if no unit is specified
-                context = new LengthContext(owner, LengthUnit.px);
+                // Default to Number if no unit is specified
+                context = new LengthContext(owner, LengthUnit.Number);
             }
             return new LengthPercentageOrNumber(d, context);
         }
-        
+
     }
 
 

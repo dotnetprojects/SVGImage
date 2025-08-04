@@ -7,6 +7,7 @@ namespace SVGImage.SVG.Shapes
     using System.Linq;
     using System.Diagnostics;
     using System.Text;
+    using System.Text.RegularExpressions;
 
     [DebuggerDisplay("{DebugDisplayText}")]
     public class TextShapeBase: Shape, ITextNode
@@ -173,6 +174,7 @@ namespace SVGImage.SVG.Shapes
 
             ParseChildren(svg, node);
         }
+        private static readonly Regex _trimmedWhitespace = new Regex(@"\s+", RegexOptions.Compiled | RegexOptions.Singleline);
 
         protected void ParseChildren(SVG svg, XmlNode node)
         {
@@ -180,7 +182,7 @@ namespace SVGImage.SVG.Shapes
             {
                 if (child.NodeType == XmlNodeType.Text || child.NodeType == XmlNodeType.CDATA)
                 {
-                    var text = child.InnerText.Trim();
+                    var text = _trimmedWhitespace.Replace(child.InnerText, " ");
                     if (!string.IsNullOrWhiteSpace(text))
                     {
                         Children.Add(new TextString(this, text));

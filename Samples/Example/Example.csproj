@@ -43,6 +43,7 @@
     <ProjectReference Include="..\..\Source\SVGImage\DotNetProjects.SVGImage.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\acid1_TextOnly.svg" />
     <Resource Include="Images\brush.svg" />
     <Resource Include="Images\error.svg" />
     <Resource Include="Images\example radgrad01.svg" />

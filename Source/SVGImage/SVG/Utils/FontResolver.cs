@@ -13,7 +13,7 @@ namespace SVGImage.SVG.Utils
     /// </summary>
     public class FontResolver
     {
-        private readonly ConcurrentDictionary<string, FontFamily> _fontCache = new ConcurrentDictionary<string, FontFamily>();
+        private readonly ConcurrentDictionary<string, string> _fontCache = new ConcurrentDictionary<string, string>();
         private readonly Dictionary<string, FontFamily> _availableFonts;
         private readonly Dictionary<string, string> _normalizedFontNameMap;
 
@@ -43,7 +43,7 @@ namespace SVGImage.SVG.Utils
         /// <summary>
         /// Attempts to a font family based on the requested font name.
         /// </summary>
-        /// <param name="requestedFontName">The name of the font to resolve.</param>
+        /// <param name="requestedFontName">The name of the font or fonts to resolve. Multiple fonts should be separated by commas</param>
         /// <returns>
         /// A <see cref="FontFamily"/> if a match is found, otherwise null.
         /// </returns>
@@ -51,6 +51,27 @@ namespace SVGImage.SVG.Utils
         /// Thrown when the requested font name is null or empty.
         /// </exception>
         public FontFamily ResolveFontFamily(string requestedFontName)
+        {
+            var fontList = requestedFontName
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(font => ResolveFontFamilyInternal(font.Trim()))
+                .Where(font => font != null);
+
+            var resolvedFontNames = String.Join(",", fontList);
+            return new FontFamily(resolvedFontNames);
+        }
+
+        /// <summary>
+        /// Attempts to a font family based on the requested font name.
+        /// </summary>
+        /// <param name="requestedFontName">The name of the font to resolve.</param>
+        /// <returns>
+        /// A <see cref="FontFamily"/> if a match is found, otherwise null.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the requested font name is null or empty.
+        /// </exception>
+        private string ResolveFontFamilyInternal(string requestedFontName)
         {
             if (string.IsNullOrWhiteSpace(requestedFontName))
             {
@@ -65,8 +86,8 @@ namespace SVGImage.SVG.Utils
             // 1. Exact match
             if (_availableFonts.TryGetValue(requestedFontName, out var exactMatch))
             {
-                _fontCache[requestedFontName] = exactMatch;
-                return exactMatch;
+                _fontCache[requestedFontName] = exactMatch.Source;
+                return exactMatch.Source;
             }
 
             // 2. Normalized match
@@ -74,8 +95,8 @@ namespace SVGImage.SVG.Utils
             if (_normalizedFontNameMap.TryGetValue(normalizedRequested, out var normalizedMatchName) &&
                 _availableFonts.TryGetValue(normalizedMatchName, out var normalizedMatch))
             {
-                _fontCache[requestedFontName] = normalizedMatch;
-                return normalizedMatch;
+                _fontCache[requestedFontName] = normalizedMatch.Source;
+                return normalizedMatch.Source;
             }
 
             // 3. Substring match
@@ -83,8 +104,8 @@ namespace SVGImage.SVG.Utils
                 .FirstOrDefault(kv => Normalize(kv.Key).Contains(normalizedRequested));
             if (substringMatch.Value != null)
             {
-                _fontCache[requestedFontName] = substringMatch.Value;
-                return substringMatch.Value;
+                _fontCache[requestedFontName] = substringMatch.Value.Source;
+                return substringMatch.Value.Source;
             }
 
             // 4. Levenshtein match (optional but slow)
@@ -102,16 +123,14 @@ namespace SVGImage.SVG.Utils
 
                 if (bestMatch != null && bestMatch.Distance <= 4)
                 {
-                    _fontCache[requestedFontName] = bestMatch.Font;
-                    return bestMatch.Font;
+                    _fontCache[requestedFontName] = bestMatch.Font.Source;
+                    return bestMatch.Font.Source;
                 }
             }
 
-            
-
             // 5. No match
-            _fontCache[requestedFontName] = null;
-            return null;
+            _fontCache[requestedFontName] = requestedFontName;
+            return requestedFontName;
         }
 
         /// <summary>
