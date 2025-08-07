@@ -116,7 +116,8 @@ namespace SVGImage.SVG
 
         public DrawingGroup CreateDrawing(SVG svg)
         {
-            return this.LoadGroup(svg.Elements, svg.ViewBox, false);
+            var drawingGroup = this.LoadGroup(svg.Elements, svg.ViewBox, false);
+            return drawingGroup;
         }
 
         public DrawingGroup CreateDrawing(Shape shape)
@@ -444,9 +445,9 @@ namespace SVGImage.SVG
                     GeometryGroup gp = textRender2.BuildTextGeometry(textShape);
                     if (gp != null)
                     {
-                        foreach (Geometry gm in gp.Children)
+                        foreach (Geometry gm in GetStyledSpans(gp))
                         {
-                            if (TextRenderBase.GetElement(gm) is TextShapeBase tspan)
+                            if (TextRender.GetElement(gm) is TextShapeBase tspan)
                             {
                                 var di = this.NewDrawingItem(tspan, gm);
                                 AddDrawingToGroup(grp, shape, di);
@@ -479,6 +480,31 @@ namespace SVGImage.SVG
             }
 
             return grp;
+        }
+
+        private static IEnumerable<Geometry> GetStyledSpans(Geometry geometry)
+        {
+            if (geometry is GeometryGroup gg)
+            {
+                if (!(TextRender.GetElement(gg) is null))
+                {
+                    yield return geometry;
+                }
+                else
+                {
+                    foreach (var g in gg.Children)
+                    {
+                        foreach (var subg in GetStyledSpans(g))
+                        {
+                            yield return subg;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                yield return geometry;
+            }
         }
 
         private void AddDrawingToGroup(DrawingGroup grp, Shape shape, Drawing drawing)

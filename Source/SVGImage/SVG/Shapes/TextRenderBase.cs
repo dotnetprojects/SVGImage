@@ -7,14 +7,14 @@ namespace SVGImage.SVG.Shapes
     {
         public abstract GeometryGroup BuildTextGeometry(TextShape text);
         public static DependencyProperty TSpanElementProperty = DependencyProperty.RegisterAttached(
-            "TSpanElement", typeof(ITextNode), typeof(DependencyObject));
-        public static void SetElement(DependencyObject obj, ITextNode value)
+            "TSpanElement", typeof(TextShapeBase), typeof(DependencyObject));
+        public static void SetElement(DependencyObject obj, TextShapeBase value)
         {
             obj.SetValue(TSpanElementProperty, value);
         }
-        public static ITextNode GetElement(DependencyObject obj)
+        public static TextShapeBase GetElement(DependencyObject obj)
         {
-            return (ITextNode)obj.GetValue(TSpanElementProperty);
+            return (TextShapeBase)obj.GetValue(TSpanElementProperty);
         }
     }
 

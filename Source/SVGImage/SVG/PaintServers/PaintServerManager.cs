@@ -224,10 +224,12 @@ namespace SVGImage.SVG.PaintServers
         {
             if (value.EndsWith("%"))
             {
-                var nr = int.Parse(value.Substring(0, value.Length - 1)); //TODO: should this be double?
+                var nr = double.Parse(value.Substring(0, value.Length - 1));
                 if (nr < 0)
-                    nr = 255 - nr;
-                return nr * 255 / 100;
+                    nr = 255 - nr; //TODO: what is this trying to do?
+                var result = (int)Math.Round((nr * 255) / 100);
+
+                return MathUtil.Clamp(result, 0, 255);
             }
 
             return int.Parse(value);

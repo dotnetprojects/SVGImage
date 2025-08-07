@@ -47,6 +47,7 @@
     <Resource Include="Images\brush.svg" />
     <Resource Include="Images\error.svg" />
     <Resource Include="Images\example radgrad01.svg" />
+    <Resource Include="Images\boldgreen.svg" />
     <Resource Include="Images\rect.svg" />
     <Resource Include="Images\test_3.svg" />
     <Resource Include="Images\tombigel_green_router.svg" />

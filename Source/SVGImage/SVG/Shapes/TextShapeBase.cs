@@ -40,7 +40,15 @@ namespace SVGImage.SVG.Shapes
             return sb.ToString();
         }
 
-        
+
+        protected override Fill DefaultFill()
+        {
+            return Fill.CreateDefault(Svg, "black");
+        }
+        protected override Stroke DefaultStroke()
+        {
+            return Stroke.CreateDefault(Svg, 0.1);
+        }
 
         public LengthPercentageOrNumberList X { get; protected set; }
         public LengthPercentageOrNumberList Y { get; protected set; } 

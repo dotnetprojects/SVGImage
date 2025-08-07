@@ -29,12 +29,27 @@ namespace SVGImage.SVG.Shapes
             }
         }
 
+
+
+        public static readonly DependencyProperty TextSpanTextStyleProperty = DependencyProperty.RegisterAttached(
+            "TextSpanTextStyle", typeof(TextStyle), typeof(DependencyObject));
+        private static void SetTextSpanTextStyle(DependencyObject obj, TextStyle value)
+        {
+            obj.SetValue(TextSpanTextStyleProperty, value);
+        }
+        public static TextStyle GetTextSpanTextStyle(DependencyObject obj)
+        {
+            return (TextStyle)obj.GetValue(TextSpanTextStyleProperty);
+        }
+
         private sealed class TextChunk
         {
             public List<GlyphRun> GlyphRuns { get; set; } = new List<GlyphRun>();
             public Dictionary<GlyphRun, List<Rect>> BackgroundDecorations { get; set; } = new Dictionary<GlyphRun, List<Rect>>();
             public Dictionary<GlyphRun, List<Rect>> ForegroundDecorations { get; set; } = new Dictionary<GlyphRun, List<Rect>>();
             public Dictionary<GlyphRun, Rect> GlyphRunBounds { get; set; } = new Dictionary<GlyphRun, Rect>();
+            public Dictionary<GlyphRun, TextStyle> TextStyles { get; set; } = new Dictionary<GlyphRun, TextStyle>();
+            public Dictionary<GlyphRun, TextShapeBase> TextContainers { get; set; } = new Dictionary<GlyphRun, TextShapeBase>();
             public TextAlignment TextAlignment { get; set; }
 
             public GeometryGroup BuildGeometry()
@@ -46,6 +61,14 @@ namespace SVGImage.SVG.Shapes
                 {
                     var runGeometry = !nonZeroAlignmentOffset ? glyphRun.BuildGeometry() : glyphRun.CreateOffsetRun(alignmentOffset, 0).BuildGeometry();
                     geometryGroup.Children.Add(runGeometry);
+                    if (TextStyles.TryGetValue(glyphRun, out TextStyle textStyle))
+                    {
+                        TextRender.SetTextSpanTextStyle(runGeometry, textStyle);
+                    }
+                    if (TextContainers.TryGetValue(glyphRun, out TextShapeBase textContainer))
+                    {
+                        TextRender.SetElement(runGeometry, textContainer);
+                    }
                     if (BackgroundDecorations.TryGetValue(glyphRun, out List<Rect> backgroundDecorations))
                     {
                         foreach (var decoration in backgroundDecorations)
@@ -148,7 +171,9 @@ namespace SVGImage.SVG.Shapes
                     }
                     var runGeometry = run.BuildGeometry();
                     currentTextChunk.GlyphRuns.Add(run);
+                    currentTextChunk.TextStyles[run] = textStyle;
                     currentTextChunk.GlyphRunBounds[run] = runGeometry.Bounds;
+                    currentTextChunk.TextContainers[run] = (TextShapeBase)textString.Parent;
                     if (textStyle.TextDecoration != null && textStyle.TextDecoration.Count > 0)
                     {
                         GetTextDecorations(runGeometry, textStyle, font, baselineOrigin, out List<Rect> backgroundDecorations, out List<Rect> foregroundDecorations);

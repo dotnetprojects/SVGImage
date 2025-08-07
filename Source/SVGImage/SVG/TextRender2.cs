@@ -51,7 +51,7 @@ namespace SVGImage.SVG
                         baseline -= tspan.TextStyle.FontSize + (textString.TextStyle.FontSize * 0.25)/*font.CapsHeight * fontSize*/;
 
                     Geometry gm = BuildGlyphRun(textString.TextStyle, txt, x, baseline, ref totalwidth);
-                    TextRender2.SetElement(gm, textString);
+                    TextRender2.SetElement(gm, (TextShapeBase)textString.Parent);
                     gp.Children.Add(gm);
                     x += totalwidth;
                 }
