@@ -23,7 +23,7 @@
         public TextString(Shape parent, string text)
         {
             Parent = parent;
-            string trimmed = _trimmedWhitespace.Replace(text.Trim(), " ");
+            string trimmed = _trimmedWhitespace.Replace(text, " ");
             Characters = new CharacterLayout[trimmed.Length];
             for(int i = 0; i < trimmed.Length; i++)
             {

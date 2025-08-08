@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"
+	>
+
+	<g style="font-size: 14pt;">
+		<text x="20" y="120" style="font-family:Verdana">
+			<tspan style="stroke:black;stroke-width:2;fill:green;font-size:30pt;font-weight:bold">BOLD</tspan>
+		</text>
+	</g>
+
+</svg>
