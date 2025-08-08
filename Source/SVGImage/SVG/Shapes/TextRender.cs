@@ -60,6 +60,10 @@ namespace SVGImage.SVG.Shapes
                 foreach (var glyphRun in GlyphRuns)
                 {
                     var runGeometry = !nonZeroAlignmentOffset ? glyphRun.BuildGeometry() : glyphRun.CreateOffsetRun(alignmentOffset, 0).BuildGeometry();
+                    if (runGeometry.IsFrozen)
+                    {
+                        runGeometry = runGeometry.CloneCurrentValue();
+                    }
                     geometryGroup.Children.Add(runGeometry);
                     if (TextStyles.TryGetValue(glyphRun, out TextStyle textStyle))
                     {
