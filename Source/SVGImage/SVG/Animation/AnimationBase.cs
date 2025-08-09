@@ -3,8 +3,9 @@ using System.Xml;
 
 namespace SVGImage.SVG.Animation
 {
-    using Utils;
     using Shapes;
+    using System.Globalization;
+    using Utils;
 
     public abstract class AnimationBase : Shape
     {
@@ -16,11 +17,11 @@ namespace SVGImage.SVG.Animation
         {
             var d = XmlUtil.AttrValue(node, "dur", "");
             if (d.EndsWith("ms"))
-                Duration = TimeSpan.FromMilliseconds(double.Parse(d.Substring(0, d.Length - 2)));
+                Duration = TimeSpan.FromMilliseconds(double.Parse(d.Substring(0, d.Length - 2), NumberStyles.Number, CultureInfo.InvariantCulture));
             else if (d.EndsWith("s"))
-                Duration = TimeSpan.FromSeconds(double.Parse(d.Substring(0, d.Length - 1)));
+                Duration = TimeSpan.FromSeconds(double.Parse(d.Substring(0, d.Length - 1), NumberStyles.Number, CultureInfo.InvariantCulture));
             else
-                Duration = TimeSpan.FromSeconds(double.Parse(d));
+                Duration = TimeSpan.FromSeconds(double.Parse(d, NumberStyles.Number, CultureInfo.InvariantCulture));
         }
     }
 }

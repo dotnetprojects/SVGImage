@@ -1,13 +1,13 @@
 using System;
-using System.Xml;
-using System.Text;
 using System.Collections.Generic;
 using System.Reflection;
-
+using System.Text;
 using System.Windows.Media;
+using System.Xml;
 
 namespace SVGImage.SVG.PaintServers
 {
+    using System.Globalization;
     using Utils;
 
     public sealed class PaintServerManager
@@ -224,7 +224,7 @@ namespace SVGImage.SVG.PaintServers
         {
             if (value.EndsWith("%"))
             {
-                var nr = double.Parse(value.Substring(0, value.Length - 1));
+                var nr = double.Parse(value.Substring(0, value.Length - 1), NumberStyles.Number, CultureInfo.InvariantCulture);
                 if (nr < 0)
                     nr = 255 - nr; //TODO: what is this trying to do?
                 var result = (int)Math.Round((nr * 255) / 100);
