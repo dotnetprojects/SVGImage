@@ -2,6 +2,7 @@
 
 namespace SVGImage.SVG.Shapes
 {
+    using System.Globalization;
     using System.Text.RegularExpressions;
 
     public struct LengthPercentageOrNumber
@@ -163,7 +164,7 @@ namespace SVGImage.SVG.Shapes
         public static LengthPercentageOrNumber Parse(Shape owner, string value, LengthOrientation orientation = LengthOrientation.None)
         {
             var lengthMatch = _lengthRegex.Match(value.Trim());
-            if(!lengthMatch.Success || !Double.TryParse(lengthMatch.Groups["Value"].Value, out double d))
+            if(!lengthMatch.Success || !Double.TryParse(lengthMatch.Groups["Value"].Value, NumberStyles.Number, CultureInfo.InvariantCulture, out double d))
             {
                 throw new ArgumentException($"Invalid length/percentage/number value: {value}");
             }

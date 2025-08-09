@@ -1,5 +1,6 @@
 ﻿using SVGImage.SVG.Shapes;
 using System;
+using System.Globalization;
 
 namespace SVGImage.SVG.Utils
 {
@@ -32,7 +33,7 @@ namespace SVGImage.SVG.Utils
                 //Based on previous estimation
                 return new LengthPercentageOrNumber((-1) * (textStyle.FontSize + (textStyle.FontSize * 0.25)), new LengthContext(shape, LengthUnit.Number));
             }
-            else if(textStyle.BaseLineShift.EndsWith("%") && Double.TryParse(textStyle.BaseLineShift.Substring(0, textStyle.BaseLineShift.Length - 1), out double d))
+            else if(textStyle.BaseLineShift.EndsWith("%") && Double.TryParse(textStyle.BaseLineShift.Substring(0, textStyle.BaseLineShift.Length - 1), NumberStyles.Number, CultureInfo.InvariantCulture, out double d))
             {
                 try
                 {

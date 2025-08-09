@@ -1,19 +1,19 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using System.Linq;
+﻿using SVGImage.SVG.Utils;
+using System;
 using System.Collections.Generic;
-using SVGImage.SVG.Utils;
-
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Xml;
 
 namespace SVGImage.SVG
 {
     using Animation;
-    using Shapes;
     using FileLoaders;
+    using Shapes;
+    using System.Globalization;
 
     /// <summary>
     /// This is the class that creates the WPF Drawing object based on the information from the <see cref="SVG"/> class.
@@ -261,8 +261,8 @@ namespace SVGImage.SVG
                             {
                                 var animation = new DoubleAnimation
                                 {
-                                    From = double.Parse(animateTransform.From),
-                                    To = double.Parse(animateTransform.To),
+                                    From = double.Parse(animateTransform.From, NumberStyles.Number, CultureInfo.InvariantCulture),
+                                    To = double.Parse(animateTransform.To, NumberStyles.Number, CultureInfo.InvariantCulture),
                                     Duration = animateTransform.Duration
                                 };
                                 animation.RepeatBehavior = RepeatBehavior.Forever;
@@ -279,7 +279,7 @@ namespace SVGImage.SVG
                             if (animate.AttributeName == "r")
                             {
                                 var animation = new DoubleAnimationUsingKeyFrames() { Duration = animate.Duration };
-                                foreach (var d in animate.Values.Split(';').Select(x => new LinearDoubleKeyFrame(double.Parse(x))))
+                                foreach (var d in animate.Values.Split(';').Select(x => new LinearDoubleKeyFrame(double.Parse(x, NumberStyles.Number, CultureInfo.InvariantCulture))))
                                 {
                                     animation.KeyFrames.Add(d);
                                 }
@@ -292,7 +292,7 @@ namespace SVGImage.SVG
                             {
                                 var animation = new PointAnimationUsingKeyFrames() { Duration = animate.Duration };
                                 foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(
-                                    new Point(double.Parse(_), ((EllipseGeometry)g).Center.Y))))
+                                    new Point(double.Parse(_, NumberStyles.Number, CultureInfo.InvariantCulture), ((EllipseGeometry)g).Center.Y))))
                                 {
                                     animation.KeyFrames.Add(d);
                                 }
@@ -303,7 +303,7 @@ namespace SVGImage.SVG
                             {
                                 var animation = new PointAnimationUsingKeyFrames() { Duration = animate.Duration };
                                 foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(
-                                    new Point(((EllipseGeometry)g).Center.X, double.Parse(_)))))
+                                    new Point(((EllipseGeometry)g).Center.X, double.Parse(_, NumberStyles.Number, CultureInfo.InvariantCulture)))))
                                 {
                                     animation.KeyFrames.Add(d);
                                 }

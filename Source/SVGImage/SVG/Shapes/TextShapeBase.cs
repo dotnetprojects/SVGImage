@@ -4,8 +4,9 @@ using System.Xml;
 
 namespace SVGImage.SVG.Shapes
 {
-    using System.Linq;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
 
@@ -127,7 +128,7 @@ namespace SVGImage.SVG.Shapes
                         break;
                     case "rotate":
                         Rotate = attr.Value.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                                           .Select(v => double.Parse(v)).ToList();
+                                           .Select(v => double.Parse(v, NumberStyles.Number, CultureInfo.InvariantCulture)).ToList();
                         break;
                     case "textLength":
                         TextLength = LengthPercentageOrNumber.Parse(this, attr.Value);
