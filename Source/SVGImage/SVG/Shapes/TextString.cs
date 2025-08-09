@@ -4,10 +4,10 @@
     using System.Text.RegularExpressions;
     using System.Diagnostics;
 
-    [DebuggerDisplay("{Text}")]
     /// <summary>
     /// The leaf of the Text tree
     /// </summary>
+    [DebuggerDisplay("{Text}")]
     public class TextString : ITextChild
     {
         private static readonly Regex _trimmedWhitespace = new Regex(@"\s+", RegexOptions.Compiled | RegexOptions.Singleline);
