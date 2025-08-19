@@ -488,6 +488,7 @@ namespace SVGImage.SVG.Shapes
             if (this.m_stroke == null)
             {
                 this.m_stroke = new Stroke(svg);
+                this.m_stroke.PaintServerKey = svg.PaintServers.Parse("black");
             }
 
             return this.m_stroke;
@@ -498,6 +499,7 @@ namespace SVGImage.SVG.Shapes
             if (this.m_fill == null)
             {
                 this.m_fill = new Fill(svg);
+                this.m_fill.PaintServerKey = svg.PaintServers.Parse("black");
             }
 
             return this.m_fill;
