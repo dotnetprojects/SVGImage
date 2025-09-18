@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace SVGImage.SVG.Utils
 {
@@ -27,11 +30,13 @@ namespace SVGImage.SVG.Utils
                 .Select(ff => new { NormalName = ff.Source, Family = ff })
                 .ToDictionary(x => x.NormalName, x => x.Family, StringComparer.OrdinalIgnoreCase);
 
-            _normalizedFontNameMap = _availableFonts.Keys
-                .ToDictionary(
-                    name => Normalize(name),
-                    name => name,
-                    StringComparer.OrdinalIgnoreCase);
+            _normalizedFontNameMap = new Dictionary<string, string>(_availableFonts.Count);
+            foreach (var font in _availableFonts.Keys)
+            {
+                var name = Normalize(font);
+                if (!_normalizedFontNameMap.ContainsKey(name))
+                    _normalizedFontNameMap.Add(name, font);
+            }
             MaxLevenshteinDistance = maxLevenshteinDistance;
         }
         /// <summary>
