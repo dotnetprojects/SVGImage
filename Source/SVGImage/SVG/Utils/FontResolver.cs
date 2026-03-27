@@ -27,8 +27,8 @@ namespace SVGImage.SVG.Utils
         public FontResolver(int maxLevenshteinDistance = 0)
         {
             _availableFonts = Fonts.SystemFontFamilies
-                .Select(ff => new { NormalName = ff.Source, Family = ff })
-                .ToDictionary(x => x.NormalName, x => x.Family, StringComparer.OrdinalIgnoreCase);
+                .GroupBy(ff => ff.Source, StringComparer.OrdinalIgnoreCase)
+                .ToDictionary(g => g.Key, g => g.First(), StringComparer.OrdinalIgnoreCase);
 
             _normalizedFontNameMap = new Dictionary<string, string>(_availableFonts.Count);
             foreach (var font in _availableFonts.Keys)
@@ -157,7 +157,7 @@ namespace SVGImage.SVG.Utils
                 return string.Empty;
             }
             return _normalizationRegex.Replace(fontName, String.Empty).ToLowerInvariant();
-            
+
         }
 
         private static int[,] CreateDistanceMatrix(int length1, int length2)
@@ -201,7 +201,7 @@ namespace SVGImage.SVG.Utils
                 return string1.Length;
             }
 
-            
+
             int[,] distanceMatrix = CreateDistanceMatrix(string1.Length, string2.Length);
 
             for (int i = 1; i <= string1.Length; i++)
@@ -221,5 +221,5 @@ namespace SVGImage.SVG.Utils
         }
 
     }
-    
+
 }
