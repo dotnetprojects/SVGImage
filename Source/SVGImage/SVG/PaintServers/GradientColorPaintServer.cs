@@ -54,9 +54,8 @@ namespace SVGImage.SVG.PaintServers
 
                     double stopopacity = XmlUtil.AttrValue(childnode, "stop-opacity", (double)1);
 
-                    Color color;
-                    if (s.StartsWith("#")) color = PaintServerManager.ParseHexColor(s);
-                    else color = PaintServerManager.KnownColor(s);
+                    var colorServer = owner.GetServer(owner.Parse(s)) as SolidColorPaintServer;
+                    Color color = colorServer != null ? colorServer.Color : Colors.Black;
 
                     if (stopopacity != 1) 
                         color = Color.FromArgb((byte)(stopopacity * 255), color.R, color.G, color.B);
