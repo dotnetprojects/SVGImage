@@ -6,5 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../Source/SVGImage/DotNetProjects.SVGImage.csproj" />
+    <None Include="Fixtures/*.svg" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Fixtures/*.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

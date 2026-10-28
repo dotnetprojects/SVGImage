@@ -29,6 +29,12 @@ namespace SVGImage.SVG.Shapes
         protected string m_localStyle;
 
         internal Clip m_clip = null;
+        private string m_maskId;
+        private string m_colorInterpolation;
+
+        // Resolve at render time, after definitions later in the document have been read.
+        internal Mask Mask => Svg.GetShape(m_maskId) as Mask;
+        internal string ColorInterpolation => m_colorInterpolation ?? Parent?.ColorInterpolation ?? "sRGB";
 
         internal Geometry geometryElement;
         private readonly SVG _svg;
@@ -150,6 +156,8 @@ namespace SVGImage.SVG.Shapes
             set => m_fill = value;
         }
 
+        internal Fill InheritedFill => GetParentFill();
+
         public virtual TextStyle TextStyle
         {
             get
@@ -229,6 +237,21 @@ namespace SVGImage.SVG.Shapes
             if (name.Contains(':'))
             {
                 name = name.Split(':')[1];
+            }
+
+            if (name == "mask")
+            {
+                int start = value.IndexOf('(');
+                int end = value.LastIndexOf(')');
+                string reference = start >= 0 && end > start
+                    ? value.Substring(start + 1, end - start - 1).Trim().Trim('\'', '"') : string.Empty;
+                m_maskId = reference.StartsWith("#") ? reference.Substring(1) : null;
+                return;
+            }
+            if (name == "color-interpolation")
+            {
+                m_colorInterpolation = value == "inherit" ? null : value;
+                return;
             }
 
             if (name == SVGTags.sDisplay && value == "none")
@@ -498,8 +521,7 @@ namespace SVGImage.SVG.Shapes
         {
             if (this.m_fill == null)
             {
-                this.m_fill = new Fill(svg);
-                this.m_fill.PaintServerKey = svg.PaintServers.Parse("black");
+                this.m_fill = new Fill(svg, this);
             }
 
             return this.m_fill;

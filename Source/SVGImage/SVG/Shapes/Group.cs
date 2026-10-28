@@ -25,11 +25,31 @@ namespace SVGImage.SVG.Shapes
             }
 
             Parent = parent;
-            foreach (XmlNode childnode in node.ChildNodes)
+            var originalSize = svg.Size;
+            var originalViewBox = svg.ViewBox;
+            bool normalized = this is Mask && XmlUtil.AttrValue(node, "maskContentUnits") == "objectBoundingBox";
+            if (normalized)
             {
-                Shape shape = AddToList(svg, childnode, this);
-                if (shape != null)
-                    shape.Parent = this;
+                // Percentage lengths in bounding-box mask content use a unit viewport.
+                svg.Size = new System.Windows.Size(1, 1);
+                svg.ViewBox = new System.Windows.Rect(0, 0, 1, 1);
+            }
+            try
+            {
+                foreach (XmlNode childnode in node.ChildNodes)
+                {
+                    Shape shape = AddToList(svg, childnode, this);
+                    if (shape != null)
+                        shape.Parent = this;
+                }
+            }
+            finally
+            {
+                if (normalized)
+                {
+                    svg.Size = originalSize;
+                    svg.ViewBox = originalViewBox;
+                }
             }
         }
 
@@ -71,6 +91,8 @@ namespace SVGImage.SVG.Shapes
                 retVal = new PathShape(svg, childnode, parent);
             else if (nodeName == SVGTags.sClipPath)
                 retVal = new Clip(svg, childnode, parent);
+            else if (nodeName == "mask")
+                retVal = new Mask(svg, childnode, parent);
             else if (nodeName == SVGTags.sShapeGroup)
                 retVal = new Group(svg, childnode, parent);
             else if (nodeName == SVGTags.sSwitch)
@@ -112,7 +134,8 @@ namespace SVGImage.SVG.Shapes
 
             if (retVal != null)
             {
-                if (!isDefinition)
+                retVal.Parent = parent;
+                if (!isDefinition && !(retVal is Mask))
                     m_elements.Add(retVal);
                 if (retVal.Id.Length > 0)
                     svg.AddShape(retVal.Id, retVal);
@@ -129,6 +152,7 @@ namespace SVGImage.SVG.Shapes
         private void ReadDefs(SVG svg, XmlNode node)
         {
             //ShapeGroups defined in the 'def' section is added the the 'Shapes' dictionary in SVG for later reference
+            var definitionParent = new Shape(svg, node, this);
             foreach (XmlNode childnode in node.ChildNodes)
             {
                 var nodeName = GetNodeName(childnode);
@@ -140,7 +164,7 @@ namespace SVGImage.SVG.Shapes
                     continue;
                 }
 
-                AddToList(svg, childnode, null, isDefinition: true);
+                AddToList(svg, childnode, definitionParent, isDefinition: true);
             }
         }
 

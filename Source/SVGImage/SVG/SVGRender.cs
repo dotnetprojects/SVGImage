@@ -34,6 +34,8 @@ namespace SVGImage.SVG
         public SVG SVG { get; private set; }
 
         public bool UseAnimations { get; set; }
+        private HashSet<Mask> activeMasks = new HashSet<Mask>();
+        private bool isMaskContent;
 
         public Color? OverrideColor { get; set; }
 
@@ -117,6 +119,12 @@ namespace SVGImage.SVG
         public DrawingGroup CreateDrawing(SVG svg)
         {
             var drawingGroup = this.LoadGroup(svg.Elements, svg.ViewBox, false);
+            if (svg.RootGroup?.Mask != null)
+            {
+                var masked = new DrawingGroup();
+                AddDrawingToGroup(masked, svg.RootGroup, drawingGroup);
+                return masked;
+            }
             return drawingGroup;
         }
 
@@ -325,20 +333,16 @@ namespace SVGImage.SVG
                         Shape oldparent = currentUsedShape.Parent;
                         //currentUsedShape.RealParent = useshape;
                         currentUsedShape.Parent = useshape;
-                        DrawingGroup subgroup;
-                        if (currentUsedShape is Group)
-                            subgroup = this.LoadGroup(((Group)currentUsedShape).Elements, null, false);
-                        else
-                            subgroup = this.LoadGroup(new[]{ currentUsedShape }, null, false);
-                        if (currentUsedShape.Clip != null)
-                            subgroup.ClipGeometry = currentUsedShape.Clip.ClipGeometry;
-                        subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
-                        if (useshape.Transform != null)
-                            subgroup.Transform = new TransformGroup() {
-                                Children = new TransformCollection() { subgroup.Transform, useshape.Transform } 
-                            };
-                        grp.Children.Add(subgroup);
-                        currentUsedShape.Parent = oldparent;
+                        try
+                        {
+                            var subgroup = this.LoadGroup(new[] { currentUsedShape }, null, false);
+                            subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
+                            AddDrawingToGroup(grp, shape, subgroup);
+                        }
+                        finally
+                        {
+                            currentUsedShape.Parent = oldparent;
+                        }
                     }
                     continue;
                 }
@@ -463,16 +467,6 @@ namespace SVGImage.SVG
                 }
                 if (shape is PathShape pathShape)
                 {
-                    var svg = this.SVG;
-                    if (pathShape.Fill == null || pathShape.Fill.IsEmpty(svg))
-                    {
-                        if (pathShape.Stroke == null || pathShape.Stroke.IsEmpty(svg))
-                        {
-                            var fill = new Fill(svg);
-                            fill.PaintServerKey = this.SVG.PaintServers.Parse("black");
-                            pathShape.Fill = fill;
-                        }
-                    }
                     var path = PathGeometry.CreateFromGeometry(PathGeometry.Parse(pathShape.Data));
                     var di = this.NewDrawingItem(shape, path);
                     AddDrawingToGroup(grp, shape, di);
@@ -509,9 +503,14 @@ namespace SVGImage.SVG
 
         private void AddDrawingToGroup(DrawingGroup grp, Shape shape, Drawing drawing)
         {
-            if (shape.Clip != null || shape.Transform != null || shape.Filter != null)
+            var mask = shape.Mask;
+            if (shape.Clip != null || shape.Transform != null || shape.Filter != null || mask != null || (isMaskContent && shape is Group))
             {
                 var subgrp = new DrawingGroup();
+                if (mask != null)
+                    subgrp.OpacityMask = CreateMask(mask, MaskDrawing.ObjectBounds(drawing));
+                if (isMaskContent && shape is Group)
+                    subgrp.Opacity = shape.Opacity;
                 if (shape.Clip != null)
                     subgrp.ClipGeometry = shape.Clip.ClipGeometry;
                 if (shape.Transform != null)
@@ -523,6 +522,29 @@ namespace SVGImage.SVG
             }
             else
                 grp.Children.Add(drawing);
+        }
+
+        private Brush CreateMask(Mask mask, Rect bounds)
+        {
+            if (bounds.IsEmpty || !activeMasks.Add(mask)) return Brushes.Transparent;
+            try
+            {
+                // Paint overrides apply to the visible artwork, not mask luminance.
+                var renderer = new SVGRender(ExternalFileLoader)
+                {
+                    SVG = SVG, activeMasks = activeMasks, isMaskContent = true
+                };
+                var drawing = renderer.LoadGroup(mask.Elements, null, false);
+                if (mask.ContentUsesBoundingBox)
+                    drawing.Transform = new MatrixTransform(bounds.Width, 0, 0, bounds.Height, bounds.X, bounds.Y);
+                var maskGroup = new DrawingGroup();
+                maskGroup.Children.Add(drawing);
+                return MaskDrawing.Create(maskGroup, mask.GetRegion(bounds), mask.UsesAlpha, mask.ColorInterpolation == "linearRGB");
+            }
+            finally
+            {
+                activeMasks.Remove(mask);
+            }
         }
     }
 }

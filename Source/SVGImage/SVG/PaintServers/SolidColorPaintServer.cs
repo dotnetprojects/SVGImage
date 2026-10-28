@@ -21,19 +21,13 @@ namespace SVGImage.SVG.PaintServers
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            byte a = (byte)(255 * opacity / 100);
-            if (Brush != null && Brush is SolidColorBrush s)
-            {
-                if (opacity < 100)
-                {
-                    return new SolidColorBrush(Color.FromArgb(a, s.Color.R, s.Color.G, s.Color.B));
-                }
-                return Brush;
-            }
-            Color c = this.Color;
-            Color newcol = Color.FromArgb(a, c.R, c.G, c.B);
-            Brush = new SolidColorBrush(newcol);
-            return Brush;
+            if (Brush == null) Brush = new SolidColorBrush(this.Color);
+            if (opacity >= 100) return Brush;
+            // Preserve the color's alpha and keep the cached brush at full opacity.
+            // Masks and artwork can share a color while using different fill-opacity.
+            var result = Brush.CloneCurrentValue();
+            result.Opacity *= System.Math.Max(0, opacity / 100);
+            return result;
         }
     }
 }

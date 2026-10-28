@@ -75,6 +75,7 @@ namespace SVGImage.SVG
         public string Filename { get; private set; }
 
         public Rect? ViewBox { get; set; }
+        internal Group RootGroup { get; private set; }
 
         public Size Size { get; set; }
 
@@ -329,6 +330,7 @@ namespace SVGImage.SVG
             // Since SVG has the same functionality as Group we treat it as such, and copy over the children.
             // It might be more ideal if we would inherit from Group, but that also has its complications.
             var svgGroup = new Group(this, node, null);
+            RootGroup = svgGroup;
             m_elements.AddRange(svgGroup.Elements);
         }
     }
