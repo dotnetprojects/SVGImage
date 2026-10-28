@@ -57,6 +57,7 @@ namespace SVGImage.SVG
         private Uri _baseUri;
 
         private Drawing m_drawing;
+        private Drawing m_grayscaleDrawing;
         private SVGRender _render;
 
         private ScaleTransform m_scaleTransform;
@@ -70,6 +71,11 @@ namespace SVGImage.SVG
         public static readonly DependencyProperty UriSourceProperty =
             DependencyProperty.Register("UriSource", typeof(Uri), typeof(SVGImage),
                 new FrameworkPropertyMetadata(null, OnUriSourceChanged));
+
+        public static readonly DependencyProperty IsGrayscaleProperty =
+            DependencyProperty.Register(nameof(IsGrayscale), typeof(bool), typeof(SVGImage),
+                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender,
+                    (d, e) => ((SVGImage)d).m_grayscaleDrawing = null));
 
         public static readonly DependencyProperty SizeTypeProperty = DependencyProperty.Register("SizeType",
             typeof(eSizeType), typeof(SVGImage), new FrameworkPropertyMetadata(eSizeType.ContentToSizeNoStretch,
@@ -143,6 +149,13 @@ namespace SVGImage.SVG
         {
             get { return (eSizeType)this.GetValue(SizeTypeProperty); }
             set { this.SetValue(SizeTypeProperty, value); }
+        }
+
+        /// <summary>Displays the drawing in grayscale while preserving its alpha and vector geometry.</summary>
+        public bool IsGrayscale
+        {
+            get { return (bool)GetValue(IsGrayscaleProperty); }
+            set { SetValue(IsGrayscaleProperty, value); }
         }
 
         public string Source
@@ -347,6 +360,7 @@ namespace SVGImage.SVG
         public void SetImage(Drawing drawing)
         {
             this.m_drawing = drawing;
+            this.m_grayscaleDrawing = null;
             this.InvalidateVisual();
             this.InvalidateMeasure();
             this.RecalcImage();
@@ -408,7 +422,15 @@ namespace SVGImage.SVG
                 return;
             dc.PushTransform(this.m_offsetTransform);
             dc.PushTransform(this.m_scaleTransform);
-            dc.DrawDrawing(this.m_drawing);
+            if (this.IsGrayscale)
+            {
+                // Mutable drawings can change without SetImage; only cache frozen drawings.
+                var gray = this.m_grayscaleDrawing ?? Utils.DrawingColorConverter.ToGrayscale(this.m_drawing);
+                if (this.m_drawing.IsFrozen) this.m_grayscaleDrawing = gray;
+                dc.DrawDrawing(gray);
+            }
+            else
+                dc.DrawDrawing(this.m_drawing);
             dc.Pop();
             dc.Pop();
         }

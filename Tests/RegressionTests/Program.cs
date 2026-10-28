@@ -4,6 +4,8 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 using SvgControl = SVGImage.SVG.SVGImage;
+using SVGImage.SVG.Utils;
+using System.Windows.Media.Imaging;
 using SVGImage.SVG;
 
 internal static class Program
@@ -13,7 +15,52 @@ internal static class Program
     {
         GradientRgbColors();
         ButtonContentSize();
+        GrayscaleDrawing();
         Console.WriteLine("All regression checks passed.");
+    }
+
+    private static void GrayscaleDrawing()
+    {
+        var source = new DrawingGroup();
+        var gradient = new LinearGradientBrush(Colors.Red, Colors.Blue, 0);
+        source.Children.Add(new GeometryDrawing(gradient, new Pen(Brushes.Green, 2),
+            new RectangleGeometry(new Rect(0, 0, 20, 10))));
+        var pixels = new byte[] { 0, 0, 128, 128 };
+        source.Children.Add(new ImageDrawing(BitmapSource.Create(1, 1, 96, 96,
+            PixelFormats.Pbgra32, null, pixels, 4), new Rect(20, 0, 1, 1)));
+        source.Freeze();
+        var gray = (DrawingGroup)DrawingColorConverter.ToGrayscale(source);
+        Equal(source.Bounds, gray.Bounds, "grayscale preserves geometry");
+        var geometry = (GeometryDrawing)gray.Children[0];
+        var stops = ((GradientBrush)geometry.Brush).GradientStops;
+        Equal(Color.FromRgb(76, 76, 76), stops[0].Color, "red grayscale");
+        Equal(Color.FromRgb(29, 29, 29), stops[1].Color, "blue grayscale");
+        var pen = ((SolidColorBrush)geometry.Pen.Brush).Color;
+        Equal(pen.R, pen.G, "grayscale pen");
+        Equal(pen.G, pen.B, "grayscale pen channels");
+        Equal(Colors.Red, gradient.GradientStops[0].Color, "source unchanged");
+        ((BitmapSource)((ImageDrawing)gray.Children[1]).ImageSource).CopyPixels(pixels, 4, 0);
+        Equal((byte)128, pixels[3], "bitmap alpha preserved");
+        Equal(pixels[0], pixels[1], "bitmap grayscale");
+        Equal(pixels[1], pixels[2], "bitmap grayscale channels");
+
+        var image = new SvgControl { IsGrayscale = true, ImageSource = source, Width = 40, Height = 20 };
+        image.Measure(new Size(40, 20));
+        image.Arrange(new Rect(0, 0, 40, 20));
+        image.UpdateLayout();
+        var target = new RenderTargetBitmap(40, 20, 96, 96, PixelFormats.Pbgra32);
+        target.Render(image);
+        var output = new byte[40 * 20 * 4];
+        target.CopyPixels(output, 40 * 4, 0);
+        if (!Enumerable.Range(0, 40 * 20).Any(i => output[i * 4 + 3] > 0))
+            throw new Exception("grayscale control rendered no pixels");
+        for (int i = 0; i < output.Length; i += 4)
+        {
+            Equal(output[i], output[i + 1], "rendered grayscale");
+            Equal(output[i + 1], output[i + 2], "rendered grayscale channels");
+        }
+        image.IsGrayscale = false;
+        Equal(false, image.IsGrayscale, "grayscale can be disabled");
     }
 
     private static void ButtonContentSize()
