@@ -35,6 +35,7 @@ namespace SVGImage.SVG
 
         public bool UseAnimations { get; set; }
         private HashSet<Mask> activeMasks = new HashSet<Mask>();
+        private readonly HashSet<Shape> activeUses = new HashSet<Shape>();
         private SvgAnimationScene animationScene;
 
         /// <summary>Stops playback and evaluates the current scene at an exact time.</summary>
@@ -277,7 +278,10 @@ namespace SVGImage.SVG
                 if (shape is UseShape useshape)
                 {
                     Shape currentUsedShape = this.SVG.GetShape(useshape.hRef);
-                    if (currentUsedShape != null)
+                    bool recursive = false;
+                    for (var ancestor = shape; ancestor != null; ancestor = ancestor.Parent)
+                        if (ancestor == currentUsedShape) { recursive = true; break; }
+                    if (currentUsedShape != null && !recursive && activeUses.Add(currentUsedShape))
                     {
                         Shape oldparent = currentUsedShape.Parent;
                         //currentUsedShape.RealParent = useshape;
@@ -302,6 +306,7 @@ namespace SVGImage.SVG
                         finally
                         {
                             currentUsedShape.Parent = oldparent;
+                            activeUses.Remove(currentUsedShape);
                         }
                     }
                     continue;
@@ -312,6 +317,17 @@ namespace SVGImage.SVG
                     if (shape.Transform != null)
                         subgroup.Transform = shape.Transform;
                     grp.Children.Add(subgroup);
+                    continue;
+                }
+                if (shape is SvgViewport viewportShape)
+                {
+                    if (viewportShape.Frame.Width <= 0 || viewportShape.Frame.Height <= 0) continue;
+                    var content = LoadGroup(viewportShape.Elements,null,false);
+                    content.Transform = new MatrixTransform(viewportShape.ViewportTransform());
+                    var viewport = new DrawingGroup();
+                    if (!viewportShape.OverflowVisible) viewport.ClipGeometry = new RectangleGeometry(viewportShape.Frame);
+                    viewport.Children.Add(content);
+                    AddDrawingToGroup(grp,shape,viewport);
                     continue;
                 }
                 if (shape is Group groupShape)
@@ -473,7 +489,7 @@ namespace SVGImage.SVG
                 if (shape is Group || (animated && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity")))
                     subgrp.Opacity = shape.Opacity;
                 if (shape.Clip != null)
-                    subgrp.ClipGeometry = shape.Clip.ClipGeometry;
+                    subgrp.ClipGeometry = shape.Clip.GetGeometry(MaskDrawing.ObjectBounds(drawing));
                 if (shape.Transform != null)
                 {
                     subgrp.Transform = shape.Transform;
@@ -483,7 +499,7 @@ namespace SVGImage.SVG
                 if (shape.Filter != null)
                 {
                     subgrp.BitmapEffect = shape.Filter.GetBitmapEffect();
-                    shape.Filter.ApplyColors(drawing);
+                    drawing = shape.Filter.Render(drawing);
                 }
                 subgrp.Children.Add(drawing);
                 if (animated) animationScene.Attach(shape, subgrp);

@@ -1,20 +1,16 @@
-﻿using System;
 using System.Xml;
+using SVGImage.SVG.Utils;
 
 namespace SVGImage.SVG.Shapes
 {
-    /// <summary>
-    /// A placeholder class for TextPath.
-    /// </summary>
-    internal class TextPath : TextShapeBase, ITextChild
+    internal sealed class TextPath : TextShapeBase, ITextChild
     {
-        protected TextPath(SVG svg, XmlNode node, Shape parent) : base(svg, node, parent)
+        internal string Href { get; }
+        internal string StartOffset { get; }
+        internal TextPath(SVG svg, XmlNode node, Shape parent) : base(svg, node, parent)
         {
-            throw new NotImplementedException("TextPath is not yet implemented.");
+            Href = XmlUtil.AttrValue(node, "href", XmlUtil.AttrValue(node, "xlink:href")).TrimStart('#');
+            StartOffset = XmlUtil.AttrValue(node, "startOffset", "0");
         }
     }
-
-
-
-
 }

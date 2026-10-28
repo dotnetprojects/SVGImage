@@ -197,12 +197,13 @@ namespace SVGImage.SVG.Shapes
                         Children.Add(new TextString(this, text));
                     }
                 }
-                else if (child.NodeType == XmlNodeType.Element && child.Name == "tspan")
+                else if (child.NodeType == XmlNodeType.Element && child.LocalName == "tspan")
                 {
                     var span = new TextSpan(svg, child, this);
                     Children.Add(span);
                 }
-                // Future support for <textPath>, <tref>, etc. could go here
+                else if(child.NodeType==XmlNodeType.Element && child.LocalName=="textPath")
+                    Children.Add(new TextPath(svg,child,this));
             }
         }
 

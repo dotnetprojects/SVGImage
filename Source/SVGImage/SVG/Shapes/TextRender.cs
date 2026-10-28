@@ -60,6 +60,12 @@ namespace SVGImage.SVG.Shapes
                 foreach (var glyphRun in GlyphRuns)
                 {
                     var runGeometry = !nonZeroAlignmentOffset ? glyphRun.BuildGeometry() : glyphRun.CreateOffsetRun(alignmentOffset, 0).BuildGeometry();
+                    if (TextContainers.TryGetValue(glyphRun, out TextShapeBase container) && TextPathLayout.Find(container) is TextPath path)
+                    {
+                        double advance = GlyphRuns.Where(r => TextContainers.ContainsKey(r) && TextPathLayout.Find(TextContainers[r]) == path).Sum(r => r.AdvanceWidths.Sum());
+                        double anchorOffset = TextAlignment == TextAlignment.Center ? advance / 2 : TextAlignment == TextAlignment.Right ? advance : 0;
+                        runGeometry = TextPathLayout.Build(glyphRun, path, anchorOffset);
+                    }
                     if (runGeometry.IsFrozen)
                     {
                         runGeometry = runGeometry.CloneCurrentValue();

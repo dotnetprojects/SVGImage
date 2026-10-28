@@ -29,7 +29,7 @@ namespace SVGImage.SVG.Utils
             "fill fill-rule fill-opacity stroke stroke-width stroke-opacity stroke-dasharray stroke-linecap stroke-linejoin " +
             "opacity color display visibility transform mask mask-type clip-path color-interpolation filter " +
             "font-family font-size font-weight font-style text-decoration text-anchor word-spacing letter-spacing baseline-shift " +
-            "stop-color stop-opacity").Split(' '));
+            "stop-color stop-opacity clip-rule overflow color-interpolation-filters flood-color flood-opacity").Split(' '));
         private static readonly Dictionary<string, string> Initial = new Dictionary<string, string>
         {
             { "fill", "black" }, { "stroke", "none" }, { "color", "black" }, { "opacity", "1" },
@@ -42,7 +42,7 @@ namespace SVGImage.SVG.Utils
             for (int i = 0; i < CssAnimations.Longhands.Length; i++) Initial[CssAnimations.Longhands[i]] = CssAnimations.Defaults[i];
         }
         private static bool Inherited(string name) => name == "color" || name.StartsWith("fill") || name.StartsWith("stroke") ||
-            name.StartsWith("font-") || name == "visibility" || name == "text-anchor" || name == "word-spacing" || name == "letter-spacing";
+            name.StartsWith("font-") || name == "visibility" || name == "clip-rule" || name == "color-interpolation-filters" || name == "text-anchor" || name == "word-spacing" || name == "letter-spacing";
 
         internal void Add(string selector, List<StyleItem> declarations)
         {

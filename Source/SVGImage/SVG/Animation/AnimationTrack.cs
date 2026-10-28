@@ -25,6 +25,8 @@ namespace SVGImage.SVG.Animation
         internal string[] CssTiming;
         internal Matrix UnderlyingMatrix = System.Windows.Media.Matrix.Identity;
         internal string UnderlyingTransform;
+        internal PathGeometry MotionPath;
+        internal string MotionRotate;
         private double[][] numericValues;
         private CssTransforms[] cssValues;
 
@@ -40,6 +42,15 @@ namespace SVGImage.SVG.Animation
                 Freeze = XmlUtil.AttrValue(node, "fill") == "freeze",
                 Mode = XmlUtil.AttrValue(node, "calcMode", "linear")
             };
+            if(node.LocalName=="animateMotion")
+            {
+                track.Type="motion";
+                track.Attribute="transform";
+                track.Additive=true;
+                track.MotionRotate=XmlUtil.AttrValue(node,"rotate","0");
+                string path=XmlUtil.AttrValue(node,"path");
+                if(path.Length>0) track.MotionPath=PathGeometry.CreateFromGeometry(Geometry.Parse(path));
+            }
             string repeat = XmlUtil.AttrValue(node, "repeatCount", "1");
             track.Repeat = repeat == "indefinite" ? double.PositiveInfinity : Number(repeat);
             string values = XmlUtil.AttrValue(node, "values");
@@ -50,6 +61,11 @@ namespace SVGImage.SVG.Animation
             {
                 string from = XmlUtil.AttrValue(node, "from", track.Type == "scale" ? "1" : "0");
                 track.Values = new[] { from, XmlUtil.AttrValue(node, "to", from) };
+            }
+            if(track.Type=="motion" && (track.MotionPath!=null || node.ChildNodes.Cast<XmlNode>().Any(child => child.LocalName=="mpath")))
+            {
+                string points=XmlUtil.AttrValue(node,"keyPoints");
+                track.Values=points.Length>0 ? points.Split(';') : new[] { "0", "1" };
             }
             string times = XmlUtil.AttrValue(node, "keyTimes");
             track.Times = times.Length > 0 ? times.Split(';').Select(Number).ToArray()
@@ -146,6 +162,20 @@ namespace SVGImage.SVG.Animation
 
         internal Matrix Matrix(int index, double fraction)
         {
+            if(Type=="motion")
+            {
+                var values=Components(index,fraction);
+                Point position; Point tangent;
+                if(MotionPath!=null) MotionPath.GetPointAtFractionLength(Math.Max(0,Math.Min(1,values[0])),out position,out tangent);
+                else {
+                    position=new Point(values.Length>0?values[0]:0,values.Length>1?values[1]:0);
+                    var first=Numbers(Values[index]); var last=Numbers(Values[Math.Min(index+1,Values.Length-1)]);
+                    tangent=new Point((last.Length>0?last[0]:0)-(first.Length>0?first[0]:0),(last.Length>1?last[1]:0)-(first.Length>1?first[1]:0));
+                }
+                var motion=System.Windows.Media.Matrix.Identity;
+                double angle=MotionRotate=="auto" || MotionRotate=="auto-reverse" ? Math.Atan2(tangent.Y,tangent.X)*180/Math.PI+(MotionRotate=="auto-reverse"?180:0) : Number(MotionRotate);
+                motion.Rotate(angle); motion.Translate(position.X,position.Y); return motion;
+            }
             if (Type == "css")
             {
                 if (cssValues == null) cssValues = Values.Select(valueToken => valueToken == "__underlying__" ?

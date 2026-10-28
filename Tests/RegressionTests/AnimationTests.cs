@@ -59,6 +59,18 @@ internal static class AnimationTests
             Equal(expected[i].G, p[1], "CSS stepped frame green");
         }
 
+        drawing=renderer.LoadXmlDrawing(Wrap("<rect width='10' height='5'><animateMotion path='M10 20L50 20L50 60' dur='2s' rotate='auto' fill='freeze'/></rect>"));
+        renderer.SeekAnimations(TimeSpan.FromSeconds(.5));
+        Near(30,drawing.Bounds.X,"motion follows path length"); Near(20,drawing.Bounds.Y,"motion path y");
+        renderer.SeekAnimations(TimeSpan.FromSeconds(1.5));
+        Near(45,drawing.Bounds.X,"motion automatic rotation"); Near(40,drawing.Bounds.Y,"motion corner y");
+        drawing=renderer.LoadXmlDrawing(Wrap("<defs><path id='motion' d='M0 0Q50 100 100 0'/></defs><rect width='2' height='2'><animateMotion dur='2s'><mpath href='#motion'/></animateMotion></rect>"));
+        renderer.SeekAnimations(TimeSpan.FromSeconds(1));
+        Near(50,drawing.Bounds.X,"referenced curved motion midpoint",.1); Near(50,drawing.Bounds.Y,"referenced curved motion tangent",.1);
+        drawing=renderer.LoadXmlDrawing(Wrap("<rect width='2' height='2'><animateMotion path='M0 0H100' dur='2s' keyPoints='0;.2;1' keyTimes='0;.5;1'/></rect>"));
+        renderer.SeekAnimations(TimeSpan.FromSeconds(1));
+        Near(20,drawing.Bounds.X,"motion keyPoints");
+
         drawing = renderer.LoadXmlDrawing(Wrap("<g><animateTransform type='translate' values='0;80' keyTimes='0;1' dur='1s' " +
             "calcMode='spline' keySplines='.42 0 1 1'/><rect width='5' height='5'/></g>"));
         renderer.SeekAnimations(TimeSpan.FromSeconds(.5));

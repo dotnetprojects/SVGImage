@@ -1,54 +1,31 @@
-﻿using System.Windows;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Media;
 using System.Xml;
+using SVGImage.SVG.Utils;
 
 namespace SVGImage.SVG.Shapes
 {
     public sealed class Clip : Group
     {
-        private Geometry clpGeo;
-
-        public Clip(SVG svg, XmlNode node, Shape parent)
-            : base(svg, node, parent)
+        private readonly bool boundingBox;
+        public Clip(SVG svg, XmlNode node, Shape parent) : base(svg,node,parent)
         {
+            boundingBox = XmlUtil.AttrValue(node,"clipPathUnits") == "objectBoundingBox";
         }
-
-        public Geometry ClipGeometry
+        public Geometry ClipGeometry => GetGeometry(new Rect(0,0,1,1));
+        internal Geometry GetGeometry(Rect bounds, HashSet<Shape> active = null)
         {
-            get
+            Geometry geometry = ShapeGeometry.Create(this,active);
+            if (boundingBox)
             {
-                if (clpGeo != null) return clpGeo;
-
-                var retVal = this.getGeoForShape(this.Elements[0]);
-
-                if (this.Elements.Count > 1)
-                    foreach (var element in this.Elements)
-                    {
-                        retVal = new CombinedGeometry(retVal, this.getGeoForShape(element));
-                    }
-
-                clpGeo = retVal;
-                return clpGeo;
+                if (bounds.IsEmpty || bounds.Width <= 0 || bounds.Height <= 0) return Geometry.Empty;
+                geometry = geometry.CloneCurrentValue();
+                var matrix = geometry.Transform?.Value ?? Matrix.Identity;
+                matrix.Append(new Matrix(bounds.Width,0,0,bounds.Height,bounds.X,bounds.Y));
+                geometry.Transform = new MatrixTransform(matrix);
             }
-        }
-
-        private Geometry getGeoForShape(Shape shp)
-        {
-            if (shp is RectangleShape)
-            {
-                var r = shp as RectangleShape;
-                var g = new RectangleGeometry(new Rect(r.RX, r.RY, r.Width, r.Height));
-                r.geometryElement = g;
-                return g;
-            }
-            if (shp is CircleShape)
-            {
-                var c = shp as CircleShape;
-                var g = new EllipseGeometry(new Point(c.CX, c.CY), c.R, c.R);
-                c.geometryElement = g;
-                return g;
-            }
-            return null;
+            return geometry;
         }
     }
 }

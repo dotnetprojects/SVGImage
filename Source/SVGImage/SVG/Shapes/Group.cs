@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace SVGImage.SVG.Shapes
@@ -13,26 +13,25 @@ namespace SVGImage.SVG.Shapes
 
         public Group(SVG svg, XmlNode node, Shape parent) : base(svg, node)
         {
-            // parent on group must be set before children are added
-            var clp = XmlUtil.AttrValue(node, "clip-path", null);
-            if (!string.IsNullOrEmpty(clp))
-            {
-                Shape result;
-                string id = ShapeUtil.ExtractBetween(clp, '(', ')');
-                if (id.Length > 0 && id[0] == '#') id = id.Substring(1);
-                svg.m_shapes.TryGetValue(id, out result);
-                this.m_clip = result as Clip;
-            }
-
             Parent = parent;
             var originalSize = svg.Size;
             var originalViewBox = svg.ViewBox;
-            bool normalized = this is Mask && XmlUtil.AttrValue(node, "maskContentUnits") == "objectBoundingBox";
+            bool normalized = this is Mask && XmlUtil.AttrValue(node, "maskContentUnits") == "objectBoundingBox" ||
+                this is Clip && XmlUtil.AttrValue(node,"clipPathUnits") == "objectBoundingBox";
             if (normalized)
             {
                 // Percentage lengths in bounding-box mask content use a unit viewport.
                 svg.Size = new System.Windows.Size(1, 1);
                 svg.ViewBox = new System.Windows.Rect(0, 0, 1, 1);
+            }
+            bool nested = this is SvgViewport || this is Symbol && SvgViewport.ReadViewBox(node).HasValue;
+            if (nested)
+            {
+                var viewport = originalViewBox ?? new System.Windows.Rect(originalSize);
+                var box = SvgViewport.ReadViewBox(node);
+                svg.Size = box?.Size ?? new System.Windows.Size(System.Math.Max(0,XmlUtil.AttrValue(node,"width",viewport.Width,viewport.Width)),
+                    System.Math.Max(0,XmlUtil.AttrValue(node,"height",viewport.Height,viewport.Height)));
+                svg.ViewBox = box;
             }
             try
             {
@@ -45,7 +44,7 @@ namespace SVGImage.SVG.Shapes
             }
             finally
             {
-                if (normalized)
+                if (normalized || nested)
                 {
                     svg.Size = originalSize;
                     svg.ViewBox = originalViewBox;
@@ -61,7 +60,7 @@ namespace SVGImage.SVG.Shapes
         {
             if (childnode.NodeType != XmlNodeType.Element)
                 return null;
-            if (childnode.LocalName == "animate" || childnode.LocalName == "animateTransform" || childnode.LocalName == "set")
+            if (childnode.LocalName == "animate" || childnode.LocalName == "animateTransform" || childnode.LocalName == "animateMotion" || childnode.LocalName == "set")
                 return null; // Attached to the target shape, rather than rendered as children.
 
             Shape retVal = null;
@@ -75,6 +74,8 @@ namespace SVGImage.SVG.Shapes
             }
             else if (nodeName == SVGTags.sShapeRect)
                 retVal = new RectangleShape(svg, childnode);
+            else if (nodeName == SVGTags.sSvg)
+                retVal = new SvgViewport(svg, childnode, parent);
             else if (nodeName == SVGTags.sFilter)
                 retVal = new Filter(svg, childnode, parent);
             else if (nodeName == SVGTags.sFeGaussianBlur)
@@ -116,7 +117,7 @@ namespace SVGImage.SVG.Shapes
             else if (nodeName == SVGTags.sText)
                 //retVal = new TextShape(svg, childnode, parent);
                 retVal = new TextShape(svg, childnode, parent);
-            else if (nodeName == SVGTags.sLinearGradient)
+            else if (nodeName == SVGTags.sLinearGradient || nodeName == SVGTags.sPattern)
             {
                 svg.PaintServers.Create(svg, childnode);
                 return null;
@@ -139,7 +140,7 @@ namespace SVGImage.SVG.Shapes
             if (retVal != null)
             {
                 retVal.Parent = parent;
-                if (!isDefinition && !(retVal is Mask) && !(retVal is Symbol))
+                if (!isDefinition && !(retVal is Mask) && !(retVal is Symbol) && !(retVal is Clip))
                     m_elements.Add(retVal);
                 if (retVal.Id.Length > 0)
                     svg.AddShape(retVal.Id, retVal);

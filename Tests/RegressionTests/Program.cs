@@ -19,6 +19,8 @@ internal static class Program
         MaskTests.Run();
         AnimationTests.Run();
         CssTests.Run();
+        GeometryTests.Run();
+        FilterTests.Run();
         Console.WriteLine("All regression checks passed.");
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Xml;
+using System.Xml;
 
 using System.Windows.Media.Effects;
 using System.Windows.Media;
@@ -9,10 +9,22 @@ namespace SVGImage.SVG.Filters
 
     public sealed class Filter : Group
     {
+        private readonly XmlNode node;
+        private readonly System.Windows.Rect viewport;
         public Filter(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)
         {
-           
+            this.node = node;
+            viewport = svg.ViewBox ?? new System.Windows.Rect(svg.Size);
+        }
+
+        internal Drawing Render(Drawing drawing)
+        {
+            foreach (XmlNode child in node.ChildNodes)
+                if (child.LocalName == "feTurbulence" || child.LocalName == "feDisplacementMap")
+                    return new RasterFilter(Svg,node,Utils.MaskDrawing.ObjectBounds(drawing),viewport).Render(drawing);
+            ApplyColors(drawing);
+            return drawing;
         }
 
         public BitmapEffect GetBitmapEffect()

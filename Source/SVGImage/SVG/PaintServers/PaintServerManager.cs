@@ -263,6 +263,10 @@ namespace SVGImage.SVG.PaintServers
                     if (info.PropertyType == typeof(Color)) 
                         m_knownColors[info.Name.ToLower()] = (Color)info.GetValue(typeof(Color), null);
                 }
+                // SVG/CSS accepts the British spellings that WPF omits.
+                foreach (string name in new[] { "grey", "darkgrey", "darkslategrey", "dimgrey", "lightgrey", "lightslategrey", "slategrey" })
+                    m_knownColors[name] = m_knownColors[name.Replace("grey", "gray")];
+                m_knownColors["rebeccapurple"] = Color.FromRgb(102, 51, 153);
             }
         }
     }

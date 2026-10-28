@@ -8,10 +8,12 @@ namespace SVGImage.SVG.Shapes
     {
         private readonly XmlNode node;
         private string maskType;
+        private readonly Rect viewport;
 
         internal Mask(SVG svg, XmlNode node, Shape parent) : base(svg, node, parent)
         {
             this.node = node;
+            viewport = svg.ViewBox ?? new Rect(svg.Size);
         }
 
         internal bool UsesAlpha => maskType == "alpha";
@@ -20,7 +22,6 @@ namespace SVGImage.SVG.Shapes
         internal Rect GetRegion(Rect bounds)
         {
             bool boundingBox = XmlUtil.AttrValue(node, "maskUnits", "objectBoundingBox") != "userSpaceOnUse";
-            var viewport = Svg.ViewBox ?? new Rect(Svg.Size);
             double width = boundingBox ? 1 : viewport.Width;
             double height = boundingBox ? 1 : viewport.Height;
             double x = XmlUtil.GetDoubleValue(XmlUtil.AttrValue(node, "x", "-10%"), width);

@@ -29,6 +29,9 @@ namespace SVGImage.SVG.Shapes
         protected string m_localStyle;
 
         internal Clip m_clip = null;
+        private string clipId;
+        private FillRule? clipRule;
+        internal FillRule ClipRule => clipRule ?? Parent?.ClipRule ?? FillRule.Nonzero;
         private string m_maskId;
         private string m_colorInterpolation;
         internal List<XmlNode> AnimationNodes { get; } = new List<XmlNode>();
@@ -83,7 +86,7 @@ namespace SVGImage.SVG.Shapes
             ParseLocalStyle(svg);
             if (node != null)
                 foreach (XmlNode child in node.ChildNodes)
-                    if (child.LocalName == "animate" || child.LocalName == "animateTransform" || child.LocalName == "set")
+                    if (child.LocalName == "animate" || child.LocalName == "animateTransform" || child.LocalName == "animateMotion" || child.LocalName == "set")
                     {
                         string href = Utils.XmlUtil.AttrValue(child, "href", Utils.XmlUtil.AttrValue(child, "xlink:href"));
                         if (href.StartsWith("#"))
@@ -115,7 +118,7 @@ namespace SVGImage.SVG.Shapes
         {
             get
             {
-                return this.m_clip;
+                return this.m_clip ?? Svg.GetShape(clipId) as Clip;
             }
         }
 
@@ -347,9 +350,10 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sFilterProperty)
             {
+                filterId = null;
                 if (value.StartsWith("url"))
                 {
-                    string id = ShapeUtil.ExtractBetween(value, '(', ')');
+                    string id = ShapeUtil.ExtractBetween(value, '(', ')').Trim().Trim('\'', '"');
                     if (id.Length > 0 && id[0] == '#')
                     {
                         id = id.Substring(1);
@@ -362,21 +366,23 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sClipPathProperty)
             {
+                m_clip = null;
+                clipId = null;
                 if (value.StartsWith("url"))
                 {
-                    Shape result;
                     string id = ShapeUtil.ExtractBetween(value, '(', ')');
+                    id = id.Trim().Trim('\'', '"');
                     if (id.Length > 0 && id[0] == '#')
                     {
                         id = id.Substring(1);
                     }
 
-                    svg.m_shapes.TryGetValue(id, out result);
-                    this.m_clip = result as Clip;
+                    clipId = id;
                     return;
                 }
                 return;
             }
+            if (name == "clip-rule") { clipRule = value == "evenodd" ? FillRule.EvenOdd : FillRule.Nonzero; return; }
             if (name == SVGTags.sFill)
             {
                 this.GetFill(svg).PaintServerKey = svg.PaintServers.Parse(value);

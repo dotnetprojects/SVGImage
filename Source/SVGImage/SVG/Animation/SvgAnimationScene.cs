@@ -38,6 +38,18 @@ namespace SVGImage.SVG.Animation
                 try
                 {
                     var track = AnimationTrack.Parse(node);
+                    if(track.Type=="motion" && track.MotionPath==null)
+                    {
+                        foreach(XmlNode child in node.ChildNodes) if(child.LocalName=="mpath")
+                        {
+                            string href=XmlUtil.AttrValue(child,"href",XmlUtil.AttrValue(child,"xlink:href"));
+                            if(href.StartsWith("#") && svg.GetShape(href.Substring(1)) is PathShape path)
+                            {
+                                track.MotionPath=PathGeometry.CreateFromGeometry(Geometry.Parse(path.Data));
+
+                            }
+                        }
+                    }
                     if (track.Type != null || new[] { "display", "visibility", "opacity", "r", "rx", "ry", "cx", "cy", "viewBox" }.Contains(track.Attribute))
                         result.Add(track);
                     else Warnings.Add("Unsupported animated attribute: " + track.Attribute);
