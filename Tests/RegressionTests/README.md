@@ -17,3 +17,5 @@ The browser reference was rendered with Chrome 156.0.8078.48, with a transparent
 Run Chrome headlessly against that HTML file with `--hide-scrollbars --default-background-color=00000000 --window-size=320,320 --screenshot=<absolute-output-path>`. Review the result before replacing the reference.
 
 Additional pixel checks cover black-over-white cutouts, grayscale and linear-RGB luminance, alpha masks, gradients, embedded images, transparent colors, independent shared-paint opacity, mask child group opacity, coordinate units, percentage content, stroke-independent bounding boxes, transforms, forward/style references, nested/cyclic/empty masks, root SVG masks, `use` elements and paint overrides.
+
+Animation checks use small synthetic SVG strings and verify SMIL interpolation, transform composition, timed frame visibility, repeats, click starts, CSS stepped sprite sheets, a real advancing WPF clock, symbol viewBox mapping, camera animation, color filters and disabling animation. Optional external sample validation is documented in [Animations](../../Docs/Animations.md); downloaded examples are not included in this repository.

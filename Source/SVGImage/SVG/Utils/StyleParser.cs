@@ -27,6 +27,22 @@ namespace SVGImage.SVG.Utils
 
         public static void ParseStyle(SVG svg, string style)
         {
+            style = Regex.Replace(style, @"/\*.*?\*/", "", RegexOptions.Singleline);
+            var keyframe = Regex.Match(style, @"@(?:-webkit-)?keyframes\s+([\w-]+)\s*\{");
+            while (keyframe.Success)
+            {
+                int start = keyframe.Index + keyframe.Length, end = start, depth = 1;
+                while (end < style.Length && depth > 0)
+                {
+                    if (style[end] == '{') depth++;
+                    if (style[end] == '}') depth--;
+                    end++;
+                }
+                if (depth != 0) break;
+                svg.CssKeyframes[keyframe.Groups[1].Value] = style.Substring(start, end - start - 1);
+                style = style.Remove(keyframe.Index, end - keyframe.Index);
+                keyframe = Regex.Match(style, @"@(?:-webkit-)?keyframes\s+([\w-]+)\s*\{");
+            }
             var svgStyles = svg.Styles;
 
             var match = _regexStyle.Match(style);

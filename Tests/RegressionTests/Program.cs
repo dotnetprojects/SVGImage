@@ -17,6 +17,7 @@ internal static class Program
         ButtonContentSize();
         GrayscaleDrawing();
         MaskTests.Run();
+        AnimationTests.Run();
         Console.WriteLine("All regression checks passed.");
     }
 

@@ -116,7 +116,13 @@ namespace SVGImage.SVG
                     FrameworkPropertyMetadataOptions.AffectsRender, CustomBrushesPropertyChanged));
 
         public static readonly DependencyProperty UseAnimationsProperty = DependencyProperty.Register("UseAnimations",
-            typeof(bool), typeof(SVGImage), new PropertyMetadata(true));
+            typeof(bool), typeof(SVGImage), new PropertyMetadata(true, (d, e) =>
+            {
+                var image = (SVGImage)d;
+                if (image._render == null) return;
+                image._render.UseAnimations = (bool)e.NewValue;
+                image.ReRenderSvg();
+            }));
 
         public static readonly DependencyProperty ExternalFileLoaderProperty = DependencyProperty.Register("ExternalFileLoader",
             typeof(IExternalFileLoader), typeof(SVGImage), new PropertyMetadata(FileSystemLoader.Instance));
@@ -287,6 +293,20 @@ namespace SVGImage.SVG
             }
         }
 
+        /// <summary>Stops playback and displays the SVG at an exact animation time.</summary>
+        public void SeekAnimations(TimeSpan position)
+        {
+            _render?.SeekAnimations(position);
+            this.InvalidateVisual();
+        }
+
+        /// <summary>Forwards a named event to SMIL begin timing, such as button.click.</summary>
+        public void TriggerAnimationEvent(string elementId, string eventName = "click")
+        {
+            _render?.TriggerAnimationEvent(elementId, eventName);
+            this.InvalidateVisual();
+        }
+
         public void SetImage(string svgFilename)
         {
             _loadImage = (render) =>
@@ -298,7 +318,7 @@ namespace SVGImage.SVG
             {
                 _render = new SVGRender();
                 _render.ExternalFileLoader = this.ExternalFileLoader;
-                _render.UseAnimations = false;
+                _render.UseAnimations = this.UseAnimations;
                 _render.OverrideColor = OverrideColor;
                 _render.OverrideFillColor = OverrideFillColor;
                 _render.OverrideStrokeColor = OverrideStrokeColor;
@@ -326,7 +346,7 @@ namespace SVGImage.SVG
                 _render.OverrideStrokeColor = OverrideStrokeColor;
                 _render.CustomBrushes = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
-                _render.UseAnimations = false;
+                _render.UseAnimations = this.UseAnimations;
 
                 _loadImage(_render);
                 _loadImage = null;
@@ -350,7 +370,7 @@ namespace SVGImage.SVG
                 _render.OverrideStrokeColor = OverrideStrokeColor;
                 _render.CustomBrushes = CustomBrushes;
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
-                _render.UseAnimations = false;
+                _render.UseAnimations = this.UseAnimations;
 
                 _loadImage(_render);
                 _loadImage = null;

@@ -76,6 +76,8 @@ namespace SVGImage.SVG
 
         public Rect? ViewBox { get; set; }
         internal Group RootGroup { get; private set; }
+        internal Dictionary<string, string> CssKeyframes { get; } = new Dictionary<string, string>();
+        internal Dictionary<string, List<XmlNode>> ReferencedAnimations { get; } = new Dictionary<string, List<XmlNode>>();
 
         public Size Size { get; set; }
 
@@ -326,6 +328,11 @@ namespace SVGImage.SVG
             }
 
             this.Size = new Size(XmlUtil.AttrValue(node, "width", 300), XmlUtil.AttrValue(node, "height", 150));
+
+            // CSS applies to the entire document, even when a style element occurs
+            // after the shapes it selects (common when embedding external CSS).
+            foreach (XmlNode style in node.SelectNodes(".//*[local-name()='style']"))
+                StyleParser.ParseStyle(this, style.InnerText);
 
             // Since SVG has the same functionality as Group we treat it as such, and copy over the children.
             // It might be more ideal if we would inherit from Group, but that also has its complications.

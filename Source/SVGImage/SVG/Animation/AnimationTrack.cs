@@ -1,0 +1,175 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Xml;
+using SVGImage.SVG.Utils;
+
+namespace SVGImage.SVG.Animation
+{
+    internal sealed class AnimationTrack
+    {
+        internal string Attribute, Type, Begin, Mode;
+        internal bool Additive, Freeze;
+        internal double Duration, Repeat = 1;
+        internal string[] Values;
+        internal double[] Times;
+        internal KeySpline[] Splines;
+        internal int Steps;
+        private double[][] numericValues;
+        private Matrix[] cssValues;
+
+        internal static AnimationTrack Parse(XmlNode node)
+        {
+            var track = new AnimationTrack
+            {
+                Attribute = XmlUtil.AttrValue(node, "attributeName"),
+                Type = node.LocalName == "animateTransform" ? XmlUtil.AttrValue(node, "type", "translate") : null,
+                Begin = XmlUtil.AttrValue(node, "begin", "0s"),
+                Duration = Clock(XmlUtil.AttrValue(node, "dur", "indefinite")),
+                Additive = XmlUtil.AttrValue(node, "additive") == "sum",
+                Freeze = XmlUtil.AttrValue(node, "fill") == "freeze",
+                Mode = XmlUtil.AttrValue(node, "calcMode", "linear")
+            };
+            string repeat = XmlUtil.AttrValue(node, "repeatCount", "1");
+            track.Repeat = repeat == "indefinite" ? double.PositiveInfinity : Number(repeat);
+            string values = XmlUtil.AttrValue(node, "values");
+            if (node.LocalName == "set")
+                track.Values = new[] { XmlUtil.AttrValue(node, "to") };
+            else if (values.Length > 0) track.Values = values.Split(';').Select(v => v.Trim()).ToArray();
+            else
+            {
+                string from = XmlUtil.AttrValue(node, "from", track.Type == "scale" ? "1" : "0");
+                track.Values = new[] { from, XmlUtil.AttrValue(node, "to", from) };
+            }
+            string times = XmlUtil.AttrValue(node, "keyTimes");
+            track.Times = times.Length > 0 ? times.Split(';').Select(Number).ToArray()
+                : Enumerable.Range(0, track.Values.Length).Select(i => track.Values.Length == 1 ? 0 : (double)i / (track.Values.Length - 1)).ToArray();
+            if (track.Times.Length != track.Values.Length || track.Times.Any(t => t < 0 || t > 1) ||
+                track.Times.Where((t, i) => i > 0 && t < track.Times[i - 1]).Any())
+                throw new FormatException("Invalid animation keyTimes");
+            string splines = XmlUtil.AttrValue(node, "keySplines");
+            if (splines.Length > 0)
+                track.Splines = splines.Split(';').Select(s =>
+                {
+                    var n = Numbers(s);
+                    if (n.Length == 0) return new KeySpline(0, 0, 1, 1); // Flash2Svg can leave a final linear segment empty.
+                    if (n.Length != 4) throw new FormatException("Invalid keySpline");
+                    return new KeySpline(n[0], n[1], n[2], n[3]);
+                }).ToArray();
+            return track;
+        }
+
+        internal bool Sample(double seconds, IDictionary<string, double> events, out int index, out double fraction)
+        {
+            index = 0; fraction = 0;
+            double start = double.NegativeInfinity;
+            foreach (string begin in Begin.Split(';'))
+            {
+                double candidate = Clock(begin.Trim());
+                if (double.IsNaN(candidate))
+                {
+                    var eventMatch = Regex.Match(begin.Trim(), @"^(.+\.click)([+-].+)?$");
+                    if (eventMatch.Success && events.TryGetValue(eventMatch.Groups[1].Value, out candidate))
+                        candidate += eventMatch.Groups[2].Success ? Clock(eventMatch.Groups[2].Value) : 0;
+                    else continue;
+                }
+                if (candidate <= seconds) start = Math.Max(start, candidate);
+            }
+            if (double.IsInfinity(start) || double.IsNaN(Duration) || Duration <= 0 || Repeat <= 0) return false;
+            double elapsed = seconds - start;
+            double total = Duration * Repeat;
+            if (elapsed >= total && !Freeze) return false;
+            double progress = double.IsInfinity(Duration) ? 0 : elapsed >= total ?
+                (Repeat % 1 == 0 ? 1 : Repeat % 1) : (elapsed % Duration) / Duration;
+            if (Steps > 0) progress = Math.Floor(progress * Steps) / Steps;
+            while (index < Values.Length - 1 && progress >= Times[index + 1]) index++;
+            if (index < Values.Length - 1 && Times[index + 1] > Times[index])
+                fraction = (progress - Times[index]) / (Times[index + 1] - Times[index]);
+            if (Mode == "discrete" || Attribute == "display" || Attribute == "visibility") fraction = 0;
+            else if (Mode == "spline" && Splines != null && index < Splines.Length)
+                fraction = Splines[index].GetSplineProgress(Math.Max(0, Math.Min(1, fraction)));
+            return true;
+        }
+
+        internal double[] Components(int index, double fraction)
+        {
+            if (numericValues == null) numericValues = Values.Select(Numbers).ToArray();
+            var first = numericValues[index];
+            var second = numericValues[Math.Min(index + 1, Values.Length - 1)];
+            int length = Math.Max(first.Length, second.Length);
+            var result = new double[length];
+            for (int i = 0; i < length; i++)
+            {
+                double a = i < first.Length ? first[i] : Type == "scale" && first.Length > 0 ? first[0] : 0;
+                double b = i < second.Length ? second[i] : Type == "scale" && second.Length > 0 ? second[0] : 0;
+                result[i] = a + (b - a) * fraction;
+            }
+            return result;
+        }
+
+        internal Matrix Matrix(int index, double fraction)
+        {
+            if (Type == "css")
+            {
+                if (cssValues == null) cssValues = Values.Select(CssMatrix).ToArray();
+                var a = cssValues[index];
+                var b = cssValues[Math.Min(index + 1, Values.Length - 1)];
+                return new Matrix(a.M11 + (b.M11 - a.M11) * fraction, a.M12 + (b.M12 - a.M12) * fraction,
+                    a.M21 + (b.M21 - a.M21) * fraction, a.M22 + (b.M22 - a.M22) * fraction,
+                    a.OffsetX + (b.OffsetX - a.OffsetX) * fraction, a.OffsetY + (b.OffsetY - a.OffsetY) * fraction);
+            }
+            var v = Components(index, fraction);
+            double x = v.Length > 0 ? v[0] : 0, y = v.Length > 1 ? v[1] : 0;
+            var matrix = System.Windows.Media.Matrix.Identity;
+            switch (Type)
+            {
+                case "translate": matrix.Translate(x, y); break;
+                case "scale": matrix.Scale(x, v.Length > 1 ? y : x); break;
+                case "rotate": matrix.RotateAt(x, y, v.Length > 2 ? v[2] : 0); break;
+                case "skewX": matrix.Skew(x, 0); break;
+                case "skewY": matrix.Skew(0, x); break;
+            }
+            return matrix;
+        }
+
+        internal static Matrix CssMatrix(string value)
+        {
+            var result = System.Windows.Media.Matrix.Identity;
+            foreach (Match match in Regex.Matches(value, @"([a-zA-Z]+)\(([^)]*)\)"))
+            {
+                var n = Numbers(match.Groups[2].Value);
+                if (n.Length == 0) continue;
+                var m = System.Windows.Media.Matrix.Identity;
+                switch (match.Groups[1].Value)
+                {
+                    case "translateY": m.Translate(0, n[0]); break;
+                    case "translateX": m.Translate(n[0], 0); break;
+                    case "translate": m.Translate(n[0], n.Length > 1 ? n[1] : 0); break;
+                    case "scale": m.Scale(n[0], n.Length > 1 ? n[1] : n[0]); break;
+                    case "rotate": m.Rotate(n[0]); break;
+                    case "matrix": if (n.Length == 6) m = new Matrix(n[0], n[1], n[2], n[3], n[4], n[5]); break;
+                }
+                result.Prepend(m);
+            }
+            return result;
+        }
+
+        internal static double Clock(string text)
+        {
+            text = text.Trim();
+            if (text == "indefinite") return double.PositiveInfinity;
+            double multiplier = text.EndsWith("ms") ? .001 : text.EndsWith("min") ? 60 : text.EndsWith("h") ? 3600 : 1;
+            text = Regex.Replace(text, @"(?:ms|min|s|h)$", "");
+            double number;
+            return double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out number) ? number * multiplier : double.NaN;
+        }
+
+        internal static double Number(string text) => double.Parse(text, NumberStyles.Float, CultureInfo.InvariantCulture);
+        internal static double[] Numbers(string text) => Regex.Matches(text, @"[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?").Cast<Match>().Select(m => Number(m.Value)).ToArray();
+    }
+}

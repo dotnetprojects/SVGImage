@@ -31,6 +31,8 @@ namespace SVGImage.SVG.Shapes
         internal Clip m_clip = null;
         private string m_maskId;
         private string m_colorInterpolation;
+        internal List<XmlNode> AnimationNodes { get; } = new List<XmlNode>();
+        internal string CssAnimation { get; private set; }
 
         // Resolve at render time, after definitions later in the document have been read.
         internal Mask Mask => Svg.GetShape(m_maskId) as Mask;
@@ -76,6 +78,19 @@ namespace SVGImage.SVG.Shapes
                 }
             }
             ParseLocalStyle(svg);
+            if (node != null)
+                foreach (XmlNode child in node.ChildNodes)
+                    if (child.LocalName == "animate" || child.LocalName == "animateTransform" || child.LocalName == "set")
+                    {
+                        string href = Utils.XmlUtil.AttrValue(child, "href", Utils.XmlUtil.AttrValue(child, "xlink:href"));
+                        if (href.StartsWith("#"))
+                        {
+                            string id = href.Substring(1);
+                            if (!svg.ReferencedAnimations.ContainsKey(id)) svg.ReferencedAnimations[id] = new List<XmlNode>();
+                            svg.ReferencedAnimations[id].Add(child);
+                        }
+                        else AnimationNodes.Add(child);
+                    }
         }
 
         public Shape(SVG svg, List<StyleItem> attrs, Shape parent) : base(null)
@@ -191,7 +206,8 @@ namespace SVGImage.SVG.Shapes
 
         public Shape Parent { get; set; }
 
-        internal virtual Filter Filter { get; private set; }
+        private string filterId;
+        internal virtual Filter Filter => Svg.GetShape(filterId) as Filter;
 
         protected virtual void ParseAtStart(SVG svg, XmlNode node)
         {
@@ -246,6 +262,11 @@ namespace SVGImage.SVG.Shapes
                 string reference = start >= 0 && end > start
                     ? value.Substring(start + 1, end - start - 1).Trim().Trim('\'', '"') : string.Empty;
                 m_maskId = reference.StartsWith("#") ? reference.Substring(1) : null;
+                return;
+            }
+            if (name == "animation")
+            {
+                CssAnimation = value;
                 return;
             }
             if (name == "color-interpolation")
@@ -346,15 +367,13 @@ namespace SVGImage.SVG.Shapes
             {
                 if (value.StartsWith("url"))
                 {
-                    Shape result;
                     string id = ShapeUtil.ExtractBetween(value, '(', ')');
                     if (id.Length > 0 && id[0] == '#')
                     {
                         id = id.Substring(1);
                     }
 
-                    svg.m_shapes.TryGetValue(id, out result);
-                    this.Filter = result as Filter;
+                    filterId = id;
                     return;
                 }
                 return;

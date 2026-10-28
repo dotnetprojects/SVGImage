@@ -1,6 +1,7 @@
 ﻿using System.Xml;
 
 using System.Windows.Media.Effects;
+using System.Windows.Media;
 
 namespace SVGImage.SVG.Filters
 {
@@ -19,10 +20,17 @@ namespace SVGImage.SVG.Filters
             var beg = new BitmapEffectGroup();
             foreach (FilterBaseFe element in this.Elements)
             {
-                beg.Children.Add(element.GetBitmapEffect());
+                var effect = element.GetBitmapEffect();
+                if (effect != null) beg.Children.Add(effect);
             }
 
             return beg;
+        }
+
+        internal void ApplyColors(Drawing drawing)
+        {
+            foreach (var element in Elements)
+                if (element is FilterColorMatrix matrix) matrix.Apply(drawing);
         }
     }
 }

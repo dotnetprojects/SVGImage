@@ -9,11 +9,15 @@ namespace SVGImage.SVG.Shapes
         public double X { get; set; }
 
         public double Y { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
 
         public string hRef { get; set; }
 
         public UseShape(SVG svg, XmlNode node) : base(svg, node)
-        { 
+        {
+            Width = XmlUtil.AttrValue(node, "width", svg.Size.Width, svg.Size.Width);
+            Height = XmlUtil.AttrValue(node, "height", svg.Size.Height, svg.Size.Height);
         }
 
         protected override void Parse(SVG svg, string name, string value)

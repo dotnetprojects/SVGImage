@@ -35,14 +35,22 @@ namespace SVGImage.SVG
 
         public bool UseAnimations { get; set; }
         private HashSet<Mask> activeMasks = new HashSet<Mask>();
-        private bool isMaskContent;
+        private SvgAnimationScene animationScene;
+
+        /// <summary>Stops playback and evaluates the current scene at an exact time.</summary>
+        public void SeekAnimations(TimeSpan position) => animationScene?.Seek(position);
+
+        /// <summary>Forwards a named SVG event, for example an element's click, to SMIL timing.</summary>
+        public void TriggerAnimationEvent(string elementId, string eventName = "click") => animationScene?.Trigger(elementId, eventName);
+
+        public IList<string> AnimationWarnings => animationScene != null ? animationScene.Warnings.AsReadOnly() : new List<string>().AsReadOnly();
 
         public Color? OverrideColor { get; set; }
 
         public Color? OverrideFillColor { get; set; }
 
         public Color? OverrideStrokeColor { get; set; }
-       
+
         public double? OverrideStrokeWidth { get; set; }
 
         private Dictionary<string, Brush> m_customBrushes;
@@ -118,11 +126,15 @@ namespace SVGImage.SVG
 
         public DrawingGroup CreateDrawing(SVG svg)
         {
-            var drawingGroup = this.LoadGroup(svg.Elements, svg.ViewBox, false);
-            if (svg.RootGroup?.Mask != null)
+            this.SVG = svg;
+            animationScene = UseAnimations ? new SvgAnimationScene(svg) : null;
+            bool camera = animationScene != null && animationScene.Tracks(svg.RootGroup).Any(t => t.Attribute == "viewBox");
+            var drawingGroup = this.LoadGroup(svg.Elements, camera ? null : svg.ViewBox, false);
+            if (svg.RootGroup?.Mask != null || (animationScene != null && animationScene.Tracks(svg.RootGroup).Count > 0))
             {
                 var masked = new DrawingGroup();
                 AddDrawingToGroup(masked, svg.RootGroup, drawingGroup);
+                if (camera && svg.ViewBox.HasValue) masked.ClipGeometry = new RectangleGeometry(svg.ViewBox.Value);
                 return masked;
             }
             return drawingGroup;
@@ -135,6 +147,7 @@ namespace SVGImage.SVG
 
         private GeometryDrawing NewDrawingItem(Shape shape, Geometry geometry)
         {
+            double shapeOpacity = animationScene != null && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity") ? 1 : shape.Opacity;
             shape.geometryElement = geometry;
             GeometryDrawing item = new GeometryDrawing();
             Stroke stroke = shape.Stroke;
@@ -145,12 +158,12 @@ namespace SVGImage.SVG
                 {
                     strokeWidth = OverrideStrokeWidth.Value;
                 }
-                var brush = stroke.StrokeBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
+                var brush = stroke.StrokeBrush(this.SVG, this, shape, shapeOpacity, geometry.Bounds);
                 if (OverrideColor != null)
-                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
+                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shapeOpacity),
                         OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 if (OverrideStrokeColor != null)
-                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity),
+                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shapeOpacity),
                         OverrideStrokeColor.Value.R, OverrideStrokeColor.Value.G, OverrideStrokeColor.Value.B));
                 item.Pen = new Pen(brush, strokeWidth);
                 if (stroke.StrokeArray != null)
@@ -194,10 +207,10 @@ namespace SVGImage.SVG
             {
                 item.Brush = Brushes.Black;
                 if (OverrideColor != null)
-                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
+                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shapeOpacity),
                         OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 if (OverrideFillColor != null)
-                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity),
+                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shapeOpacity),
                         OverrideFillColor.Value.R, OverrideFillColor.Value.G, OverrideFillColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
                 g.FillRule = FillRule.Nonzero;
@@ -206,14 +219,14 @@ namespace SVGImage.SVG
             }
             else if (shape.Fill != null)
             {
-                item.Brush = shape.Fill.FillBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
+                item.Brush = shape.Fill.FillBrush(this.SVG, this, shape, shapeOpacity, geometry.Bounds);
                 if (item.Brush != null)
                 {
                     if (OverrideColor != null)
-                        item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), 
+                        item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shapeOpacity),
                             OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                     if (OverrideFillColor != null)
-                        item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity),
+                        item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shapeOpacity),
                             OverrideFillColor.Value.R, OverrideFillColor.Value.G, OverrideFillColor.Value.B));
                 }
                 GeometryGroup g = new GeometryGroup();
@@ -235,7 +248,7 @@ namespace SVGImage.SVG
             foreach (Shape shape in elements)
             {
                 shape.RealParent = null;
-                if (!shape.Display)
+                if (!shape.Display && !(animationScene != null && animationScene.Tracks(shape).Any(t => t.Attribute == "display")))
                 {
                     continue;
                 }
@@ -259,71 +272,7 @@ namespace SVGImage.SVG
                     }
                 }
 
-                if (shape is AnimationBase)
-                {
-                    if (UseAnimations)
-                    {
-                        if (shape is AnimateTransform animateTransform)
-                        {
-                            if (animateTransform.Type == AnimateTransformType.Rotate)
-                            {
-                                var animation = new DoubleAnimation
-                                {
-                                    From = double.Parse(animateTransform.From, NumberStyles.Number, CultureInfo.InvariantCulture),
-                                    To = double.Parse(animateTransform.To, NumberStyles.Number, CultureInfo.InvariantCulture),
-                                    Duration = animateTransform.Duration
-                                };
-                                animation.RepeatBehavior = RepeatBehavior.Forever;
-                                var r = new RotateTransform();
-                                grp.Transform = r;
-                                r.BeginAnimation(RotateTransform.AngleProperty, animation);
-                            }
-                        }
-                        else if (shape is Animate animate)
-                        {
-                            var target = this.SVG.GetShape(animate.hRef);
-                            var g = target.geometryElement;
-                            //todo : rework this all, generalize it!
-                            if (animate.AttributeName == "r")
-                            {
-                                var animation = new DoubleAnimationUsingKeyFrames() { Duration = animate.Duration };
-                                foreach (var d in animate.Values.Split(';').Select(x => new LinearDoubleKeyFrame(double.Parse(x, NumberStyles.Number, CultureInfo.InvariantCulture))))
-                                {
-                                    animation.KeyFrames.Add(d);
-                                }
-                                animation.RepeatBehavior = RepeatBehavior.Forever;
-
-                                g.BeginAnimation(EllipseGeometry.RadiusXProperty, animation);
-                                g.BeginAnimation(EllipseGeometry.RadiusYProperty, animation);
-                            }
-                            else if (animate.AttributeName == "cx")
-                            {
-                                var animation = new PointAnimationUsingKeyFrames() { Duration = animate.Duration };
-                                foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(
-                                    new Point(double.Parse(_, NumberStyles.Number, CultureInfo.InvariantCulture), ((EllipseGeometry)g).Center.Y))))
-                                {
-                                    animation.KeyFrames.Add(d);
-                                }
-                                animation.RepeatBehavior = RepeatBehavior.Forever;
-                                g.BeginAnimation(EllipseGeometry.CenterProperty, animation);
-                            }
-                            else if (animate.AttributeName == "cy")
-                            {
-                                var animation = new PointAnimationUsingKeyFrames() { Duration = animate.Duration };
-                                foreach (var d in animate.Values.Split(';').Select(_ => new LinearPointKeyFrame(
-                                    new Point(((EllipseGeometry)g).Center.X, double.Parse(_, NumberStyles.Number, CultureInfo.InvariantCulture)))))
-                                {
-                                    animation.KeyFrames.Add(d);
-                                }
-                                animation.RepeatBehavior = RepeatBehavior.Forever;
-                                g.BeginAnimation(EllipseGeometry.CenterProperty, animation);
-                            }
-
-                        }
-                    }
-
-                    continue;
-                }
+                if (shape is AnimationBase) continue;
 
                 if (shape is UseShape useshape)
                 {
@@ -336,7 +285,18 @@ namespace SVGImage.SVG
                         try
                         {
                             var subgroup = this.LoadGroup(new[] { currentUsedShape }, null, false);
-                            subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
+                            if (currentUsedShape is Symbol symbol && symbol.ViewBox.HasValue)
+                            {
+                                if (useshape.Width <= 0 || useshape.Height <= 0) continue;
+                                subgroup.Transform = new MatrixTransform(symbol.Viewport(useshape.X, useshape.Y, useshape.Width, useshape.Height));
+                                if (!symbol.OverflowVisible)
+                                {
+                                    var viewport = new DrawingGroup { ClipGeometry = new RectangleGeometry(new Rect(useshape.X, useshape.Y, useshape.Width, useshape.Height)) };
+                                    viewport.Children.Add(subgroup);
+                                    subgroup = viewport;
+                                }
+                            }
+                            else subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
                             AddDrawingToGroup(grp, shape, subgroup);
                         }
                         finally
@@ -504,20 +464,25 @@ namespace SVGImage.SVG
         private void AddDrawingToGroup(DrawingGroup grp, Shape shape, Drawing drawing)
         {
             var mask = shape.Mask;
-            if (shape.Clip != null || shape.Transform != null || shape.Filter != null || mask != null || (isMaskContent && shape is Group))
+            bool animated = animationScene != null && animationScene.Tracks(shape).Count > 0;
+            if (shape.Clip != null || shape.Transform != null || shape.Filter != null || mask != null || animated || shape is Group)
             {
                 var subgrp = new DrawingGroup();
                 if (mask != null)
                     subgrp.OpacityMask = CreateMask(mask, MaskDrawing.ObjectBounds(drawing));
-                if (isMaskContent && shape is Group)
+                if (shape is Group || (animated && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity")))
                     subgrp.Opacity = shape.Opacity;
                 if (shape.Clip != null)
                     subgrp.ClipGeometry = shape.Clip.ClipGeometry;
                 if (shape.Transform != null)
                     subgrp.Transform = shape.Transform;
                 if (shape.Filter != null)
+                {
                     subgrp.BitmapEffect = shape.Filter.GetBitmapEffect();
+                    shape.Filter.ApplyColors(drawing);
+                }
                 subgrp.Children.Add(drawing);
+                if (animated) animationScene.Attach(shape, subgrp);
                 grp.Children.Add(subgrp);
             }
             else
@@ -532,7 +497,7 @@ namespace SVGImage.SVG
                 // Paint overrides apply to the visible artwork, not mask luminance.
                 var renderer = new SVGRender(ExternalFileLoader)
                 {
-                    SVG = SVG, activeMasks = activeMasks, isMaskContent = true
+                    SVG = SVG, activeMasks = activeMasks
                 };
                 var drawing = renderer.LoadGroup(mask.Elements, null, false);
                 if (mask.ContentUsesBoundingBox)

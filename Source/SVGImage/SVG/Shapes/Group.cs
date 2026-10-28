@@ -61,6 +61,8 @@ namespace SVGImage.SVG.Shapes
         {
             if (childnode.NodeType != XmlNodeType.Element)
                 return null;
+            if (childnode.LocalName == "animate" || childnode.LocalName == "animateTransform" || childnode.LocalName == "set")
+                return null; // Attached to the target shape, rather than rendered as children.
 
             Shape retVal = null;
 
@@ -69,7 +71,7 @@ namespace SVGImage.SVG.Shapes
                 return null;
             if (nodeName == SVGTags.sStyle)
             {
-                StyleParser.ParseStyle(svg, childnode.InnerText);
+                return null; // Collected before constructing the document's shapes.
             }
             else if (nodeName == SVGTags.sShapeRect)
                 retVal = new RectangleShape(svg, childnode);
@@ -77,6 +79,8 @@ namespace SVGImage.SVG.Shapes
                 retVal = new Filter(svg, childnode, parent);
             else if (nodeName == SVGTags.sFeGaussianBlur)
                 retVal = new FilterFeGaussianBlur(svg, childnode, parent);
+            else if (nodeName == "feColorMatrix")
+                retVal = new FilterColorMatrix(svg, childnode, parent);
             else if (nodeName == SVGTags.sShapeCircle)
                 retVal = new CircleShape(svg, childnode);
             else if (nodeName == SVGTags.sShapeEllipse)
@@ -129,13 +133,13 @@ namespace SVGImage.SVG.Shapes
             }
             else if (nodeName == SVGTags.sSymbol)
             {
-                retVal = new Group(svg, childnode, parent);
+                retVal = new Symbol(svg, childnode, parent);
             }
 
             if (retVal != null)
             {
                 retVal.Parent = parent;
-                if (!isDefinition && !(retVal is Mask))
+                if (!isDefinition && !(retVal is Mask) && !(retVal is Symbol))
                     m_elements.Add(retVal);
                 if (retVal.Id.Length > 0)
                     svg.AddShape(retVal.Id, retVal);
