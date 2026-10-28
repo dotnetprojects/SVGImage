@@ -1,6 +1,9 @@
 using System;
 using System.Linq;
 using System.Windows.Media;
+using System.Windows;
+using System.Windows.Controls;
+using SvgControl = SVGImage.SVG.SVGImage;
 using SVGImage.SVG;
 
 internal static class Program
@@ -9,7 +12,34 @@ internal static class Program
     private static void Main()
     {
         GradientRgbColors();
+        ButtonContentSize();
         Console.WriteLine("All regression checks passed.");
+    }
+
+    private static void ButtonContentSize()
+    {
+        foreach (SvgControl.eSizeType mode in Enum.GetValues(typeof(SvgControl.eSizeType)))
+        {
+            var image = new SvgControl { SizeType = mode };
+            image.SetImage(new GeometryDrawing(Brushes.Red, null, new RectangleGeometry(new Rect(0, 0, 32, 16))));
+            var button = new Button { Content = image };
+            button.Measure(new Size(200, 100));
+            button.Arrange(new Rect(0, 0, 200, 100));
+            button.UpdateLayout();
+            if (image.DesiredSize.Width <= 0 || image.DesiredSize.Height <= 0 || image.ActualWidth <= 0 || image.ActualHeight <= 0)
+                throw new Exception(mode + ": SVG inside Button received no space");
+        }
+
+        var changing = new SvgControl();
+        changing.SetImage(new GeometryDrawing(Brushes.Red, null, new RectangleGeometry(new Rect(0, 0, 32, 16))));
+        changing.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+        Equal(new Size(32, 16), changing.DesiredSize, "unconstrained intrinsic size");
+        changing.SetImage(new GeometryDrawing(Brushes.Red, null, new RectangleGeometry(new Rect(0, 0, 64, 48))));
+        changing.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+        Equal(new Size(64, 48), changing.DesiredSize, "replacement drawing invalidates measure");
+        changing.SetImage((Drawing)null);
+        changing.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+        Equal(new Size(0, 0), changing.DesiredSize, "clearing drawing invalidates measure");
     }
 
     private static void GradientRgbColors()

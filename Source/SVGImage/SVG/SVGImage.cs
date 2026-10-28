@@ -348,8 +348,7 @@ namespace SVGImage.SVG
         {
             this.m_drawing = drawing;
             this.InvalidateVisual();
-            if (this.m_drawing != null && this.SizeType == eSizeType.SizeToContent)
-                this.InvalidateMeasure();
+            this.InvalidateMeasure();
             this.RecalcImage();
             this.InvalidateVisual();
         }
@@ -417,22 +416,26 @@ namespace SVGImage.SVG
         protected override Size MeasureOverride(Size constraint)
         {
             Size result = base.MeasureOverride(constraint);
-            if (this.SizeType == eSizeType.SizeToContent)
+            if (this.m_drawing != null && !this.m_drawing.Bounds.IsEmpty)
             {
-                if (this.m_drawing != null && !this.m_drawing.Bounds.Size.IsEmpty)
-                    result = this.m_drawing.Bounds.Size;
+                Size naturalSize = this.m_drawing.Bounds.Size;
+                if (this.SizeType == eSizeType.ViewBoxToSizeNoStretch && this.SVG?.ViewBox.HasValue == true)
+                    naturalSize = this.SVG.ViewBox.Value.Size;
+
+                if (this.SizeType == eSizeType.SizeToContent)
+                    result = naturalSize;
+                else
+                {
+                    // Control's default template has no content to measure. Supply the
+                    // drawing's intrinsic size so content presenters can allocate space.
+                    if (result.Width == 0) result.Width = naturalSize.Width;
+                    if (result.Height == 0) result.Height = naturalSize.Height;
+                }
             }
             if (constraint.Width > 0 && constraint.Width < result.Width)
                 result.Width = constraint.Width;
             if (constraint.Height > 0 && constraint.Height < result.Height)
                 result.Height = constraint.Height;
-
-            // Check for empty size...
-            if (result.IsEmpty)
-            {
-                if (this.m_drawing != null)
-                    result = this.m_drawing.Bounds.Size;
-            }
 
             return result;
         }
