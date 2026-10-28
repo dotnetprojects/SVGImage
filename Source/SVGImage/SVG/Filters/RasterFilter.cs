@@ -10,24 +10,26 @@ using SVGImage.SVG.Utils;
 
 namespace SVGImage.SVG.Filters
 {
-    internal sealed class RasterFilter
+    internal sealed partial class RasterFilter
     {
         private readonly SVG svg;
         private readonly XmlNode filter;
-        private readonly Rect bounds, region, viewport;
+        private readonly Rect bounds, region, filterRegion, viewport;
         private readonly int width, height;
         private readonly double sx, sy, unitX, unitY;
         private sealed class Frame
         {
             internal readonly float[] Data;
             internal bool Linear;
+            internal Rect Area = Rect.Empty;
             internal Frame(int size, bool linear) { Data = new float[size]; Linear = linear; }
         }
         internal RasterFilter(SVG svg, XmlNode filter, Rect bounds, Rect viewport)
         {
             this.svg = svg; this.filter = filter; this.bounds = bounds; this.viewport = viewport;
-            region = Region(filter, bounds, true);
-            if (region.IsEmpty || bounds.IsEmpty) return;
+            filterRegion = Region(filter, bounds, true);
+            if (filterRegion.IsEmpty) return;
+            region = filterRegion;
             double scale = Math.Min(4, 2048 / Math.Max(region.Width, region.Height));
             width = Math.Max(1, (int)Math.Ceiling(region.Width * scale)); height = Math.Max(1, (int)Math.Ceiling(region.Height * scale));
             sx = width / region.Width; sy = height / region.Height;
@@ -35,7 +37,11 @@ namespace SVGImage.SVG.Filters
             unitX = bbox ? bounds.Width : 1; unitY = bbox ? bounds.Height : 1;
         }
         private static string Attr(XmlNode node, string name, string fallback = "") => XmlUtil.AttrValue(node, name, fallback);
-        private static double Number(XmlNode node, string name, double fallback = 0) => XmlUtil.AttrValue(node, name, fallback);
+        private static double Number(XmlNode node, string name, double fallback = 0)
+        {
+            double value;
+            return double.TryParse(Attr(node, name), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out value) && !double.IsNaN(value) && !double.IsInfinity(value) ? value : fallback;
+        }
         private Rect Region(XmlNode node, Rect fallback, bool outer)
         {
             bool bbox = Attr(filter, outer ? "filterUnits" : "primitiveUnits", outer ? "objectBoundingBox" : "userSpaceOnUse") == "objectBoundingBox";
@@ -55,7 +61,7 @@ namespace SVGImage.SVG.Filters
         }
         internal Drawing Render(Drawing source)
         {
-            if (region.IsEmpty || bounds.IsEmpty || unitX <= 0 || unitY <= 0) return new DrawingGroup();
+            if (filterRegion.IsEmpty || region.IsEmpty || unitX <= 0 || unitY <= 0) return new DrawingGroup();
             var visual = new DrawingVisual();
             using (var dc = visual.RenderOpen())
             {
@@ -63,7 +69,7 @@ namespace SVGImage.SVG.Filters
             }
             var bitmap = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Pbgra32); bitmap.Render(visual);
             var bytes = new byte[width * height * 4]; bitmap.CopyPixels(bytes, width * 4, 0);
-            var graphic = new Frame(bytes.Length, false); var alpha = new Frame(bytes.Length, false);
+            var graphic = new Frame(bytes.Length, false) { Area = filterRegion }; var alpha = new Frame(bytes.Length, false) { Area = filterRegion };
             for (int i = 0; i < bytes.Length; i += 4)
             {
                 graphic.Data[i] = bytes[i + 2] / 255f; graphic.Data[i + 1] = bytes[i + 1] / 255f; graphic.Data[i + 2] = bytes[i] / 255f;
@@ -93,8 +99,9 @@ namespace SVGImage.SVG.Filters
                         break;
                     case "feFlood":
                         string color, opacity; styles.TryGetValue("flood-color", out color); styles.TryGetValue("flood-opacity", out opacity);
-                        Color flood; try { flood = (Color)ColorConverter.ConvertFromString(color ?? "black"); } catch { flood = Colors.Black; }
-                        double fa = flood.A / 255.0 * (opacity == null ? 1 : XmlUtil.GetDoubleValue(opacity, 1));
+                        Color flood; if (color == "currentColor") color = Style(node, "color", "black", true);
+                        if (!CssColor.TryParse(color ?? "black", out flood)) flood = Colors.Black;
+                        double fa = Clamp(flood.A / 255.0 * (opacity == null ? 1 : XmlUtil.GetDoubleValue(opacity, 1)));
                         for (int i = 0; i < output.Data.Length; i += 4)
                         {
                             output.Data[i] = (float)(fa * (linear ? ConvertColor(flood.R / 255.0, true) : flood.R / 255.0)); output.Data[i + 1] = (float)(fa * (linear ? ConvertColor(flood.G / 255.0, true) : flood.G / 255.0));
@@ -110,9 +117,21 @@ namespace SVGImage.SVG.Filters
                         break;
                     case "feComposite": Composite(node, input, second, output); break;
                     case "feColorMatrix": ColorMatrix(node, input, output); break;
+                    case "feComponentTransfer": ComponentTransfer(node, input, output); break;
+                    case "feBlend": Blend(node, input, second, output); break;
+                    case "feGaussianBlur": output = Blur(node, input); break;
+                    case "feMorphology": output = Morphology(node, input); break;
+                    case "feTile": Tile(input, output); break;
                     default: Array.Copy(input.Data, output.Data, input.Data.Length); break;
                 }
-                Rect clip = Region(node, region, false);
+                Rect defaultArea = input.Area;
+                if (node.LocalName == "feFlood" || node.LocalName == "feTurbulence" || node.LocalName == "feTile") defaultArea = filterRegion;
+                else if (node.LocalName == "feBlend" || node.LocalName == "feComposite" || node.LocalName == "feDisplacementMap") defaultArea.Union(second.Area);
+                else if (node.LocalName == "feMerge")
+                    foreach (XmlNode child in node.ChildNodes) if (child.LocalName == "feMergeNode") defaultArea.Union(Input(images, Attr(child, "in"), previous, linear).Area);
+                Rect clip = Region(node, defaultArea, false);
+                clip.Intersect(region);
+                output.Area = clip;
                 for (int y = 0; y < height; y++) for (int x = 0; x < width; x++)
                     if (!clip.Contains(region.X + (x + .5) / sx, region.Y + (y + .5) / sy)) Array.Clear(output.Data, (y * width + x) * 4, 4);
                 previous = output;
@@ -124,7 +143,9 @@ namespace SVGImage.SVG.Filters
                 bytes[i] = Byte(previous.Data[i + 2]); bytes[i + 1] = Byte(previous.Data[i + 1]); bytes[i + 2] = Byte(previous.Data[i]); bytes[i + 3] = Byte(previous.Data[i + 3]);
             }
             var image = BitmapSource.Create(width, height, 96, 96, PixelFormats.Pbgra32, null, bytes, width * 4); image.Freeze();
-            return new ImageDrawing(image, region);
+            var resultDrawing = new DrawingGroup { ClipGeometry = new RectangleGeometry(filterRegion) };
+            resultDrawing.Children.Add(new ImageDrawing(image, region));
+            return resultDrawing;
         }
         private string Style(XmlNode node, string property, string fallback, bool inherited)
         {
@@ -145,7 +166,7 @@ namespace SVGImage.SVG.Filters
         private static Frame ConvertFrame(Frame input, bool linear)
         {
             if (input.Linear == linear) return input;
-            var result = new Frame(input.Data.Length, linear);
+            var result = new Frame(input.Data.Length, linear) { Area = input.Area };
             for (int i = 0; i < input.Data.Length; i += 4)
             {
                 double a = input.Data[i + 3]; result.Data[i + 3] = (float)a;
@@ -162,13 +183,13 @@ namespace SVGImage.SVG.Filters
         }
         private void Noise(XmlNode node, Frame output)
         {
-            var frequencies = AnimationTrack.Numbers(Attr(node, "baseFrequency", "0"));
+            var frequencies = global::SVGImage.SVG.Utils.SvgNumberReader.List(Attr(node, "baseFrequency", "0"));
             double fx = frequencies.Length > 0 ? frequencies[0] : 0, fy = frequencies.Length > 1 ? frequencies[1] : fx;
             if (fx < 0 || fy < 0) return;
             int octaves = (int)Math.Max(0, Math.Min(9, Number(node, "numOctaves", 1)));
             var noise = new TurbulenceNoise(Number(node, "seed"));
             bool fractal = Attr(node, "type") == "fractalNoise", stitch = Attr(node, "stitchTiles") == "stitch";
-            Rect tile = Region(node, region, false);
+            Rect tile = Region(node, filterRegion, false);
             if (tile.IsEmpty) return;
             tile = new Rect(tile.X / unitX, tile.Y / unitY, tile.Width / unitX, tile.Height / unitY);
             for (int y = 0; y < height; y++) for (int x = 0; x < width; x++)
@@ -199,13 +220,20 @@ namespace SVGImage.SVG.Filters
         }
         private static void ColorMatrix(XmlNode node, Frame input, Frame output)
         {
-            double[] m = AnimationTrack.Numbers(Attr(node, "values"));
+            double[] m = global::SVGImage.SVG.Utils.SvgNumberReader.List(Attr(node, "values"));
             string type = Attr(node, "type", "matrix");
             if (type == "luminanceToAlpha") m = new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, .2125, .7154, .0721, 0, 0 };
             else if (type == "saturate")
             {
-                double s = m.Length > 0 ? m[0] : 1;
+                double s = m.Length == 1 && m[0] >= 0 && m[0] <= 1 ? m[0] : 1;
                 m = new[] { .213 + .787 * s, .715 - .715 * s, .072 - .072 * s, 0, 0, .213 - .213 * s, .715 + .285 * s, .072 - .072 * s, 0, 0, .213 - .213 * s, .715 - .715 * s, .072 + .928 * s, 0, 0, 0, 0, 0, 1, 0 };
+            }
+            else if (type == "hueRotate")
+            {
+                double angle = m.Length == 1 ? m[0] * Math.PI / 180 : 0, cos = Math.Cos(angle), sin = Math.Sin(angle);
+                m = new[] { .213+.787*cos-.213*sin,.715-.715*cos-.715*sin,.072-.072*cos+.928*sin,0,0,
+                    .213-.213*cos+.143*sin,.715+.285*cos+.140*sin,.072-.072*cos-.283*sin,0,0,
+                    .213-.213*cos-.787*sin,.715-.715*cos+.715*sin,.072+.928*cos+.072*sin,0,0,0,0,0,1,0 };
             }
             if (m.Length != 20) { Array.Copy(input.Data, output.Data, input.Data.Length); return; }
             for (int i = 0; i < input.Data.Length; i += 4)

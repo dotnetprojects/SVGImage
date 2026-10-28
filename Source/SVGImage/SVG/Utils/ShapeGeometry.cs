@@ -23,7 +23,7 @@ namespace SVGImage.SVG.Utils
                     geometry = new EllipseGeometry(new Point(ellipse.CX, ellipse.CY), ellipse.RX, ellipse.RY);
                 else if (shape is PathShape path)
                 {
-                    var parsed = PathGeometry.CreateFromGeometry(Geometry.Parse(path.Data));
+                    var parsed = SvgPathData.Parse(path.Data);
                     parsed.FillRule = shape.ClipRule;
                     geometry = parsed;
                 }

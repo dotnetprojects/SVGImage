@@ -34,6 +34,11 @@ internal static class CssTests
         ColorAt("<style>:root {--ink:red} stop {stop-color:var(--ink) !important}</style>"+
             "<defs><linearGradient id='g'><stop stop-color='blue' offset='0'/><stop stop-color='blue' offset='1'/></linearGradient></defs>"+
             "<rect fill='url(#g)' width='20' height='20'/>", Colors.Red, "gradient stops use the CSS cascade and variables");
+        ColorAt("<rect width='20' height='20' fill='rgba(255,0,0,.5)'/>",Color.FromArgb(128,255,0,0),"CSS fractional alpha");
+        ColorAt("<rect width='20' height='20' fill='#f008'/>",Color.FromArgb(136,255,0,0),"CSS short alpha hex");
+        ColorAt("<rect width='20' height='20' fill='#ff000080'/>",Color.FromArgb(128,255,0,0),"CSS RGBA hex");
+        ColorAt("<rect width='20' height='20' fill='hsl(120,100%,50%)'/>",Colors.Lime,"CSS HSL color");
+        ColorAt("<rect width='20' height='20' fill='rgb(-10%,120%,0%)'/>",Colors.Lime,"CSS channel clamping");
         AnimationTiming();
         Console.WriteLine("CSS cascade, selector and custom-property checks passed.");
     }
@@ -102,7 +107,7 @@ internal static class CssTests
         var drawing = new SVGRender().LoadXmlDrawing("<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" + source + "</svg>");
         var pixels = AnimationTests.Image(drawing, 100, 100, new Rect(0, 0, 100, 100));
         int offset = (5 * 100 + 5) * 4;
-        if (pixels[offset] != expected.B || pixels[offset + 1] != expected.G || pixels[offset + 2] != expected.R || pixels[offset + 3] != expected.A)
+        if (pixels[offset] != expected.B * expected.A / 255 || pixels[offset + 1] != expected.G * expected.A / 255 || pixels[offset + 2] != expected.R * expected.A / 255 || pixels[offset + 3] != expected.A)
             throw new Exception(name + ": wrong rendered color " + string.Join(",", pixels.Skip(offset).Take(4)));
     }
 }

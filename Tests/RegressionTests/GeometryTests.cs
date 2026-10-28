@@ -52,6 +52,20 @@ internal static class GeometryTests
         Pixel(d,72,5,Colors.Red,"pattern reused at different bounds"); Pixel(d,77,5,Colors.Transparent,"pattern scales per target");
         d=Svg("<defs><pattern id='p' href='#base' patternUnits='userSpaceOnUse' width='20' height='20' viewBox='0 0 10 10'/><pattern id='base'><rect width='5' height='10' fill='red'/></pattern></defs><rect width='100' height='100' fill='url(#p)'/>");
         Pixel(d,5,5,Colors.Red,"pattern forward template and viewBox"); Pixel(d,15,5,Colors.Transparent,"pattern viewBox scales content");
+        d=Svg("<path d='M10 10h30v30h-30z' fill='red'/><path d='M60 10L90 10L90#40' fill='none' stroke='blue' stroke-width='4'/>");
+        Pixel(d,20,20,Colors.Red,"relative path commands"); Pixel(d,75,10,Colors.Blue,"invalid path retains complete segments");
+        d=Svg("<polygon/><polyline/><polygon points='10 10 40 10 40 40 broken 10 40' fill='red'/><rect x='60' y='60' width='10' height='10' fill='blue'/>");
+        Pixel(d,30,15,Colors.Red,"polygon retains valid point prefix"); Pixel(d,65,65,Colors.Blue,"empty geometry does not interrupt siblings");
+        d=Svg("<path d='M20 20a20 20 0 0110 30' fill='none' stroke='red' stroke-width='3'/>");
+        if(d.Bounds.IsEmpty || d.Bounds.Height<29) throw new Exception("adjacent arc flags are supported");
+        d=Svg("<path d='L20 20'/><path d='M20 20L' fill='none'/><rect width='10' height='10' fill='red'/>");
+        Pixel(d,5,5,Colors.Red,"malformed path does not abort document");
+        d=Svg("<linearGradient id='g'><stop offset='0' stop-color='red'/><stop offset='1' stop-color='red'/></linearGradient><rect width='20' height='20' fill='url(#g)' fill-opacity='.5'/><rect x='30' width='20' height='20' fill='url(#g)'/>");
+        Pixel(d,5,5,Color.FromArgb(128,255,0,0),"gradient fill opacity",2); Pixel(d,35,5,Colors.Red,"cached gradient preserves per-use opacity");
+        d=Svg("<pattern id='p' patternUnits='userSpaceOnUse' width='10' height='10'><rect width='10' height='10' fill='red'/></pattern><rect width='20' height='20' fill='url(#p)' fill-opacity='.5'/>");
+        Pixel(d,5,5,Color.FromArgb(128,255,0,0),"pattern fill opacity",2);
+        d=Svg("<radialGradient id='r'><stop offset='0' stop-color='red'/><stop offset='1' stop-color='white'/></radialGradient><rect width='100' height='100' fill='url(#r)'/>");
+        Pixel(d,50,50,Colors.Red,"default radial focal point is centered",5);
         Console.WriteLine("Clip paths, nested viewports, text paths and recursive-use checks passed.");
     }
     private static void Near(Rect expected,Rect actual,string name)

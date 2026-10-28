@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Windows.Media;
 using System.Xml;
 
 namespace SVGImage.SVG.PaintServers
 {
-    using System.Globalization;
     using Utils;
 
     public sealed class PaintServerManager
@@ -119,22 +117,23 @@ namespace SVGImage.SVG.PaintServers
                     m_servers[value] = new CurrentColorPaintServer(this);
                     return value;
                 }
-                if (value[0] == '#') return this.ParseSolidColor(value);
-                
+
                 if (value.StartsWith("url"))
                 {
-                    string id = ShapeUtil.ExtractBetween(value, '(', ')');
+                    string id = ShapeUtil.ExtractBetween(value, '(', ')').Trim().Trim('\'', '"');
                     if (id.Length > 0 && id[0] == '#') id = id.Substring(1);
                     this.m_servers.TryGetValue(id, out result);
                     return id;
                 }
 
-                if (value.StartsWith("rgb"))
+                Color color;
+                if (CssColor.TryParse(value,out color))
                 {
-                    return this.ParseSolidRgbColor(value);
+                    string id="_css"+value;
+                    m_servers[id]=new SolidColorPaintServer(this,color);
+                    return id;
                 }
-
-                return this.ParseKnownColor(value.ToLower());
+                return null;
             }
             catch (Exception) { }
 
@@ -179,76 +178,6 @@ namespace SVGImage.SVG.PaintServers
             LoadKnownColors();
             if (m_knownColors.ContainsKey(value)) return m_knownColors[value];
             return Colors.Black;
-        }
-
-        private string ParseSolidColor(string value)
-        {
-            string id = "_solid" + value;
-            PaintServer result;
-            if (this.m_servers.TryGetValue(id, out result)) return id;
-            result = new SolidColorPaintServer(this, ParseHexColor(value));
-            this.m_servers[id] = result;
-            return id;
-        }
-
-        private string ParseSolidRgbColor(string value)
-        {
-            value = value.Replace("\r", "").Replace("\n", "").Replace("\t", "").Replace(" ", "");
-            if (value.StartsWith("rgb("))
-            {
-                var newVal = value.Substring(4, value.Length - 5).Split(',');
-                int alpha = 255;
-                StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("#{0:X2}", alpha);
-                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[0]));
-                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[1]));
-                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[2]));
-                return ParseSolidColor(sb.ToString());
-                //return ParseSolidColor("#" + ParseColorNumber(newVal[0]).ToString("x") + ParseColorNumber(newVal[1]).ToString("x") + ParseColorNumber(newVal[2]).ToString("x"));
-            }
-            if (value.StartsWith("rgba("))
-            {
-                var newVal = value.Substring(5, value.Length - 6).Split(',');
-                StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("#{0:X2}", ParseColorNumber(newVal[0]));
-                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[1]));
-                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[2]));
-                sb.AppendFormat("{0:X2}", ParseColorNumber(newVal[3]));
-                return ParseSolidColor(sb.ToString());
-                //return ParseSolidColor("#" + ParseColorNumber(newVal[0]).ToString("x") + ParseColorNumber(newVal[1]).ToString("x") + ParseColorNumber(newVal[2]).ToString("x") + ParseColorNumber(newVal[3]).ToString("x"));
-            }
-
-            return null;
-        }
-
-        private int ParseColorNumber(string value)
-        {
-            if (value.EndsWith("%"))
-            {
-                var nr = double.Parse(value.Substring(0, value.Length - 1), NumberStyles.Number, CultureInfo.InvariantCulture);
-                if (nr < 0)
-                    nr = 255 - nr; //TODO: what is this trying to do?
-                var result = (int)Math.Round((nr * 255) / 100);
-
-                return MathUtil.Clamp(result, 0, 255);
-            }
-
-            return int.Parse(value);
-        }
-
-        private string ParseKnownColor(string value)
-        {
-            LoadKnownColors();
-            PaintServer result;
-            if (this.m_servers.TryGetValue(value, out result)) return value;
-            Color c;
-            if (m_knownColors.TryGetValue(value, out c))
-            {
-                result = new SolidColorPaintServer(this, c);
-                this.m_servers[value] = result;
-                return value;
-            }
-            return null;
         }
 
         private static void LoadKnownColors()

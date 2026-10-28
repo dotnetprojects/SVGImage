@@ -49,7 +49,7 @@ namespace SVGImage.SVG.Animation
                 track.Additive=true;
                 track.MotionRotate=XmlUtil.AttrValue(node,"rotate","0");
                 string path=XmlUtil.AttrValue(node,"path");
-                if(path.Length>0) track.MotionPath=PathGeometry.CreateFromGeometry(Geometry.Parse(path));
+                if(path.Length>0) track.MotionPath=SvgPathData.Parse(path);
             }
             string repeat = XmlUtil.AttrValue(node, "repeatCount", "1");
             track.Repeat = repeat == "indefinite" ? double.PositiveInfinity : Number(repeat);

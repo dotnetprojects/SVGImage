@@ -20,6 +20,8 @@ namespace SVGImage.SVG.PaintServers
             : base(owner)
         {
             this.GradientUnits = XmlUtil.AttrValue(node, "gradientUnits", string.Empty);
+            string spread=XmlUtil.AttrValue(node,"spreadMethod","pad");
+            SpreadMethod=spread=="repeat"?GradientSpreadMethod.Repeat:spread=="reflect"?GradientSpreadMethod.Reflect:GradientSpreadMethod.Pad;
             string transform = XmlUtil.AttrValue(node, "gradientTransform", string.Empty);
             if (transform.Length > 0)
             {
@@ -66,7 +68,7 @@ namespace SVGImage.SVG.PaintServers
                     if (stopopacity != 1) 
                         color = Color.FromArgb((byte)(System.Math.Max(0,System.Math.Min(1,stopopacity)) * color.A), color.R, color.G, color.B);
 
-                    if (offset > 1) offset = offset / 100;
+                    offset = System.Math.Max(m_stops.Count>0 ? m_stops[m_stops.Count-1].Offset : 0, System.Math.Min(1,offset));
                     this.m_stops.Add(new GradientStop(color, offset));
                 }
             }
@@ -75,6 +77,8 @@ namespace SVGImage.SVG.PaintServers
         public IList<GradientStop> Stops => this.m_stops.AsReadOnly();
 
         public Transform Transform { get; protected set; }
+
+        public GradientSpreadMethod SpreadMethod { get; private set; }
 
         public string GradientUnits { get; private set; }
     }

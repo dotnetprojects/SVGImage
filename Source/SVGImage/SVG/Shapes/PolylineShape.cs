@@ -12,13 +12,7 @@ namespace SVGImage.SVG.Shapes
             : base(svg, node)
         {
             string points = XmlUtil.AttrValue(node, SVGTags.sPoints, string.Empty);
-            StringSplitter split = new StringSplitter(points);
-            List<Point> list = new List<Point>();
-            while (split.More)
-            {
-                list.Add(split.ReadNextPoint());
-            }
-            this.Points = list.ToArray();
+            this.Points = SvgNumberReader.Points(points);
         }
 
         public Point[] Points { get; private set; }

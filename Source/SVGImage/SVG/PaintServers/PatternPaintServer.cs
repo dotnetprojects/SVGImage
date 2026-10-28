@@ -46,7 +46,7 @@ namespace SVGImage.SVG.PaintServers
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            if (Brush != null) return Brush;
+            if (Brush != null) return ApplyOpacity(Brush, opacity);
             if (rendering || bounds.IsEmpty) return Brushes.Transparent;
             bool relative = PatternUnits != "userSpaceOnUse";
             double x = Number("x", 0, relative ? 1 : viewport.Width), y = Number("y", 0, relative ? 1 : viewport.Height);
@@ -95,7 +95,7 @@ namespace SVGImage.SVG.PaintServers
                     Stretch = Stretch.Fill,
                     TileMode = TileMode.Tile,
                     Transform = PatternTransform,
-                    Opacity = opacity
+                    Opacity = System.Math.Max(0, System.Math.Min(1, opacity / 100))
                 };
             }
             finally { svg.Size = oldSize; svg.ViewBox = oldBox; rendering = false; }

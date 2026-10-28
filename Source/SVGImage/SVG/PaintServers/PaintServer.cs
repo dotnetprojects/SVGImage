@@ -23,7 +23,15 @@ namespace SVGImage.SVG.PaintServers
 
         public virtual Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            return Brush;
+            return ApplyOpacity(Brush, opacity);
+        }
+
+        protected static Brush ApplyOpacity(Brush brush, double opacity)
+        {
+            if (brush == null || opacity >= 100) return brush;
+            var result = brush.CloneCurrentValue();
+            result.Opacity *= System.Math.Max(0, opacity / 100);
+            return result;
         }
 
         public Brush GetBrush()

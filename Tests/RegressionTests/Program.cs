@@ -13,6 +13,7 @@ internal static class Program
     [STAThread]
     private static void Main()
     {
+        VerifyRenderingAvailable();
         GradientRgbColors();
         ButtonContentSize();
         GrayscaleDrawing();
@@ -21,7 +22,19 @@ internal static class Program
         CssTests.Run();
         GeometryTests.Run();
         FilterTests.Run();
+        ResvgTests.Run();
         Console.WriteLine("All regression checks passed.");
+    }
+
+    private static void VerifyRenderingAvailable()
+    {
+        var visual = new DrawingVisual();
+        using (var dc = visual.RenderOpen()) dc.DrawRectangle(Brushes.Red, null, new Rect(0, 0, 2, 2));
+        var bitmap = new RenderTargetBitmap(2, 2, 96, 96, PixelFormats.Pbgra32);
+        bitmap.Render(visual);
+        var pixel = new byte[16]; bitmap.CopyPixels(pixel, 8, 0);
+        if (pixel[2] != 255 || pixel[3] != 255)
+            throw new InvalidOperationException("WPF returned blank pixels for a plain rectangle. Restore the interactive Windows graphics session before running rendering checks.");
     }
 
     private static void GrayscaleDrawing()

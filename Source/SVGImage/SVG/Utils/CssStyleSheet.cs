@@ -35,6 +35,7 @@ namespace SVGImage.SVG.Utils
             { "fill", "black" }, { "stroke", "none" }, { "color", "black" }, { "opacity", "1" },
             { "fill-opacity", "1" }, { "stroke-opacity", "1" }, { "stroke-width", "1" },
             { "display", "inline" }, { "visibility", "visible" }, { "transform", "none" },
+            { "flood-color", "black" }, { "flood-opacity", "1" }, { "color-interpolation-filters", "linearRGB" },
             { "animation", "none" }, { "fill-rule", "nonzero" }, { "stop-color", "black" }, { "stop-opacity", "1" }
         };
         static CssStyleSheet()
@@ -140,6 +141,11 @@ namespace SVGImage.SVG.Utils
 
         private string AncestorValue(XmlNode node, string property)
         {
+            if(!Inherited(property))
+            {
+                string direct;
+                return node!=null && Resolve(node).TryGetValue(property,out direct) ? direct : Initial.ContainsKey(property)?Initial[property]:null;
+            }
             for (; node != null && node.NodeType == XmlNodeType.Element; node = node.ParentNode)
             {
                 string value;

@@ -40,7 +40,7 @@ namespace SVGImage.SVG.PaintServers
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            if (this.Brush != null) return this.Brush;
+            if (this.Brush != null) return ApplyOpacity(this.Brush, opacity);
 
             RadialGradientBrush b = new RadialGradientBrush();
             foreach (GradientStop stop in this.Stops) b.GradientStops.Add(stop);
@@ -60,7 +60,6 @@ namespace SVGImage.SVG.PaintServers
             }
             else
             {
-                double scale = 1d / 100d;
                 if (double.IsNaN(this.CX) == false && double.IsNaN(this.CY) == false)
                 {
                     //b.GradientOrigin = new Point(this.CX*scale, this.CY*scale);
@@ -68,7 +67,7 @@ namespace SVGImage.SVG.PaintServers
                 }
                 if (double.IsNaN(this.FX) == false && double.IsNaN(this.FY) == false)
                 {
-                    b.GradientOrigin = new Point(this.FX * scale, this.FY * scale);
+                    b.GradientOrigin = new Point(this.FX, this.FY);
                 }
                 if (double.IsNaN(this.R) == false)
                 {
@@ -79,9 +78,10 @@ namespace SVGImage.SVG.PaintServers
             }
             if (this.Transform != null) b.Transform = this.Transform;
 
+            b.SpreadMethod = SpreadMethod;
             this.Brush = b;
 
-            return b;
+            return ApplyOpacity(b, opacity);
         }
 
         private void Normalize()

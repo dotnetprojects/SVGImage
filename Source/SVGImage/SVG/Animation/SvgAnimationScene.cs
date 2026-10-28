@@ -45,7 +45,7 @@ namespace SVGImage.SVG.Animation
                             string href=XmlUtil.AttrValue(child,"href",XmlUtil.AttrValue(child,"xlink:href"));
                             if(href.StartsWith("#") && svg.GetShape(href.Substring(1)) is PathShape path)
                             {
-                                track.MotionPath=PathGeometry.CreateFromGeometry(Geometry.Parse(path.Data));
+                                track.MotionPath=SvgPathData.Parse(path.Data);
 
                             }
                         }

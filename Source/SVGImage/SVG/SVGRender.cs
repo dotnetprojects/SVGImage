@@ -148,7 +148,7 @@ namespace SVGImage.SVG
 
         private GeometryDrawing NewDrawingItem(Shape shape, Geometry geometry)
         {
-            double shapeOpacity = animationScene != null && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity") ? 1 : shape.Opacity;
+            double shapeOpacity = shape.Filter != null || animationScene != null && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity") ? 1 : shape.Opacity;
             shape.geometryElement = geometry;
             GeometryDrawing item = new GeometryDrawing();
             Stroke stroke = shape.Stroke;
@@ -371,6 +371,7 @@ namespace SVGImage.SVG
                 }
                 if (shape is PolylineShape polyline)
                 {
+                    if (polyline.Points.Length == 0) continue;
                     PathGeometry path = new PathGeometry();
                     PathFigure p = new PathFigure();
                     path.Figures.Add(p);
@@ -386,6 +387,7 @@ namespace SVGImage.SVG
                 }
                 if (shape is PolygonShape polygon)
                 {
+                    if (polygon.Points.Length == 0) continue;
                     PathGeometry path = new PathGeometry();
                     PathFigure p = new PathFigure();
                     path.Figures.Add(p);
@@ -443,7 +445,7 @@ namespace SVGImage.SVG
                 }
                 if (shape is PathShape pathShape)
                 {
-                    var path = PathGeometry.CreateFromGeometry(PathGeometry.Parse(pathShape.Data));
+                    var path = SvgPathData.Parse(pathShape.Data);
                     var di = this.NewDrawingItem(shape, path);
                     AddDrawingToGroup(grp, shape, di);
                 }
@@ -486,7 +488,7 @@ namespace SVGImage.SVG
                 var subgrp = new DrawingGroup();
                 if (mask != null)
                     subgrp.OpacityMask = CreateMask(mask, MaskDrawing.ObjectBounds(drawing));
-                if (shape is Group || (animated && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity")))
+                if (shape is Group || shape.Filter != null || (animated && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity")))
                     subgrp.Opacity = shape.Opacity;
                 if (shape.Clip != null)
                     subgrp.ClipGeometry = shape.Clip.GetGeometry(MaskDrawing.ObjectBounds(drawing));
@@ -498,8 +500,7 @@ namespace SVGImage.SVG
                 }
                 if (shape.Filter != null)
                 {
-                    subgrp.BitmapEffect = shape.Filter.GetBitmapEffect();
-                    drawing = shape.Filter.Render(drawing);
+                    drawing = shape.Filter.Render(drawing, animationScene != null);
                 }
                 subgrp.Children.Add(drawing);
                 if (animated) animationScene.Attach(shape, subgrp);

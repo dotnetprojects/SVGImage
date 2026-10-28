@@ -36,7 +36,7 @@ namespace SVGImage.SVG.PaintServers
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            if (this.Brush != null) return this.Brush;
+            if (this.Brush != null) return ApplyOpacity(this.Brush, opacity);
 
             LinearGradientBrush b = new LinearGradientBrush();
             foreach (GradientStop stop in this.Stops) b.GradientStops.Add(stop);
@@ -68,9 +68,10 @@ namespace SVGImage.SVG.PaintServers
                 if (double.IsNaN(this.X2) == false) b.EndPoint = new Point(this.X2, this.Y2);
             }
 
+            b.SpreadMethod = SpreadMethod;
             this.Brush = b;
 
-            return b;
+            return ApplyOpacity(b, opacity);
         }
 
         private void Normalize()
