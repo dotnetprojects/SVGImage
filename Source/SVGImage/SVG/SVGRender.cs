@@ -475,7 +475,11 @@ namespace SVGImage.SVG
                 if (shape.Clip != null)
                     subgrp.ClipGeometry = shape.Clip.ClipGeometry;
                 if (shape.Transform != null)
+                {
                     subgrp.Transform = shape.Transform;
+                    if (!animated || !animationScene.Tracks(shape).Any(t => t.Type != null))
+                        subgrp.Transform = new MatrixTransform(CssTransforms.Around(shape.Transform.Value, CssTransforms.Origin(shape, MaskDrawing.ObjectBounds(drawing))));
+                }
                 if (shape.Filter != null)
                 {
                     subgrp.BitmapEffect = shape.Filter.GetBitmapEffect();

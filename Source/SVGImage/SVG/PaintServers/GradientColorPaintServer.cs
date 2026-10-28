@@ -46,7 +46,13 @@ namespace SVGImage.SVG.PaintServers
                         foreach (StyleItem styleitem in StyleParser.SplitStyle(null, fullstyle)) 
                             styleattr.Add(new StyleItem(styleitem.Name, styleitem.Value));
                     }
-                    foreach (var attr1 in styleattr) 
+                    if (owner.Svg != null)
+                    {
+                        styleattr.Clear();
+                        foreach (var item in owner.Svg.StyleSheet.Resolve(childnode))
+                            if (item.Key == "stop-color" || item.Key == "stop-opacity") styleattr.Add(new StyleItem(item.Key,item.Value));
+                    }
+                    foreach (var attr1 in styleattr)
                         childnode.Attributes.Append(XmlUtil.CreateAttr(childnode, attr1.Name, attr1.Value));
 
                     double offset = XmlUtil.AttrValue(childnode, "offset", (double)0);
@@ -58,7 +64,7 @@ namespace SVGImage.SVG.PaintServers
                     Color color = colorServer != null ? colorServer.Color : Colors.Black;
 
                     if (stopopacity != 1) 
-                        color = Color.FromArgb((byte)(stopopacity * 255), color.R, color.G, color.B);
+                        color = Color.FromArgb((byte)(System.Math.Max(0,System.Math.Min(1,stopopacity)) * color.A), color.R, color.G, color.B);
 
                     if (offset > 1) offset = offset / 100;
                     this.m_stops.Add(new GradientStop(color, offset));

@@ -12,6 +12,7 @@ namespace SVGImage.SVG.PaintServers
 
     public sealed class PaintServerManager
     {
+        internal SVG Svg { get; set; }
         private static Dictionary<string, Color> m_knownColors = null;
 
         private Dictionary<string, PaintServer> m_servers = new Dictionary<string, PaintServer>();

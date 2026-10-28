@@ -19,9 +19,14 @@ namespace SVGImage.SVG.Animation
         internal string[] Values;
         internal double[] Times;
         internal KeySpline[] Splines;
-        internal int Steps;
+        internal bool IsCss, Backwards, Paused;
+        internal double Delay;
+        internal string Direction;
+        internal string[] CssTiming;
+        internal Matrix UnderlyingMatrix = System.Windows.Media.Matrix.Identity;
+        internal string UnderlyingTransform;
         private double[][] numericValues;
-        private Matrix[] cssValues;
+        private CssTransforms[] cssValues;
 
         internal static AnimationTrack Parse(XmlNode node)
         {
@@ -67,6 +72,7 @@ namespace SVGImage.SVG.Animation
         internal bool Sample(double seconds, IDictionary<string, double> events, out int index, out double fraction)
         {
             index = 0; fraction = 0;
+            if (IsCss) return CssSample(seconds, out index, out fraction);
             double start = double.NegativeInfinity;
             foreach (string begin in Begin.Split(';'))
             {
@@ -86,13 +92,39 @@ namespace SVGImage.SVG.Animation
             if (elapsed >= total && !Freeze) return false;
             double progress = double.IsInfinity(Duration) ? 0 : elapsed >= total ?
                 (Repeat % 1 == 0 ? 1 : Repeat % 1) : (elapsed % Duration) / Duration;
-            if (Steps > 0) progress = Math.Floor(progress * Steps) / Steps;
             while (index < Values.Length - 1 && progress >= Times[index + 1]) index++;
             if (index < Values.Length - 1 && Times[index + 1] > Times[index])
                 fraction = (progress - Times[index]) / (Times[index + 1] - Times[index]);
             if (Mode == "discrete" || Attribute == "display" || Attribute == "visibility") fraction = 0;
             else if (Mode == "spline" && Splines != null && index < Splines.Length)
                 fraction = Splines[index].GetSplineProgress(Math.Max(0, Math.Min(1, fraction)));
+            return true;
+        }
+
+        private bool CssSample(double seconds, out int index, out double fraction)
+        {
+            index = 0; fraction = 0;
+            if (double.IsNaN(Duration) || double.IsNaN(Delay) || Duration < 0 || Repeat <= 0) return false;
+            double elapsed = (Paused ? 0 : seconds) - Delay;
+            bool before = elapsed < 0;
+            double total = Duration * Repeat;
+            if (before && !Backwards || !before && elapsed >= total && !Freeze) return false;
+            double iteration, progress;
+            if (before) { iteration = 0; progress = 0; }
+            else if (Duration == 0 || elapsed >= total)
+            {
+                iteration = Math.Max(0, Math.Ceiling(Repeat) - 1);
+                progress = Repeat % 1 == 0 ? 1 : Repeat % 1;
+            }
+            else { iteration = Math.Floor(elapsed / Duration); progress = elapsed / Duration - iteration; }
+            bool reversed = Direction == "reverse" || Direction == "alternate-reverse";
+            if ((Direction == "alternate" || Direction == "alternate-reverse") && iteration % 2 == 1) reversed = !reversed;
+            if (reversed) progress = 1 - progress;
+            while (index < Values.Length - 1 && progress >= Times[index + 1]) index++;
+            if (index < Values.Length - 1 && Times[index + 1] > Times[index])
+                fraction = (progress - Times[index]) / (Times[index + 1] - Times[index]);
+            if (index < Values.Length - 1)
+                fraction = CssAnimations.Ease(CssTiming[index], fraction, before);
             return true;
         }
 
@@ -116,12 +148,12 @@ namespace SVGImage.SVG.Animation
         {
             if (Type == "css")
             {
-                if (cssValues == null) cssValues = Values.Select(CssMatrix).ToArray();
+                if (cssValues == null) cssValues = Values.Select(valueToken => valueToken == "__underlying__" ?
+                    UnderlyingTransform != null ? CssTransforms.Parse(UnderlyingTransform) : UnderlyingMatrix.IsIdentity ? CssTransforms.Parse("none") : CssTransforms.FromMatrix(UnderlyingMatrix)
+                    : CssTransforms.Parse(valueToken)).ToArray();
                 var a = cssValues[index];
                 var b = cssValues[Math.Min(index + 1, Values.Length - 1)];
-                return new Matrix(a.M11 + (b.M11 - a.M11) * fraction, a.M12 + (b.M12 - a.M12) * fraction,
-                    a.M21 + (b.M21 - a.M21) * fraction, a.M22 + (b.M22 - a.M22) * fraction,
-                    a.OffsetX + (b.OffsetX - a.OffsetX) * fraction, a.OffsetY + (b.OffsetY - a.OffsetY) * fraction);
+                return a.Interpolate(b, fraction);
             }
             var v = Components(index, fraction);
             double x = v.Length > 0 ? v[0] : 0, y = v.Length > 1 ? v[1] : 0;

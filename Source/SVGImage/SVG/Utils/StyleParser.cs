@@ -1,69 +1,104 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace SVGImage.SVG.Utils
 {
     internal static class StyleParser
     {
-        private static Regex _regexStyle =
-            new Regex("([\\.,<>a-zA-Z0-9: \\-#]*){([^}]*)}", RegexOptions.Compiled | RegexOptions.Singleline);
+        internal static List<string> SplitTopLevel(string text, char separator)
+        {
+            var result = new List<string>();
+            int start = 0, depth = 0; char quote = '\0';
+            for (int i = 0; i < text.Length; i++)
+            {
+                char c = text[i];
+                if (quote != '\0') { if (c == quote && (i == 0 || text[i - 1] != '\\')) quote = '\0'; }
+                else if (c == '\'' || c == '"') quote = c;
+                else if (c == '(' || c == '[' || c == '{') depth++;
+                else if (c == ')' || c == ']' || c == '}') depth--;
+                else if (c == separator && depth == 0) { result.Add(text.Substring(start, i - start)); start = i + 1; }
+            }
+            result.Add(text.Substring(start));
+            return result;
+        }
+
+        internal static int Closing(string text, int start, char open, char close)
+        {
+            int depth = 0; char quote = '\0';
+            for (int i = start; i < text.Length; i++)
+            {
+                char c = text[i];
+                if (quote != '\0') { if (c == quote && (i == 0 || text[i - 1] != '\\')) quote = '\0'; }
+                else if (c == '\'' || c == '"') quote = c;
+                else if (c == open) depth++;
+                else if (c == close && --depth == 0) return i;
+            }
+            return -1;
+        }
+
+        private static string WithoutComments(string text)
+        {
+            var result = new StringBuilder(); char quote = '\0';
+            for (int i = 0; i < text.Length; i++)
+            {
+                char c = text[i];
+                if (quote != '\0') { if (c == quote && (i == 0 || text[i - 1] != '\\')) quote = '\0'; }
+                else if (c == '\'' || c == '"') quote = c;
+                else if (c == '/' && i + 1 < text.Length && text[i + 1] == '*')
+                {
+                    int end = text.IndexOf("*/", i + 2, StringComparison.Ordinal);
+                    if (end < 0) break;
+                    i = end + 1; result.Append(' '); continue;
+                }
+                result.Append(c);
+            }
+            return result.ToString();
+        }
 
         public static List<StyleItem> SplitStyle(SVG svg, string fullstyle)
         {
-            List<StyleItem> list = new List<StyleItem>();
-            if (fullstyle.Length == 0)
-                return list;
-            // style contains attributes in format of "attrname:value;attrname:value"
-            string[] attrs = fullstyle.Split(';');
-            foreach (string attr in attrs)
+            var result = new List<StyleItem>();
+            foreach (string declaration in SplitTopLevel(WithoutComments(fullstyle), ';'))
             {
-                string[] s = attr.Split(':');
-                if (s.Length != 2)
-                    continue;
-                list.Add(new StyleItem(s[0].Trim(), s[1].Trim()));
+                var parts = SplitTopLevel(declaration, ':');
+                if (parts.Count < 2) continue;
+                string name = parts[0].Trim();
+                string value = string.Join(":", parts.GetRange(1, parts.Count - 1)).Trim();
+                if (!Regex.IsMatch(name, @"^(?:--)?[a-zA-Z_][\w-]*$")) continue;
+                if (value.Length == 0 && !name.StartsWith("--")) continue;
+                result.Add(new StyleItem(name.StartsWith("--") ? name : name.ToLowerInvariant(), value));
             }
-            return list;
+            return result;
+        }
+
+        internal static IEnumerable<StyleItem> Blocks(string style)
+        {
+            style = WithoutComments(style);
+            int position = 0;
+            while (position < style.Length)
+            {
+                int start = style.IndexOf('{', position);
+                int semicolon = style.IndexOf(';', position);
+                if (semicolon >= 0 && (start < 0 || semicolon < start)) { position = semicolon + 1; continue; }
+                if (start < 0) yield break;
+                int end = Closing(style, start, '{', '}');
+                if (end < 0) yield break;
+                yield return new StyleItem(style.Substring(position, start - position).Trim(), style.Substring(start + 1, end - start - 1));
+                position = end + 1;
+            }
         }
 
         public static void ParseStyle(SVG svg, string style)
         {
-            style = Regex.Replace(style, @"/\*.*?\*/", "", RegexOptions.Singleline);
-            var keyframe = Regex.Match(style, @"@(?:-webkit-)?keyframes\s+([\w-]+)\s*\{");
-            while (keyframe.Success)
+            foreach (var block in Blocks(style))
             {
-                int start = keyframe.Index + keyframe.Length, end = start, depth = 1;
-                while (end < style.Length && depth > 0)
-                {
-                    if (style[end] == '{') depth++;
-                    if (style[end] == '}') depth--;
-                    end++;
-                }
-                if (depth != 0) break;
-                svg.CssKeyframes[keyframe.Groups[1].Value] = style.Substring(start, end - start - 1);
-                style = style.Remove(keyframe.Index, end - keyframe.Index);
-                keyframe = Regex.Match(style, @"@(?:-webkit-)?keyframes\s+([\w-]+)\s*\{");
-            }
-            var svgStyles = svg.Styles;
-
-            var match = _regexStyle.Match(style);
-            while (match.Success)
-            {
-                var name  = match.Groups[1].Value.Trim();
-                var value = match.Groups[2].Value.Trim();
-                foreach (var nm in name.Split(','))
-                {
-                    if (!svgStyles.ContainsKey(nm))
-                    {
-                        svgStyles.Add(nm, new List<StyleItem>());
-                    }
-
-                    foreach (StyleItem styleitem in SplitStyle(svg, value))
-                    {
-                        svgStyles[nm].Add(new StyleItem(styleitem.Name, styleitem.Value));
-                    }
-                }
-
-                match = match.NextMatch();
+                var keyframe = Regex.Match(block.Name, @"^@(?:-webkit-)?keyframes\s+([\w-]+)$");
+                if (keyframe.Success) svg.CssKeyframes[keyframe.Groups[1].Value] = block.Value;
+                else if (!block.Name.StartsWith("@"))
+                    foreach (string selector in SplitTopLevel(block.Name, ','))
+                        svg.StyleSheet.Add(selector.Trim(), SplitStyle(svg, block.Value));
             }
         }
     }

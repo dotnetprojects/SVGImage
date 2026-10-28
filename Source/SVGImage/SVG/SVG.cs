@@ -35,6 +35,7 @@ namespace SVGImage.SVG
             this.Filename = "";
             m_shapes = new Dictionary<string, Shape>();
             m_styles = new Dictionary<string, List<StyleItem>>();
+            PaintServers.Svg = this;
         }
 
         public SVG(IExternalFileLoader externalFileLoader)
@@ -76,6 +77,7 @@ namespace SVGImage.SVG
 
         public Rect? ViewBox { get; set; }
         internal Group RootGroup { get; private set; }
+        internal CssStyleSheet StyleSheet { get; } = new CssStyleSheet();
         internal Dictionary<string, string> CssKeyframes { get; } = new Dictionary<string, string>();
         internal Dictionary<string, List<XmlNode>> ReferencedAnimations { get; } = new Dictionary<string, List<XmlNode>>();
 

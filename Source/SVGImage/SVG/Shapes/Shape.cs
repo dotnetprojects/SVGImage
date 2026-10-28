@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Media;
 using System.Xml;
@@ -33,6 +33,8 @@ namespace SVGImage.SVG.Shapes
         private string m_colorInterpolation;
         internal List<XmlNode> AnimationNodes { get; } = new List<XmlNode>();
         internal string CssAnimation { get; private set; }
+        internal Dictionary<string, string> CssProperties { get; } = new Dictionary<string, string>();
+        private XmlNode sourceNode;
 
         // Resolve at render time, after definitions later in the document have been read.
         internal Mask Mask => Svg.GetShape(m_maskId) as Mask;
@@ -65,6 +67,7 @@ namespace SVGImage.SVG.Shapes
 
         public Shape(SVG svg, XmlNode node, Shape parent) : base(node)
         {
+            sourceNode = node;
             _svg = svg;
             this.Opacity = 1;
             this.Parent = parent;
@@ -116,7 +119,12 @@ namespace SVGImage.SVG.Shapes
             }
         }
 
-        public virtual string PaintServerKey { get; set; }
+        private string paintServerKey;
+        public virtual string PaintServerKey
+        {
+            get => paintServerKey ?? (RealParent ?? Parent)?.PaintServerKey;
+            set => paintServerKey = value;
+        }
 
         public string RequiredExtensions { get; set; }
 
@@ -203,43 +211,24 @@ namespace SVGImage.SVG.Shapes
         }
 
         public virtual Transform Transform { get; private set; }
+        internal string TransformText { get; private set; }
 
         public Shape Parent { get; set; }
 
         private string filterId;
         internal virtual Filter Filter => Svg.GetShape(filterId) as Filter;
 
-        protected virtual void ParseAtStart(SVG svg, XmlNode node)
-        {
-            if (node != null)
-            {
-                var name = node.Name;
-                if (name.Contains(':'))
-                {
-                    name = name.Split(':')[1];
-                }
-
-                if (svg.m_styles.TryGetValue(name, out var attributes))
-                {
-                    foreach (var xmlAttribute in attributes)
-                    {
-                        Parse(svg, xmlAttribute.Name, xmlAttribute.Value);
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(this.Id) && svg.m_styles.TryGetValue("#" + this.Id, out attributes))
-                {
-                    foreach (var xmlAttribute in attributes)
-                    {
-                        Parse(svg, xmlAttribute.Name, xmlAttribute.Value);
-                    }
-                }
-            }
-        }
+        protected virtual void ParseAtStart(SVG svg, XmlNode node) { }
 
         protected virtual void ParseLocalStyle(SVG svg)
         {
-            if (!string.IsNullOrEmpty(this.m_localStyle))
+            if (sourceNode != null)
+            {
+                foreach (var item in svg.StyleSheet.Resolve(sourceNode))
+                    if (item.Key.StartsWith("--")) CssProperties[item.Key] = item.Value;
+                    else this.Parse(svg, item.Key, item.Value);
+            }
+            else if (!string.IsNullOrEmpty(this.m_localStyle))
             {
                 foreach (StyleItem item in StyleParser.SplitStyle(svg, this.m_localStyle))
                 {
@@ -266,7 +255,13 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == "animation")
             {
+                CssProperties[name] = value;
                 CssAnimation = value;
+                return;
+            }
+            if (name.StartsWith("animation-") || name == "transform-origin" || name == "transform-box")
+            {
+                CssProperties[name] = value;
                 return;
             }
             if (name == "color-interpolation")
@@ -275,29 +270,16 @@ namespace SVGImage.SVG.Shapes
                 return;
             }
 
-            if (name == SVGTags.sDisplay && value == "none")
+            if (name == SVGTags.sDisplay)
             {
-                this.Display = false;
+                this.Display = value != "none";
             }
 
-            if (name == SVGTags.sClass)
-            {
-                var classes = value.Split(' ');
-                foreach (var @class in classes)
-                {
-                    if (svg.m_styles.TryGetValue("." + @class, out var attributes))
-                    {
-                        foreach (var xmlAttribute in attributes)
-                        {
-                            Parse(svg, xmlAttribute.Name, xmlAttribute.Value);
-                        }
-                    }
-                }
-                return;
-            }
+            if (name == SVGTags.sClass) return;
             if (name == SVGTags.sTransform)
             {
-                this.Transform = ShapeUtil.ParseTransform(value.ToLower());
+                TransformText = value;
+                this.Transform = new MatrixTransform(CssTransforms.Parse(value).Matrix);
                 return;
             }
             if (name == SVGTags.sVisibility)
@@ -402,7 +384,7 @@ namespace SVGImage.SVG.Shapes
             }
             if (name == SVGTags.sColor)
             {
-                this.PaintServerKey = svg.PaintServers.Parse(value);
+                this.PaintServerKey = value == "currentColor" ? null : svg.PaintServers.Parse(value);
                 return;
             }
             if (name == SVGTags.sFillOpacity)

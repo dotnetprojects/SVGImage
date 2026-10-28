@@ -45,36 +45,7 @@ namespace SVGImage.SVG.Animation
                 catch (Exception e) when (e is FormatException || e is ArgumentException || e is OverflowException)
                 { Warnings.Add(shape.Id + ": " + e.Message); }
             }
-            if (!string.IsNullOrEmpty(shape.CssAnimation))
-            {
-                var tokens = Regex.Matches(shape.CssAnimation, @"[\w.-]+\([^)]*\)|[^\s]+").Cast<Match>().Select(m => m.Value).ToArray();
-                string definition;
-                if (tokens.Length >= 2 && svg.CssKeyframes.TryGetValue(tokens[0], out definition))
-                {
-                    var frames = new SortedDictionary<double, string>();
-                    foreach (Match frame in Regex.Matches(definition, @"(from|to|[\d.]+%)\s*\{([^}]*)\}"))
-                    {
-                        var transform = StyleParser.SplitStyle(svg, frame.Groups[2].Value).FirstOrDefault(s => s.Name == "transform");
-                        if (transform == null) continue;
-                        string key = frame.Groups[1].Value;
-                        frames[key == "from" ? 0 : key == "to" ? 1 : AnimationTrack.Number(key.TrimEnd('%')) / 100] = transform.Value;
-                    }
-                    if (!frames.ContainsKey(0)) frames[0] = "none";
-                    if (!frames.ContainsKey(1)) frames[1] = "none";
-                    var step = Regex.Match(shape.CssAnimation, @"steps\(\s*(\d+)\s*(?:,\s*(?:end|jump-end))?\s*\)");
-                    var duration = tokens.Select(AnimationTrack.Clock).FirstOrDefault(t => !double.IsNaN(t));
-                    int stepCount;
-                    if (!step.Success || !int.TryParse(step.Groups[1].Value, out stepCount)) stepCount = 0;
-                    result.Add(new AnimationTrack
-                    {
-                        Attribute = "transform", Type = "css", Begin = "0s", Duration = duration,
-                        Repeat = tokens.Contains("infinite") ? double.PositiveInfinity : 1,
-                        Freeze = tokens.Contains("forwards") || tokens.Contains("both"),
-                        Mode = "linear", Steps = stepCount,
-                        Values = frames.Values.ToArray(), Times = frames.Keys.ToArray()
-                    });
-                }
-            }
+            result.AddRange(CssAnimations.Build(svg, shape));
             return result;
         }
 
@@ -87,6 +58,8 @@ namespace SVGImage.SVG.Animation
             if (transforms.Length > 0 || cameras.Length > 0)
             {
                 Matrix original = group.Transform?.Value ?? Matrix.Identity;
+                var origin = CssTransforms.Origin(shape, MaskDrawing.ObjectBounds(group.Children[0]));
+                foreach (var track in transforms) { track.UnderlyingMatrix = original; track.UnderlyingTransform = shape.TransformText; }
                 Func<double, Matrix> sample = seconds =>
                 {
                     var matrix = original;
@@ -109,7 +82,7 @@ namespace SVGImage.SVG.Animation
                         matrix = new Matrix(scale, 0, 0, scale, viewport.X + (viewport.Width - box[2] * scale) / 2 - box[0] * scale,
                             viewport.Y + (viewport.Height - box[3] * scale) / 2 - box[1] * scale);
                     }
-                    return matrix;
+                    return CssTransforms.Around(matrix, origin);
                 };
                 var transform = new MatrixTransform(sample(0));
                 group.Transform = transform;

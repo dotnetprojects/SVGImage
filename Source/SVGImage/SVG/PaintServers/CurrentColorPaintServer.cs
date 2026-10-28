@@ -12,7 +12,7 @@ namespace SVGImage.SVG.PaintServers
 
         public override Brush GetBrush(double opacity, SVG svg, SVGRender svgRender, Rect bounds)
         {
-            return Brushes.Black;
+            return new SolidColorBrush(Colors.Black) { Opacity = System.Math.Max(0,System.Math.Min(1,opacity/100)) };
         }
     }
 }
