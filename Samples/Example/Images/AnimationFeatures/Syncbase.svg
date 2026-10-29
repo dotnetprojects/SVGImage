@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
+  <path d="M40 40H260 M40 100H260 M40 160H260" stroke="#d7dfef" stroke-width="4"/>
+  <circle cx="40" cy="40" r="17" fill="#ed6573">
+    <animateTransform id="first" attributeName="transform" type="translate" from="0" to="220" dur="1s" begin="0s;first.end+2.5s"/>
+  </circle>
+  <circle cx="40" cy="100" r="17" fill="#e7aa2d">
+    <animateTransform id="second" attributeName="transform" type="translate" from="0" to="220" dur="1s" begin="first.end+0.15s"/>
+  </circle>
+  <circle cx="40" cy="160" r="17" fill="#16a994">
+    <animateTransform attributeName="transform" type="translate" from="0" to="220" dur="1s" begin="second.end+0.15s"/>
+  </circle>
+</svg>

@@ -25,8 +25,10 @@ namespace SVGImage.SVG.Animation
         internal string[] CssTiming;
         internal Matrix UnderlyingMatrix = System.Windows.Media.Matrix.Identity;
         internal string UnderlyingTransform;
+        internal Rect TransformReference;
         internal PathGeometry MotionPath;
         internal string MotionRotate;
+        internal Func<double, double> StartTime;
         private double[][] numericValues;
         private CssTransforms[] cssValues;
 
@@ -65,7 +67,7 @@ namespace SVGImage.SVG.Animation
             else if (values.Length > 0) track.Values = values.Split(';').Select(v => v.Trim()).ToArray();
             else
             {
-                string from = XmlUtil.AttrValue(node, "from", track.Type == "scale" ? "1" : "0");
+                string from = XmlUtil.AttrValue(node, "from", track.Attribute == "d" ? "__underlying__" : track.Type == "scale" ? "1" : "0");
                 track.Values = new[] { from, XmlUtil.AttrValue(node, "to", from) };
             }
             if(track.Type=="motion" && (track.MotionPath!=null || node.ChildNodes.Cast<XmlNode>().Any(child => child.LocalName=="mpath")))
@@ -95,8 +97,8 @@ namespace SVGImage.SVG.Animation
         {
             index = 0; fraction = 0;
             if (IsCss) return CssSample(seconds, out index, out fraction);
-            double start = double.NegativeInfinity;
-            foreach (string begin in Begin.Split(';'))
+            double start = StartTime == null ? double.NegativeInfinity : StartTime(seconds);
+            foreach (string begin in StartTime == null ? Begin.Split(';') : new string[0])
             {
                 double candidate = Clock(begin.Trim());
                 if (double.IsNaN(candidate))
@@ -186,8 +188,8 @@ namespace SVGImage.SVG.Animation
             if (Type == "css")
             {
                 if (cssValues == null) cssValues = Values.Select(valueToken => valueToken == "__underlying__" ?
-                    UnderlyingTransform != null ? CssTransforms.Parse(UnderlyingTransform) : UnderlyingMatrix.IsIdentity ? CssTransforms.Parse("none") : CssTransforms.FromMatrix(UnderlyingMatrix)
-                    : CssTransforms.Parse(valueToken)).ToArray();
+                    UnderlyingTransform != null ? CssTransforms.Parse(UnderlyingTransform, TransformReference) : UnderlyingMatrix.IsIdentity ? CssTransforms.Parse("none") : CssTransforms.FromMatrix(UnderlyingMatrix)
+                    : CssTransforms.Parse(valueToken, TransformReference)).ToArray();
                 var a = cssValues[index];
                 var b = cssValues[Math.Min(index + 1, Values.Length - 1)];
                 return a.Interpolate(b, fraction);

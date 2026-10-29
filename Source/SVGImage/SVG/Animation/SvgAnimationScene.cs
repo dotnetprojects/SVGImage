@@ -14,6 +14,7 @@ namespace SVGImage.SVG.Animation
     internal sealed class SvgAnimationScene
     {
         private readonly SVG svg;
+        private readonly SmilTimeline timeline;
         private readonly Dictionary<Shape, List<AnimationTrack>> tracks = new Dictionary<Shape, List<AnimationTrack>>();
         private readonly List<AnimationClock> clocks = new List<AnimationClock>();
         private readonly List<Action<double>> snapshots = new List<Action<double>>();
@@ -21,7 +22,7 @@ namespace SVGImage.SVG.Animation
         internal readonly List<string> Warnings = new List<string>();
         private double time;
 
-        internal SvgAnimationScene(SVG svg) { this.svg = svg; }
+        internal SvgAnimationScene(SVG svg) { this.svg = svg; timeline = new SmilTimeline(svg); }
 
         internal List<AnimationTrack> Tracks(Shape shape)
         {
@@ -37,7 +38,7 @@ namespace SVGImage.SVG.Animation
             {
                 try
                 {
-                    var track = AnimationTrack.Parse(node);
+                    var track = timeline.Track(node);
                     if(track.Type=="motion" && track.MotionPath==null)
                     {
                         foreach(XmlNode child in node.ChildNodes) if(child.LocalName=="mpath")
@@ -50,7 +51,7 @@ namespace SVGImage.SVG.Animation
                             }
                         }
                     }
-                    if (track.Type != null || new[] { "display", "visibility", "opacity", "r", "rx", "ry", "cx", "cy", "viewBox" }.Contains(track.Attribute))
+                    if (track.Type != null || new[] { "display", "visibility", "opacity", "r", "rx", "ry", "cx", "cy", "viewBox", "d" }.Contains(track.Attribute))
                         result.Add(track);
                     else Warnings.Add("Unsupported animated attribute: " + track.Attribute);
                 }
@@ -69,7 +70,7 @@ namespace SVGImage.SVG.Animation
             geometry.Transform = null;
             group.Children.Add(new GeometryDrawing(Brushes.Black, null, geometry));
             Geometry animated = geometry;
-            if (shape is CircleShape || shape is EllipseShape)
+            if (shape is CircleShape || shape is EllipseShape || shape is PathShape)
                 while (animated is GeometryGroup wrapper && wrapper.Children.Count == 1) animated = wrapper.Children[0];
             Attach(shape, group, animated);
             return new GeometryGroup { Children = { geometry }, Transform = group.Transform };
@@ -83,9 +84,10 @@ namespace SVGImage.SVG.Animation
             var cameras = items.Where(t => t.Attribute == "viewBox").ToArray();
             if (transforms.Length > 0 || cameras.Length > 0)
             {
-                Matrix original = group.Transform?.Value ?? Matrix.Identity;
+                var reference = CssTransforms.ReferenceBox(shape, MaskDrawing.ObjectBounds(group.Children[0]));
+                Matrix original = shape.TransformText == null ? group.Transform?.Value ?? Matrix.Identity : CssTransforms.Parse(shape.TransformText, reference).Matrix;
                 var origin = CssTransforms.Origin(shape, MaskDrawing.ObjectBounds(group.Children[0]));
-                foreach (var track in transforms) { track.UnderlyingMatrix = original; track.UnderlyingTransform = shape.TransformText; }
+                foreach (var track in transforms) { track.UnderlyingMatrix = original; track.UnderlyingTransform = shape.TransformText; track.TransformReference = reference; }
                 Func<double, Matrix> sample = seconds =>
                 {
                     var matrix = original;
@@ -137,6 +139,22 @@ namespace SVGImage.SVG.Animation
                 };
                 AddDouble(group, DrawingGroup.OpacityProperty, sample);
             }
+            var path = (animatedGeometry ?? shape.geometryElement) as PathGeometry;
+            var morphTrack = items.LastOrDefault(track => track.Attribute == "d");
+            if (path != null && shape is PathShape pathShape && morphTrack != null)
+            {
+                try
+                {
+                    var morph = new PathMorph(pathShape.Data, morphTrack);
+                    var originalFigures = path.Figures.Clone();
+                    AddValue(path, PathGeometry.FiguresProperty, typeof(PathFigureCollection), seconds =>
+                    {
+                        int index; double fraction;
+                        return morphTrack.Sample(seconds, events, out index, out fraction) ? morph.Sample(index, fraction) : originalFigures;
+                    });
+                }
+                catch (FormatException ex) { Warnings.Add(shape.Id + ": " + ex.Message); }
+            }
             // Keep the previously supported radius/center animations, now including
             // parent targets, explicit keyTimes, repeat counts and spline easing.
             var ellipse = (animatedGeometry ?? shape.geometryElement) as EllipseGeometry;
@@ -161,6 +179,38 @@ namespace SVGImage.SVG.Animation
                     snapshots.Add(t => { ellipse.ApplyAnimationClock(EllipseGeometry.CenterProperty, null); ellipse.Center = sample(t); });
                 }
             }
+        }
+
+        internal int ClockCount => clocks.Count;
+        internal Brush AnimatedMask(DrawingGroup drawing, Rect region, bool alpha, bool linear)
+        {
+            Brush cached = null; long frame = long.MinValue;
+            Func<double, bool, Brush> render = (t, force) =>
+            {
+                long next = (long)Math.Floor(t * 30);
+                if (force || cached == null || next != frame)
+                { cached = MaskDrawing.Create(drawing, region, alpha, linear, 512); frame = next; }
+                return cached;
+            };
+            var paint = new GeometryDrawing(render(0, true), null, new RectangleGeometry(region));
+            AddValue(paint, GeometryDrawing.BrushProperty, typeof(Brush), t => render(t, false), t => render(t, true));
+            var content = new DrawingGroup(); content.Children.Add(paint);
+            return new DrawingBrush(content) { ViewboxUnits = BrushMappingMode.Absolute, Viewbox = region,
+                ViewportUnits = BrushMappingMode.Absolute, Viewport = region, Stretch = Stretch.Fill };
+        }
+        private void AddValue(Animatable target, DependencyProperty property, Type type, Func<double, object> sample, Func<double, object> snapshot = null)
+        {
+            var clock = (AnimationClock)new ValueSampler { Sample = sample, ValueType = type, Duration = Duration.Forever }.CreateClock(true);
+            target.ApplyAnimationClock(property, clock); clocks.Add(clock);
+            snapshots.Add(t => { target.ApplyAnimationClock(property, null); target.SetValue(property, (snapshot ?? sample)(t)); });
+        }
+        private sealed class ValueSampler : AnimationTimeline
+        {
+            internal Func<double, object> Sample;
+            internal Type ValueType;
+            public override Type TargetPropertyType => ValueType;
+            protected override Freezable CreateInstanceCore() => new ValueSampler { Sample = Sample, ValueType = ValueType };
+            public override object GetCurrentValue(object origin, object destination, AnimationClock clock) => Sample(clock.CurrentTime?.TotalSeconds ?? 0);
         }
 
         private Func<double, double> SampleNumber(AnimationTrack track, double original)
@@ -188,6 +238,7 @@ namespace SVGImage.SVG.Animation
         {
             double current = clocks.Count > 0 && clocks[0].CurrentTime.HasValue ? clocks[0].CurrentTime.Value.TotalSeconds : time;
             events[id + "." + name] = current;
+            timeline.Trigger(id + "." + name, current);
             // In snapshot mode re-evaluate immediately; running clocks update on the next tick.
             if (clocks.Count > 0 && clocks[0].CurrentState == ClockState.Stopped)
                 foreach (var snapshot in snapshots) snapshot(time);

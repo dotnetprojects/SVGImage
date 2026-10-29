@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
+  <style>
+    @keyframes slide { 0%,100% {transform:translateX(0%)} 50% {transform:translateX(300%)} }
+    .tile { transform-box:fill-box; animation:slide 4s ease-in-out infinite }
+  </style>
+  <path d="M20 50H260 M20 140H260" stroke="#d7dfef" stroke-width="4"/>
+  <rect class="tile" x="20" y="30" width="60" height="40" rx="9" fill="#5265eb"/>
+  <rect class="tile" x="20" y="125" width="30" height="30" rx="7" fill="#16a994"/>
+</svg>

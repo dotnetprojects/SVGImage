@@ -20,6 +20,7 @@ internal static class Program
         GrayscaleDrawing();
         MaskTests.Run();
         AnimationTests.Run();
+        AdvancedAnimationTests.Run();
         CssTests.Run();
         GeometryTests.Run();
         FilterTests.Run();

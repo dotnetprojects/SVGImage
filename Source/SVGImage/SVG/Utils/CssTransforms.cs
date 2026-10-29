@@ -16,7 +16,7 @@ namespace SVGImage.SVG.Utils
         private readonly List<Function> functions = new List<Function>();
         private Matrix? constant;
         internal static CssTransforms FromMatrix(Matrix matrix) => new CssTransforms { constant = matrix };
-        internal static CssTransforms Parse(string text)
+        internal static CssTransforms Parse(string text, Rect reference = default(Rect))
         {
             var result = new CssTransforms();
             foreach (Match match in Regex.Matches(text, @"([a-zA-Z]+)\(([^)]*)\)"))
@@ -29,39 +29,69 @@ namespace SVGImage.SVG.Utils
                     angle *= unit == "turn" ? 360 : unit == "rad" ? 180 / Math.PI : unit == "grad" ? .9 : 1;
                     return angle.ToString(CultureInfo.InvariantCulture);
                 });
-                result.functions.Add(new Function { Name = name, Values = AnimationTrack.Numbers(args) });
+                var tokens = Regex.Matches(args, @"[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?%?").Cast<Match>().Select(m => m.Value).ToArray();
+                var values = tokens.Select(token => AnimationTrack.Number(token.TrimEnd('%'))).ToArray();
+                if (name.StartsWith("translate"))
+                    for (int i = 0; i < values.Length; i++) if (tokens[i].EndsWith("%"))
+                        values[i] *= (name == "translatey" || i == 1 ? reference.Height : reference.Width) / 100;
+                result.functions.Add(new Function { Name = name, Values = values });
             }
             return result;
         }
         internal Matrix Matrix => Interpolate(this, 0);
         internal Matrix Interpolate(CssTransforms other, double progress)
         {
-            bool compatible = !constant.HasValue && !other.constant.HasValue &&
-                (functions.Count == 0 || other.functions.Count == 0 || functions.Count == other.functions.Count && functions.Zip(other.functions, (a,b) => a.Name == b.Name).All(v => v));
-            if (!compatible)
-            {
-                var a = Raw(); var b = other.Raw();
-                return new Matrix(Mix(a.M11,b.M11,progress),Mix(a.M12,b.M12,progress),Mix(a.M21,b.M21,progress),Mix(a.M22,b.M22,progress),Mix(a.OffsetX,b.OffsetX,progress),Mix(a.OffsetY,b.OffsetY,progress));
-            }
+            if (constant.HasValue || other.constant.HasValue) return InterpolateMatrices(Raw(), other.Raw(), progress);
             var result = System.Windows.Media.Matrix.Identity;
             int count = Math.Max(functions.Count, other.functions.Count);
             for (int i = 0; i < count; i++)
             {
-                var a = functions.Count == 0 ? null : functions[i];
-                var b = other.functions.Count == 0 ? null : other.functions[i];
+                var a = i < functions.Count ? functions[i] : null;
+                var b = i < other.functions.Count ? other.functions[i] : null;
                 string name = (a ?? b).Name;
+                if (name == "matrix" || a != null && b != null && a.Name != b.Name)
+                {
+                    result.Prepend(InterpolateMatrices(Raw(i), other.Raw(i), progress));
+                    break;
+                }
                 var av = Expand(name, a?.Values); var bv = Expand(name, b?.Values);
                 var values = av.Zip(bv, (x,y) => Mix(x,y,progress)).ToArray();
                 result.Prepend(FunctionMatrix(name, values));
             }
             return result;
         }
-        private Matrix Raw()
+        private Matrix Raw(int start = 0)
         {
             if (constant.HasValue) return constant.Value;
             var result = System.Windows.Media.Matrix.Identity;
-            foreach (var function in functions) result.Prepend(FunctionMatrix(function.Name, Expand(function.Name, function.Values)));
+            foreach (var function in functions.Skip(start)) result.Prepend(FunctionMatrix(function.Name, Expand(function.Name, function.Values)));
             return result;
+        }
+        // CSS 2D decomposition: interpolate translation, signed scales, rotation
+        // and the residual linear matrix. Keep matching function prefixes above.
+        private static double[] Decompose(Matrix m)
+        {
+            double sx = Math.Sqrt(m.M11*m.M11 + m.M12*m.M12), sy = Math.Sqrt(m.M21*m.M21 + m.M22*m.M22);
+            double determinant = m.Determinant;
+            if (determinant == 0 || sx == 0 || sy == 0) return null;
+            if (determinant < 0) { if (m.M11 < m.M22) sx = -sx; else sy = -sy; }
+            double a=m.M11/sx, b=m.M12/sx, c=m.M21/sy, d=m.M22/sy;
+            double angle = Math.Atan2(b,a)*180/Math.PI;
+            return new[] { m.OffsetX,m.OffsetY,sx,sy,angle,a*a-b*c,a*b-b*d,b*a+a*c,b*b+a*d };
+        }
+        private static Matrix InterpolateMatrices(Matrix a, Matrix b, double progress)
+        {
+            if (progress <= 0) return a;
+            if (progress >= 1) return b;
+            var av=Decompose(a); var bv=Decompose(b);
+            if (av==null || bv==null) return progress < .5 ? a : b;
+            if (av[2]<0 && bv[3]<0 || av[3]<0 && bv[2]<0)
+            { av[2]=-av[2]; av[3]=-av[3]; av[4]+=av[4]<0?180:-180; }
+            if (Math.Abs(av[4]-bv[4])>180) { if(av[4]>bv[4]) av[4]-=360; else bv[4]-=360; }
+            var v=av.Zip(bv,(x,y)=>Mix(x,y,progress)).ToArray();
+            var matrix=new Matrix(v[5],v[6],v[7],v[8],0,0);
+            matrix.RotatePrepend(v[4]); matrix.ScalePrepend(v[2],v[3]); matrix.Translate(v[0],v[1]);
+            return matrix;
         }
         private static double Mix(double a, double b, double t) => a + (b - a) * t;
         private static double[] Expand(string name, double[] values)
@@ -91,13 +121,17 @@ namespace SVGImage.SVG.Utils
             return m;
         }
 
+        internal static Rect ReferenceBox(Shape shape, Rect objectBounds)
+        {
+            string box;
+            return shape.CssProperties.TryGetValue("transform-box", out box) && box == "fill-box" && !objectBounds.IsEmpty
+                ? objectBounds : shape.TransformViewport;
+        }
         internal static Point Origin(Shape shape, Rect objectBounds)
         {
             string value;
             if (!shape.CssProperties.TryGetValue("transform-origin", out value)) return new Point();
-            string box;
-            var reference = shape.CssProperties.TryGetValue("transform-box", out box) && box == "fill-box" && !objectBounds.IsEmpty
-                ? objectBounds : shape.Svg.ViewBox ?? new Rect(shape.Svg.Size);
+            var reference = ReferenceBox(shape, objectBounds);
             var parts = Regex.Split(value.Trim(), @"\s+");
             string x = parts[0], y = parts.Length > 1 ? parts[1] : "center";
             if (x == "top" || x == "bottom") { string temp = x; x = y; y = temp; }

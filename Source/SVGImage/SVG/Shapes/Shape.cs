@@ -72,6 +72,7 @@ namespace SVGImage.SVG.Shapes
         {
             sourceNode = node;
             _svg = svg;
+            TransformViewport = svg.ViewBox ?? new Rect(svg.Size);
             this.Opacity = 1;
             this.Parent = parent;
             this.ParseAtStart(svg, node);
@@ -102,6 +103,7 @@ namespace SVGImage.SVG.Shapes
         public Shape(SVG svg, List<StyleItem> attrs, Shape parent) : base(null)
         {
             _svg = svg;
+            TransformViewport = svg.ViewBox ?? new Rect(svg.Size);
             this.Opacity = 1;
             this.Parent = parent;
             if (attrs != null)
@@ -214,6 +216,9 @@ namespace SVGImage.SVG.Shapes
         }
 
         public virtual Transform Transform { get; private set; }
+        internal Rect TransformViewport { get; private set; }
+        internal XmlNode SourceNode => sourceNode;
+
         internal string TransformText { get; private set; }
 
         public Shape Parent { get; set; }
@@ -282,7 +287,7 @@ namespace SVGImage.SVG.Shapes
             if (name == SVGTags.sTransform)
             {
                 TransformText = value;
-                this.Transform = new MatrixTransform(CssTransforms.Parse(value).Matrix);
+                this.Transform = new MatrixTransform(CssTransforms.Parse(value, TransformViewport).Matrix);
                 return;
             }
             if (name == SVGTags.sVisibility)

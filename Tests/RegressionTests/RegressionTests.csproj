@@ -7,6 +7,7 @@
   <ItemGroup>
     <Resource Include="../../Samples/Example/Images/acid1.svg" Link="Embedded/acid1.svg" />
     <Resource Include="../../Samples/Example/Images/acid1.css" Link="Embedded/acid1.css" />
+    <None Include="../../Samples/Example/Images/AnimationFeatures/*.svg" Link="AnimationFeatures/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="../../Source/SVGImage/DotNetProjects.SVGImage.csproj" />
     <None Include="Fixtures/*.svg" CopyToOutputDirectory="PreserveNewest" />
     <None Include="Fixtures/*.png" CopyToOutputDirectory="PreserveNewest" />

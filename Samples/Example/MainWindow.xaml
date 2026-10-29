@@ -204,5 +204,10 @@
                 <DataTemplate><local:Flash2SvgPage/></DataTemplate>
             </TabItem.ContentTemplate>
         </TabItem>
+        <TabItem Header="Animation features" Height="40" Width="210" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
+            <TabItem.ContentTemplate>
+                <DataTemplate><local:AnimationFeaturesPage/></DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
     </TabControl>
 </Window>

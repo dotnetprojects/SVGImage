@@ -73,17 +73,20 @@ Styles belong in the SVG's `<style>` element or inline/presentation attributes. 
 | --- | --- |
 | Native playback | WPF animation clocks. The control's `UseAnimations` defaults to true. |
 | SMIL transforms | Translation, scale, rotation, skew and additive composition. |
+| Path morphing | Native `d` animation for matching normalized figures/segments and arc flags; discrete switching supports incompatible paths. |
 | SMIL properties | Timed display/visibility, opacity, circle/ellipse radii/centers, root viewBox cameras. |
 | SMIL motion | `animateMotion`, inline/local `mpath`, tangent/numeric rotation and key points/times. |
-| SMIL timing | Numeric starts, repeat counts/durations, freeze, key times, linear/discrete/spline and explicit click starts. |
+| SMIL timing | Numeric/event starts, forward `id.begin` / `id.end` chains with offsets, seeded self loops, repeat counts/durations, freeze, key times and linear/discrete/spline. |
 | Animated clips | Native circle/ellipse centers and radii, plus clip transforms; unions, static parent transforms and bounding-box mapping retain the clocks. |
 | CSS keyframes | Transform/opacity, multiple animations, shorthand/longhands, grouped offsets, delays, iterations, directions, fill and an initial paused state. |
+| Animated masks | Vector alpha/white luminance masks; composited colored luminance refreshes up to 30 Hz at 512 pixels on the longest side. |
+| CSS transforms | Percentage translations using viewport/fill-box bounds; 2D matrix decomposition with signed scales, rotation and residual skew, preserving compatible function prefixes. |
 | CSS easing | Ease presets, cubic-bezier and steps; matching transform parameters preserve full rotations. |
 | Host controls | `SeekAnimations` snapshots and `TriggerAnimationEvent` forwarding. |
 
 Seeking stops playback on the existing drawing; reload/recreate it to restart. The host forwards click events explicitly; the control does not infer SVG element hit targets.
 
-JavaScript/audio/HTML `foreignObject` playback, path morphing, syncbase timing, animated masks, general matrix decomposition, percentage translations and interactive CSS play-state changes remain unsupported. [Animation guide](Animations.md).
+JavaScript/audio/HTML `foreignObject` playback, arbitrary path topology normalization, 3D matrix decomposition and interactive CSS play-state changes remain unsupported. Syncbase timing currently supports acyclic chains and seeded self loops; multi-animation dependency cycles, explicit SMIL end/restart rules and general event names remain incomplete. Mask region attributes and filtered mask content still retain their existing static sampling limits. [Animation guide](Animations.md).
 
 ## Verification
 
@@ -101,5 +104,7 @@ dotnet run --project Tests/RegressionTests -p:TargetFrameworks=net8.0-windows -p
 Rendering checks need a working Windows graphics session. A plain-WPF preflight reports blank rendering before SVG comparisons run. Downloaded references and animation examples remain outside the repository.
 
 ## Example application
+
+The **Animation features** tab contains five original, offline examples with inspectable SVG source: path morphing, syncbase sequencing, alpha/luminance masks, matrix decomposition and percentage translations. Play/restart and an exact two-second snapshot are available for each.
 
 The **Flash2Svg examples** tab lists all 13 animations from [Tom Byrne's examples page](https://github.com/TomByrne/Flash2Svg/wiki/Examples), with visible attribution and a link to the project's MIT license. Select an example to download it into `%LOCALAPPDATA%\SVGImage\Flash2Svg\Examples`; subsequent runs use the cached copy. Only the selected preview runs. Play/restart forwards the Viber examples' SMIL click events. LoveDota's embedded JavaScript/audio is not executed. Downloaded artwork stays outside the repository.

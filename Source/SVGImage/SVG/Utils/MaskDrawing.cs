@@ -21,7 +21,7 @@ namespace SVGImage.SVG.Utils
             return drawing.Bounds;
         }
 
-        internal static Brush Create(DrawingGroup drawing, Rect region, bool alpha, bool linearRgb)
+        internal static Brush Create(DrawingGroup drawing, Rect region, bool alpha, bool linearRgb, int rasterLimit = 0)
         {
             if (region.IsEmpty) return Brushes.Transparent;
             drawing.ClipGeometry = new RectangleGeometry(region);
@@ -39,7 +39,7 @@ namespace SVGImage.SVG.Utils
             // Composite first: an opaque black shape over white must erase the mask.
             // Converting individual brushes to alpha before compositing would lose that.
             double longest = Math.Max(region.Width, region.Height);
-            double scale = Math.Min(2048 / longest, Math.Max(1, 1024 / longest));
+            double scale = rasterLimit > 0 ? rasterLimit / longest : Math.Min(2048 / longest, Math.Max(1, 1024 / longest));
             int width = Math.Max(1, (int)Math.Ceiling(region.Width * scale));
             int height = Math.Max(1, (int)Math.Ceiling(region.Height * scale));
             var visual = new DrawingVisual();
@@ -76,6 +76,8 @@ namespace SVGImage.SVG.Utils
         {
             return value <= 0.04045 ? value / 12.92 : Math.Pow((value + 0.055) / 1.055, 2.4);
         }
+
+        internal static bool WhiteOnly(Drawing drawing) => IsWhite(drawing);
 
         private static bool IsWhite(Drawing drawing)
         {

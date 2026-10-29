@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
+  <style>
+    @keyframes matrixMotion {
+      0%,100% { transform:matrix(1,0,0,1,0,0) }
+      50% { transform:matrix(0,1,-1,0,180,70) }
+    }
+    #tile { animation:matrixMotion 6s ease-in-out infinite; transform-box:fill-box; transform-origin:center }
+  </style>
+  <g id="tile">
+    <rect x="25" y="40" width="65" height="45" rx="10" fill="#5265eb"/>
+    <path d="M39 61H75 M65 51L75 61L65 71" fill="none" stroke="white" stroke-width="5"/>
+  </g>
+</svg>

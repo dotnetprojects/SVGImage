@@ -36,6 +36,7 @@
     <ProjectReference Include="..\..\Source\SVGImage\DotNetProjects.SVGImage.VS2019.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\AnimationFeatures\*.svg" />
     <Resource Include="Images\brush.svg" />
     <Resource Include="Images\error.svg" />
     <Resource Include="Images\example radgrad01.svg" />

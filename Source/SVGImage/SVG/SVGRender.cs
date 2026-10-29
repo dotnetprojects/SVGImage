@@ -497,7 +497,7 @@ namespace SVGImage.SVG
                 {
                     subgrp.Transform = shape.Transform;
                     if (!animated || !animationScene.Tracks(shape).Any(t => t.Type != null))
-                        subgrp.Transform = new MatrixTransform(CssTransforms.Around(shape.Transform.Value, CssTransforms.Origin(shape, MaskDrawing.ObjectBounds(drawing))));
+                        subgrp.Transform = new MatrixTransform(CssTransforms.Around(CssTransforms.Parse(shape.TransformText, CssTransforms.ReferenceBox(shape, MaskDrawing.ObjectBounds(drawing))).Matrix, CssTransforms.Origin(shape, MaskDrawing.ObjectBounds(drawing))));
                 }
                 if (filtered)
                 {
@@ -519,14 +519,19 @@ namespace SVGImage.SVG
                 // Paint overrides apply to the visible artwork, not mask luminance.
                 var renderer = new SVGRender(ExternalFileLoader)
                 {
-                    SVG = SVG, activeMasks = activeMasks, UseFilters = UseFilters
+                    SVG = SVG, activeMasks = activeMasks, UseFilters = UseFilters, animationScene = animationScene
                 };
+                int before = animationScene?.ClockCount ?? 0;
                 var drawing = renderer.LoadGroup(mask.Elements, null, false);
                 if (mask.ContentUsesBoundingBox)
                     drawing.Transform = new MatrixTransform(bounds.Width, 0, 0, bounds.Height, bounds.X, bounds.Y);
                 var maskGroup = new DrawingGroup();
                 maskGroup.Children.Add(drawing);
-                return MaskDrawing.Create(maskGroup, mask.GetRegion(bounds), mask.UsesAlpha, mask.ColorInterpolation == "linearRGB");
+                var region = mask.GetRegion(bounds);
+                bool linear = mask.ColorInterpolation == "linearRGB";
+                if (animationScene != null && animationScene.ClockCount > before && !mask.UsesAlpha && !MaskDrawing.WhiteOnly(maskGroup))
+                    return animationScene.AnimatedMask(maskGroup, region, false, linear);
+                return MaskDrawing.Create(maskGroup, region, mask.UsesAlpha, linear);
             }
             finally
             {

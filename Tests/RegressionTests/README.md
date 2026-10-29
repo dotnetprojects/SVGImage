@@ -27,3 +27,5 @@ Set `RESVG_TEST_SUITE` to an external checkout for 215 selected path/point/filte
 Release version validation runs separately with `./Tests/ReleaseWorkflowTests.ps1`. Packaging is verified across all nine framework assemblies and symbol sets with `.github/scripts/Test-ReleasePackages.ps1`.
 
 Filter preview checks verify that bypassing filters preserves clipping and element/group opacity, the setting propagates into masks, a frozen preview remains unchanged, and restoring filters on the same parsed SVG matches a fresh full render.
+
+Advanced animation checks cover compatible and to-only path morphs, incompatible-path warnings, morphed clip paths, advancing native path/mask clocks, syncbase chains/offsets/repeats/click history/self loops/cycle guards, alpha and composited luminance masks, exact seeking within a raster-mask frame bucket, matrix decomposition/common prefixes, and static/animated/nested percentage references. All five original Animation features sample SVGs must render distinct frames without animation warnings.
