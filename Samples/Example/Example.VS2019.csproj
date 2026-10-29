@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\AnimationFeatures\*.svg" />
+    <Resource Include="Images\FilterFeatures\*.svg" />
     <Resource Include="Images\brush.svg" />
     <Resource Include="Images\error.svg" />
     <Resource Include="Images\example radgrad01.svg" />

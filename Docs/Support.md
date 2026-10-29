@@ -33,7 +33,7 @@ This page describes the **current repository source**, including [unreleased wor
 
 ## Filters
 
-Standalone filters and chains support named results, `SourceGraphic` / `SourceAlpha`, primitive subregions, coordinate units and sRGB / linearRGB conversion.
+Standalone filters and chains support named results, `SourceGraphic` / `SourceAlpha`, `BackgroundImage` / `BackgroundAlpha`, primitive subregions, coordinate units and sRGB / linearRGB conversion.
 
 | Primitive | Current scope |
 | --- | --- |
@@ -50,14 +50,19 @@ Standalone filters and chains support named results, `SourceGraphic` / `SourceAl
 | `feTile` | Input subregion repetition, including transparent pixels. |
 | `feConvolveMatrix` | Rotated kernels, rectangular orders, divisor/bias, targets, duplicate/wrap/transparent edges, kernel spacing and preserved alpha. |
 | `feDropShadow` | Source-alpha blur, offset, flood color/opacity and source-over composition. |
+| `feDiffuseLighting` / `feSpecularLighting` | Alpha height maps, edge/corner normals, surface scale, kernel spacing, CSS lighting color and diffuse/specular constants. |
+| `feDistantLight` / `fePointLight` / `feSpotLight` | Azimuth/elevation, positions, target direction, cone limits and spot/specular exponents. |
+| `feImage` | Local SVG elements, raster/SVG data URIs, external raster/SVG through the host loader, primitive subregions and aspect-ratio placement; guarded cyclic references. |
 
 `SVGRender.UseFilters` defaults to true. Disable it for a quick preview, then re-enable it and call `CreateDrawing(renderer.SVG)` to render the same parsed document with filters. The sample car uses both passes on a background STA and publishes separate frozen drawings. Clipping, masks and opacity remain active in the preview.
 
 Element opacity is applied **after** filtering. Fill/stroke opacity is part of `SourceGraphic`.
 
-Raster filters sample inputs **at load time**. Animating their source/parameters does not refresh the bitmap. Single matrix/saturation filters can retain vector paints with animation enabled. Rasterization uses up to four pixels per user unit, capped at 2048 pixels on the longest dimension.
+Raster filters sample inputs **at load time**. Animating their source/parameters does not refresh the bitmap. Single matrix/saturation filters can retain vector paints with animation enabled. `SVGRender.RasterizationScale` sets pixels per user unit (default four), capped at 2048 pixels on the longest dimension. Default lighting derivatives are pixel based, so lighting changes with the sampling resolution; set the scale to the intended output resolution when comparing reference images.
 
-Lighting, general `feImage` inputs and backdrop sources are not yet implemented. Unsupported primitives currently pass their input through. [Rendering details](Rendering.md).
+Backdrops use the SVG 1.1 `enable-background` model: an ancestor `new` enables capture; `accumulate` preserves the buffer; nested `new` resets it. Optional `new x y width height` clips the captured region. Filters see preceding siblings in their coordinate space, before ancestor group opacity/filter/clip/mask composition. Explicit `inherit` inherits the parent value, including a `new` reset. This does not implement CSS `backdrop-filter` on HTML.
+
+External `feImage` loads go through `IExternalFileLoader` (local files and pack resources by default); network access requires a host loader. Local references use SVG element coordinates rather than fitting their object bounds. External SVG fragments use the document viewport; full SVG image `defer`/intrinsic-sizing semantics remain incomplete. Unsupported primitives currently pass their input through. [Rendering details](Rendering.md).
 
 ## CSS
 
@@ -94,7 +99,7 @@ Nine library targets build: .NET Framework 4.0, 4.5, 4.6, 4.7, 4.8; .NET Core 3.
 
 Coverage includes the [#118 mask](https://github.com/dotnetprojects/SVGImage/issues/118) (93,767 flat interior pixels against Chromium), synthetic checks, a real advancing clock and 14 external animation examples.
 
-A local resvg checkout enables **223 selected external SVG checks**: 219 reference-image comparisons and four render-only cases with nonportable/undefined expectations. Tolerances allow WPF antialiasing, tiled edges, fractional morphology radii and resolution-dependent convolution kernels. Eleven portable convolution images and all eight drop-shadow images are included. Malformed/UB convolution images are excluded; malformed kernel counts use the current Filter Effects pass-through behavior instead of historical SVG 1.1 error rendering. The full resvg suite remains a work in progress.
+A local resvg checkout enables **321 selected external SVG checks**: 312 reference-image comparisons and nine render-only cases with historical/nonportable/undefined expectations. The 98 lighting/image/backdrop additions include three historical specular images whose saturated channels overflow, one inherited-background image that retains an ancestor buffer instead of resetting it, and one explicitly undefined masked-backdrop image. Focused tests enforce channel clamping and explicit inheritance/reset behavior. Tolerances allow WPF antialiasing, tiled edges, fractional morphology radii and resolution-dependent convolution kernels. Eleven portable convolution images and all eight drop-shadow images are included. Malformed/UB convolution images are excluded; malformed kernel counts use the current Filter Effects pass-through behavior instead of historical SVG 1.1 error rendering. The full resvg suite remains a work in progress.
 
 ```powershell
 $env:RESVG_TEST_SUITE = 'C:\path\to\resvg-test-suite'
@@ -104,6 +109,8 @@ dotnet run --project Tests/RegressionTests -p:TargetFrameworks=net8.0-windows -p
 Rendering checks need a working Windows graphics session. A plain-WPF preflight reports blank rendering before SVG comparisons run. Downloaded references and animation examples remain outside the repository.
 
 ## Example application
+
+The **Filter features** tab contains three original offline demonstrations: diffuse/specular lighting with all three light types, local/relative/data-URI image inputs and backdrop glass. Each has inspectable SVG source and Reload.
 
 The **Animation features** tab contains five original, offline examples with inspectable SVG source: path morphing, syncbase sequencing, alpha/luminance masks, matrix decomposition and percentage translations. Play/restart and an exact two-second snapshot are available for each.
 

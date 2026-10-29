@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400">
+<defs>
+ <g id="badge"><rect x="0" y="0" width="170" height="170" rx="24" fill="#e2f6ee"/><path d="M30 90L65 125L140 45" fill="none" stroke="#208269" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <filter id="local" filterUnits="userSpaceOnUse" x="40" y="100" width="170" height="170"><feImage href="#badge"/></filter>
+ <filter id="external" filterUnits="userSpaceOnUse" x="275" y="100" width="170" height="170"><feImage href="Tile.svg" preserveAspectRatio="xMidYMid meet"/></filter>
+ <filter id="data" filterUnits="userSpaceOnUse" x="510" y="100" width="170" height="170"><feImage href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='%23ffe2b0'/%3E%3Ccircle cx='40' cy='40' r='27' fill='%23ce6c32'/%3E%3C/svg%3E"/></filter>
+</defs>
+<rect width="720" height="400" rx="18" fill="#f0f5fc"/>
+<g font-family="Segoe UI" text-anchor="middle" fill="#233a59" font-size="19"><text x="125" y="60">Local SVG reference</text><text x="360" y="60">Relative SVG resource</text><text x="595" y="60">Embedded data URI</text><text x="360" y="340" font-size="16">feImage sources share filter subregions and color processing.</text></g>
+<g filter="url(#local)"/><g filter="url(#external)"/><g filter="url(#data)"/>
+</svg>

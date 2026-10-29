@@ -211,6 +211,12 @@ namespace SVGImage.SVG
             this.Load(doc);
         }
 
+        internal void LoadResource(Stream stream, string filename)
+        {
+            Filename=filename;
+            Load(stream);
+        }
+
         public void Load(Stream stream)
         {
             if (stream == null)

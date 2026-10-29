@@ -25,3 +25,14 @@ Convolution supports rectangular kernels, 180-degree kernel rotation, target pos
 Clip circle/ellipse center/radius and transform animations preserve native WPF clocks through clip unions and coordinate wrappers. `clipping_css.svg` is checked directly, including image visibility, repeated frames and a separately advancing live clip clock.
 
 For a progressive preview, set `SVGRender.UseFilters = false`, load the SVG, then set `UseFilters = true` and call `CreateDrawing(renderer.SVG)`. This reuses the parsed document. Clipping, mask compositing and opacity remain enabled, while filters inside masks follow the same setting. The sample car runs both passes on one background STA and freezes each drawing before handing it to the UI; the completed render replaces the preview rather than mutating it.
+
+
+## Lighting, images and backdrop inputs
+
+Diffuse/specular lighting treats input alpha as a height map and derives Sobel normals, including edge and corner cases. Light sources support distant directions, point positions and spot direction/exponent/cone controls. Lighting honors sRGB/linearRGB, CSS `lighting-color`/`currentColor`, constants and kernel spacing. Diffuse output is opaque; specular alpha is the largest clamped RGB component. See [Filter Effects lighting rules](https://www.w3.org/TR/filter-effects-1/#feDiffuseLightingElement).
+
+`feImage` can reference a local element using use-like coordinates, load a raster/SVG data URI, or request an external resource through `IExternalFileLoader`. External image placement supports meet/slice/none alignment. Relative files inside external SVGs keep their source base; embedded resources resolve beside their containing SVG. Missing/invalid images and cyclic references produce transparent input. SVG fragments use the document viewport; full `defer` and intrinsic-sizing behavior remains incomplete.
+
+`BackgroundImage` and `BackgroundAlpha` implement the [SVG 1.1 background-buffer model](https://www.w3.org/TR/SVG11/filters.html#AccessBackgroundImage). `enable-background:new` starts/reset a buffer; optional four-number bounds clip it. Only earlier siblings enter a filter snapshot, and snapshots map into the target's local coordinates. Group opacity, filters, clipping and masks apply when that group is composited rather than being baked into its children's backdrop. Without an enabled buffer, background inputs are transparent. Background capture is skipped for documents without those inputs.
+
+`SVGRender.RasterizationScale` controls pixels per user unit (default four, longest side capped at 2048). Default lighting normals use the filter pixel grid, so output depends on sampling resolution. All raster filter inputs remain load-time snapshots; animated lighting/image/background updates are not implemented.

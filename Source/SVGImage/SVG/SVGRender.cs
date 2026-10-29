@@ -20,7 +20,7 @@ namespace SVGImage.SVG
     /// </summary>
     /// <seealso href="http://www.w3.org/TR/SVGTiny12/"/>
     /// <seealso href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials"/>
-    public class SVGRender
+    public partial class SVGRender
     {
         public SVGRender() : this(FileSystemLoader.Instance)
         {
@@ -37,6 +37,20 @@ namespace SVGImage.SVG
 
         /// <summary>Applies SVG filter effects. Disable for a fast preview, then enable and recreate the drawing for full quality.</summary>
         public bool UseFilters { get; set; } = true;
+
+        private double rasterizationScale = 4;
+        /// <summary>Filter pixels per SVG user unit, capped at 2048 pixels per side.
+        /// Lighting without kernelUnitLength depends on this sampling resolution.</summary>
+        public double RasterizationScale
+        {
+            get { return rasterizationScale; }
+            set
+            {
+                if (value <= 0 || double.IsNaN(value) || double.IsInfinity(value))
+                    throw new ArgumentOutOfRangeException(nameof(value));
+                rasterizationScale = value;
+            }
+        }
         private HashSet<Mask> activeMasks = new HashSet<Mask>();
         private readonly HashSet<Shape> activeUses = new HashSet<Shape>();
         private SvgAnimationScene animationScene;
@@ -133,8 +147,11 @@ namespace SVGImage.SVG
             this.SVG = svg;
             animationScene = UseAnimations ? new SvgAnimationScene(svg) : null;
             bool camera = animationScene != null && animationScene.Tracks(svg.RootGroup).Any(t => t.Attribute == "viewBox");
-            var drawingGroup = this.LoadGroup(svg.Elements, camera ? null : svg.ViewBox, false);
-            if (svg.RootGroup?.Mask != null || (animationScene != null && animationScene.Tracks(svg.RootGroup).Count > 0))
+            needsBackground=UseFilters && svg.RootGroup.SourceNode.SelectNodes(".//*[@in='BackgroundImage' or @in='BackgroundAlpha' or @in2='BackgroundImage' or @in2='BackgroundAlpha']").Count>0;
+            BackdropContext rootBackdrop=null;
+            if(needsBackground) NewBackdrop(svg.RootGroup,out rootBackdrop);
+            var drawingGroup = this.LoadGroup(svg.Elements, camera ? null : svg.ViewBox, false, rootBackdrop);
+            if (svg.RootGroup?.Mask != null || (UseFilters && svg.RootGroup?.Filter != null) || svg.RootGroup?.Transform != null || svg.RootGroup?.Clip != null || svg.RootGroup?.Opacity != 1 || (animationScene != null && animationScene.Tracks(svg.RootGroup).Count > 0))
             {
                 var masked = new DrawingGroup();
                 AddDrawingToGroup(masked, svg.RootGroup, drawingGroup);
@@ -244,7 +261,7 @@ namespace SVGImage.SVG
             return item;
         }
 
-        internal DrawingGroup LoadGroup(IList<Shape> elements, Rect? viewBox, bool isSwitch)
+        internal DrawingGroup LoadGroup(IList<Shape> elements, Rect? viewBox, bool isSwitch, BackdropContext backdrop = null)
         {
             DrawingGroup grp = new DrawingGroup();
             if (viewBox.HasValue) grp.ClipGeometry = new RectangleGeometry(viewBox.Value);
@@ -288,7 +305,9 @@ namespace SVGImage.SVG
                         currentUsedShape.Parent = useshape;
                         try
                         {
-                            var subgroup = this.LoadGroup(new[] { currentUsedShape }, null, false);
+                            if(currentUsedShape is Symbol invalid && invalid.ViewBox.HasValue && (useshape.Width<=0 || useshape.Height<=0)) continue;
+                            var placement=currentUsedShape is Symbol symbolBox && symbolBox.ViewBox.HasValue ? symbolBox.Viewport(useshape.X,useshape.Y,useshape.Width,useshape.Height) : new Matrix(1,0,0,1,useshape.X,useshape.Y);
+                            var subgroup = this.LoadGroup(new[] { currentUsedShape }, null, false, ChildBackdrop(shape,backdrop,grp,placement));
                             if (currentUsedShape is Symbol symbol && symbol.ViewBox.HasValue)
                             {
                                 if (useshape.Width <= 0 || useshape.Height <= 0) continue;
@@ -301,7 +320,7 @@ namespace SVGImage.SVG
                                 }
                             }
                             else subgroup.Transform = new TranslateTransform(useshape.X, useshape.Y);
-                            AddDrawingToGroup(grp, shape, subgroup);
+                            AddDrawingToGroup(grp, shape, subgroup, backdrop);
                         }
                         finally
                         {
@@ -322,18 +341,18 @@ namespace SVGImage.SVG
                 if (shape is SvgViewport viewportShape)
                 {
                     if (viewportShape.Frame.Width <= 0 || viewportShape.Frame.Height <= 0) continue;
-                    var content = LoadGroup(viewportShape.Elements,null,false);
+                    var content = LoadGroup(viewportShape.Elements,null,false,ChildBackdrop(shape,backdrop,grp,viewportShape.ViewportTransform()));
                     content.Transform = new MatrixTransform(viewportShape.ViewportTransform());
                     var viewport = new DrawingGroup();
                     if (!viewportShape.OverflowVisible) viewport.ClipGeometry = new RectangleGeometry(viewportShape.Frame);
                     viewport.Children.Add(content);
-                    AddDrawingToGroup(grp,shape,viewport);
+                    AddDrawingToGroup(grp, shape, viewport, backdrop);
                     continue;
                 }
                 if (shape is Group groupShape)
                 {
-                    var subgroup = this.LoadGroup((shape as Group).Elements, null, groupShape.IsSwitch);
-                    AddDrawingToGroup(grp, shape, subgroup);
+                    var subgroup = this.LoadGroup((shape as Group).Elements, null, groupShape.IsSwitch, ChildBackdrop(shape,backdrop,grp));
+                    AddDrawingToGroup(grp, shape, subgroup, backdrop);
                     continue;
                 }
                 if (shape is RectangleShape rectShape)
@@ -359,14 +378,14 @@ namespace SVGImage.SVG
 
                     var rect = new RectangleGeometry(new Rect(dx, dy, width, height), rx, ry);
                     var di = this.NewDrawingItem(shape, rect);
-                    AddDrawingToGroup(grp, shape, di);
+                    AddDrawingToGroup(grp, shape, di, backdrop);
                     continue;
                 }
                 if (shape is LineShape lineShape)
                 {
                     LineGeometry line = new LineGeometry(lineShape.P1, lineShape.P2);
                     var di = this.NewDrawingItem(shape, line);
-                    AddDrawingToGroup(grp, shape, di);
+                    AddDrawingToGroup(grp, shape, di, backdrop);
                     continue;
                 }
                 if (shape is PolylineShape polyline)
@@ -382,7 +401,7 @@ namespace SVGImage.SVG
                         p.Segments.Add(new LineSegment(polyline.Points[index], true));
                     }
                     var di = this.NewDrawingItem(shape, path);
-                    AddDrawingToGroup(grp, shape, di);
+                    AddDrawingToGroup(grp, shape, di, backdrop);
                     continue;
                 }
                 if (shape is PolygonShape polygon)
@@ -398,27 +417,27 @@ namespace SVGImage.SVG
                         p.Segments.Add(new LineSegment(polygon.Points[index], true));
                     }
                     var di = this.NewDrawingItem(shape, path);
-                    AddDrawingToGroup(grp, shape, di);
+                    AddDrawingToGroup(grp, shape, di, backdrop);
                     continue;
                 }
                 if (shape is CircleShape circle)
                 {
                     EllipseGeometry c = new EllipseGeometry(new Point(circle.CX, circle.CY), circle.R, circle.R);
                     var di = this.NewDrawingItem(shape, c);
-                    AddDrawingToGroup(grp, shape, di);
+                    AddDrawingToGroup(grp, shape, di, backdrop);
                     continue;
                 }
                 if (shape is EllipseShape ellipse)
                 {
                     EllipseGeometry c = new EllipseGeometry(new Point(ellipse.CX, ellipse.CY), ellipse.RX, ellipse.RY);
                     var di = this.NewDrawingItem(shape, c);
-                    AddDrawingToGroup(grp, shape, di);
+                    AddDrawingToGroup(grp, shape, di, backdrop);
                     continue;
                 }
                 if (shape is ImageShape image)
                 {
                     var i = new ImageDrawing(image.ImageSource, new Rect(image.X, image.Y, image.Width, image.Height));
-                    AddDrawingToGroup(grp, shape, i);
+                    AddDrawingToGroup(grp, shape, i, backdrop);
                     continue;
                 }
                 if (shape is TextShape textShape)
@@ -432,12 +451,12 @@ namespace SVGImage.SVG
                             if (TextRender.GetElement(gm) is TextShapeBase tspan)
                             {
                                 var di = this.NewDrawingItem(tspan, gm);
-                                AddDrawingToGroup(grp, shape, di);
+                                AddDrawingToGroup(grp, shape, di, backdrop);
                             }
                             else
                             {
                                 var di = this.NewDrawingItem(shape, gm);
-                                AddDrawingToGroup(grp, shape, di);
+                                AddDrawingToGroup(grp, shape, di, backdrop);
                             }
                         }
                     }
@@ -447,7 +466,7 @@ namespace SVGImage.SVG
                 {
                     var path = SvgPathData.Parse(pathShape.Data);
                     var di = this.NewDrawingItem(shape, path);
-                    AddDrawingToGroup(grp, shape, di);
+                    AddDrawingToGroup(grp, shape, di, backdrop);
                 }
             }
 
@@ -479,7 +498,7 @@ namespace SVGImage.SVG
             }
         }
 
-        private void AddDrawingToGroup(DrawingGroup grp, Shape shape, Drawing drawing)
+        private void AddDrawingToGroup(DrawingGroup grp, Shape shape, Drawing drawing, BackdropContext backdrop = null)
         {
             var mask = shape.Mask;
             bool filtered = UseFilters && shape.Filter != null;
@@ -501,7 +520,7 @@ namespace SVGImage.SVG
                 }
                 if (filtered)
                 {
-                    drawing = shape.Filter.Render(drawing, animationScene != null);
+                    drawing = shape.Filter.Render(drawing, animationScene != null, this, shape.Filter.UsesBackground ? FilterBackdrop(shape,drawing,grp,backdrop) : null);
                 }
                 subgrp.Children.Add(drawing);
                 if (animated) animationScene.Attach(shape, subgrp);
@@ -519,7 +538,7 @@ namespace SVGImage.SVG
                 // Paint overrides apply to the visible artwork, not mask luminance.
                 var renderer = new SVGRender(ExternalFileLoader)
                 {
-                    SVG = SVG, activeMasks = activeMasks, UseFilters = UseFilters, animationScene = animationScene
+                    SVG = SVG, activeMasks = activeMasks, UseFilters = UseFilters, RasterizationScale = RasterizationScale, animationScene = animationScene, activeFilterImages = activeFilterImages, activeImageResources = activeImageResources, needsBackground = needsBackground
                 };
                 int before = animationScene?.ClockCount ?? 0;
                 var drawing = renderer.LoadGroup(mask.Elements, null, false);

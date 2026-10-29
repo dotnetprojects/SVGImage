@@ -209,5 +209,10 @@
                 <DataTemplate><local:AnimationFeaturesPage/></DataTemplate>
             </TabItem.ContentTemplate>
         </TabItem>
+        <TabItem Header="Filter features" Height="40" Width="180" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
+            <TabItem.ContentTemplate>
+                <DataTemplate><local:FilterFeaturesPage/></DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
     </TabControl>
 </Window>

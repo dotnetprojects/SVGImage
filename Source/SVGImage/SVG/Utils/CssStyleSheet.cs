@@ -29,13 +29,13 @@ namespace SVGImage.SVG.Utils
             "fill fill-rule fill-opacity stroke stroke-width stroke-opacity stroke-dasharray stroke-linecap stroke-linejoin " +
             "opacity color display visibility transform mask mask-type clip-path color-interpolation filter " +
             "font-family font-size font-weight font-style text-decoration text-anchor word-spacing letter-spacing baseline-shift " +
-            "stop-color stop-opacity clip-rule overflow color-interpolation-filters flood-color flood-opacity").Split(' '));
+            "stop-color stop-opacity clip-rule overflow color-interpolation-filters flood-color flood-opacity lighting-color enable-background").Split(' '));
         private static readonly Dictionary<string, string> Initial = new Dictionary<string, string>
         {
             { "fill", "black" }, { "stroke", "none" }, { "color", "black" }, { "opacity", "1" },
             { "fill-opacity", "1" }, { "stroke-opacity", "1" }, { "stroke-width", "1" },
             { "display", "inline" }, { "visibility", "visible" }, { "transform", "none" },
-            { "flood-color", "black" }, { "flood-opacity", "1" }, { "color-interpolation-filters", "linearRGB" },
+            { "lighting-color", "white" }, { "enable-background", "accumulate" }, { "flood-color", "black" }, { "flood-opacity", "1" }, { "color-interpolation-filters", "linearRGB" },
             { "animation", "none" }, { "fill-rule", "nonzero" }, { "stop-color", "black" }, { "stop-opacity", "1" }
         };
         static CssStyleSheet()

@@ -13,6 +13,7 @@ namespace SVGImage.SVG.Filters
     internal sealed partial class RasterFilter
     {
         private readonly SVG svg;
+        private readonly SVGRender renderer;
         private readonly XmlNode filter;
         private readonly Rect bounds, region, filterRegion, viewport;
         private readonly int width, height;
@@ -24,13 +25,13 @@ namespace SVGImage.SVG.Filters
             internal Rect Area = Rect.Empty;
             internal Frame(int size, bool linear) { Data = new float[size]; Linear = linear; }
         }
-        internal RasterFilter(SVG svg, XmlNode filter, Rect bounds, Rect viewport)
+        internal RasterFilter(SVG svg, XmlNode filter, Rect bounds, Rect viewport, SVGRender renderer = null)
         {
-            this.svg = svg; this.filter = filter; this.bounds = bounds; this.viewport = viewport;
+            this.renderer = renderer; this.svg = svg; this.filter = filter; this.bounds = bounds; this.viewport = viewport;
             filterRegion = Region(filter, bounds, true);
             if (filterRegion.IsEmpty) return;
             region = filterRegion;
-            double scale = Math.Min(4, 2048 / Math.Max(region.Width, region.Height));
+            double scale = Math.Min(renderer?.RasterizationScale ?? 4, 2048 / Math.Max(region.Width, region.Height));
             width = Math.Max(1, (int)Math.Ceiling(region.Width * scale)); height = Math.Max(1, (int)Math.Ceiling(region.Height * scale));
             sx = width / region.Width; sy = height / region.Height;
             bool bbox = Attr(filter, "primitiveUnits", "") == "objectBoundingBox";
@@ -59,23 +60,17 @@ namespace SVGImage.SVG.Filters
             }
             return w <= 0 || h <= 0 || double.IsInfinity(x + y + w + h) || double.IsNaN(x + y + w + h) ? Rect.Empty : new Rect(x, y, w, h);
         }
-        internal Drawing Render(Drawing source)
+        internal Drawing Render(Drawing source, Drawing background = null)
         {
             if (filterRegion.IsEmpty || region.IsEmpty || unitX <= 0 || unitY <= 0) return new DrawingGroup();
-            var visual = new DrawingVisual();
-            using (var dc = visual.RenderOpen())
+            var graphic = Rasterize(source, false, filterRegion);
+            var bytes = new byte[width * height * 4];
+            var images = new Dictionary<string, Frame> { { "SourceGraphic", graphic }, { "SourceAlpha", Alpha(graphic) } };
+            if (filter.SelectNodes(".//*[@in='BackgroundImage' or @in='BackgroundAlpha' or @in2='BackgroundImage' or @in2='BackgroundAlpha']").Count > 0)
             {
-                dc.PushTransform(new MatrixTransform(sx, 0, 0, sy, -region.X * sx, -region.Y * sy)); dc.DrawDrawing(source);
+                var backdrop = Rasterize(background, false, filterRegion);
+                images["BackgroundImage"] = backdrop; images["BackgroundAlpha"] = Alpha(backdrop);
             }
-            var bitmap = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Pbgra32); bitmap.Render(visual);
-            var bytes = new byte[width * height * 4]; bitmap.CopyPixels(bytes, width * 4, 0);
-            var graphic = new Frame(bytes.Length, false) { Area = filterRegion }; var alpha = new Frame(bytes.Length, false) { Area = filterRegion };
-            for (int i = 0; i < bytes.Length; i += 4)
-            {
-                graphic.Data[i] = bytes[i + 2] / 255f; graphic.Data[i + 1] = bytes[i + 1] / 255f; graphic.Data[i + 2] = bytes[i] / 255f;
-                graphic.Data[i + 3] = alpha.Data[i + 3] = bytes[i + 3] / 255f;
-            }
-            var images = new Dictionary<string, Frame> { { "SourceGraphic", graphic }, { "SourceAlpha", alpha } };
             Frame previous = graphic;
             foreach (XmlNode node in filter.ChildNodes)
             {
@@ -87,6 +82,13 @@ namespace SVGImage.SVG.Filters
                 var output = new Frame(bytes.Length, linear);
                 switch (node.LocalName)
                 {
+                    case "feDiffuseLighting": Lighting(node,input,output,false); break;
+                    case "feSpecularLighting": Lighting(node,input,output,true); break;
+                    case "feImage":
+                        var imageArea = Region(node,filterRegion,false);
+                        if (renderer != null && !imageArea.IsEmpty)
+                            output = Rasterize(renderer.RenderFilterImage(node,imageArea,unitX,unitY),linear,imageArea);
+                        break;
                     case "feTurbulence": Noise(node, output); break;
                     case "feDisplacementMap":
                         double scale = Number(node, "scale"); int cx = Channel(Attr(node, "xChannelSelector", "A")), cy = Channel(Attr(node, "yChannelSelector", "A"));
@@ -127,7 +129,7 @@ namespace SVGImage.SVG.Filters
                     default: Array.Copy(input.Data, output.Data, input.Data.Length); break;
                 }
                 Rect defaultArea = input.Area;
-                if (node.LocalName == "feFlood" || node.LocalName == "feTurbulence" || node.LocalName == "feTile") defaultArea = filterRegion;
+                if (node.LocalName == "feFlood" || node.LocalName == "feTurbulence" || node.LocalName == "feTile" || node.LocalName == "feImage") defaultArea = filterRegion;
                 else if (node.LocalName == "feBlend" || node.LocalName == "feComposite" || node.LocalName == "feDisplacementMap") defaultArea.Union(second.Area);
                 else if (node.LocalName == "feMerge")
                     foreach (XmlNode child in node.ChildNodes) if (child.LocalName == "feMergeNode") defaultArea.Union(Input(images, Attr(child, "in"), previous, linear).Area);
@@ -148,6 +150,25 @@ namespace SVGImage.SVG.Filters
             var resultDrawing = new DrawingGroup { ClipGeometry = new RectangleGeometry(filterRegion) };
             resultDrawing.Children.Add(new ImageDrawing(image, region));
             return resultDrawing;
+        }
+        private Frame Rasterize(Drawing drawing, bool linear, Rect area)
+        {
+            var result = new Frame(width*height*4,false) { Area = area };
+            if(drawing==null) { result.Linear=linear; return result; }
+            var visual = new DrawingVisual();
+            using(var dc=visual.RenderOpen())
+            { dc.PushTransform(new MatrixTransform(sx,0,0,sy,-region.X*sx,-region.Y*sy)); dc.DrawDrawing(drawing); }
+            var bitmap=new RenderTargetBitmap(width,height,96,96,PixelFormats.Pbgra32); bitmap.Render(visual);
+            var pixels=new byte[result.Data.Length]; bitmap.CopyPixels(pixels,width*4,0);
+            for(int i=0;i<pixels.Length;i+=4)
+            { result.Data[i]=pixels[i+2]/255f; result.Data[i+1]=pixels[i+1]/255f; result.Data[i+2]=pixels[i]/255f; result.Data[i+3]=pixels[i+3]/255f; }
+            return ConvertFrame(result,linear);
+        }
+        private static Frame Alpha(Frame frame)
+        {
+            var result=new Frame(frame.Data.Length,frame.Linear) { Area=frame.Area };
+            for(int i=3;i<frame.Data.Length;i+=4) result.Data[i]=frame.Data[i];
+            return result;
         }
         private string Style(XmlNode node, string property, string fallback, bool inherited)
         {

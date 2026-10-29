@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400">
+<defs><filter id="glass" filterUnits="userSpaceOnUse" x="245" y="100" width="230" height="230" color-interpolation-filters="sRGB"><feGaussianBlur in="BackgroundImage" stdDeviation="9"/><feColorMatrix type="saturate" values=".4"/><feComponentTransfer><feFuncR type="linear" slope=".7" intercept=".25"/><feFuncG type="linear" slope=".7" intercept=".25"/><feFuncB type="linear" slope=".7" intercept=".25"/></feComponentTransfer></filter>
+<filter id="alpha" filterUnits="userSpaceOnUse" x="0" y="0" width="720" height="400"><feOffset in="BackgroundAlpha" dx="420"/><feFlood flood-color="#17243b" result="ink"/><feComposite in="ink" in2="BackgroundAlpha" operator="in"/></filter></defs>
+<rect width="720" height="400" rx="18" fill="#eef3fa"/>
+<g enable-background="new"><path d="M80 120H620V280H80Z" fill="#6be0bd"/><circle cx="300" cy="200" r="90" fill="#eb7a67"/><path d="M380 60L570 300H190Z" fill="#3278bb"/><g filter="url(#glass)"/><rect x="245" y="100" width="230" height="230" rx="3" fill="none" stroke="white" stroke-width="3"/></g>
+<g font-family="Segoe UI" fill="#233a59" text-anchor="middle"><text x="360" y="40" font-size="24">Backdrop glass</text><text x="360" y="370" font-size="16">Only preceding siblings enter BackgroundImage; the glass samples their color.</text></g>
+</svg>

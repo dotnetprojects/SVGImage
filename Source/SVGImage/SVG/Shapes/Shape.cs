@@ -267,7 +267,7 @@ namespace SVGImage.SVG.Shapes
                 CssAnimation = value;
                 return;
             }
-            if (name.StartsWith("animation-") || name == "transform-origin" || name == "transform-box")
+            if (name.StartsWith("animation-") || name == "transform-origin" || name == "transform-box" || name == "enable-background")
             {
                 CssProperties[name] = value;
                 return;

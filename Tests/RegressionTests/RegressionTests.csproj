@@ -8,6 +8,8 @@
     <Resource Include="../../Samples/Example/Images/acid1.svg" Link="Embedded/acid1.svg" />
     <Resource Include="../../Samples/Example/Images/acid1.css" Link="Embedded/acid1.css" />
     <None Include="../../Samples/Example/Images/AnimationFeatures/*.svg" Link="AnimationFeatures/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../Samples/Example/Images/FilterFeatures/*.svg" Link="FilterFeatures/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Resource Include="../../Samples/Example/Images/FilterFeatures/*.svg" Link="FilterFeatures/%(Filename)%(Extension)" />
     <ProjectReference Include="../../Source/SVGImage/DotNetProjects.SVGImage.csproj" />
     <None Include="Fixtures/*.svg" CopyToOutputDirectory="PreserveNewest" />
     <None Include="Fixtures/*.png" CopyToOutputDirectory="PreserveNewest" />

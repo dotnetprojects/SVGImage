@@ -18,7 +18,7 @@ namespace SVGImage.SVG.Shapes
             this.Y      = XmlUtil.AttrValue(node, "y", 0, svg.Size.Height);
             this.Width  = XmlUtil.AttrValue(node, "width", 0, svg.Size.Width);
             this.Height = XmlUtil.AttrValue(node, "height", 0, svg.Size.Height);
-            string hRef = XmlUtil.AttrValue(node, "xlink:href", string.Empty);
+            string hRef = XmlUtil.AttrValue(node, "href", node.Attributes["href", SVGTags.sNsXLink]?.Value ?? string.Empty);
             if (hRef.Length <= 0)
             {
                 return;
@@ -44,12 +44,16 @@ namespace SVGImage.SVG.Shapes
                 }
                 if (imageStream != null)
                 {
-                    BitmapImage b = new BitmapImage();
-                    b.BeginInit();
-                    b.StreamSource = imageStream;
-                    b.EndInit();
-
-                    this.ImageSource = b;
+                    using (imageStream)
+                    {
+                        BitmapImage b = new BitmapImage();
+                        b.BeginInit();
+                        b.CacheOption = BitmapCacheOption.OnLoad;
+                        b.StreamSource = imageStream;
+                        b.EndInit();
+                        b.Freeze();
+                        this.ImageSource = b;
+                    }
                 }
             }
             catch (Exception ex)

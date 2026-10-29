@@ -10,29 +10,33 @@ namespace SVGImage.SVG.Filters
     public sealed class Filter : Group
     {
         private readonly XmlNode node;
+        internal bool UsesBackground { get; }
         private readonly System.Windows.Rect viewport;
         public Filter(SVG svg, XmlNode node, Shape parent)
             : base(svg, node, parent)
         {
             this.node = node;
+            UsesBackground=node.SelectNodes(".//*[@in='BackgroundImage' or @in='BackgroundAlpha' or @in2='BackgroundImage' or @in2='BackgroundAlpha']").Count>0;
             viewport = svg.ViewBox ?? new System.Windows.Rect(svg.Size);
         }
 
-        internal Drawing Render(Drawing drawing, bool preserveAnimation)
+        internal Drawing Render(Drawing drawing, bool preserveAnimation, SVGRender renderer, Drawing background = null)
         {
             var primitives=new System.Collections.Generic.List<XmlNode>();
             foreach(XmlNode child in node.ChildNodes)
                 if(child.NodeType==XmlNodeType.Element && child.LocalName.StartsWith("fe")) primitives.Add(child);
             // These vector paint mappings preserve native child animation clocks.
             // Other filters require a composited raster input.
-            if(preserveAnimation && primitives.Count==1 && primitives[0].LocalName=="feColorMatrix" &&
+            if(preserveAnimation && primitives.Count==1 && (XmlUtilInput(primitives[0])=="" || XmlUtilInput(primitives[0])=="SourceGraphic") && primitives[0].LocalName=="feColorMatrix" &&
                 (Utils.XmlUtil.AttrValue(primitives[0],"type","matrix")=="matrix" || Utils.XmlUtil.AttrValue(primitives[0],"type")=="saturate"))
             {
                 ApplyColors(drawing);
                 return drawing;
             }
-            return new RasterFilter(Svg,node,Utils.MaskDrawing.ObjectBounds(drawing),viewport).Render(drawing);
+            return new RasterFilter(Svg,node,Utils.MaskDrawing.ObjectBounds(drawing),viewport,renderer).Render(drawing,background);
         }
+
+        private static string XmlUtilInput(XmlNode primitive) => Utils.XmlUtil.AttrValue(primitive,"in");
 
         public BitmapEffect GetBitmapEffect()
         {

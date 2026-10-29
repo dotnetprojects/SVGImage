@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400">
+<defs>
+ <filter id="distant" x="-.1" y="-.1" width="1.2" height="1.2"><feGaussianBlur stdDeviation="4"/><feDiffuseLighting lighting-color="#7bc8ff" surfaceScale="8"><feDistantLight azimuth="225" elevation="45"/></feDiffuseLighting><feComposite in2="SourceAlpha" operator="in"/></filter>
+ <filter id="point"><feGaussianBlur stdDeviation="4"/><feDiffuseLighting lighting-color="#ffd578" surfaceScale="8"><fePointLight x="360" y="155" z="60"/></feDiffuseLighting><feComposite in2="SourceAlpha" operator="in"/></filter>
+ <filter id="spot"><feGaussianBlur stdDeviation="4"/><feDiffuseLighting lighting-color="#91efc2" surfaceScale="8"><feSpotLight x="560" y="80" z="110" pointsAtX="590" pointsAtY="220" limitingConeAngle="45" specularExponent="8"/></feDiffuseLighting><feComposite in2="SourceAlpha" operator="in"/></filter>
+ <filter id="spec"><feGaussianBlur stdDeviation="5"/><feSpecularLighting surfaceScale="12" specularConstant="1.6" specularExponent="16" lighting-color="#ffffff"><fePointLight x="320" y="200" z="100"/></feSpecularLighting><feComposite in2="SourceAlpha" operator="in"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode/></feMerge></filter>
+</defs>
+<rect width="720" height="400" rx="18" fill="#14233d"/>
+<g font-family="Segoe UI" text-anchor="middle" fill="#dae9ff" font-size="16">
+ <text x="130" y="45">Distant light</text><text x="360" y="45">Point light</text><text x="590" y="45">Spot light</text>
+</g>
+<circle cx="130" cy="140" r="65" filter="url(#distant)"/>
+<circle cx="360" cy="140" r="65" filter="url(#point)"/>
+<circle cx="590" cy="140" r="65" filter="url(#spot)"/>
+<rect x="100" y="260" width="520" height="85" rx="28" fill="#286eb2" filter="url(#spec)"/>
+<text x="360" y="305" font-family="Segoe UI" text-anchor="middle" font-size="26" fill="white">Specular highlight</text>
+</svg>

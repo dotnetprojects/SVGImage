@@ -14,6 +14,8 @@ namespace SVGImage.SVG.FileLoaders
             this.source = source;
             this.fallback = fallback;
         }
+        internal Uri Resolve(string href) => new Uri(source,href);
+        internal ResourceFileLoader RelativeTo(string href) => new ResourceFileLoader(Resolve(href),fallback);
         public Stream LoadFile(string href, string svgFilename)
         {
             Uri resource;

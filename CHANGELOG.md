@@ -10,6 +10,11 @@ These entries describe the current repository source. They have not been assigne
 
 #### Added
 
+- **Lighting filters:** diffuse and specular shading from alpha height maps, distant/point/spot lights, Sobel edge/corner normals, lighting color/CSS, surface scale, kernel spacing, spot cones and specular exponents. Diffuse alpha is opaque; specular alpha follows the largest output channel, with clamping before byte conversion.
+- **Filter image inputs:** `feImage` loads local SVG elements, raster/SVG data URIs and host-resolved external resources; aspect-ratio placement, primitive regions, nested relative SVG resources and cycle guards are supported. Raster image decoding now releases its streams and accepts SVG2 `href` and namespace-qualified XLink references.
+- **Backdrops:** `BackgroundImage` / `BackgroundAlpha` capture preceding siblings inside `enable-background:new`, with region clipping, nested resets and transformed coordinate spaces. Ancestor group opacity is applied once after composition. Normal documents avoid background capture work.
+- **Filter examples:** an offline Filter features tab demonstrates lighting, three image-input forms and backdrop glass, with inspectable source. `SVGRender.RasterizationScale` controls filter sampling (default four pixels per user unit, retaining the 2048-pixel cap).
+- **Filter verification:** 98 additional resvg lighting/image/background fixtures, plus analytic pixel tests for saturation, alpha, relative resources, recursion, buffer resets and sibling order. Of 321 selected corpus checks, 312 compare reference pixels and nine are render-only; five newly included historical/UB references are covered by explicit current-rule tests where applicable.
 - **Path morphing:** native SMIL `d` interpolation for compatible line/quadratic/cubic/arc path structures, to-only underlying paths, clipping/masking integration and discrete switching for incompatible topology.
 - **Syncbase timing:** forward animation-ID begin/end references, signed offsets, acyclic timing chains, repeated active durations, click-start propagation/history and seeded self-repeating sequences. Unseeded cycles stay inactive; the full SMIL end/restart and multi-animation cycle model remains incomplete.
 - **Animated masks:** retained vector clocks for alpha/white masks and live composited luminance masks with correct black-over-white occlusion; bounded 30 Hz/512-pixel raster updates and immediate exact seeking.
@@ -33,7 +38,7 @@ These entries describe the current repository source. They have not been assigne
 - **CSS selectors:** type, universal, ID, class, compound and attribute presence/equality selectors, `:root`, descendant/child and adjacent/general sibling relationships.
 - **CSS animation controls:** multiple animations, shorthand/longhands, positive/negative delays, fractional repeats, directions, fill modes, initial paused state, grouped offsets and per-keyframe easing. Matching transform functions preserve full rotations.
 - **CSS colors:** RGB/RGBA and HSL/HSLA functions, percentage channels, short/long RGBA hex colors, grey aliases and `rebeccapurple`.
-- **Regression coverage:** an optional local resvg test-suite runner for 215 path/point/filter cases and eight turbulence references. Downloaded fixtures remain outside the repository.
+- **Regression coverage:** an optional local resvg test-suite runner for 313 path/point/filter cases and eight turbulence references. Downloaded fixtures remain outside the repository.
 
 #### Fixed
 
@@ -56,7 +61,7 @@ These entries describe the current repository source. They have not been assigne
 #### Verification and scope
 
 - All nine library targets build without warnings/errors. WPF regressions, live clocks and 14 external animation examples pass.
-- Selected checks use resvg-test-suite revision `d8e0643`: 200 reference-image comparisons and four render-only cases with nonportable/undefined expectations. Tolerances account for WPF antialiasing, tiled edges and fractional morphology radii.
+- Selected checks use resvg-test-suite revision `d8e0643`: 312 reference-image comparisons and nine render-only cases with historical/nonportable/undefined expectations. Tolerances account for WPF antialiasing, tiled edges and fractional morphology radii.
 - Blur uses separable box convolutions; morphology uses sliding extrema. Raster filters are capped at 2048 pixels on their longest dimension and sample sources at load time. Single matrix/saturation filters can retain vector paints to preserve native clocks.
 - A plain-WPF rendering preflight reports an unavailable Windows graphics session before SVG pixel checks run.
 
