@@ -121,6 +121,16 @@ namespace SVGImage.SVG.Utils
             return m;
         }
 
+        internal static Matrix Resolve(Shape shape, Rect objectBounds)
+        {
+            var matrix = shape.Transform?.Value ?? System.Windows.Media.Matrix.Identity;
+            // Resolve authored percentages once the target bounds are known,
+            // while respecting a transform subsequently assigned through the API.
+            if (shape.TransformText != null && shape.TransformText.Contains("%") &&
+                matrix == Parse(shape.TransformText, shape.TransformViewport).Matrix)
+                return Parse(shape.TransformText, ReferenceBox(shape, objectBounds)).Matrix;
+            return matrix;
+        }
         internal static Rect ReferenceBox(Shape shape, Rect objectBounds)
         {
             string box;

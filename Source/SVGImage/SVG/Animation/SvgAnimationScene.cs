@@ -85,7 +85,7 @@ namespace SVGImage.SVG.Animation
             if (transforms.Length > 0 || cameras.Length > 0)
             {
                 var reference = CssTransforms.ReferenceBox(shape, MaskDrawing.ObjectBounds(group.Children[0]));
-                Matrix original = shape.TransformText == null ? group.Transform?.Value ?? Matrix.Identity : CssTransforms.Parse(shape.TransformText, reference).Matrix;
+                Matrix original = shape.Transform == null ? group.Transform?.Value ?? Matrix.Identity : CssTransforms.Resolve(shape, MaskDrawing.ObjectBounds(group.Children[0]));
                 var origin = CssTransforms.Origin(shape, MaskDrawing.ObjectBounds(group.Children[0]));
                 foreach (var track in transforms) { track.UnderlyingMatrix = original; track.UnderlyingTransform = shape.TransformText; track.TransformReference = reference; }
                 Func<double, Matrix> sample = seconds =>

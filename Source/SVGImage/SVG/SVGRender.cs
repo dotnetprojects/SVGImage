@@ -497,7 +497,7 @@ namespace SVGImage.SVG
                 {
                     subgrp.Transform = shape.Transform;
                     if (!animated || !animationScene.Tracks(shape).Any(t => t.Type != null))
-                        subgrp.Transform = new MatrixTransform(CssTransforms.Around(CssTransforms.Parse(shape.TransformText, CssTransforms.ReferenceBox(shape, MaskDrawing.ObjectBounds(drawing))).Matrix, CssTransforms.Origin(shape, MaskDrawing.ObjectBounds(drawing))));
+                        subgrp.Transform = new MatrixTransform(CssTransforms.Around(CssTransforms.Resolve(shape, MaskDrawing.ObjectBounds(drawing)), CssTransforms.Origin(shape, MaskDrawing.ObjectBounds(drawing))));
                 }
                 if (filtered)
                 {
@@ -528,6 +528,7 @@ namespace SVGImage.SVG
                 var maskGroup = new DrawingGroup();
                 maskGroup.Children.Add(drawing);
                 var region = mask.GetRegion(bounds);
+                if (region.IsEmpty) return Brushes.Transparent;
                 bool linear = mask.ColorInterpolation == "linearRGB";
                 if (animationScene != null && animationScene.ClockCount > before && !mask.UsesAlpha && !MaskDrawing.WhiteOnly(maskGroup))
                     return animationScene.AnimatedMask(maskGroup, region, false, linear);

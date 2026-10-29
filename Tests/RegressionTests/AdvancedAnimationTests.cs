@@ -64,6 +64,12 @@ internal static class AdvancedAnimationTests
         var cutoutAfter = AnimationTests.Image(drawing,100,100,new Rect(0,0,100,100));
         int edge = (50*100+35)*4+3;
         if (cutoutAfter[edge] - cutoutBefore[edge] < 40) throw new Exception("Mask seeking must refresh within the same 30 Hz playback bucket");
+        var nested=renderer.LoadXmlDrawing(Svg(colored.Replace("<rect width='100' height='100' fill='red' mask='url(#m)'/>","<mask id='outer' mask-type='alpha'><rect width='100' height='100' fill='white' mask='url(#m)'/></mask><rect width='100' height='100' fill='red' mask='url(#outer)'/>")));
+        renderer.SeekAnimations(TimeSpan.FromSeconds(1)); GeometryTests.Pixel(nested,50,50,Colors.Transparent,"nested masks preserve an animated luminance cutout"); GeometryTests.Pixel(nested,20,50,Colors.Red,"nested animated mask restored pixel");
+        var morphed=renderer.LoadXmlDrawing(Svg("<mask id='m' mask-type='alpha' maskContentUnits='objectBoundingBox'><path d='M0 0H.2V1H0Z' fill='white'><animate attributeName='d' values='M0 0H.2V1H0Z;M.8 0H1V1H.8Z' dur='2s'/></path></mask><rect width='100' height='100' fill='red' mask='url(#m)'/>"));
+        renderer.SeekAnimations(TimeSpan.FromSeconds(1)); GeometryTests.Pixel(morphed,50,50,Colors.Red,"morphing path in normalized alpha mask"); GeometryTests.Pixel(morphed,20,50,Colors.Transparent,"morphing mask moved away from original position");
+        var empty=renderer.LoadXmlDrawing(Svg(colored.Replace("width='100' height='100'><rect", "width='0' height='100'><rect")));
+        renderer.SeekAnimations(TimeSpan.FromSeconds(1)); GeometryTests.Pixel(empty,50,50,Colors.Transparent,"empty animated mask region is safe");
         drawing=renderer.LoadXmlDrawing(Svg(colored.Replace("dur='2s'","dur='.5s'")));
         var before=AnimationTests.Image(drawing,100,100,new Rect(0,0,100,100)); Tick();
         if(before.SequenceEqual(AnimationTests.Image(drawing,100,100,new Rect(0,0,100,100)))) throw new Exception("Live luminance mask did not refresh");
@@ -73,6 +79,10 @@ internal static class AdvancedAnimationTests
         var r=Renderer();
         var d=r.LoadXmlDrawing(Svg("<style>@keyframes m{from{transform:matrix(1,0,0,1,0,0)}to{transform:matrix(0,1,-1,0,0,0)}}rect{animation:m 2s linear}</style><rect x='20' width='10' height='5'/>"));
         r.SeekAnimations(TimeSpan.FromSeconds(1)); Near(10.6066,d.Bounds.X,"matrix rotation decomposes rather than collapsing",.001); Near(10.6066,d.Bounds.Height,"matrix midpoint rotated bounds",.001);
+        d=r.LoadXmlDrawing(Svg("<style>@keyframes p{from{transform:matrix(1,2,3,4,5,6)}to{transform:matrix(1,2,3,4,5,6)}}rect{animation:p 2s linear}</style><rect width='10' height='5'/>"));
+        r.SeekAnimations(TimeSpan.FromSeconds(1)); Near(5,d.Bounds.X,"decomposed residual preserves translation"); Near(25,d.Bounds.Width,"decomposed skew/reflection round trip width"); Near(40,d.Bounds.Height,"decomposed skew/reflection round trip height");
+        d=r.LoadXmlDrawing(Svg("<style>@keyframes p{from{transform:matrix(-1,0,0,1,0,0)}to{transform:matrix(1,0,0,-1,0,0)}}rect{animation:p 2s linear}</style><rect width='10' height='5'/>"));
+        r.SeekAnimations(TimeSpan.FromSeconds(1)); Near(5,d.Bounds.Width,"reflection-axis interpolation does not collapse width"); Near(10,d.Bounds.Height,"reflection-axis interpolation rotates height");
         d=r.LoadXmlDrawing(Svg("<style>@keyframes p{from{transform:rotate(0deg) translateX(0)}to{transform:rotate(360deg) scale(1)}}rect{animation:p 2s linear}</style><rect x='10' width='10' height='5'/>"));
         r.SeekAnimations(TimeSpan.FromSeconds(1)); Near(-20,d.Bounds.X,"compatible prefix preserves full turns before matrix fallback");
         d=r.LoadXmlDrawing(Svg("<rect x='10' y='20' width='20' height='10' style='transform-box:fill-box;transform:translate(50%,100%)'/>"));
@@ -81,6 +91,10 @@ internal static class AdvancedAnimationTests
         r.SeekAnimations(TimeSpan.FromSeconds(1)); Near(10,d.Bounds.X,"animated percentage x"); Near(2.5,d.Bounds.Y,"animated percentage y");
         d=r.LoadXmlDrawing(Svg("<svg x='20' width='40' height='40' viewBox='0 0 200 200'><rect width='10' height='10' transform='translate(50%,25%)'/></svg>"));
         Near(40,d.Bounds.X,"nested percentage viewport x"); Near(10,d.Bounds.Y,"nested percentage viewport y");
+        r.UseAnimations=false;
+        r.LoadXmlDrawing(Svg("<rect id='manual' width='10' height='10' transform='translate(50%)'/>"));
+        ((MatrixTransform)r.SVG.GetShape("manual").Transform).Matrix=new Matrix(1,0,0,1,35,0);
+        Near(35,r.CreateDrawing(r.SVG).Bounds.X,"explicit API transform overrides the authored percentage transform");
     }
     private static void Samples()
     {
