@@ -1,26 +1,27 @@
-## SVGImage
-This is an SVG Image View Control for WPF applications.
+# SVGImage documentation
 
-Initially forked from: [SVGImage Control - CodeProject Article](https://www.codeproject.com/Articles/92434/SVGImage-Control)
+The [homepage](index.md) introduces the project with previews rendered by SVGImage itself.
 
-Besides the bug fixes, new features are added including the following:
-  - Mask/Clip support
-  - Support of styles.
-  - Simple Animation support.
+- [Get started](GettingStarted.md)
+- [SVG support reference](Support.md)
+- [Changelog](Changelog.md) — includes the repository's single canonical `CHANGELOG.md`
+- [Masks](Masks.md), [CSS](CSS.md), [animations](Animations.md), [rendering](Rendering.md), [grayscale](Grayscale.md)
 
-## Documentations
-For the User Manual and API References see [Documentation](http://dotnetprojects.github.io/SVGImage/).
+Build and preview on Windows:
 
-## Framework support
-The SVGImage control library targets the following frameworks
-* .NET Framework, Version 4.0
-* .NET Framework, Version 4.5
-* .NET Framework, Version 4.6
-* .NET Framework, Version 4.7
-* .NET Framework, Version 4.8
-* .NET Core, Version 3.1
-* .NET 6 ~ 8
+```powershell
+dotnet tool install -g docfx --version 2.78.5
+docfx Docs/docfx.json --serve
+```
 
-## License
-The SVGImage control library is relicensed under [MIT License](https://github.com/dotnetprojects/SVGImage/blob/master/LICENSE),
-with permission from the original author.
+The generated site is written to `Docs/_site`. The existing GitHub Pages workflow deploys it on pushes to `master`.
+
+Gallery SVGs in `images/demos` are original documentation examples. Their PNG/GIF previews are rendered with the WPF library, rather than browser screenshots. Downloaded animation and resvg fixtures are not included.
+
+Regenerate the gallery from the repository root on Windows:
+
+```powershell
+dotnet run --project Docs/tools/GalleryRenderer -p:TargetFrameworks=net8.0-windows -p:GeneratePackageOnBuild=false
+```
+
+For future updates, add dated entries under Unreleased in the root `CHANGELOG.md`. The website includes that file directly; do not maintain a second copy.

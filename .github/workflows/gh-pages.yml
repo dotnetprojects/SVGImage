@@ -1,6 +1,8 @@
 # Your GitHub workflow file under .github/workflows/
 # Trigger the action on push to master
+name: Documentation
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -31,7 +33,7 @@ jobs:
       with:
         dotnet-version: 8.x
 
-    - run: dotnet tool update -g docfx
+    - run: dotnet tool install -g docfx --version 2.78.5
     - run: docfx Docs/docfx.json
 
     - name: Setup Pages

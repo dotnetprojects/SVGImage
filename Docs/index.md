@@ -1,48 +1,60 @@
-# SVGImage
-This is an SVG Image View Control for WPF applications.
+---
+title: SVGImage — SVG, naturally at home in WPF
+description: A native WPF SVG control with masks, filters, text paths, reusable symbols, CSS and SMIL animation.
+_layout: landing
+_disableContribution: true
+---
+<div class="svg-home">
+<section class="home-hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="status-dot"></span> OPEN SOURCE · WINDOWS · MIT</p>
+    <h1 id="hero-title">SVG, naturally<br>at home in <em>WPF.</em></h1>
+    <p class="hero-description">From a single icon to an animated illustration. Bring scalable artwork into your app with a native WPF control and a Drawing-based renderer.</p>
+    <div class="hero-actions"><a class="home-button primary" href="GettingStarted.md">Start building <span aria-hidden="true">↗</span></a><a class="home-button secondary" href="Support.md">Explore support <span aria-hidden="true">↓</span></a></div>
+    <a class="install-command" href="https://www.nuget.org/packages/DotNetProjects.SVGImage"><span class="terminal-prompt" aria-hidden="true">&gt;_</span><code>dotnet add package DotNetProjects.SVGImage</code><span aria-hidden="true">↗</span></a>
+    <p class="source-note">This site describes the current source, including <a href="Changelog.md">unreleased additions</a>. See the changelog for published package versions.</p>
+  </div>
+  <div class="hero-art"><img src="images/demos/hero.png" width="640" height="560" alt="Layered SVG artwork: a patterned panel, a cut-out green ring and an orange orb connected by a curved path."><div class="art-caption"><span class="caption-rule"></span> VECTOR ART. NATIVE DRAWING.</div></div>
+</section>
+<div class="framework-strip"><span class="strip-label">ONE CONTROL. NINE TARGETS.</span><span>.NET Framework 4.0–4.8</span><span>.NET Core 3.1</span><span>.NET 6 / 7 / 8 for Windows</span></div>
+<section class="home-section" id="gallery" aria-labelledby="gallery-title">
+  <div class="section-heading"><div><p class="eyebrow">A SMALL GALLERY OF POSSIBILITIES</p><h2 id="gallery-title">More than an icon viewer.</h2></div><p>Actual SVGImage output. Each example links to its SVG source, ready to try in your own app.</p></div>
+  <div class="demo-grid">
+    <a class="demo-card" href="images/demos/masks.svg"><img src="images/demos/masks.png" width="512" height="320" loading="lazy" alt="A green moon-shaped cutout inside a clipped dark panel."><div class="demo-caption"><div><span class="demo-number">01 / MASKS &amp; CLIPS</span><h3>Make room for negative space.</h3></div><span class="demo-arrow" aria-hidden="true">↗</span></div></a>
+    <a class="demo-card" href="images/demos/patterns.svg"><img src="images/demos/patterns.png" width="512" height="320" loading="lazy" alt="A repeated green line-and-dot pattern beside an orange gradient circle."><div class="demo-caption"><div><span class="demo-number">02 / PATTERNS &amp; GRADIENTS</span><h3>Paint beyond a solid fill.</h3></div><span class="demo-arrow" aria-hidden="true">↗</span></div></a>
+    <a class="demo-card" href="images/demos/filters.svg"><img src="images/demos/filters.png" width="512" height="320" loading="lazy" alt="Overlapping green and orange circles with wavy, displaced contour lines."><div class="demo-caption"><div><span class="demo-number">03 / RASTER FILTERS</span><h3>Add a little turbulence.</h3></div><span class="demo-arrow" aria-hidden="true">↗</span></div></a>
+    <a class="demo-card" href="images/demos/text-path.svg"><img src="images/demos/text-path.png" width="512" height="320" loading="lazy" alt="The words A little outside the baseline follow a curved path."><div class="demo-caption"><div><span class="demo-number">04 / TEXT ON A PATH</span><h3>Step outside the baseline.</h3></div><span class="demo-arrow" aria-hidden="true">↗</span></div></a>
+    <a class="demo-card" href="images/demos/structure.svg"><img src="images/demos/structure.png" width="512" height="320" loading="lazy" alt="Three differently sized leaf symbols in green, lime and terracotta."><div class="demo-caption"><div><span class="demo-number">05 / SYMBOLS &amp; VIEWPORTS</span><h3>Compose once. Reuse anywhere.</h3></div><span class="demo-arrow" aria-hidden="true">↗</span></div></a>
+    <a class="demo-card" href="images/demos/animation.svg"><img class="motion-demo" src="images/demos/animation.gif" width="512" height="320" loading="lazy" alt="An orange ball follows a curved path while three light-green dots pulse."><img class="motion-still" src="images/demos/animation.png" width="512" height="320" loading="lazy" alt="An orange ball on a curved motion path."><div class="demo-caption"><div><span class="demo-number">06 / CSS &amp; SMIL ANIMATION</span><h3>A little movement goes a long way.</h3></div><span class="demo-arrow" aria-hidden="true">↗</span></div></a>
+  </div>
+  <p class="gallery-note">Previews were rendered with the WPF renderer. The animation combines SMIL motion with CSS opacity keyframes. <a href="Support.md#animation">See the supported animation scope.</a></p>
+</section>
+<section class="support-band home-section" aria-labelledby="support-title">
+  <div class="support-intro"><p class="eyebrow">KNOW WHAT YOU CAN BUILD</p><h2 id="support-title">A capable renderer.<br>A clear support story.</h2><p>Paths and paint. Layout and reuse. Styling and motion. Find the supported pieces, their scope, and the details that matter for your SVGs.</p><a class="text-link" href="Support.md">Read the full support reference <span aria-hidden="true">↗</span></a></div>
+  <dl class="support-list">
+    <div><dt>Geometry &amp; composition</dt><dd>Paths, basic shapes, masks, clip paths, symbols, use elements and nested viewports.</dd></div>
+    <div><dt>Paint &amp; effects</dt><dd>Gradients, patterns, grayscale, color overrides, turbulence, displacement, blur, blend and more.</dd></div>
+    <div><dt>Type &amp; style</dt><dd>Text paths, styled spans, CSS selectors, specificity, custom properties and color functions.</dd></div>
+    <div><dt>Native motion</dt><dd>SMIL transforms and motion paths, CSS keyframes, easing, repeats, seeking and explicit click-start events.</dd></div>
+  </dl>
+</section>
+<section class="home-section quickstart-section" aria-labelledby="quickstart-title">
+  <div><p class="eyebrow">FROM SVG FILE TO WPF CONTROL</p><h2 id="quickstart-title">Fits right into your XAML.</h2><p>Load a local SVG or work directly with a WPF Drawing. Keep your artwork scalable, override its colors, or enable supported animation.</p><a class="text-link" href="GettingStarted.md">Installation &amp; first steps <span aria-hidden="true">↗</span></a></div>
+  <div class="code-panel"><div class="code-panel-heading"><span class="code-dot"></span><span>MainWindow.xaml</span><span>WPF</span></div><pre><code>&lt;Window
+  xmlns:svg="https://github.com/dotnetprojects/SVGImage"&gt;
 
-Initially forked from: [SVGImage Control - CodeProject Article](https://www.codeproject.com/Articles/92434/SVGImage-Control)
+  &lt;svg:SVGImage
+    UriSource="Assets/illustration.svg"
+    UseAnimations="True"
+    SizeType="ViewBoxToSizeNoStretch" /&gt;
 
-Besides the bug fixes, new features are added including the following:
-  - Mask/Clip support
-  - Support of styles.
-  - Simple Animation support.
-
-## Downloads
-The SVGImage is available as a single DLL in [NuGet Package](https://www.nuget.org/packages/DotNetProjects.SVGImage).
-The respository includes
-* **Tests:** For test tools, and
-* **Samples:** For sample applications
-* **Docs:** For the documentations (in markdown format).
-
-The command lines installation options are: For the version `5.1.1`
-* **.NET CLI:** dotnet add package DotNetProjects.SVGImage --version 5.1.1
-* **Package Manager:** NuGet\Install-Package DotNetProjects.SVGImage -Version 5.1.1
-
-For reference in projects use: For the version `5.1.1`
-```xml
-<PackageReference Include="DotNetProjects.SVGImage" Version="5.1.1" />
-```
-
-## How to build
-The SVGImage build targets .NET6.0-Windows (and up), .Net Framework 4.x TFMs and .NET Core 3.1. 
-* Use `Source/SVGImage.sln` in requires Visual Studio 2022 for complete build, or 
-* Use `Source/SVGImage.VS2019.sln` in Visual Studio 2019 for .Net Frameworks and .NET Core 3.1.
-
-## Framework support
-The SVGImage control library targets the following frameworks
-* .NET Framework, Version 4.0
-* .NET Framework, Version 4.5
-* .NET Framework, Version 4.6
-* .NET Framework, Version 4.7
-* .NET Framework, Version 4.8
-* .NET Core, Version 3.1
-* .NET 6 ~ 8
-
-## License
-The SVGImage control library is relicensed under [MIT License](https://github.com/dotnetprojects/SVGImage/blob/master/LICENSE),
-with permission from the original author.
-
-## Sample Application
-
-![](images/sample.png)
+&lt;/Window&gt;</code></pre></div>
+</section>
+<section class="home-section updates-section" aria-labelledby="updates-title">
+  <div class="section-heading"><div><p class="eyebrow">THE PROJECT IS MOVING</p><h2 id="updates-title">A lot has changed.</h2></div><a class="text-link" href="Changelog.md">Explore the changelog <span aria-hidden="true">↗</span></a></div>
+  <div class="update-row"><time datetime="2026-10-29">29 OCT 2026</time><div><h3>A broader SVG toolkit.</h3><p>Text paths, nested viewports, reusable patterns, motion paths, richer CSS and a growing raster filter pipeline. Plus safer path parsing and reference-image regression coverage.</p></div><a href="Changelog.md#2026-10-29" aria-label="Read changes for October 29">↗</a></div>
+  <div class="update-row"><time datetime="2026-10-28">28 OCT 2026</time><div><h3>Masks, grayscale, and native motion.</h3><p>SVG masking, WPF-clock animation, CSS sprite sheets and symbol viewport fixes, alongside gradient color and button-sizing corrections.</p></div><a href="Changelog.md#2026-10-28" aria-label="Read changes for October 28">↗</a></div>
+  <div class="quality-strip"><div><strong>9</strong><span>target frameworks built</span></div><div><strong>204</strong><span>selected external SVG checks</span></div><div><strong>14</strong><span>animation examples checked</span></div><a href="Support.md#verification">How we verify support <span aria-hidden="true">↗</span></a></div>
+</section>
+<section class="home-endcap"><div><p class="eyebrow">BUILT IN THE OPEN</p><h2>Small library. Plenty to explore.</h2></div><div><a class="home-button primary" href="https://github.com/dotnetprojects/SVGImage">Explore the repository <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/dotnetprojects/SVGImage/issues">Bring an SVG that needs attention ↗</a></div></section>
+</div>

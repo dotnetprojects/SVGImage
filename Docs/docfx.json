@@ -6,10 +6,7 @@
           "files": [
             "SVGImage/DotNetProjects.SVGImage.csproj"
           ],
-          "src": "../Source/",
-          "properties": {
-            "TargetFramework": "net8.0"
-          }          
+          "src": "../Source/"
         }
       ],
       "dest": "api",
@@ -21,7 +18,12 @@
       "namespaceLayout": "flattened",
       "memberLayout": "samePage",
       "enumSortOrder": "alphabetic",
-      "allowCompilationErrors": false
+      "allowCompilationErrors": false,
+      "properties": {
+        "TargetFramework": "net8.0-windows",
+        "TargetFrameworks": "net8.0-windows",
+        "GeneratePackageOnBuild": "false"
+      }
     }
   ],
   "build": {
@@ -50,20 +52,19 @@
     ],
     "globalMetadata": {
       "_appName": "SVGImage",
-      "_appTitle": "SVGImage Documentation",
-      "_appLogoPath": "images/dotnetprojects.png",
-      "_appFaviconPath": "images/dotnetprojects.png",	  
+      "_appTitle": "SVGImage",
+      "_appLogoPath": "images/logo.svg",
+      "_appFaviconPath": "images/logo.svg",
       "_enableDiagrams": true,
       "_enableSearch": true,
-      "pdf": true,
-      "pdfTocPage": true,
-      "_appFooter": "<div class=\"d-flex flex-column flex-sm-row justify-content-between pt-1\"><p> &copy; 2020 - 2023 DotNetProjects</p><p>Made with <a href=\"https://dotnet.github.io/docfx\">DocFX</a></p></div>",
+      "_appFooter": "<div class=\"svg-footer\"><span>SVGImage \u00b7 Native SVG for WPF</span><span>MIT licensed \u00b7 <a href=\"https://github.com/dotnetprojects/SVGImage\">Built in the open</a> \u00b7 \u00a9 2020\u20132026 DotNetProjects</span></div>",
       "_gitContribute": {
         "repo": "https://github.com/dotnetprojects/SVGImage",
-		"branch": "master"
+        "branch": "master"
       },
-      "_gitUrlPattern": "github"
-    },    
+      "_gitUrlPattern": "github",
+      "_lang": "en"
+    },
     "output": "_site",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],

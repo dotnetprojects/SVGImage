@@ -1,5 +1,25 @@
-- name: Articles
-  href: articles/
-- name: API Reference
+- name: Overview
+  href: index.md
+- name: Get started
+  href: GettingStarted.md
+- name: SVG support
+  href: Support.md
+- name: Guides
+  items:
+  - name: Masks
+    href: Masks.md
+  - name: CSS
+    href: CSS.md
+  - name: Animation
+    href: Animations.md
+  - name: Rendering & filters
+    href: Rendering.md
+  - name: Grayscale
+    href: Grayscale.md
+  - name: Background & sizing
+    href: articles/intro.md
+- name: Changelog
+  href: Changelog.md
+- name: API
   href: api/
   homepage: api/index.md

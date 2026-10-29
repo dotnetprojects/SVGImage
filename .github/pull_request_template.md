@@ -1,6 +1,6 @@
 # Pull Request Template
 > [!NOTE] 
-> All Pull Requests must be submitted to the default branch: **develop**
+> Submit pull requests to the repository's default branch.
 
 ## Description
 
@@ -36,5 +36,6 @@ Please describe the tests that you ran to verify your changes.
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I have made corresponding changes to the documentation
+- [ ] I added user-visible changes to `CHANGELOG.md` under Unreleased (or this change has no user-visible effect)
 - [ ] My changes generate no new warnings
 - [ ] I have added tests that prove my fix is effective or that my feature works

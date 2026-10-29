@@ -1,53 +1,69 @@
-# SVGImage
-This is an SVG Image View Control for WPF applications.
+<p align="center"><img src="Docs/images/logo.svg" width="56" height="56" alt="SVGImage logo"></p>
+<h1 align="center">SVGImage</h1>
+<p align="center"><strong>SVG, naturally at home in WPF.</strong></p>
+<p align="center">A native WPF SVG control and Drawing-based renderer for icons, illustrations and supported animation.</p>
+<p align="center"><a href="https://dotnetprojects.github.io/SVGImage/">Homepage</a> · <a href="Docs/GettingStarted.md">Get started</a> · <a href="Docs/Support.md">SVG support</a> · <a href="CHANGELOG.md">Changelog</a> · <a href="https://www.nuget.org/packages/DotNetProjects.SVGImage">NuGet</a></p>
 
-Initially forked from: [SVGImage Control - CodeProject Article](https://www.codeproject.com/Articles/92434/SVGImage-Control)
+<p align="center"><img src="Docs/images/demos/masks.png" width="32%" alt="SVGImage-rendered mask cutout"> <img src="Docs/images/demos/filters.png" width="32%" alt="SVGImage-rendered turbulence and displacement"> <img src="Docs/images/demos/animation.gif" width="32%" alt="Native SMIL motion and CSS opacity animation"></p>
+<p align="center"><sub>Original examples, rendered with SVGImage. <a href="Docs/images/demos">Explore the SVG sources.</a></sub></p>
 
-Besides the bug fixes, new features are added including the following:
-  - Mask/Clip support
-  - Support of styles.
-  - Simple Animation support.
+## What can it render?
 
-## Downloads
-The SVGImage is available as a single DLL in [NuGet Package](https://www.nuget.org/packages/DotNetProjects.SVGImage).
-The respository includes
-* **Tests:** For test tools, and
-* **Samples:** For sample applications
-* **Docs:** For the documentations (in markdown format).
+| Area | Current source support |
+| --- | --- |
+| Geometry | Basic shapes, paths/curves/arcs, transforms and groups |
+| Composition | Luminance/alpha masks, clip paths, patterns, symbol/use and nested viewports |
+| Paint | Linear/radial gradients, spreading, CSS colors, per-use opacity and color overrides |
+| Text | Styled spans, text anchoring and glyphs along a textPath |
+| Filters | Turbulence, displacement, flood, offset, merge, composite, color matrices, component transfer, blend, blur, morphology and tile |
+| CSS | Author cascade, supported selectors, specificity, variables and transform/opacity keyframes |
+| SMIL | Native clocks, transforms, motion paths, supported properties, timing and explicit events |
+| WPF | Drawing access, intrinsic button sizing, grayscale and deterministic seeking |
 
-The command lines installation options are: For the version `5.1.1`
-* **.NET CLI:** dotnet add package DotNetProjects.SVGImage --version 5.1.1
-* **Package Manager:** NuGet\Install-Package DotNetProjects.SVGImage -Version 5.1.1
+See the [support reference](Docs/Support.md) for scope and limits. The current source includes **unreleased changes**; published package availability is recorded in the changelog. The full SVG/resvg specification remains a work in progress.
 
-For reference in projects use: For the version `5.1.1`
-```xml
-<PackageReference Include="DotNetProjects.SVGImage" Version="5.1.1" />
+## Get started
+
+Install a published package:
+
+```powershell
+dotnet add package DotNetProjects.SVGImage
 ```
 
-## How to build
-The SVGImage build targets .NET6.0-Windows (and up), .Net Framework 4.x TFMs and .NET Core 3.1. 
-* Use `Source/SVGImage.sln` in requires Visual Studio 2022 for complete build, or 
-* Use `Source/SVGImage.VS2019.sln` in Visual Studio 2019 for .Net Frameworks and .NET Core 3.1.
+Add `xmlns:svg="https://github.com/dotnetprojects/SVGImage"` to your WPF window, then use:
 
-## Documentations
-For the User Manual and API References see [Documentation](http://dotnetprojects.github.io/SVGImage/).
+```xml
+<svg:SVGImage UriSource="Assets/illustration.svg"
+              Width="320" Height="240"
+              UseAnimations="True"
+              SizeType="ViewBoxToSizeNoStretch" />
+```
 
-## Framework support
-The SVGImage control library targets the following frameworks
-* .NET Framework, Version 4.0
-* .NET Framework, Version 4.5
-* .NET Framework, Version 4.6
-* .NET Framework, Version 4.7
-* .NET Framework, Version 4.8
-* .NET Core, Version 3.1
-* .NET 6 ~ 8
+Add the SVG as Content and copy it to your output directory. [Installation and first steps →](Docs/GettingStarted.md)
 
-## License
-The SVGImage control library is relicensed under [MIT License](https://github.com/dotnetprojects/SVGImage/blob/master/LICENSE),
-with permission from the original author.
+## Frameworks
 
-## Sample Application
+Windows / WPF. Targets: **.NET Framework 4.0, 4.5, 4.6, 4.7, 4.8**, **.NET Core 3.1**, and **.NET 6, 7, 8 for Windows**.
 
-![](Docs/images/sample.png)
+```powershell
+dotnet build Source/SVGImage/DotNetProjects.SVGImage.csproj -p:GeneratePackageOnBuild=false
+```
+
+Use `Source/SVGImage.sln` with Visual Studio 2022. For unreleased features, reference the current library project or a locally built DLL.
+
+## Documentation and change history
+
+- [Homepage and native-rendered gallery](https://dotnetprojects.github.io/SVGImage/)
+- [Support reference](Docs/Support.md) and [ongoing changelog](CHANGELOG.md)
+- [Masks](Docs/Masks.md), [CSS](Docs/CSS.md), [animation](Docs/Animations.md), [rendering and filters](Docs/Rendering.md), [grayscale](Docs/Grayscale.md)
+- [Samples](Samples) and [regression checks](Tests/RegressionTests/README.md)
+
+Selected verification includes 204 external SVG checks, 14 animation examples and a mask fixture compared against Chromium. Downloaded samples/reference suites remain outside the repository.
+
+## Contributing and license
+
+[Contributions and SVG reproductions](https://github.com/dotnetprojects/SVGImage/issues) are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md); user-visible changes belong in the [changelog](CHANGELOG.md), which also feeds the website.
+
+[MIT licensed](LICENSE), with permission from the original author. Originally forked from the [SVGImage Control CodeProject article](https://www.codeproject.com/Articles/92434/SVGImage-Control).
 
 
