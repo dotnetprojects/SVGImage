@@ -20,6 +20,12 @@ internal static class ControlInitializationTests
         if (brush == null || brush.Color != Colors.White)
             throw new Exception("The embedded acid1.svg must load its companion acid1.css resource.");
 
+        var drawing = new SVGImage.SVG.SVGRender().CreateDrawing(image.SVG);
+        var acidPixels = AnimationTests.Image(drawing, 600, 400, new Rect(-600, -400, 1200, 800));
+        int pupil = (174 * 600 + 351) * 4;
+        if (acidPixels[pupil] != 0 || acidPixels[pupil + 1] != 128 || acidPixels[pupil + 2] != 0 || acidPixels[pupil + 3] != 255)
+            throw new Exception("The actual embedded acid1.svg must render its right pupil green using modern mixed-unit RGB.");
+
         // Initial paint overrides and later edits must still work when publishing
         // the initial palette no longer causes a second complete rendering.
         var stream = new MemoryStream(Encoding.UTF8.GetBytes("<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='red'/></svg>"));

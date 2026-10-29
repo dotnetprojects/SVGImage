@@ -7,3 +7,5 @@ Custom properties inherit computed values and support `var()` substitutions, nes
 The declaration tokenizer preserves quoted strings, comments, function arguments and data URI separators. Styles are collected before shapes are constructed, so style elements may occur after their targets.
 
 See [animation support](Animations.md) for CSS timing, keyframes and transforms. This remains an SVG-focused subset: dynamic pseudo-classes, selector escapes/namespaces, advanced selectors, cascade layers, conditional media/supports rules, `calc()`, CSS layout and external HTML-page styles are not implemented.
+
+Modern RGB/RGBA syntax supports mixed numbers and percentages, including `rgb(-5% 128 0%)` and `rgba(25% 128 100% / 50%)`. Components may be separated by CSS whitespace/newlines; alpha requires `/`. Legacy comma syntax keeps its separate grammar: its three RGB channels must all use numbers or all use percentages. The Acid1 sample uses modern mixed-unit RGB for its green right pupil.

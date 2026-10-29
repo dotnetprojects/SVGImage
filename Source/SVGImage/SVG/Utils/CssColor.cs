@@ -23,11 +23,31 @@ namespace SVGImage.SVG.Utils
                     color = hex.Length == 6 ? Color.FromRgb((byte)(value >> 16), (byte)(value >> 8), (byte)value) : Color.FromArgb((byte)value, (byte)(value >> 24), (byte)(value >> 16), (byte)(value >> 8));
                     return true;
                 }
-                var match = Regex.Match(text, @"^(rgba?|hsla?)\((.*)\)$");
+                var match = Regex.Match(text, @"\A(rgba?|hsla?)\((.*)\)\z", RegexOptions.Singleline);
                 if (match.Success)
                 {
-                    string[] values = Regex.Split(match.Groups[2].Value.Trim(), @"\s*[,/]\s*|\s+");
-                    if (values.Length != 3 && values.Length != 4) return false;
+                    string body = match.Groups[2].Value.Trim();
+                    bool legacy = body.IndexOf(',') >= 0;
+                    string[] values;
+                    if (legacy)
+                    {
+                        if (body.IndexOf('/') >= 0) return false;
+                        values = Regex.Split(body, @"\s*,\s*");
+                        if (values.Length != 3 && values.Length != 4) return false;
+                        // Legacy comma RGB requires homogeneous channel units.
+                        // Modern whitespace RGB may mix numbers and percentages.
+                        if (match.Groups[1].Value.StartsWith("rgb") &&
+                            (values[0].EndsWith("%") != values[1].EndsWith("%") ||
+                             values[0].EndsWith("%") != values[2].EndsWith("%"))) return false;
+                    }
+                    else
+                    {
+                        var parts = body.Split('/');
+                        if (parts.Length > 2) return false;
+                        var channels = Regex.Split(parts[0].Trim(), @"\s+");
+                        if (channels.Length != 3) return false;
+                        values = parts.Length == 1 ? channels : new[] { channels[0], channels[1], channels[2], parts[1].Trim() };
+                    }
                     double alpha = values.Length == 4 ? Unit(values[3], 1) : 1;
                     if (match.Groups[1].Value.StartsWith("rgb"))
                         color = Color.FromArgb(Byte(alpha), Byte(Unit(values[0], 255)), Byte(Unit(values[1], 255)), Byte(Unit(values[2], 255)));

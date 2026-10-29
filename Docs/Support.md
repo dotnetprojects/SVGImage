@@ -26,7 +26,7 @@ This page describes the **current repository source**, including [unreleased wor
 | Fills / strokes | Solid colors, widths, caps, joins and dash arrays | Some CSS length/layout cases remain incomplete. |
 | Gradients | Linear/radial paints, stops and spreading | Stop opacity, focal points, pad/repeat/reflect and per-use opacity. General template inheritance is incomplete. |
 | `pattern` | Repeated SVG content | Tile/content units, viewBoxes, transforms, opacity and local templates. |
-| Colors | Names, RGB/RGBA, HSL/HSLA and hex | Percentages, clamping and short/long RGBA hex notation. |
+| Colors | Names, RGB/RGBA, HSL/HSLA and hex | Modern RGB/RGBA mixed numbers/percentages, slash alpha, legacy commas, clamping and short/long RGBA hex notation. |
 | Text | Glyph outlines, styled spans, anchoring and basic layout | Complete bidirectional/complex-script layout and every font property are not implemented. |
 | `textPath` | Local path references and tangent-aligned glyphs | Percentage `startOffset`, anchoring and spans. Stretching, vertical path text and `pathLength` calibration remain unsupported. |
 | Grayscale / overrides | `IsGrayscale`, drawing conversion and color/stroke overrides | [Grayscale guide](Grayscale.md). |

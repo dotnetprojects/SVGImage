@@ -29,6 +29,8 @@ These entries describe the current repository source. They have not been assigne
 
 #### Fixed
 
+- The Acid1 sample's right pupil now uses modern `rgb(-5% 128 0%)` and renders green. RGB/RGBA parsing distinguishes space/slash syntax (mixed numeric/percentage channels allowed) from legacy commas (uniform channel units), accepts multiline CSS whitespace and rejects mixed separators or alpha without a slash. Pixel regressions cover the actual embedded sample and mixed channels/alpha.
+
 - Animated clip geometry retains its native clocks through unions/transforms and bounding-box mapping. The original `clipping_css.svg` now moves/repeats correctly; `repeatDur` supports indefinite and finite durations, including frozen partial iterations.
 - Initial control loading publishes its brush palette without rendering the SVG twice. File sources retain their filename for relative resource resolution; embedded SVGs load companion CSS/images beside their resource URI. Initial and later paint overrides remain functional.
 - Blur passes process RGBA scanlines together, avoiding repeated edge-mode decoding and strided per-channel reads. The sample opens immediately while its detailed static illustration renders on a background STA; only a frozen drawing crosses back to the UI. Sample asset paths resolve relative to the executable regardless of the working directory.

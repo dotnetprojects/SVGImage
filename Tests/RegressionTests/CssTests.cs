@@ -40,6 +40,13 @@ internal static class CssTests
         ColorAt("<rect width='20' height='20' fill='#ff000080'/>",Color.FromArgb(128,255,0,0),"CSS RGBA hex");
         ColorAt("<rect width='20' height='20' fill='hsl(120,100%,50%)'/>",Colors.Lime,"CSS HSL color");
         ColorAt("<rect width='20' height='20' fill='rgb(-10%,120%,0%)'/>",Colors.Lime,"CSS channel clamping");
+        ColorAt("<rect width='20' height='20' fill='rgb(-5% 128 0%)'/>", Colors.Green, "modern RGB mixes percentage and numeric channels");
+        ColorAt("<rect width='20' height='20' fill='rgb(64 50% 100%)'/>", Color.FromRgb(64,128,255), "modern RGB mixed units in other channel positions");
+        ColorAt("<rect width='20' height='20' style='fill:rgb(\n -5%\t128\n 0%\n)'/>", Colors.Green, "modern RGB accepts CSS whitespace and newlines");
+        ColorAt("<rect width='20' height='20' fill='rgba(25% 128 100% / 50%)'/>", Color.FromArgb(128,64,128,255), "modern RGBA mixed units and percentage alpha");
+        ColorAt("<rect width='20' height='20' fill='rgb(0% 128 0% / .5)'/>", Color.FromArgb(128,0,128,0), "modern RGB numeric alpha after slash");
+        foreach (string invalid in new[] { "rgb(-5%,128,0%)", "rgb(0 128 0 .5)", "rgb(0,128,0 / .5)", "rgb(0 128 0 / .5 / .5)" })
+            ColorAt("<defs><filter id='invalid'><feFlood flood-color='" + invalid + "'/></filter></defs><rect width='20' height='20' filter='url(#invalid)'/>", Colors.Black, "invalid RGB separators/legacy mixed units use flood default: " + invalid);
         AnimationTiming();
         Console.WriteLine("CSS cascade, selector and custom-property checks passed.");
     }
