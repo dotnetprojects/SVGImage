@@ -42,6 +42,8 @@ These entries describe the current repository source. They have not been assigne
 
 #### Fixed
 
+- Background-buffer discovery and root filter composition safely handle an uninitialized SVG document; empty drawings remain valid with filters enabled or disabled.
+
 - The Acid1 sample's right pupil now uses modern `rgb(-5% 128 0%)` and renders green. RGB/RGBA parsing distinguishes space/slash syntax (mixed numeric/percentage channels allowed) from legacy commas (uniform channel units), accepts multiline CSS whitespace and rejects mixed separators or alpha without a slash. Pixel regressions cover the actual embedded sample and mixed channels/alpha.
 
 - Animated clip geometry retains its native clocks through unions/transforms and bounding-box mapping. The original `clipping_css.svg` now moves/repeats correctly; `repeatDur` supports indefinite and finite durations, including frozen partial iterations.

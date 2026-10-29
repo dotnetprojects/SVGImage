@@ -147,11 +147,11 @@ namespace SVGImage.SVG
             this.SVG = svg;
             animationScene = UseAnimations ? new SvgAnimationScene(svg) : null;
             bool camera = animationScene != null && animationScene.Tracks(svg.RootGroup).Any(t => t.Attribute == "viewBox");
-            needsBackground=UseFilters && svg.RootGroup.SourceNode.SelectNodes(".//*[@in='BackgroundImage' or @in='BackgroundAlpha' or @in2='BackgroundImage' or @in2='BackgroundAlpha']").Count>0;
+            needsBackground=UseFilters && (svg.RootGroup?.SourceNode?.SelectNodes(".//*[@in='BackgroundImage' or @in='BackgroundAlpha' or @in2='BackgroundImage' or @in2='BackgroundAlpha']").Count ?? 0)>0;
             BackdropContext rootBackdrop=null;
             if(needsBackground) NewBackdrop(svg.RootGroup,out rootBackdrop);
             var drawingGroup = this.LoadGroup(svg.Elements, camera ? null : svg.ViewBox, false, rootBackdrop);
-            if (svg.RootGroup?.Mask != null || (UseFilters && svg.RootGroup?.Filter != null) || svg.RootGroup?.Transform != null || svg.RootGroup?.Clip != null || svg.RootGroup?.Opacity != 1 || (animationScene != null && animationScene.Tracks(svg.RootGroup).Count > 0))
+            if (svg.RootGroup != null && (svg.RootGroup.Mask != null || (UseFilters && svg.RootGroup.Filter != null) || svg.RootGroup.Transform != null || svg.RootGroup.Clip != null || svg.RootGroup.Opacity != 1 || (animationScene != null && animationScene.Tracks(svg.RootGroup).Count > 0)))
             {
                 var masked = new DrawingGroup();
                 AddDrawingToGroup(masked, svg.RootGroup, drawingGroup);

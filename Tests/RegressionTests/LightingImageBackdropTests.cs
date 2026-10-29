@@ -13,6 +13,9 @@ internal static class LightingImageBackdropTests
         => GeometryTests.Svg(Filter + primitives + "</filter>" + content);
     internal static void Run()
     {
+        foreach(bool enabled in new[]{true,false})
+            if(!new SVGRender { UseFilters=enabled }.CreateDrawing(new SVGImage.SVG.SVG()).Bounds.IsEmpty)
+                throw new Exception("An uninitialized SVG must render empty");
         Lighting(); Images(); Backdrops(); Samples();
         Console.WriteLine("Lighting, feImage and backdrop checks passed.");
     }
