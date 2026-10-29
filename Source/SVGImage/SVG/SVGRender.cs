@@ -34,6 +34,9 @@ namespace SVGImage.SVG
         public SVG SVG { get; private set; }
 
         public bool UseAnimations { get; set; }
+
+        /// <summary>Applies SVG filter effects. Disable for a fast preview, then enable and recreate the drawing for full quality.</summary>
+        public bool UseFilters { get; set; } = true;
         private HashSet<Mask> activeMasks = new HashSet<Mask>();
         private readonly HashSet<Shape> activeUses = new HashSet<Shape>();
         private SvgAnimationScene animationScene;
@@ -148,7 +151,7 @@ namespace SVGImage.SVG
 
         private GeometryDrawing NewDrawingItem(Shape shape, Geometry geometry)
         {
-            double shapeOpacity = shape.Filter != null || animationScene != null && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity") ? 1 : shape.Opacity;
+            double shapeOpacity = UseFilters && shape.Filter != null || animationScene != null && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity") ? 1 : shape.Opacity;
             shape.geometryElement = geometry;
             GeometryDrawing item = new GeometryDrawing();
             Stroke stroke = shape.Stroke;
@@ -479,13 +482,14 @@ namespace SVGImage.SVG
         private void AddDrawingToGroup(DrawingGroup grp, Shape shape, Drawing drawing)
         {
             var mask = shape.Mask;
+            bool filtered = UseFilters && shape.Filter != null;
             bool animated = animationScene != null && animationScene.Tracks(shape).Count > 0;
-            if (shape.Clip != null || shape.Transform != null || shape.Filter != null || mask != null || animated || shape is Group)
+            if (shape.Clip != null || shape.Transform != null || filtered || mask != null || animated || shape is Group)
             {
                 var subgrp = new DrawingGroup();
                 if (mask != null)
                     subgrp.OpacityMask = CreateMask(mask, MaskDrawing.ObjectBounds(drawing));
-                if (shape is Group || shape.Filter != null || (animated && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity")))
+                if (shape is Group || filtered || (animated && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity")))
                     subgrp.Opacity = shape.Opacity;
                 if (shape.Clip != null)
                     subgrp.ClipGeometry = shape.Clip.GetGeometry(MaskDrawing.ObjectBounds(drawing), null, animationScene == null ? (Func<Shape, Geometry, Geometry>)null : animationScene.AttachClip);
@@ -495,7 +499,7 @@ namespace SVGImage.SVG
                     if (!animated || !animationScene.Tracks(shape).Any(t => t.Type != null))
                         subgrp.Transform = new MatrixTransform(CssTransforms.Around(shape.Transform.Value, CssTransforms.Origin(shape, MaskDrawing.ObjectBounds(drawing))));
                 }
-                if (shape.Filter != null)
+                if (filtered)
                 {
                     drawing = shape.Filter.Render(drawing, animationScene != null);
                 }
@@ -515,7 +519,7 @@ namespace SVGImage.SVG
                 // Paint overrides apply to the visible artwork, not mask luminance.
                 var renderer = new SVGRender(ExternalFileLoader)
                 {
-                    SVG = SVG, activeMasks = activeMasks
+                    SVG = SVG, activeMasks = activeMasks, UseFilters = UseFilters
                 };
                 var drawing = renderer.LoadGroup(mask.Elements, null, false);
                 if (mask.ContentUsesBoundingBox)

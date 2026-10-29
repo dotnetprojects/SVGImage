@@ -10,6 +10,8 @@ These entries describe the current repository source. They have not been assigne
 
 #### Added
 
+- **Progressive SVG preview:** `SVGRender.UseFilters` can bypass SVG filters while keeping clipping, masks and opacity. The car sample publishes a frozen preview immediately, then rerenders the same parsed SVG with filters on its background STA and replaces the preview with the complete result.
+
 - **Documentation:** redesigned homepage and repository overview, original WPF-rendered gallery, support reference, getting-started guide and this permanent changelog.
 - **SVG filter graphs:** standalone raster rendering, named `in` / `in2` / `result` connections, `SourceGraphic` / `SourceAlpha`, filter regions, primitive subregions, coordinate units and sRGB / linearRGB processing.
 - **Procedural effects:** four-channel seeded `feTurbulence` with turbulence/fractal noise, one/two base frequencies, octaves and stitching; `feDisplacementMap` with unpremultiplied channel selection and bilinear sampling.

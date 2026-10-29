@@ -94,7 +94,7 @@
         <TabItem Header="SVG Rendering" Height="40" Width="245" x:Name="tabSizeType" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
             <UniformGrid Background="Wheat" Columns="4" Rows="4">
                 <Grid>
-                    <TextBlock x:Name="DetailedIllustrationStatus" Text="Loading detailed illustration…" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="DetailedIllustrationStatus" Panel.ZIndex="1" Background="#DDFFFFFF" Padding="4" Text="Loading detailed illustration…" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <svg1:SVGImage x:Name="DetailedIllustration" UseAnimations="False" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 </Grid>
                 <svg1:SVGImage Source="/Example;component/Images/6.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />

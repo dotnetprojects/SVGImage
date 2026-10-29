@@ -25,3 +25,5 @@ The original `clipping_css.svg` sample is linked into the test output alongside 
 Set `RESVG_TEST_SUITE` to an external checkout for 215 selected path/point/filter fixtures, plus eight turbulence reference comparisons. These include eleven portable convolution cases and all eight drop-shadow cases. Four earlier undefined/nonportable cases are render-only. Convolution's malformed/UB upstream references are excluded; synthetic checks verify the current specification's invalid-kernel pass-through and zero-divisor defaults. Downloaded corpus files remain outside the repository.
 
 Release version validation runs separately with `./Tests/ReleaseWorkflowTests.ps1`. Packaging is verified across all nine framework assemblies and symbol sets with `.github/scripts/Test-ReleasePackages.ps1`.
+
+Filter preview checks verify that bypassing filters preserves clipping and element/group opacity, the setting propagates into masks, a frozen preview remains unchanged, and restoring filters on the same parsed SVG matches a fresh full render.

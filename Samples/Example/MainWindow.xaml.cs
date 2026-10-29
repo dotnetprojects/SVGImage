@@ -128,8 +128,21 @@ namespace Example
             {
                 try
                 {
-                    System.Windows.Media.DrawingGroup drawing;
-                    using (data) drawing = new SVGRender { UseAnimations = false }.LoadDrawing(data);
+                    var renderer = new SVGRender { UseAnimations = false, UseFilters = false };
+                    System.Windows.Media.DrawingGroup preview;
+                    using (data) preview = renderer.LoadDrawing(data);
+                    preview.Freeze();
+                    UpdateIllustration(new Action(() =>
+                    {
+                        if (!IsLoaded) return;
+                        DetailedIllustration.SetImage(preview);
+                        DetailedIllustrationStatus.Text = "Applying filters…";
+                        DetailedIllustrationStatus.VerticalAlignment = VerticalAlignment.Bottom;
+                    }));
+                    // Reuse the parsed SVG; publish a separate complete drawing
+                    // so the visible preview is never modified across threads.
+                    renderer.UseFilters = true;
+                    var drawing = renderer.CreateDrawing(renderer.SVG);
                     drawing.Freeze();
                     UpdateIllustration(new Action(() =>
                     {

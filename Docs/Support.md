@@ -51,6 +51,8 @@ Standalone filters and chains support named results, `SourceGraphic` / `SourceAl
 | `feConvolveMatrix` | Rotated kernels, rectangular orders, divisor/bias, targets, duplicate/wrap/transparent edges, kernel spacing and preserved alpha. |
 | `feDropShadow` | Source-alpha blur, offset, flood color/opacity and source-over composition. |
 
+`SVGRender.UseFilters` defaults to true. Disable it for a quick preview, then re-enable it and call `CreateDrawing(renderer.SVG)` to render the same parsed document with filters. The sample car uses both passes on a background STA and publishes separate frozen drawings. Clipping, masks and opacity remain active in the preview.
+
 Element opacity is applied **after** filtering. Fill/stroke opacity is part of `SourceGraphic`.
 
 Raster filters sample inputs **at load time**. Animating their source/parameters does not refresh the bitmap. Single matrix/saturation filters can retain vector paints with animation enabled. Rasterization uses up to four pixels per user unit, capped at 2048 pixels on the longest dimension.

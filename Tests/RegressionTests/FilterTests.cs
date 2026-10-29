@@ -5,8 +5,34 @@ using System.Windows.Media;
 
 internal static class FilterTests
 {
+    private static void FilterPreview()
+    {
+        const string source = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><defs><filter id='f'><feFlood flood-color='blue'/></filter><clipPath id='c'><rect x='20' y='20' width='20' height='40'/></clipPath></defs><g opacity='.5'><rect x='20' y='20' width='40' height='40' fill='red' opacity='.5' filter='url(#f)' clip-path='url(#c)'/></g></svg>";
+        var renderer = new SVGImage.SVG.SVGRender { UseFilters = false };
+        var preview = renderer.LoadXmlDrawing(source);
+        GeometryTests.Pixel(preview,30,30,Color.FromArgb(64,255,0,0),"filter preview preserves element and group opacity",2);
+        GeometryTests.Pixel(preview,50,30,Colors.Transparent,"filter preview retains clipping");
+        preview.Freeze();
+        var previewPixels = AnimationTests.Image(preview,100,100,new Rect(0,0,100,100));
+        renderer.UseFilters = true;
+        var full = renderer.CreateDrawing(renderer.SVG);
+        full.Freeze();
+        GeometryTests.Pixel(full,30,30,Color.FromArgb(64,0,0,255),"full pass restores filters and opacity",2);
+        if (!previewPixels.SequenceEqual(AnimationTests.Image(preview,100,100,new Rect(0,0,100,100))))
+            throw new Exception("Creating the full drawing mutated the published frozen preview");
+        var baseline = new SVGImage.SVG.SVGRender().LoadXmlDrawing(source);
+        if (!AnimationTests.Image(full,100,100,new Rect(0,0,100,100)).SequenceEqual(AnimationTests.Image(baseline,100,100,new Rect(0,0,100,100))))
+            throw new Exception("Re-enabling filters must match a fresh full render");
+        const string masked = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><defs><filter id='black'><feFlood flood-color='black'/></filter><mask id='m'><rect width='100' height='100' fill='white' filter='url(#black)'/></mask></defs><rect width='100' height='100' fill='red' mask='url(#m)'/></svg>";
+        renderer.UseFilters = false;
+        GeometryTests.Pixel(renderer.LoadXmlDrawing(masked),50,50,Colors.Red,"preview filter policy propagates into masks");
+        renderer.UseFilters = true;
+        GeometryTests.Pixel(renderer.CreateDrawing(renderer.SVG),50,50,Colors.Transparent,"full pass restores mask filters");
+    }
+
     internal static void Run()
     {
+        FilterPreview();
         var d=GeometryTests.Svg("<filter id='f' x='0' y='0' width='1' height='1' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise'/></filter><rect width='100' height='100' filter='url(#f)'/>");
         GeometryTests.Pixel(d,50,50,Color.FromArgb(128,128,128,128),"zero-frequency fractal noise in sRGB",2);
         d=GeometryTests.Svg("<filter id='f' x='0' y='0' width='1' height='1'><feTurbulence type='fractalNoise'/></filter><rect width='100' height='100' filter='url(#f)'/>");
