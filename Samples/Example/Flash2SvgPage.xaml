@@ -1,0 +1,38 @@
+<UserControl x:Class="Example.Flash2SvgPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svg="https://github.com/dotnetprojects/SVGImage"
+    Loaded="OnLoaded" Unloaded="OnUnloaded" Background="#F3F5F9">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/><RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Flash2Svg animation collection" FontSize="26" FontWeight="SemiBold" Foreground="#18243B"/>
+            <TextBlock Margin="0,8,0,12" TextWrapping="Wrap">
+                All 13 examples from Tom Byrne's
+                <Hyperlink NavigateUri="https://github.com/TomByrne/Flash2Svg/wiki/Examples" RequestNavigate="OpenLink">Flash2Svg examples page</Hyperlink>.
+                Flash2Svg is an <Hyperlink NavigateUri="https://github.com/TomByrne/Flash2Svg/blob/cc/license.txt" RequestNavigate="OpenLink">MIT-licensed project</Hyperlink>.
+                Artwork belongs to its respective creators.
+            </TextBlock>
+        </StackPanel>
+        <TextBlock Grid.Row="1" Margin="0,0,0,16" TextWrapping="Wrap" Foreground="#485775"
+            Text="Select an animation. Viber examples start with Play or a click on the preview. Samples download to your local cache on demand and then work offline. JavaScript and audio in LoveDota are not played."/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="200"/><ColumnDefinition Width="16"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+            <ListBox x:Name="Examples" SelectionChanged="SelectExample" FontSize="15" Padding="8"/>
+            <Border Grid.Column="2" Background="White" BorderBrush="#D5DEEB" BorderThickness="1" CornerRadius="12" Padding="16">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,12,0,0">
+                        <Button x:Name="PlayButton" Content="Play / restart" Padding="18,7" Click="Play" IsEnabled="False"/>
+                        <Button Content="Open original page" Padding="18,7" Margin="8,0,0,0" Click="OpenExamples"/>
+                    </StackPanel>
+                    <svg:SVGImage x:Name="Preview" UseAnimations="True" MouseLeftButtonUp="PreviewClicked"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </DockPanel>
+            </Border>
+        </Grid>
+        <TextBlock x:Name="Status" Grid.Row="3" TextWrapping="Wrap" Margin="0,14,0,0" Foreground="#485775"/>
+    </Grid>
+</UserControl>

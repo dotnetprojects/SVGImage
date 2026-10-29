@@ -1,0 +1,71 @@
+name: Release NuGet packages
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      RELEASE_TAG: ${{ github.event.release.tag_name }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Read the version from the release tag
+        id: version
+        run: ./.github/scripts/Get-ReleaseVersion.ps1 -Tag $env:RELEASE_TAG -GitHubOutput $env:GITHUB_OUTPUT
+      - name: Validate release version parsing
+        run: ./Tests/ReleaseWorkflowTests.ps1
+      - name: Run regression checks
+        run: dotnet run --project Tests/RegressionTests --configuration Release -p:TargetFrameworks=net8.0-windows -p:GeneratePackageOnBuild=false
+      - name: Pack all targets with the release version
+        env:
+          PACKAGE_VERSION: ${{ steps.version.outputs.version }}
+          ASSEMBLY_VERSION: ${{ steps.version.outputs.assembly-version }}
+        run: |
+          dotnet pack Source/SVGImage/DotNetProjects.SVGImage.csproj --configuration Release --output artifacts `
+            -p:GeneratePackageOnBuild=false -p:PackageVersion=$env:PACKAGE_VERSION -p:Version=$env:PACKAGE_VERSION `
+            -p:AssemblyVersion=$env:ASSEMBLY_VERSION -p:FileVersion=$env:ASSEMBLY_VERSION `
+            -p:InformationalVersion=$env:PACKAGE_VERSION -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+          if ($LASTEXITCODE -ne 0) { throw 'NuGet packing failed.' }
+      - name: Validate package contents and versions
+        env:
+          PACKAGE_VERSION: ${{ steps.version.outputs.version }}
+          ASSEMBLY_VERSION: ${{ steps.version.outputs.assembly-version }}
+        run: ./.github/scripts/Test-ReleasePackages.ps1 -Directory artifacts -Version $env:PACKAGE_VERSION -AssemblyVersion $env:ASSEMBLY_VERSION
+      - name: Attach packages to this release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $assets = @(Get-ChildItem artifacts -File | Where-Object { $_.Extension -in '.nupkg', '.snupkg' } | ForEach-Object FullName)
+          if ($assets.Count -lt 2) { throw 'Expected the NuGet package and its symbol package.' }
+          gh release upload $env:RELEASE_TAG @assets --repo $env:GITHUB_REPOSITORY --clobber
+          if ($LASTEXITCODE -ne 0) { throw 'Release asset upload failed.' }
+      - name: Publish packages and symbols to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_API_KEY)) { throw 'Set the repository NUGET_API_KEY secret before publishing a release.' }
+          # dotnet also pushes the matching .snupkg beside each .nupkg.
+          foreach ($package in Get-ChildItem artifacts -Filter '*.nupkg' -File) {
+            dotnet nuget push $package.FullName --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+            if ($LASTEXITCODE -ne 0) { throw "NuGet publication failed for $($package.Name)." }
+          }

@@ -13,6 +13,9 @@ These entries describe the current repository source. They have not been assigne
 - **Documentation:** redesigned homepage and repository overview, original WPF-rendered gallery, support reference, getting-started guide and this permanent changelog.
 - **SVG filter graphs:** standalone raster rendering, named `in` / `in2` / `result` connections, `SourceGraphic` / `SourceAlpha`, filter regions, primitive subregions, coordinate units and sRGB / linearRGB processing.
 - **Procedural effects:** four-channel seeded `feTurbulence` with turbulence/fractal noise, one/two base frequencies, octaves and stitching; `feDisplacementMap` with unpremultiplied channel selection and bilinear sampling.
+- **Convolution and shadows:** `feConvolveMatrix` kernels, order/targets, divisor/bias, edge modes, kernel spacing and preserved alpha; `feDropShadow` blur/offset/color/opacity and source-over composition. Added eleven portable convolution and all eight drop-shadow reference comparisons.
+- **Animation gallery:** a dedicated, lazily created Flash2Svg sample tab lists all 13 wiki examples, credits the original page/project license, caches downloads outside the repository and provides Play/restart for SMIL click triggers. JavaScript/audio remain unsupported.
+- **Release automation:** publishing a GitHub release packs all nine frameworks with the release tag's semantic version, validates manifests/assembly versions/symbols, attaches `.nupkg`/`.snupkg` assets and publishes them to NuGet. Push/PR/AppVeyor builds no longer publish packages; GitVersion was removed.
 - **More filter primitives:** `feFlood`, `feOffset`, `feMerge`, `feComposite`, `feColorMatrix` (matrix, saturation, hue rotation, luminance-to-alpha), `feComponentTransfer` (identity, table, discrete, linear, gamma), `feBlend`, `feGaussianBlur`, `feMorphology` and `feTile`.
 - **Text on a path:** local `textPath` references, glyph placement and tangent rotation, percentage `startOffset`, text anchoring and styled spans.
 - **SMIL motion:** `animateMotion` with inline paths or local `mpath` references, automatic/numeric rotation and `keyPoints` / `keyTimes`.
@@ -22,9 +25,14 @@ These entries describe the current repository source. They have not been assigne
 - **CSS selectors:** type, universal, ID, class, compound and attribute presence/equality selectors, `:root`, descendant/child and adjacent/general sibling relationships.
 - **CSS animation controls:** multiple animations, shorthand/longhands, positive/negative delays, fractional repeats, directions, fill modes, initial paused state, grouped offsets and per-keyframe easing. Matching transform functions preserve full rotations.
 - **CSS colors:** RGB/RGBA and HSL/HSLA functions, percentage channels, short/long RGBA hex colors, grey aliases and `rebeccapurple`.
-- **Regression coverage:** an optional local resvg test-suite runner for 196 path/point/filter cases and eight turbulence references. Downloaded fixtures remain outside the repository.
+- **Regression coverage:** an optional local resvg test-suite runner for 215 path/point/filter cases and eight turbulence references. Downloaded fixtures remain outside the repository.
 
 #### Fixed
+
+- Animated clip geometry retains its native clocks through unions/transforms and bounding-box mapping. The original `clipping_css.svg` now moves/repeats correctly; `repeatDur` supports indefinite and finite durations, including frozen partial iterations.
+- Initial control loading publishes its brush palette without rendering the SVG twice. File sources retain their filename for relative resource resolution; embedded SVGs load companion CSS/images beside their resource URI. Initial and later paint overrides remain functional.
+- Blur passes process RGBA scanlines together, avoiding repeated edge-mode decoding and strided per-channel reads. The sample opens immediately while its detailed static illustration renders on a background STA; only a frozen drawing crosses back to the UI. Sample asset paths resolve relative to the executable regardless of the working directory.
+- Explicit inherited fill/stroke follow `<use>` instance ancestry, fixing the black outer eye in `acid1.svg`. SVG switch feature lists recognize whitespace-separated required features and reject unsupported extensions independently.
 
 - Middle/end text anchoring now shifts text before its anchor using advances; `textPath` respects its own anchor style. The native documentation gallery exposed this existing alignment issue.
 - Clip paths unite child silhouettes and honor paths, basic shapes, text, `use`, inherited `clip-rule`, transforms, bounding-box units and forward references. Empty clips safely hide their targets.

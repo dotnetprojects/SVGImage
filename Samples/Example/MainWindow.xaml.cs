@@ -3,6 +3,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Collections.Generic;
 using System.Windows;
+using System.Threading;
+using SVGImage.SVG;
 
 namespace Example
 {
@@ -47,6 +49,7 @@ namespace Example
         private const string IconFolder  = "Svg-Icons";
 
         private bool _isShown;
+        private bool _loadingDetailedIllustration;
         private bool _showMessage;
         private string _iconsPath;
 
@@ -78,9 +81,10 @@ namespace Example
 
         private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
         {
+            LoadDetailedIllustration();
             this.EnsureIcons();
 
-            string workingDir = Path.GetFullPath(SamplesDir);
+            string workingDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, SamplesDir));
 
             string iconsPath = Path.Combine(workingDir, IconZipFile);
             if (!File.Exists(iconsPath))
@@ -110,10 +114,53 @@ namespace Example
             this.DataContext = sourceData;
         }
 
+        private void LoadDetailedIllustration()
+        {
+            if (_loadingDetailedIllustration) return;
+            _loadingDetailedIllustration = true;
+            // The car contains many raster blur layers. Render this static SVG
+            // on its own STA so the window can open and respond immediately.
+            var resource = Application.GetResourceStream(new Uri("/Example;component/Images/171.svg", UriKind.Relative));
+            var data = new MemoryStream();
+            using (var source = resource.Stream) source.CopyTo(data);
+            data.Position = 0;
+            var worker = new Thread(() =>
+            {
+                try
+                {
+                    System.Windows.Media.DrawingGroup drawing;
+                    using (data) drawing = new SVGRender { UseAnimations = false }.LoadDrawing(data);
+                    drawing.Freeze();
+                    UpdateIllustration(new Action(() =>
+                    {
+                        if (!IsLoaded) return;
+                        DetailedIllustration.SetImage(drawing);
+                        DetailedIllustrationStatus.Visibility = System.Windows.Visibility.Collapsed;
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    UpdateIllustration(new Action(() =>
+                    {
+                        if (IsLoaded) DetailedIllustrationStatus.Text = "Could not load illustration: " + ex.Message;
+                    }));
+                }
+            }) { IsBackground = true };
+            worker.SetApartmentState(ApartmentState.STA);
+            worker.Start();
+        }
+
+        private void UpdateIllustration(Action update)
+        {
+            if (Dispatcher.HasShutdownStarted) return;
+            try { Dispatcher.BeginInvoke(update); }
+            catch (InvalidOperationException) { if (!Dispatcher.HasShutdownStarted) throw; }
+        }
+
         private void EnsureIcons()
         {
             // Icons credit: https://github.com/icons8/flat-color-icons
-            string workingDir = Path.GetFullPath(SamplesDir);
+            string workingDir = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, SamplesDir));
 
             string iconsPath = Path.Combine(workingDir, IconZipFile);
             if (!File.Exists(iconsPath))

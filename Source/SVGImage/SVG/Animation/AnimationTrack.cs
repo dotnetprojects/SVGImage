@@ -15,7 +15,7 @@ namespace SVGImage.SVG.Animation
     {
         internal string Attribute, Type, Begin, Mode;
         internal bool Additive, Freeze;
-        internal double Duration, Repeat = 1;
+        internal double Duration, Repeat = 1, RepeatDuration = double.PositiveInfinity;
         internal string[] Values;
         internal double[] Times;
         internal KeySpline[] Splines;
@@ -53,6 +53,12 @@ namespace SVGImage.SVG.Animation
             }
             string repeat = XmlUtil.AttrValue(node, "repeatCount", "1");
             track.Repeat = repeat == "indefinite" ? double.PositiveInfinity : Number(repeat);
+            string repeatDuration = XmlUtil.AttrValue(node, "repeatDur");
+            if (repeatDuration.Length > 0)
+            {
+                track.RepeatDuration = Clock(repeatDuration);
+                if (node.Attributes["repeatCount"] == null) track.Repeat = double.PositiveInfinity;
+            }
             string values = XmlUtil.AttrValue(node, "values");
             if (node.LocalName == "set")
                 track.Values = new[] { XmlUtil.AttrValue(node, "to") };
@@ -104,10 +110,11 @@ namespace SVGImage.SVG.Animation
             }
             if (double.IsInfinity(start) || double.IsNaN(Duration) || Duration <= 0 || Repeat <= 0) return false;
             double elapsed = seconds - start;
-            double total = Duration * Repeat;
+            double total = Math.Min(Duration * Repeat, RepeatDuration);
+            if (total <= 0 || double.IsNaN(total)) return false;
             if (elapsed >= total && !Freeze) return false;
             double progress = double.IsInfinity(Duration) ? 0 : elapsed >= total ?
-                (Repeat % 1 == 0 ? 1 : Repeat % 1) : (elapsed % Duration) / Duration;
+                (total % Duration == 0 ? 1 : (total % Duration) / Duration) : (elapsed % Duration) / Duration;
             while (index < Values.Length - 1 && progress >= Times[index + 1]) index++;
             if (index < Values.Length - 1 && Times[index + 1] > Times[index])
                 fraction = (progress - Times[index]) / (Times[index + 1] - Times[index]);

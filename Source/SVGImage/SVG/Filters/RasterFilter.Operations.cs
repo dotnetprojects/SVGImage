@@ -117,34 +117,61 @@ namespace SVGImage.SVG.Filters
         }
         private Frame BoxBlur(Frame input, int radius, bool horizontal, string edge)
         {
+            if (radius == 0) return input;
             var output = new Frame(input.Data.Length, input.Linear);
             int length = horizontal ? width : height, lines = horizontal ? height : width;
-            for (int line = 0; line < lines; line++) for (int c = 0; c < 4; c++)
+            bool duplicate = edge == "duplicate", wrap = edge == "wrap";
+            double divisor = 2.0 * radius + 1;
+            // Gather each scanline once. Sliding all RGBA channels together avoids
+            // repeated edge-mode parsing and strided reads for every channel.
+            var scan = new float[length * 4];
+            for (int line = 0; line < lines; line++)
             {
-                double sum = 0;
-                if (edge == "none")
+                if (horizontal) Array.Copy(input.Data, line * width * 4, scan, 0, scan.Length);
+                else for (int at = 0; at < length; at++)
+                    Array.Copy(input.Data, (at * width + line) * 4, scan, at * 4, 4);
+                double r = 0, g = 0, b = 0, a = 0;
+                for (int at = 0; at < length; at++)
                 {
-                    for (int at = 0; at <= Math.Min(radius, length - 1); at++) sum += Edge(input, at, line, c, horizontal, edge);
-                }
-                else if (edge == "duplicate")
-                {
-                    sum = radius * Edge(input, 0, line, c, horizontal, edge);
-                    for (int at = 0; at <= Math.Min(radius, length - 1); at++) sum += Edge(input, at, line, c, horizontal, edge);
-                    sum += Math.Max(0, radius - length + 1) * Edge(input, length - 1, line, c, horizontal, edge);
-                }
-                else
-                {
-                    double cycle = 0;
-                    for (int at = 0; at < length; at++) cycle += Edge(input, at, line, c, horizontal, edge);
-                    int window = 2 * radius + 1;
-                    sum = cycle * (window / length);
-                    for (int at = 0; at < window % length; at++) sum += Edge(input, -radius + at, line, c, horizontal, edge);
+                    int copies = at <= radius ? 1 : 0;
+                    if (duplicate)
+                    {
+                        if (at == 0) copies += radius;
+                        if (at == length - 1) copies += Math.Max(0, radius - length + 1);
+                    }
+                    else if (wrap)
+                    {
+                        int window = 2 * radius + 1, start = ((-radius % length) + length) % length;
+                        copies = window / length + (((at - start + length) % length) < window % length ? 1 : 0);
+                    }
+                    int index = at * 4;
+                    r += (double)scan[index] * copies; g += (double)scan[index + 1] * copies;
+                    b += (double)scan[index + 2] * copies; a += (double)scan[index + 3] * copies;
                 }
                 for (int at = 0; at < length; at++)
                 {
-                    int index = horizontal ? (line * width + at) * 4 + c : (at * width + line) * 4 + c;
-                    output.Data[index] = (float)(sum / (2 * radius + 1));
-                    sum += Edge(input, at + radius + 1, line, c, horizontal, edge) - Edge(input, at - radius, line, c, horizontal, edge);
+                    int index = (horizontal ? line * width + at : at * width + line) * 4;
+                    output.Data[index] = (float)(r / divisor); output.Data[index + 1] = (float)(g / divisor);
+                    output.Data[index + 2] = (float)(b / divisor); output.Data[index + 3] = (float)(a / divisor);
+                    int entering = at + radius + 1, leaving = at - radius;
+                    if (duplicate)
+                    {
+                        entering = Math.Min(length - 1, entering); leaving = Math.Max(0, leaving);
+                    }
+                    else if (wrap)
+                    {
+                        entering %= length; leaving = (leaving % length + length) % length;
+                    }
+                    if (entering >= 0 && entering < length)
+                    {
+                        int i = entering * 4;
+                        r += scan[i]; g += scan[i + 1]; b += scan[i + 2]; a += scan[i + 3];
+                    }
+                    if (leaving >= 0 && leaving < length)
+                    {
+                        int i = leaving * 4;
+                        r -= scan[i]; g -= scan[i + 1]; b -= scan[i + 2]; a -= scan[i + 3];
+                    }
                 }
             }
             return output;

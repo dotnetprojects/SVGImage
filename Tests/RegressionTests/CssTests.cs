@@ -8,6 +8,7 @@ internal static class CssTests
 {
     internal static void Run()
     {
+        ColorAt("<defs><g id='eye'><circle cx='10' cy='10' r='10' fill='inherit'/></g></defs><use href='#eye' fill='white'/>", Colors.White, "explicit fill inherit follows the use instance");
         ColorAt("<style>rect {fill:red}</style><rect fill='blue' width='20' height='20'/>", Colors.Red, "CSS overrides presentation attributes");
         ColorAt("<style>#target {fill:red}.a {fill:blue} rect {fill:green}</style><rect id='target' class='a' width='20' height='20'/>", Colors.Red, "specificity");
         ColorAt("<style>.b {fill:blue}.a {fill:red}</style><rect class='a b' width='20' height='20'/>", Colors.Red, "class order does not set precedence");

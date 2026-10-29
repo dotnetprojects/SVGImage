@@ -4,7 +4,7 @@
 		<UseWPF>true</UseWPF>
 		<Description>DotNetProjects.SVGImage</Description>
 		<RootNamespace>SVGImage.SVG</RootNamespace>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<PackageId>DotNetProjects.SVGImage</PackageId>
 		<Authors>DotNetProjects</Authors>
 		<Company>DotNetProjects</Company>

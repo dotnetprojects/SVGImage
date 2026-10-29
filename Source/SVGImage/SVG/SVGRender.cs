@@ -262,15 +262,12 @@ namespace SVGImage.SVG
                     }
                     if (!string.IsNullOrEmpty(shape.RequiredFeatures))
                     {
-                        if (!SVGFeatures.Features.Contains(shape.RequiredFeatures))
-                        {
-                            continue;
-                        }
-                        if (!string.IsNullOrEmpty(shape.RequiredExtensions))
+                        if (!shape.RequiredFeatures.Split((char[])null, StringSplitOptions.RemoveEmptyEntries).All(SVGFeatures.Features.Contains))
                         {
                             continue;
                         }
                     }
+                    if (!string.IsNullOrEmpty(shape.RequiredExtensions)) continue;
                 }
 
                 if (shape is AnimationBase) continue;
@@ -491,7 +488,7 @@ namespace SVGImage.SVG
                 if (shape is Group || shape.Filter != null || (animated && animationScene.Tracks(shape).Any(t => t.Attribute == "opacity")))
                     subgrp.Opacity = shape.Opacity;
                 if (shape.Clip != null)
-                    subgrp.ClipGeometry = shape.Clip.GetGeometry(MaskDrawing.ObjectBounds(drawing));
+                    subgrp.ClipGeometry = shape.Clip.GetGeometry(MaskDrawing.ObjectBounds(drawing), null, animationScene == null ? (Func<Shape, Geometry, Geometry>)null : animationScene.AttachClip);
                 if (shape.Transform != null)
                 {
                     subgrp.Transform = shape.Transform;

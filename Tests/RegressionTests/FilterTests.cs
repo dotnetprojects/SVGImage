@@ -51,6 +51,24 @@ internal static class FilterTests
         GeometryTests.Pixel(d,30,30,Color.FromArgb(128,0,0,255),"transfer receives source before element opacity",2);
         d=GeometryTests.Svg("<filter id='f' filterUnits='userSpaceOnUse' x='0' y='0' width='100' height='100'><feFlood x='0' y='0' width='20' height='20' flood-color='red'/><feOffset dx='10' dy='10'/><feTile/></filter><rect width='100' height='100' filter='url(#f)'/>");
         GeometryTests.Pixel(d,15,15,Colors.Red,"tile retains offset input subregion"); GeometryTests.Pixel(d,5,5,Colors.Transparent,"tile repeats transparent subregion pixels");
+        d=GeometryTests.Svg("<filter id='f' color-interpolation-filters='sRGB'><feConvolveMatrix order='1' kernelMatrix='1'/></filter><rect x='20' y='20' width='40' height='40' fill='red' fill-opacity='.5' filter='url(#f)'/>");
+        GeometryTests.Pixel(d,30,30,Color.FromArgb(128,255,0,0),"identity convolution preserves alpha",2);
+        d=GeometryTests.Svg("<filter id='f' color-interpolation-filters='sRGB'><feConvolveMatrix order='1' kernelMatrix='2' divisor='1' preserveAlpha='true'/></filter><rect width='100' height='100' fill='#4080c0' fill-opacity='.5' filter='url(#f)'/>");
+        GeometryTests.Pixel(d,30,30,Color.FromArgb(128,128,255,255),"convolution unpremultiplies when preserving alpha",3);
+        const string convolution="<filter id='f' filterUnits='userSpaceOnUse' x='0' y='0' width='100' height='100'><feConvolveMatrix order='3 1' kernelMatrix='1 0 0' kernelUnitLength='5' edgeMode='none'/></filter><rect x='40' y='40' width='10' height='10' fill='red' filter='url(#f)'/>";
+        d=GeometryTests.Svg(convolution);
+        GeometryTests.Pixel(d,37,45,Colors.Red,"convolution rotates its kernel"); GeometryTests.Pixel(d,48,45,Colors.Transparent,"convolution orientation boundary");
+        string wrapping=convolution.Replace("kernelUnitLength='5'","kernelUnitLength='50'").Replace("edgeMode='none'","edgeMode='wrap'").Replace("x='40' y='40' width='10'","x='0' y='40' width='10'");
+        d=GeometryTests.Svg(wrapping);
+        GeometryTests.Pixel(d,55,45,Colors.Red,"convolution wraps across the image edge");
+        d=GeometryTests.Svg(wrapping.Replace("edgeMode='wrap'","edgeMode='none'"));
+        GeometryTests.Pixel(d,55,45,Colors.Transparent,"none convolution edges stay transparent");
+        d=GeometryTests.Svg("<filter id='f' filterUnits='userSpaceOnUse' x='0' y='0' width='100' height='100'><feDropShadow dx='20' dy='0' stdDeviation='0' flood-color='blue' flood-opacity='.5'/></filter><rect x='20' y='20' width='20' height='20' fill='red' filter='url(#f)'/>");
+        GeometryTests.Pixel(d,30,30,Colors.Red,"drop shadow preserves source on top"); GeometryTests.Pixel(d,50,30,Color.FromArgb(128,0,0,255),"drop shadow offset color and opacity",2);
+        string convolve = "<filter id='f' color-interpolation-filters='sRGB'><feConvolveMatrix order='1' kernelMatrix='2' divisor='0'/></filter><rect width='100' height='100' fill='red' filter='url(#f)'/>";
+        GeometryTests.Pixel(GeometryTests.Svg(convolve),50,50,Colors.Red,"zero divisor uses the kernel sum");
+        foreach (string invalid in new[] { "order='0' kernelMatrix='1'", "order='3' kernelMatrix='1 2'", "order='3'" })
+            GeometryTests.Pixel(GeometryTests.Svg(convolve.Replace("order='1' kernelMatrix='2' divisor='0'",invalid)),50,50,Colors.Red,"invalid convolution passes its input through");
         ReferenceNoise();
         Console.WriteLine("Turbulence, displacement, filter input and color-space checks passed.");
     }

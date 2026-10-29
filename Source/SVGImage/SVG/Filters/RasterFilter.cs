@@ -122,6 +122,8 @@ namespace SVGImage.SVG.Filters
                     case "feGaussianBlur": output = Blur(node, input); break;
                     case "feMorphology": output = Morphology(node, input); break;
                     case "feTile": Tile(input, output); break;
+                    case "feConvolveMatrix": Convolve(node, input, output); break;
+                    case "feDropShadow": DropShadow(node, input, output); break;
                     default: Array.Copy(input.Data, output.Data, input.Data.Length); break;
                 }
                 Rect defaultArea = input.Area;

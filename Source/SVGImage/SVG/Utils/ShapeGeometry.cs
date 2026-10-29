@@ -8,7 +8,7 @@ namespace SVGImage.SVG.Utils
 {
     internal static class ShapeGeometry
     {
-        internal static Geometry Create(Shape shape, HashSet<Shape> active = null)
+        internal static Geometry Create(Shape shape, HashSet<Shape> active = null, Func<Shape, Geometry, Geometry> animate = null)
         {
             active = active ?? new HashSet<Shape>();
             if (shape == null || !shape.Display || shape.Visibility == Visibility.Hidden || !active.Add(shape)) return Geometry.Empty;
@@ -17,9 +17,9 @@ namespace SVGImage.SVG.Utils
                 Geometry geometry = Geometry.Empty;
                 if (shape is RectangleShape rect && rect.Width > 0 && rect.Height > 0)
                     geometry = new RectangleGeometry(new Rect(rect.X, rect.Y, rect.Width, rect.Height), rect.RX, rect.RY);
-                else if (shape is CircleShape circle && circle.R > 0)
+                else if (shape is CircleShape circle && circle.R >= 0)
                     geometry = new EllipseGeometry(new Point(circle.CX, circle.CY), circle.R, circle.R);
-                else if (shape is EllipseShape ellipse && ellipse.RX > 0 && ellipse.RY > 0)
+                else if (shape is EllipseShape ellipse && ellipse.RX >= 0 && ellipse.RY >= 0)
                     geometry = new EllipseGeometry(new Point(ellipse.CX, ellipse.CY), ellipse.RX, ellipse.RY);
                 else if (shape is PathShape path)
                 {
@@ -33,7 +33,7 @@ namespace SVGImage.SVG.Utils
                 else if (shape is UseShape use)
                 {
                     var target = shape.Svg.GetShape(use.hRef);
-                    geometry = Create(target, active).CloneCurrentValue();
+                    geometry = new GeometryGroup { Children = { Create(target, active, animate) } };
                     Matrix matrix = target is Symbol symbol && symbol.ViewBox.HasValue ? symbol.Viewport(use.X, use.Y, use.Width, use.Height) : new Matrix(1, 0, 0, 1, use.X, use.Y);
                     matrix.Prepend(geometry.Transform?.Value ?? Matrix.Identity);
                     geometry.Transform = new MatrixTransform(matrix);
@@ -41,18 +41,18 @@ namespace SVGImage.SVG.Utils
                 else if (shape is Group group)
                 {
                     foreach (var child in group.Elements)
-                        geometry = new CombinedGeometry(GeometryCombineMode.Union, geometry, Create(child, active));
+                        geometry = new CombinedGeometry(GeometryCombineMode.Union, geometry, Create(child, active, animate));
                 }
                 if (shape.Clip != null)
-                    geometry = new CombinedGeometry(GeometryCombineMode.Intersect, geometry, shape.Clip.GetGeometry(geometry.Bounds, active));
+                    geometry = new CombinedGeometry(GeometryCombineMode.Intersect, geometry, shape.Clip.GetGeometry(geometry.Bounds, active, animate));
                 if (shape.Transform != null)
                 {
-                    geometry = geometry.CloneCurrentValue();
+                    geometry = new GeometryGroup { Children = { geometry } };
                     Matrix matrix = geometry.Transform?.Value ?? Matrix.Identity;
                     matrix.Append(shape.Transform.Value);
                     geometry.Transform = new MatrixTransform(matrix);
                 }
-                return geometry;
+                return animate == null ? geometry : animate(shape, geometry);
             }
             catch (FormatException) { return Geometry.Empty; }
             finally { active.Remove(shape); }

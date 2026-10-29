@@ -1,6 +1,7 @@
-﻿<Window x:Class="Example.MainWindow"
+<Window x:Class="Example.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Example"
         xmlns:svg1="https://github.com/dotnetprojects/SVGImage"
         Title="SVGImage - Sample" Height="960" Width="1080"  WindowStartupLocation="CenterScreen" Background="Wheat">
     <Window.Resources>
@@ -92,7 +93,10 @@
     <TabControl Margin="6" x:Name="tabControl" Style="{DynamicResource TabControl.Style.TopTabStripPlacement}">
         <TabItem Header="SVG Rendering" Height="40" Width="245" x:Name="tabSizeType" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
             <UniformGrid Background="Wheat" Columns="4" Rows="4">
-                <svg1:SVGImage Source="/Example;component/Images/171.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
+                <Grid>
+                    <TextBlock x:Name="DetailedIllustrationStatus" Text="Loading detailed illustration…" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <svg1:SVGImage x:Name="DetailedIllustration" UseAnimations="False" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
+                </Grid>
                 <svg1:SVGImage Source="/Example;component/Images/6.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/acid1.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
                 <svg1:SVGImage Source="/Example;component/Images/bb.svg" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="3" />
@@ -194,6 +198,11 @@
                     </ListView.ItemTemplate>
                 </ListView>                    
             </Grid>
+        </TabItem>
+        <TabItem Header="Flash2Svg examples" Height="40" Width="210" Style="{DynamicResource TabItem.Style.TopTabStripPlacement}">
+            <TabItem.ContentTemplate>
+                <DataTemplate><local:Flash2SvgPage/></DataTemplate>
+            </TabItem.ContentTemplate>
         </TabItem>
     </TabControl>
 </Window>

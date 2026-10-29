@@ -127,7 +127,42 @@ internal static class AnimationTests
         renderer.SeekAnimations(TimeSpan.FromSeconds(.5));
         Near(0, drawing.Bounds.X, "UseAnimations=false");
         Console.WriteLine("SMIL, CSS steps and live WPF clock checks passed.");
+        AnimatedClipping();
         DownloadedExamples();
+    }
+
+    private static void AnimatedClipping()
+    {
+        var renderer = new SVGRender { UseAnimations = true };
+        var drawing = renderer.LoadDrawing(Path.Combine(AppContext.BaseDirectory, "Samples", "clipping_css.svg"));
+        Func<double, byte[]> frameAt = seconds =>
+        {
+            renderer.SeekAnimations(TimeSpan.FromSeconds(seconds));
+            return Image(drawing, 360, 510, new Rect(0, 0, 360, 510));
+        };
+        var first = frameAt(1); var middle = frameAt(3); var repeat = frameAt(13);
+        if (first.SequenceEqual(middle)) throw new Exception("clipping_css.svg: the animated aperture did not move");
+        if (!first.SequenceEqual(repeat)) throw new Exception("clipping_css.svg: repeatDur must keep the aperture looping");
+        if (!first.Take(250 * 360 * 4).SequenceEqual(middle.Take(250 * 360 * 4)))
+            throw new Exception("Animating cp2 changed the static cp1 image");
+        int center = (380 * 360 + 180) * 4;
+        if (middle[center] == 0 && middle[center + 1] == 0 && middle[center + 2] == 0)
+            throw new Exception("clipping_css.svg: the aperture must reveal its image at the midpoint");
+        drawing = renderer.LoadXmlDrawing(Wrap("<circle cx='10' cy='20' r='5'><animate attributeName='cx' from='10' to='90' dur='2s' repeatDur='3s' fill='freeze'/></circle>"));
+        renderer.SeekAnimations(TimeSpan.FromSeconds(4));
+        Near(45, drawing.Bounds.X, "finite repeatDur freezes at a partial iteration");
+        drawing = renderer.LoadXmlDrawing(Wrap("<g clip-path='url(#c)'><rect width='100' height='100' fill='red'/></g>" +
+            "<defs><clipPath id='c' transform='translate(10)'><circle cx='10' cy='20' r='5'><animate attributeName='cx' from='10' to='70' dur='1s' repeatDur='indefinite'/></circle></clipPath></defs>"));
+        var before = Image(drawing, 100, 100, new Rect(0, 0, 100, 100));
+        var live = new DispatcherFrame(); var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(200) };
+        timer.Tick += (s, e) => { timer.Stop(); live.Continue = false; }; timer.Start(); Dispatcher.PushFrame(live);
+        if (before.SequenceEqual(Image(drawing, 100, 100, new Rect(0, 0, 100, 100))))
+            throw new Exception("Animated clip geometry did not advance on its native WPF clock");
+        drawing = renderer.LoadXmlDrawing(Wrap("<defs><clipPath id='clip' clipPathUnits='objectBoundingBox'><circle transform='translate(.1)' cx='.2' cy='.5' r='0'><animate attributeName='cx' values='.2;.8' dur='2s'/><animate attributeName='r' values='0;.2' dur='2s'/></circle></clipPath></defs><rect width='100' height='100' fill='red' clip-path='url(#clip)'/>"));
+        renderer.SeekAnimations(TimeSpan.FromSeconds(1));
+        Equal(255, Pixel(drawing,60,50)[3], "animated transformed bbox clip reveals the midpoint");
+        Equal(0, Pixel(drawing,30,50)[3], "animated bbox clip leaves its original center");
+        Console.WriteLine("clipping_css.svg, animated clip geometry and repeatDur checks passed.");
     }
 
     private static void DownloadedExamples()

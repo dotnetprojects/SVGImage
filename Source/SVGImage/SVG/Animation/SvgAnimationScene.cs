@@ -61,7 +61,21 @@ namespace SVGImage.SVG.Animation
             return result;
         }
 
-        internal void Attach(Shape shape, DrawingGroup group)
+        internal Geometry AttachClip(Shape shape, Geometry geometry)
+        {
+            if (Tracks(shape).Count == 0) return geometry;
+            if (geometry.IsFrozen) geometry = geometry.Clone();
+            var group = new DrawingGroup { Transform = geometry.Transform };
+            geometry.Transform = null;
+            group.Children.Add(new GeometryDrawing(Brushes.Black, null, geometry));
+            Geometry animated = geometry;
+            if (shape is CircleShape || shape is EllipseShape)
+                while (animated is GeometryGroup wrapper && wrapper.Children.Count == 1) animated = wrapper.Children[0];
+            Attach(shape, group, animated);
+            return new GeometryGroup { Children = { geometry }, Transform = group.Transform };
+        }
+
+        internal void Attach(Shape shape, DrawingGroup group, Geometry animatedGeometry = null)
         {
             var items = Tracks(shape);
             if (items.Count == 0) return;
@@ -125,7 +139,7 @@ namespace SVGImage.SVG.Animation
             }
             // Keep the previously supported radius/center animations, now including
             // parent targets, explicit keyTimes, repeat counts and spline easing.
-            var ellipse = shape.geometryElement as EllipseGeometry;
+            var ellipse = (animatedGeometry ?? shape.geometryElement) as EllipseGeometry;
             if (ellipse != null)
             {
                 foreach (string attribute in new[] { "r", "rx", "ry" })

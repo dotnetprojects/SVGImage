@@ -5,8 +5,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <Resource Include="../../Samples/Example/Images/acid1.svg" Link="Embedded/acid1.svg" />
+    <Resource Include="../../Samples/Example/Images/acid1.css" Link="Embedded/acid1.css" />
     <ProjectReference Include="../../Source/SVGImage/DotNetProjects.SVGImage.csproj" />
     <None Include="Fixtures/*.svg" CopyToOutputDirectory="PreserveNewest" />
     <None Include="Fixtures/*.png" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../Samples/Example/Images/clipping_css.svg" Link="Samples/clipping_css.svg" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../Samples/Example/raupen.jpg" Link="Samples/raupen.jpg" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

@@ -125,7 +125,11 @@ namespace SVGImage.SVG.Utils
                 string value = Substitute(winner.Value.Value, variable);
                 if (value != null && value.StartsWith("__animation_var__"))
                     value = CssAnimations.Expand(value.Substring("__animation_var__".Length))[winner.Key];
-                if (value == "inherit" || value == "unset" && Inherited(winner.Key))
+                // Paint inheritance must follow the instance tree of <use>, not
+                // the original definition's XML ancestors at parse time.
+                if ((winner.Key == "fill" || winner.Key == "stroke") && (value == "inherit" || value == "unset"))
+                    value = "inherit";
+                else if (value == "inherit" || value == "unset" && Inherited(winner.Key))
                     value = AncestorValue(node.ParentNode, winner.Key);
                 else if (value == "initial" || value == "unset")
                     value = Initial.ContainsKey(winner.Key) ? Initial[winner.Key] : null;

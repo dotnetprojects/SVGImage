@@ -48,12 +48,14 @@ Standalone filters and chains support named results, `SourceGraphic` / `SourceAl
 | `feGaussianBlur` | Independent deviations; three box convolutions approximate a Gaussian. |
 | `feMorphology` | Erosion and dilation using sliding extrema. |
 | `feTile` | Input subregion repetition, including transparent pixels. |
+| `feConvolveMatrix` | Rotated kernels, rectangular orders, divisor/bias, targets, duplicate/wrap/transparent edges, kernel spacing and preserved alpha. |
+| `feDropShadow` | Source-alpha blur, offset, flood color/opacity and source-over composition. |
 
 Element opacity is applied **after** filtering. Fill/stroke opacity is part of `SourceGraphic`.
 
 Raster filters sample inputs **at load time**. Animating their source/parameters does not refresh the bitmap. Single matrix/saturation filters can retain vector paints with animation enabled. Rasterization uses up to four pixels per user unit, capped at 2048 pixels on the longest dimension.
 
-`feConvolveMatrix`, lighting, `feDropShadow`, general `feImage` inputs and backdrop sources are not yet implemented. Unsupported primitives currently pass their input through. [Rendering details](Rendering.md).
+Lighting, general `feImage` inputs and backdrop sources are not yet implemented. Unsupported primitives currently pass their input through. [Rendering details](Rendering.md).
 
 ## CSS
 
@@ -71,7 +73,8 @@ Styles belong in the SVG's `<style>` element or inline/presentation attributes. 
 | SMIL transforms | Translation, scale, rotation, skew and additive composition. |
 | SMIL properties | Timed display/visibility, opacity, circle/ellipse radii/centers, root viewBox cameras. |
 | SMIL motion | `animateMotion`, inline/local `mpath`, tangent/numeric rotation and key points/times. |
-| SMIL timing | Numeric starts, repeats, freeze, key times, linear/discrete/spline and explicit click starts. |
+| SMIL timing | Numeric starts, repeat counts/durations, freeze, key times, linear/discrete/spline and explicit click starts. |
+| Animated clips | Native circle/ellipse centers and radii, plus clip transforms; unions, static parent transforms and bounding-box mapping retain the clocks. |
 | CSS keyframes | Transform/opacity, multiple animations, shorthand/longhands, grouped offsets, delays, iterations, directions, fill and an initial paused state. |
 | CSS easing | Ease presets, cubic-bezier and steps; matching transform parameters preserve full rotations. |
 | Host controls | `SeekAnimations` snapshots and `TriggerAnimationEvent` forwarding. |
@@ -86,7 +89,7 @@ Nine library targets build: .NET Framework 4.0, 4.5, 4.6, 4.7, 4.8; .NET Core 3.
 
 Coverage includes the [#118 mask](https://github.com/dotnetprojects/SVGImage/issues/118) (93,767 flat interior pixels against Chromium), synthetic checks, a real advancing clock and 14 external animation examples.
 
-A local resvg checkout enables **204 selected external SVG checks**: 200 reference-image comparisons and four render-only cases with nonportable/undefined expectations. Tolerances allow WPF antialiasing, tiled edges and fractional morphology radii. The full resvg suite remains a work in progress.
+A local resvg checkout enables **223 selected external SVG checks**: 219 reference-image comparisons and four render-only cases with nonportable/undefined expectations. Tolerances allow WPF antialiasing, tiled edges, fractional morphology radii and resolution-dependent convolution kernels. Eleven portable convolution images and all eight drop-shadow images are included. Malformed/UB convolution images are excluded; malformed kernel counts use the current Filter Effects pass-through behavior instead of historical SVG 1.1 error rendering. The full resvg suite remains a work in progress.
 
 ```powershell
 $env:RESVG_TEST_SUITE = 'C:\path\to\resvg-test-suite'
@@ -94,3 +97,7 @@ dotnet run --project Tests/RegressionTests -p:TargetFrameworks=net8.0-windows -p
 ```
 
 Rendering checks need a working Windows graphics session. A plain-WPF preflight reports blank rendering before SVG comparisons run. Downloaded references and animation examples remain outside the repository.
+
+## Example application
+
+The **Flash2Svg examples** tab lists all 13 animations from [Tom Byrne's examples page](https://github.com/TomByrne/Flash2Svg/wiki/Examples), with visible attribution and a link to the project's MIT license. Select an example to download it into `%LOCALAPPDATA%\SVGImage\Flash2Svg\Examples`; subsequent runs use the cached copy. Only the selected preview runs. Play/restart forwards the Viber examples' SMIL click events. LoveDota's embedded JavaScript/audio is not executed. Downloaded artwork stays outside the repository.

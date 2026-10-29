@@ -1,148 +1,29 @@
-name: .NET
+name: Build
 
 on:
-  workflow_dispatch: # Allow running the workflow manually from the GitHub UI
+  workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [master]
 
-defaults:
-  run:
-    shell: bash
-    
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: windows-latest
-
+    defaults:
+      run:
+        shell: pwsh
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-
-    - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0
-      with:
-        versionSpec: '5.x'      
-    
-    - name: Use GitVersion
-      id: gitversion # step id used as reference for output values
-      uses: gittools/actions/gitversion/execute@v0
-        
-    - name: Display GitVersion outputs (step output)
-      run: |
-        echo "Major: ${{ steps.gitversion.outputs.major }}"
-        echo "Minor: ${{ steps.gitversion.outputs.minor }}"
-        echo "Patch: ${{ steps.gitversion.outputs.patch }}"
-        echo "PreReleaseTag: ${{ steps.gitversion.outputs.preReleaseTag }}"
-        echo "PreReleaseTagWithDash: ${{ steps.gitversion.outputs.preReleaseTagWithDash }}"
-        echo "PreReleaseLabel: ${{ steps.gitversion.outputs.preReleaseLabel }}"
-        echo "PreReleaseNumber: ${{ steps.gitversion.outputs.preReleaseNumber }}"
-        echo "WeightedPreReleaseNumber: ${{ steps.gitversion.outputs.weightedPreReleaseNumber }}"
-        echo "BuildMetaData: ${{ steps.gitversion.outputs.buildMetaData }}"
-        echo "BuildMetaDataPadded: ${{ steps.gitversion.outputs.buildMetaDataPadded }}"
-        echo "FullBuildMetaData: ${{ steps.gitversion.outputs.fullBuildMetaData }}"
-        echo "MajorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}"
-        echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
-        echo "LegacySemVer: ${{ steps.gitversion.outputs.legacySemVer }}"
-        echo "LegacySemVerPadded: ${{ steps.gitversion.outputs.legacySemVerPadded }}"
-        echo "AssemblySemVer: ${{ steps.gitversion.outputs.assemblySemVer }}"
-        echo "AssemblySemFileVer: ${{ steps.gitversion.outputs.assemblySemFileVer }}"
-        echo "FullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}"
-        echo "InformationalVersion: ${{ steps.gitversion.outputs.informationalVersion }}"
-        echo "BranchName: ${{ steps.gitversion.outputs.branchName }}"
-        echo "EscapedBranchName: ${{ steps.gitversion.outputs.escapedBranchName }}"
-        echo "Sha: ${{ steps.gitversion.outputs.sha }}"
-        echo "ShortSha: ${{ steps.gitversion.outputs.shortSha }}"
-        echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
-        echo "NuGetVersion: ${{ steps.gitversion.outputs.nuGetVersion }}"
-        echo "NuGetPreReleaseTagV2: ${{ steps.gitversion.outputs.nuGetPreReleaseTagV2 }}"
-        echo "NuGetPreReleaseTag: ${{ steps.gitversion.outputs.nuGetPreReleaseTag }}"
-        echo "VersionSourceSha: ${{ steps.gitversion.outputs.versionSourceSha }}"
-        echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.commitsSinceVersionSource }}"
-        echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
-        echo "UncommittedChanges: ${{ steps.gitversion.outputs.uncommittedChanges }}"
-        echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
-
-    - name: Update project version
-      uses: roryprimrose/set-vs-sdk-project-version@v1.0.6
-      with:
-        projectFilter: './Source/SVGImage/*.SVGImage.csproj'
-        version: ${{ steps.gitversion.outputs.NuGetVersionV2 }}
-        assemblyVersion: ${{ steps.gitversion.outputs.AssemblySemVer }}
-        fileVersion: ${{ steps.gitversion.outputs.MajorMinorPatch }}
-        informationalVersion: ${{ steps.gitversion.outputs.InformationalVersion }}
-
-    - name: Install .NET 8.0
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
-
-    - name: Restore dependencies
-      run: dotnet restore ./Source/SVGImage/DotNetProjects.SVGImage.csproj
-
-    - name: Build
-      run: dotnet build --configuration Release DotNetProjects.SVGImage.csproj
-      working-directory: ./Source/SVGImage
-
-    - name: Generate nuget package.
-      run: dotnet pack DotNetProjects.SVGImage.csproj --configuration Release -o nupkg
-      working-directory: ./Source/SVGImage
-        
-    - name: Publish to nuget
-      # run: find . -type f -name *.nupkg -print0 | xargs -0 -I pkg dotnet nuget push pkg -k $nuget_api_key -s "https://api.nuget.org/v3/index.json" --skip-duplicate
-      run: |
-        find . -type f -name *.nupkg -print0 | xargs -0 -I pkg dotnet nuget push pkg -k $nuget_api_key -s "https://api.nuget.org/v3/index.json" --skip-duplicate
-      env:
-        nuget_api_key: ${{ secrets.NUGET_API_KEY }}
-        working-directory: ./Source/SVGImage/nupkg
-         
-    - name: "Create release"
-      uses: "actions/github-script@v6"
-      id: createrelease
-      with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
-        script: |
-          try {
-            const response = await github.rest.repos.createRelease({
-              draft: false,
-              generate_release_notes: true,
-              name: "Release ${{ steps.gitversion.outputs.semVer }}",
-              owner: context.repo.owner,
-              prerelease: false,
-              repo: context.repo.repo,
-              tag_name: "${{ steps.gitversion.outputs.semVer }}",
-            });
-
-            core.exportVariable('RELEASE_ID', response.data.id);
-            core.exportVariable('RELEASE_UPLOAD_URL', response.data.upload_url);
-          } catch (error) {
-            core.setFailed(error.message);
-          }
-          
-    - name: Upload release artifacts
-      uses: actions/github-script@v6
-      env:
-        releaseId: ${{ env.RELEASE_ID }}
-        workingDirectory: ./Source/SVGImage/nupkg
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-            const releaseId = process.env.releaseId;
-            const workingDirectory = process.env.workingDirectory;
-            const fs = require('fs');
-            const dirPath = workingDirectory;
-            const path = require('path');
-            fs.readdir(dirPath, async (err,list) => {
-              if (err) throw err;
-              for (var i = 0; i < list.length; i++) {
-                  if (path.extname(list[i]) === '.nupkg' || path.extname(list[i]) === '.snupkg') {
-                      const uploadAssetResponse = await github.rest.repos.uploadReleaseAsset({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        release_id: releaseId,
-                        name: list[i],
-                        data: fs.readFileSync(path.join(dirPath, list[i]))
-                      });
-                  }
-              }
-            });
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build all target frameworks
+        run: dotnet build Source/SVGImage/DotNetProjects.SVGImage.csproj --configuration Release -p:GeneratePackageOnBuild=false
+      - name: Build the example application
+        run: dotnet build Samples/Example/Example.csproj --configuration Release -p:TargetFrameworks=net8.0-windows -p:GeneratePackageOnBuild=false
+      - name: Validate release version parsing
+        run: ./Tests/ReleaseWorkflowTests.ps1
+      - name: Run regression checks
+        run: dotnet run --project Tests/RegressionTests --configuration Release -p:TargetFrameworks=net8.0-windows -p:GeneratePackageOnBuild=false

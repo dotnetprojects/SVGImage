@@ -387,6 +387,8 @@ namespace SVGImage.SVG
             this.InvalidateVisual();
         }
 
+        private bool _publishingInitialBrushes;
+
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
@@ -402,24 +404,18 @@ namespace SVGImage.SVG
                 _render.OverrideStrokeWidth = OverrideStrokeWidth;
                 _render.UseAnimations = this.UseAnimations;
 
-                //This is to prevent double rendering because setting CustomBrushes = brushesFromSVG; invokes ReRenderSvg
-                //Not sure if it has any side effects
-                if (!String.IsNullOrEmpty(FileSource))
-                {
-                    _render.LoadDrawingWithoutRender(FileSource);
-                }
-                else
-                {
-                    _loadImage(_render);
-                }
-                //_loadImage(_render);
+                _loadImage(_render);
                 _loadImage = null;
                 var brushesFromSVG = new Dictionary<string, Brush>();
                 foreach (var server in _render.SVG.PaintServers.GetServers())
                 {
                     brushesFromSVG[server.Key] = server.Value.GetBrush();
                 }
-                CustomBrushes = brushesFromSVG;
+                // URI and stream sources already have a drawing. Publishing their
+                // brush palette must not rasterize every filter a second time.
+                _publishingInitialBrushes = true;
+                try { CustomBrushes = brushesFromSVG; }
+                finally { _publishingInitialBrushes = false; }
             }
         }
 
@@ -806,6 +802,7 @@ namespace SVGImage.SVG
                     }
                     break;
                 case "pack":
+                    _render.ExternalFileLoader = new ResourceFileLoader(svgSource, this.ExternalFileLoader);
                     StreamResourceInfo svgStreamInfo = null;
                     if (svgSource.ToString().IndexOf("siteoforigin", StringComparison.OrdinalIgnoreCase) >= 0)
                     {
@@ -943,17 +940,16 @@ namespace SVGImage.SVG
 
         static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var sourceUri = e.NewValue != null ? new Uri(e.NewValue.ToString(), UriKind.Relative) : null;
-            var resource = e.NewValue != null ? Application.GetResourceStream(sourceUri) : null;
-            ((SVGImage)d).SetImage(resource != null ? resource.Stream : null);
+            var image = (SVGImage)d;
+            if (e.NewValue == null) image.SetImage((Drawing)null);
+            else image.SetImage(new Uri(new Uri("pack://application:,,,/"), e.NewValue.ToString()));
         }
 
         static void OnFileSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue != null)
             {
-                var stream = new FileStream(e.NewValue.ToString(), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                ((SVGImage)d).SetImage(stream);
+                ((SVGImage)d).SetImage(e.NewValue.ToString());
             }
             else
             {
@@ -1027,7 +1023,7 @@ namespace SVGImage.SVG
                     }
                 }
                 svgImage.InvalidateVisual();
-                svgImage.ReRenderSvg();
+                if (!svgImage._publishingInitialBrushes) svgImage.ReRenderSvg();
             }
         }
 

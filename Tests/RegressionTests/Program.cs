@@ -14,6 +14,7 @@ internal static class Program
     private static void Main()
     {
         VerifyRenderingAvailable();
+        ControlInitializationTests.Run();
         GradientRgbColors();
         ButtonContentSize();
         GrayscaleDrawing();

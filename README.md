@@ -58,7 +58,7 @@ Use `Source/SVGImage.sln` with Visual Studio 2022. For unreleased features, refe
 - [Masks](Docs/Masks.md), [CSS](Docs/CSS.md), [animation](Docs/Animations.md), [rendering and filters](Docs/Rendering.md), [grayscale](Docs/Grayscale.md)
 - [Samples](Samples) and [regression checks](Tests/RegressionTests/README.md)
 
-Selected verification includes 204 external SVG checks, 14 animation examples and a mask fixture compared against Chromium. Downloaded samples/reference suites remain outside the repository.
+Selected verification includes 223 external SVG checks, 14 animation examples and a mask fixture compared against Chromium. Downloaded samples/reference suites remain outside the repository.
 
 ## Contributing and license
 
