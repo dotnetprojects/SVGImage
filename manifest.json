@@ -1,5 +1,5 @@
 {
-  "source_base_path": "D:/a/SVGImage/SVGImage/Docs",
+  "source_base_path": "D:/repos/github/dotnetprojects/SVGImage/Docs",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -12,10 +12,90 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "Animations.md",
+      "output": {
+        ".html": {
+          "relative_path": "Animations.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "CSS.md",
+      "output": {
+        ".html": {
+          "relative_path": "CSS.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Changelog.md",
+      "output": {
+        ".html": {
+          "relative_path": "Changelog.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "GettingStarted.md",
+      "output": {
+        ".html": {
+          "relative_path": "GettingStarted.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Grayscale.md",
+      "output": {
+        ".html": {
+          "relative_path": "Grayscale.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Masks.md",
+      "output": {
+        ".html": {
+          "relative_path": "Masks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "Readme.md",
       "output": {
         ".html": {
           "relative_path": "Readme.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Rendering.md",
+      "output": {
+        ".html": {
+          "relative_path": "Rendering.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Support.md",
+      "output": {
+        ".html": {
+          "relative_path": "Support.html"
         }
       },
       "version": ""
@@ -28,7 +108,11 @@
           "relative_path": "api/SVGImage.SVG.Animation.Animate.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Animation.Animate",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -38,7 +122,11 @@
           "relative_path": "api/SVGImage.SVG.Animation.AnimateColor.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Animation.AnimateColor",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -48,7 +136,11 @@
           "relative_path": "api/SVGImage.SVG.Animation.AnimateMotion.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Animation.AnimateMotion",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -58,7 +150,11 @@
           "relative_path": "api/SVGImage.SVG.Animation.AnimateTransform.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Animation.AnimateTransform",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -68,7 +164,11 @@
           "relative_path": "api/SVGImage.SVG.Animation.AnimateTransformType.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Animation.AnimateTransformType",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -78,7 +178,11 @@
           "relative_path": "api/SVGImage.SVG.Animation.AnimationBase.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Animation.AnimationBase",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -88,7 +192,11 @@
           "relative_path": "api/SVGImage.SVG.Animation.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Animation",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -98,7 +206,11 @@
           "relative_path": "api/SVGImage.SVG.ClipArtElement.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.ClipArtElement",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -108,7 +220,11 @@
           "relative_path": "api/SVGImage.SVG.FileLoaders.FileSystemLoader.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.FileLoaders.FileSystemLoader",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -118,7 +234,11 @@
           "relative_path": "api/SVGImage.SVG.FileLoaders.IExternalFileLoader.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.FileLoaders.IExternalFileLoader",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -128,7 +248,11 @@
           "relative_path": "api/SVGImage.SVG.FileLoaders.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.FileLoaders",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -138,7 +262,11 @@
           "relative_path": "api/SVGImage.SVG.Fill.eFillRule.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Fill.eFillRule",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -148,7 +276,11 @@
           "relative_path": "api/SVGImage.SVG.Fill.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Fill",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -158,7 +290,11 @@
           "relative_path": "api/SVGImage.SVG.Filters.Filter.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Filters.Filter",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -168,7 +304,11 @@
           "relative_path": "api/SVGImage.SVG.Filters.FilterBaseFe.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Filters.FilterBaseFe",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -178,7 +318,11 @@
           "relative_path": "api/SVGImage.SVG.Filters.FilterFeGaussianBlur.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Filters.FilterFeGaussianBlur",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -188,7 +332,11 @@
           "relative_path": "api/SVGImage.SVG.Filters.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Filters",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -198,7 +346,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.CurrentColorPaintServer.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers.CurrentColorPaintServer",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -208,7 +360,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.GradientColorPaintServer.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers.GradientColorPaintServer",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -218,7 +374,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.InheritPaintServer.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers.InheritPaintServer",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -228,7 +388,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.LinearGradientColorPaintServer.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers.LinearGradientColorPaintServer",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -238,7 +402,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.PaintServer.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers.PaintServer",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -248,7 +416,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.PaintServerManager.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers.PaintServerManager",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -258,7 +430,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.PatternPaintServer.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers.PatternPaintServer",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -268,7 +444,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.RadialGradientColorPaintServer.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers.RadialGradientColorPaintServer",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -278,7 +458,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.SolidColorPaintServer.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers.SolidColorPaintServer",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -288,7 +472,11 @@
           "relative_path": "api/SVGImage.SVG.PaintServers.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PaintServers",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -298,7 +486,11 @@
           "relative_path": "api/SVGImage.SVG.PathShape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.PathShape",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -308,7 +500,11 @@
           "relative_path": "api/SVGImage.SVG.SVG.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.SVG",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.SVG.yml\" sourcestartlinenumber=\"1\">This is the class that reads and parses the XML file.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -318,7 +514,11 @@
           "relative_path": "api/SVGImage.SVG.SVGImage.eSizeType.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.SVGImage.eSizeType",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.SVGImage.eSizeType.yml\" sourcestartlinenumber=\"1\">This controls how the image is stretched to fill the control,</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -328,7 +528,11 @@
           "relative_path": "api/SVGImage.SVG.SVGImage.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.SVGImage",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.SVGImage.yml\" sourcestartlinenumber=\"1\">This is the SVG image view control.\nThe image control can either load the image from a file <xref href=\"SVGImage.SVG.SVGImage.SetImage(System.String)\" data-throw-if-not-resolved=\"false\"></xref> or by\nsetting the <xref href=\"System.Windows.Media.Drawing\" data-throw-if-not-resolved=\"false\"></xref> object through <xref href=\"SVGImage.SVG.SVGImage.SetImage(System.Windows.Media.Drawing)\" data-throw-if-not-resolved=\"false\"></xref>, which allows\nmultiple controls to share the same drawing instance.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -338,7 +542,25 @@
           "relative_path": "api/SVGImage.SVG.SVGRender.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.SVGRender",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.SVGRender.yml\" sourcestartlinenumber=\"1\">This is the class that creates the WPF Drawing object based on the information from the <xref href=\"SVGImage.SVG.SVGRender.SVG\" data-throw-if-not-resolved=\"false\"></xref> class.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.CharacterLayout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.CharacterLayout.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.CharacterLayout",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.Shapes.CharacterLayout.yml\" sourcestartlinenumber=\"1\">Represents a per-character layout result.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -348,7 +570,11 @@
           "relative_path": "api/SVGImage.SVG.Shapes.CircleShape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.CircleShape",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -358,7 +584,11 @@
           "relative_path": "api/SVGImage.SVG.Shapes.Clip.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.Clip",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -368,7 +598,11 @@
           "relative_path": "api/SVGImage.SVG.Shapes.EllipseShape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.EllipseShape",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -378,7 +612,39 @@
           "relative_path": "api/SVGImage.SVG.Shapes.Group.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.Group",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.ITextChild.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.ITextChild.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.ITextChild",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.ITextNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.ITextNode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.ITextNode",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -388,7 +654,95 @@
           "relative_path": "api/SVGImage.SVG.Shapes.ImageShape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.ImageShape",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.LengthAdjustment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.LengthAdjustment.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.LengthAdjustment",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.LengthContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.LengthContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.LengthContext",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.LengthOrientation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.LengthOrientation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.LengthOrientation",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.LengthPercentageOrNumber.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.LengthPercentageOrNumber.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.LengthPercentageOrNumber",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.LengthPercentageOrNumberList",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.LengthUnit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.LengthUnit.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.LengthUnit",
+      "Summary": ""
     },
     {
       "type": "ManagedReference",
@@ -398,7 +752,11 @@
           "relative_path": "api/SVGImage.SVG.Shapes.LineShape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.LineShape",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -408,7 +766,11 @@
           "relative_path": "api/SVGImage.SVG.Shapes.PolygonShape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.PolygonShape",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -418,7 +780,11 @@
           "relative_path": "api/SVGImage.SVG.Shapes.PolylineShape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.PolylineShape",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -428,7 +794,11 @@
           "relative_path": "api/SVGImage.SVG.Shapes.RectangleShape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.RectangleShape",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -438,7 +808,95 @@
           "relative_path": "api/SVGImage.SVG.Shapes.Shape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.Shape",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.TextRender.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.TextRender.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.TextRender",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.Shapes.TextRender.yml\" sourcestartlinenumber=\"1\">This class is responsible for rendering text shapes in SVG.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.TextRenderBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.TextRenderBase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.TextRenderBase",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.TextShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.TextShape.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.TextShape",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.TextShapeBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.TextShapeBase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.TextShapeBase",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.TextSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.TextSpan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.TextSpan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.TextString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.TextString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.TextString",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.Shapes.TextString.yml\" sourcestartlinenumber=\"1\">The leaf of the Text tree</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -448,7 +906,25 @@
           "relative_path": "api/SVGImage.SVG.Shapes.UseShape.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.UseShape",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Shapes.WritingMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Shapes.WritingMode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes.WritingMode",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.Shapes.WritingMode.yml\" sourcestartlinenumber=\"1\">The ‘writing-mode’ property specifies whether the initial inline-progression-direction for a ‘text’ element shall be left-to-right, right-to-left, or top-to-bottom.\nThe ‘writing-mode’ property applies only to ‘text’ elements; the property is ignored for ‘tspan’, ‘tref’, ‘altGlyph’ and ‘textPath’ sub-elements.\n(Note that the inline-progression-direction can change within a ‘text’ element due to the Unicode bidirectional algorithm and properties ‘direction’ and ‘unicode-bidi’.\nFor more on bidirectional text, see Relationship with bidirectionality.)</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -458,7 +934,11 @@
           "relative_path": "api/SVGImage.SVG.Shapes.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Shapes",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -468,7 +948,11 @@
           "relative_path": "api/SVGImage.SVG.Stroke.eLineCap.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Stroke.eLineCap",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -478,7 +962,11 @@
           "relative_path": "api/SVGImage.SVG.Stroke.eLineJoin.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Stroke.eLineJoin",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -488,7 +976,11 @@
           "relative_path": "api/SVGImage.SVG.Stroke.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Stroke",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -498,7 +990,11 @@
           "relative_path": "api/SVGImage.SVG.StyleItem.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.StyleItem",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -508,7 +1004,11 @@
           "relative_path": "api/SVGImage.SVG.SvgIconBase.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.SvgIconBase",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.SvgIconBase.yml\" sourcestartlinenumber=\"1\">This is an <a href=\"https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/abstract\">abstract</a> implementation of a markup extension that enables the creation\nof <xref href=\"System.Windows.Media.DrawingImage\" data-throw-if-not-resolved=\"false\"></xref> from SVG sources.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -518,7 +1018,11 @@
           "relative_path": "api/SVGImage.SVG.SvgIconConverterExtension.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.SvgIconConverterExtension",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.SvgIconConverterExtension.yml\" sourcestartlinenumber=\"1\">This implements a markup extension that enables the creation\nof <xref href=\"System.Windows.Media.DrawingImage\" data-throw-if-not-resolved=\"false\"></xref> from SVG sources.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -528,37 +1032,67 @@
           "relative_path": "api/SVGImage.SVG.SvgIconExtension.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.SvgIconExtension",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.SvgIconExtension.yml\" sourcestartlinenumber=\"1\">This implements a markup extension that enables the creation\nof <xref href=\"System.Windows.Media.DrawingImage\" data-throw-if-not-resolved=\"false\"></xref> from SVG sources.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/SVGImage.SVG.TextShape.yml",
+      "source_relative_path": "api/SVGImage.SVG.TextRender2.yml",
       "output": {
         ".html": {
-          "relative_path": "api/SVGImage.SVG.TextShape.html"
+          "relative_path": "api/SVGImage.SVG.TextRender2.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.TextRender2",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/SVGImage.SVG.TextSpan.eElementType.yml",
+      "source_relative_path": "api/SVGImage.SVG.TextShape2.yml",
       "output": {
         ".html": {
-          "relative_path": "api/SVGImage.SVG.TextSpan.eElementType.html"
+          "relative_path": "api/SVGImage.SVG.TextShape2.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.TextShape2",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.TextShape2.yml\" sourcestartlinenumber=\"1\">The original TextShape class.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/SVGImage.SVG.TextSpan.yml",
+      "source_relative_path": "api/SVGImage.SVG.TextSpan2.eElementType.yml",
       "output": {
         ".html": {
-          "relative_path": "api/SVGImage.SVG.TextSpan.html"
+          "relative_path": "api/SVGImage.SVG.TextSpan2.eElementType.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.TextSpan2.eElementType",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.TextSpan2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.TextSpan2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.TextSpan2",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -568,7 +1102,67 @@
           "relative_path": "api/SVGImage.SVG.TextStyle.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.TextStyle",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Utils.DpiUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Utils.DpiUtil.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Utils.DpiUtil",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Utils.DrawingColorConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Utils.DrawingColorConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Utils.DrawingColorConverter",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.Utils.DrawingColorConverter.yml\" sourcestartlinenumber=\"1\">Creates grayscale copies of SVG drawings without changing their geometry or alpha.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Utils.FontResolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Utils.FontResolver.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Utils.FontResolver",
+      "Summary": "<p sourcefile=\"api/SVGImage.SVG.Utils.FontResolver.yml\" sourcestartlinenumber=\"1\">A utility class that resolves font families based on requested font names.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SVGImage.SVG.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SVGImage.SVG.Utils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Utils",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -578,7 +1172,11 @@
           "relative_path": "api/SVGImage.SVG.Visibility.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG.Visibility",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -588,7 +1186,11 @@
           "relative_path": "api/SVGImage.SVG.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SVGImage.SVG",
+      "Summary": null
     },
     {
       "type": "Conceptual",
@@ -648,10 +1250,170 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/demos/animation.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/animation.gif"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/animation.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/animation.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/animation.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/animation.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/filters.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/filters.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/filters.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/filters.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/hero.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/hero.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/hero.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/hero.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/masks.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/masks.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/masks.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/masks.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/patterns.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/patterns.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/patterns.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/patterns.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/structure.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/structure.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/structure.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/structure.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/text-path.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/text-path.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/demos/text-path.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/demos/text-path.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/dotnetprojects.png",
       "output": {
         "resource": {
           "relative_path": "images/dotnetprojects.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
         }
       },
       "version": ""

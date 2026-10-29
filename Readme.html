@@ -1,12 +1,13 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>SVGImage | SVGImage Documentation </title>
+      <title>SVGImage documentation | SVGImage </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="SVGImage | SVGImage Documentation ">
+      <meta name="title" content="SVGImage documentation | SVGImage ">
       
-      <link rel="icon" href="images/dotnetprojects.png">
+      
+      <link rel="icon" href="images/logo.svg">
       <link rel="stylesheet" href="public/docfx.min.css">
       <link rel="stylesheet" href="public/main.css">
       <meta name="docfx:navrel" content="toc.html">
@@ -28,22 +29,22 @@
       <meta name="loc:changeTheme" content="Change theme">
       <meta name="loc:copy" content="Copy">
       <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-
-  <script type="module" src="./public/docfx.min.js"></script>
-
-  <script>
-    const theme = localStorage.getItem('theme') || 'auto'
-    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
-  </script>
-
 
   <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
     <header class="bg-body border-bottom">
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="index.html">
-            <img id="logo" class="svg" src="images/dotnetprojects.png" alt="SVGImage">
+            <img id="logo" class="svg" src="images/logo.svg" alt="SVGImage">
             SVGImage
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +54,7 @@
             <div id="navbar">
               <form class="search" role="search" id="search">
                 <i class="bi bi-search"></i>
-                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
@@ -62,54 +63,33 @@
     </header>
 
     <main class="container-xxl">
-      <div class="toc-offcanvas">
-        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <nav class="toc" id="toc"></nav>
-          </div>
-        </div>
-      </div>
 
       <div class="content">
         <div class="actionbar">
-          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
-            <i class="bi bi-list"></i>
-          </button>
 
           <nav id="breadcrumb"></nav>
         </div>
 
         <article data-uid="">
-<h2 id="svgimage">SVGImage</h2>
+<h1 id="svgimage-documentation">SVGImage documentation</h1>
 
-<p>This is an SVG Image View Control for WPF applications.</p>
-<p>Initially forked from: <a href="https://www.codeproject.com/Articles/92434/SVGImage-Control">SVGImage Control - CodeProject Article</a></p>
-<p>Besides the bug fixes, new features are added including the following:</p>
+<p>The <a href="index.html">homepage</a> introduces the project with previews rendered by SVGImage itself.</p>
 <ul>
-<li>Mask/Clip support</li>
-<li>Support of styles.</li>
-<li>Simple Animation support.</li>
+<li><a href="GettingStarted.html">Get started</a></li>
+<li><a href="Support.html">SVG support reference</a></li>
+<li><a href="Changelog.html">Changelog</a> — includes the repository's single canonical <code>CHANGELOG.md</code></li>
+<li><a href="Masks.html">Masks</a>, <a href="CSS.html">CSS</a>, <a href="Animations.html">animations</a>, <a href="Rendering.html">rendering</a>, <a href="Grayscale.html">grayscale</a></li>
 </ul>
-<h2 id="documentations">Documentations</h2>
-<p>For the User Manual and API References see <a href="http://dotnetprojects.github.io/SVGImage/">Documentation</a>.</p>
-<h2 id="framework-support">Framework support</h2>
-<p>The SVGImage control library targets the following frameworks</p>
-<ul>
-<li>.NET Framework, Version 4.0</li>
-<li>.NET Framework, Version 4.5</li>
-<li>.NET Framework, Version 4.6</li>
-<li>.NET Framework, Version 4.7</li>
-<li>.NET Framework, Version 4.8</li>
-<li>.NET Core, Version 3.1</li>
-<li>.NET 6 ~ 7</li>
-</ul>
-<h2 id="license">License</h2>
-<p>The SVGImage control library is relicensed under <a href="https://github.com/dotnetprojects/SVGImage/blob/master/LICENSE">MIT License</a>,
-with permission from the original author.</p>
+<p>Build and preview on Windows:</p>
+<pre><code class="lang-powershell">dotnet tool install -g docfx --version 2.78.5
+docfx Docs/docfx.json --serve
+</code></pre>
+<p>The generated site is written to <code>Docs/_site</code>. The existing GitHub Pages workflow deploys it on pushes to <code>master</code>.</p>
+<p>Gallery SVGs in <code>images/demos</code> are original documentation examples. Their PNG/GIF previews are rendered with the WPF library, rather than browser screenshots. Downloaded animation and resvg fixtures are not included.</p>
+<p>Regenerate the gallery from the repository root on Windows:</p>
+<pre><code class="lang-powershell">dotnet run --project Docs/tools/GalleryRenderer -p:TargetFrameworks=net8.0-windows -p:GeneratePackageOnBuild=false
+</code></pre>
+<p>For future updates, add dated entries under Unreleased in the root <code>CHANGELOG.md</code>. The website includes that file directly; do not maintain a second copy.</p>
 
 </article>
 
@@ -131,7 +111,7 @@ with permission from the original author.</p>
     <footer class="border-top text-secondary">
       <div class="container-xxl">
         <div class="flex-fill">
-          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2020 - 2023 DotNetProjects</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+          <div class="svg-footer"><span>SVGImage · Native SVG for WPF</span><span>MIT licensed · <a href="https://github.com/dotnetprojects/SVGImage">Built in the open</a> · © 2020–2026 DotNetProjects</span></div>
         </div>
       </div>
     </footer>

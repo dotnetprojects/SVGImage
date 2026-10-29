@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Class TextShapeBase | SVGImage </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class TextShapeBase | SVGImage ">
+      
+      
+      <link rel="icon" href="../images/logo.svg">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dotnetprojects/SVGImage/new/master/apiSpec/new?filename=SVGImage_SVG_Shapes_TextShapeBase.md&amp;value=---%0Auid%3A%20SVGImage.SVG.Shapes.TextShapeBase%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SVGImage">
+            SVGImage
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SVGImage.SVG.Shapes.TextShapeBase">
+
+
+
+  <h1 id="SVGImage_SVG_Shapes_TextShapeBase" data-uid="SVGImage.SVG.Shapes.TextShapeBase" class="text-break">
+Class TextShapeBase  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SVGImage.html">SVGImage</a>.<a class="xref" href="SVGImage.SVG.html">SVG</a>.<a class="xref" href="SVGImage.SVG.Shapes.html">Shapes</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>DotNetProjects.SVGImage.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TextShapeBase : Shape, ITextNode</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="SVGImage.SVG.ClipArtElement.html">ClipArtElement</a></div>
+      <div><a class="xref" href="SVGImage.SVG.Shapes.Shape.html">Shape</a></div>
+      <div><span class="xref">TextShapeBase</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="SVGImage.SVG.Shapes.ITextNode.html">ITextNode</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="SVGImage.SVG.Shapes.TextShape.html">TextShape</a></div>
+      <div><a class="xref" href="SVGImage.SVG.Shapes.TextSpan.html">TextSpan</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_m_fill">Shape.m_fill</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_m_stroke">Shape.m_stroke</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_m_textstyle">Shape.m_textstyle</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_m_localStyle">Shape.m_localStyle</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Svg">Shape.Svg</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Display">Shape.Display</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_GetRoot">Shape.GetRoot()</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_PaintServerKey">Shape.PaintServerKey</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_RequiredExtensions">Shape.RequiredExtensions</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_RequiredFeatures">Shape.RequiredFeatures</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Visibility">Shape.Visibility</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Stroke">Shape.Stroke</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_GetParentFill">Shape.GetParentFill()</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Fill">Shape.Fill</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_TextStyle">Shape.TextStyle</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Opacity">Shape.Opacity</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Transform">Shape.Transform</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Parent">Shape.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_ParseLocalStyle_SVGImage_SVG_SVG_">Shape.ParseLocalStyle(SVG)</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Parse_SVGImage_SVG_SVG_System_String_System_String_">Shape.Parse(SVG, string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_GetFill_SVGImage_SVG_SVG_">Shape.GetFill(SVG)</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_GetTextStyle_SVGImage_SVG_SVG_">Shape.GetTextStyle(SVG)</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_ToString">Shape.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="SVGImage.SVG.ClipArtElement.html#SVGImage_SVG_ClipArtElement_Id">ClipArtElement.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase__ctor_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.#ctor*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase__ctor_SVGImage_SVG_SVG_System_Xml_XmlNode_SVGImage_SVG_Shapes_Shape_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)">
+  TextShapeBase(SVG, XmlNode, Shape)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TextShapeBase(SVG svg, XmlNode node, Shape parent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>svg</code> <a class="xref" href="SVGImage.SVG.SVG.html">SVG</a></dt>
+    <dd></dd>
+    <dt><code>node</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></dt>
+    <dd></dd>
+    <dt><code>parent</code> <a class="xref" href="SVGImage.SVG.Shapes.Shape.html">Shape</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_Attributes_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Attributes*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_Attributes" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Attributes">
+  Attributes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;StyleItem&gt; Attributes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="SVGImage.SVG.StyleItem.html">StyleItem</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_Children_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Children*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_Children" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Children">
+  Children
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ITextChild&gt; Children { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="SVGImage.SVG.Shapes.ITextChild.html">ITextChild</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_DX_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.DX*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_DX" data-uid="SVGImage.SVG.Shapes.TextShapeBase.DX">
+  DX
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LengthPercentageOrNumberList DX { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html">LengthPercentageOrNumberList</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_DY_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.DY*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_DY" data-uid="SVGImage.SVG.Shapes.TextShapeBase.DY">
+  DY
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LengthPercentageOrNumberList DY { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html">LengthPercentageOrNumberList</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_FirstCharacter_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.FirstCharacter*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_FirstCharacter" data-uid="SVGImage.SVG.Shapes.TextShapeBase.FirstCharacter">
+  FirstCharacter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout FirstCharacter { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_LastCharacter_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.LastCharacter*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_LastCharacter" data-uid="SVGImage.SVG.Shapes.TextShapeBase.LastCharacter">
+  LastCharacter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout LastCharacter { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_Length_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Length*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_Length" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Length">
+  Length
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Length { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_LengthAdjust_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.LengthAdjust*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_LengthAdjust" data-uid="SVGImage.SVG.Shapes.TextShapeBase.LengthAdjust">
+  LengthAdjust
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LengthAdjustment LengthAdjust { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.LengthAdjustment.html">LengthAdjustment</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_Rotate_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Rotate*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_Rotate" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Rotate">
+  Rotate
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;double&gt; Rotate { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_Text_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Text*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_Text" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Text">
+  Text
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Text { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_TextLength_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.TextLength*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_TextLength" data-uid="SVGImage.SVG.Shapes.TextShapeBase.TextLength">
+  TextLength
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LengthPercentageOrNumber? TextLength { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_WritingMode_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.WritingMode*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_WritingMode" data-uid="SVGImage.SVG.Shapes.TextShapeBase.WritingMode">
+  WritingMode
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WritingMode WritingMode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.WritingMode.html">WritingMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_X_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.X*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_X" data-uid="SVGImage.SVG.Shapes.TextShapeBase.X">
+  X
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LengthPercentageOrNumberList X { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html">LengthPercentageOrNumberList</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_Y_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Y*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_Y" data-uid="SVGImage.SVG.Shapes.TextShapeBase.Y">
+  Y
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LengthPercentageOrNumberList Y { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html">LengthPercentageOrNumberList</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_DefaultFill_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.DefaultFill*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_DefaultFill" data-uid="SVGImage.SVG.Shapes.TextShapeBase.DefaultFill">
+  DefaultFill()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override Fill DefaultFill()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Fill.html">Fill</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_DefaultStroke_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.DefaultStroke*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_DefaultStroke" data-uid="SVGImage.SVG.Shapes.TextShapeBase.DefaultStroke">
+  DefaultStroke()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override Stroke DefaultStroke()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Stroke.html">Stroke</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_GetCharacters_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetCharacters*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_GetCharacters" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetCharacters">
+  GetCharacters()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout[] GetCharacters()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_GetFirstCharacter_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetFirstCharacter*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_GetFirstCharacter" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetFirstCharacter">
+  GetFirstCharacter()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout GetFirstCharacter()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_GetLastCharacter_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetLastCharacter*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_GetLastCharacter" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetLastCharacter">
+  GetLastCharacter()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout GetLastCharacter()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_GetLength_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetLength*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_GetLength" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetLength">
+  GetLength()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetLength()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_GetText_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetText*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_GetText" data-uid="SVGImage.SVG.Shapes.TextShapeBase.GetText">
+  GetText()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetText()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_ParseAtStart_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.ParseAtStart*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_ParseAtStart_SVGImage_SVG_SVG_System_Xml_XmlNode_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.ParseAtStart(SVGImage.SVG.SVG,System.Xml.XmlNode)">
+  ParseAtStart(SVG, XmlNode)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void ParseAtStart(SVG svg, XmlNode node)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>svg</code> <a class="xref" href="SVGImage.SVG.SVG.html">SVG</a></dt>
+    <dd></dd>
+    <dt><code>node</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextShapeBase_ParseChildren_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.ParseChildren*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextShapeBase_ParseChildren_SVGImage_SVG_SVG_System_Xml_XmlNode_" data-uid="SVGImage.SVG.Shapes.TextShapeBase.ParseChildren(SVGImage.SVG.SVG,System.Xml.XmlNode)">
+  ParseChildren(SVG, XmlNode)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ParseChildren(SVG svg, XmlNode node)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>svg</code> <a class="xref" href="SVGImage.SVG.SVG.html">SVG</a></dt>
+    <dd></dd>
+    <dt><code>node</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextShapeBase.cs/#L13" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="svg-footer"><span>SVGImage · Native SVG for WPF</span><span>MIT licensed · <a href="https://github.com/dotnetprojects/SVGImage">Built in the open</a> · © 2020–2026 DotNetProjects</span></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

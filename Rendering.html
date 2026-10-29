@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>SVG geometry and raster filters | SVGImage </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SVG geometry and raster filters | SVGImage ">
+      
+      
+      <link rel="icon" href="images/logo.svg">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dotnetprojects/SVGImage/blob/master/Docs/Rendering.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="images/logo.svg" alt="SVGImage">
+            SVGImage
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="svg-geometry-and-raster-filters">SVG geometry and raster filters</h1>
+
+<p>Clipping accepts paths, basic shapes, text and local <code>use</code> references. Child silhouettes are united, <code>clip-rule</code> is inherited, transforms are applied, and <code>clipPathUnits=&quot;objectBoundingBox&quot;</code> maps normalized content to the target's geometric bounds. Empty clips hide their targets. Definitions and circular references do not paint.</p>
+<p>Nested <code>svg</code> elements establish independent percentage-length contexts, viewport position/dimensions, viewBoxes, meet/slice/none aspect ratios and overflow clipping. Symbol viewBoxes also establish the percentage context for their content. Local <code>use</code> references preserve their target's parent after rendering and circular references are ignored.</p>
+<p><code>textPath</code> lays out glyph outlines along a referenced path, rotates them to the path tangent, and supports <code>startOffset</code> (including percentages), text anchoring and nested styled spans. Glyphs whose midpoints are outside the path are omitted. This does not implement text stretching/automatic spacing, vertical text-on-path or pathLength calibration.</p>
+<p>Patterns support independent <code>patternUnits</code> and <code>patternContentUnits</code>, tile origin/dimensions, viewBox/aspect ratio, transforms, opacity and local href templates (including forward references). Brushes are constructed per target bounds, so sharing a pattern between differently sized objects is safe. Circular pattern painting returns transparent content. Pattern overflow is clipped to the tile.</p>
+<p><code>feTurbulence</code> and <code>feDisplacementMap</code> use a bounded CPU raster pipeline. Turbulence provides four seeded channels, turbulence/fractalNoise, one or two base frequencies, up to nine octaves and tile stitching, using the SVG 1.1 noise generator. Displacement uses unpremultiplied R/G/B/A selectors, signed scale and bilinear sampling with transparent pixels outside the input.</p>
+<p>Standalone filters and chains support SourceGraphic/SourceAlpha, named results, primitive subregions, filter/primitive coordinate units, sRGB/linearRGB conversion, flood, offset, merge, composite, color matrices (including saturation, hue rotation and luminance-to-alpha), component transfer, blend, Gaussian blur, morphology and tile. Component transfer implements identity, linear, gamma, table and discrete functions on unpremultiplied channels. Blend implements separable and nonseparable CSS blend modes. Gaussian blur uses three separable box convolutions, keeping work linear in the image size even for large radii. Morphology uses sliding extrema for erosion/dilation. Tile repeats the input subregion, including its transparent pixels. Unsupported primitive types are currently passed through; this is not a complete SVG filter graph implementation. Single matrix/saturation filters retain a vector paint mapping when native animations are enabled to preserve child clocks.</p>
+<p>Element opacity is applied after the filter; fill/stroke opacity is part of SourceGraphic. Radial gradients retain their focal point in the same coordinate space as the center, and gradient/pattern brushes preserve per-use opacity. CSS colors accept RGB/RGBA, HSL/HSLA, percentage channels and short/long RGBA hex notation. Gradient stops clamp offsets monotonically, and gradients honor pad/repeat/reflect spreading.</p>
+<p>SVG path data is parsed segment by segment, including single-token adjacent arc flags and reflected curve controls. Invalid data stops the current path at its last complete segment instead of aborting the SVG. Polygon/polyline lists likewise retain valid pairs before invalid data and ignore an unmatched final coordinate. Empty paths and point lists are safe.</p>
+<p>Raster filters sample the source at load time; animation of the filtered source or filter parameters does not update their bitmap. Rasterization uses up to four pixels per user unit and a maximum dimension of 2048 pixels. This bounds memory use but limits magnification quality. The geometry and animation features remain vector-based outside these raster filter chains.</p>
+<p>Run the regression runner with <code>RESVG_TEST_SUITE</code> pointing to a local checkout of linebender/resvg-test-suite to additionally compare path, polygon/polyline and supported filter cases against its reference PNGs. The huge-blur, transformed-tile and two out-of-range saturation fixtures are checked for successful rendering only: the huge-blur reference has implementation-specific artifacts and the other fixtures are explicitly marked undefined behavior upstream. Image comparisons allow small rasterization differences, with a wider tolerance for repeated tile edges and fractional morphology radii. Reference SVGs/PNGs and downloaded animation examples are kept outside this repository.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dotnetprojects/SVGImage/blob/master/Docs/Rendering.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="svg-footer"><span>SVGImage · Native SVG for WPF</span><span>MIT licensed · <a href="https://github.com/dotnetprojects/SVGImage">Built in the open</a> · © 2020–2026 DotNetProjects</span></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

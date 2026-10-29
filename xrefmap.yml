@@ -469,6 +469,22 @@ references:
   fullName.vb: SVGImage.SVG.Fill.New
   nameWithType: Fill.Fill
   nameWithType.vb: Fill.New
+- uid: SVGImage.SVG.Fill.CreateDefault(SVGImage.SVG.SVG,System.String)
+  name: CreateDefault(SVG, string)
+  href: api/SVGImage.SVG.Fill.html#SVGImage_SVG_Fill_CreateDefault_SVGImage_SVG_SVG_System_String_
+  commentId: M:SVGImage.SVG.Fill.CreateDefault(SVGImage.SVG.SVG,System.String)
+  name.vb: CreateDefault(SVG, String)
+  fullName: SVGImage.SVG.Fill.CreateDefault(SVGImage.SVG.SVG, string)
+  fullName.vb: SVGImage.SVG.Fill.CreateDefault(SVGImage.SVG.SVG, String)
+  nameWithType: Fill.CreateDefault(SVG, string)
+  nameWithType.vb: Fill.CreateDefault(SVG, String)
+- uid: SVGImage.SVG.Fill.CreateDefault*
+  name: CreateDefault
+  href: api/SVGImage.SVG.Fill.html#SVGImage_SVG_Fill_CreateDefault_
+  commentId: Overload:SVGImage.SVG.Fill.CreateDefault
+  isSpec: "True"
+  fullName: SVGImage.SVG.Fill.CreateDefault
+  nameWithType: Fill.CreateDefault
 - uid: SVGImage.SVG.Fill.FillBrush(SVGImage.SVG.SVG,SVGImage.SVG.SVGRender,SVGImage.SVG.Shapes.Shape,System.Double,System.Windows.Rect)
   name: FillBrush(SVG, SVGRender, Shape, double, Rect)
   href: api/SVGImage.SVG.Fill.html#SVGImage_SVG_Fill_FillBrush_SVGImage_SVG_SVG_SVGImage_SVG_SVGRender_SVGImage_SVG_Shapes_Shape_System_Double_System_Windows_Rect_
@@ -498,6 +514,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.Fill.FillRule
   nameWithType: Fill.FillRule
+- uid: SVGImage.SVG.Fill.IsDefault
+  name: IsDefault
+  href: api/SVGImage.SVG.Fill.html#SVGImage_SVG_Fill_IsDefault
+  commentId: P:SVGImage.SVG.Fill.IsDefault
+  fullName: SVGImage.SVG.Fill.IsDefault
+  nameWithType: Fill.IsDefault
+- uid: SVGImage.SVG.Fill.IsDefault*
+  name: IsDefault
+  href: api/SVGImage.SVG.Fill.html#SVGImage_SVG_Fill_IsDefault_
+  commentId: Overload:SVGImage.SVG.Fill.IsDefault
+  isSpec: "True"
+  fullName: SVGImage.SVG.Fill.IsDefault
+  nameWithType: Fill.IsDefault
 - uid: SVGImage.SVG.Fill.IsEmpty(SVGImage.SVG.SVG)
   name: IsEmpty(SVG)
   href: api/SVGImage.SVG.Fill.html#SVGImage_SVG_Fill_IsEmpty_SVGImage_SVG_SVG_
@@ -555,6 +584,19 @@ references:
   commentId: F:SVGImage.SVG.Fill.eFillRule.nonzero
   fullName: SVGImage.SVG.Fill.eFillRule.nonzero
   nameWithType: Fill.eFillRule.nonzero
+- uid: SVGImage.SVG.Fill.get
+  name: get
+  href: api/SVGImage.SVG.Fill.html#SVGImage_SVG_Fill_get
+  commentId: P:SVGImage.SVG.Fill.get
+  fullName: SVGImage.SVG.Fill.get
+  nameWithType: Fill.get
+- uid: SVGImage.SVG.Fill.get*
+  name: get
+  href: api/SVGImage.SVG.Fill.html#SVGImage_SVG_Fill_get_
+  commentId: Overload:SVGImage.SVG.Fill.get
+  isSpec: "True"
+  fullName: SVGImage.SVG.Fill.get
+  nameWithType: Fill.get
 - uid: SVGImage.SVG.Filters
   name: SVGImage.SVG.Filters
   href: api/SVGImage.SVG.Filters.html
@@ -808,6 +850,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.PaintServers.GradientColorPaintServer.GradientUnits
   nameWithType: GradientColorPaintServer.GradientUnits
+- uid: SVGImage.SVG.PaintServers.GradientColorPaintServer.SpreadMethod
+  name: SpreadMethod
+  href: api/SVGImage.SVG.PaintServers.GradientColorPaintServer.html#SVGImage_SVG_PaintServers_GradientColorPaintServer_SpreadMethod
+  commentId: P:SVGImage.SVG.PaintServers.GradientColorPaintServer.SpreadMethod
+  fullName: SVGImage.SVG.PaintServers.GradientColorPaintServer.SpreadMethod
+  nameWithType: GradientColorPaintServer.SpreadMethod
+- uid: SVGImage.SVG.PaintServers.GradientColorPaintServer.SpreadMethod*
+  name: SpreadMethod
+  href: api/SVGImage.SVG.PaintServers.GradientColorPaintServer.html#SVGImage_SVG_PaintServers_GradientColorPaintServer_SpreadMethod_
+  commentId: Overload:SVGImage.SVG.PaintServers.GradientColorPaintServer.SpreadMethod
+  isSpec: "True"
+  fullName: SVGImage.SVG.PaintServers.GradientColorPaintServer.SpreadMethod
+  nameWithType: GradientColorPaintServer.SpreadMethod
 - uid: SVGImage.SVG.PaintServers.GradientColorPaintServer.Stops
   name: Stops
   href: api/SVGImage.SVG.PaintServers.GradientColorPaintServer.html#SVGImage_SVG_PaintServers_GradientColorPaintServer_Stops
@@ -1011,6 +1066,22 @@ references:
   fullName.vb: SVGImage.SVG.PaintServers.PaintServer.New
   nameWithType: PaintServer.PaintServer
   nameWithType.vb: PaintServer.New
+- uid: SVGImage.SVG.PaintServers.PaintServer.ApplyOpacity(System.Windows.Media.Brush,System.Double)
+  name: ApplyOpacity(Brush, double)
+  href: api/SVGImage.SVG.PaintServers.PaintServer.html#SVGImage_SVG_PaintServers_PaintServer_ApplyOpacity_System_Windows_Media_Brush_System_Double_
+  commentId: M:SVGImage.SVG.PaintServers.PaintServer.ApplyOpacity(System.Windows.Media.Brush,System.Double)
+  name.vb: ApplyOpacity(Brush, Double)
+  fullName: SVGImage.SVG.PaintServers.PaintServer.ApplyOpacity(System.Windows.Media.Brush, double)
+  fullName.vb: SVGImage.SVG.PaintServers.PaintServer.ApplyOpacity(System.Windows.Media.Brush, Double)
+  nameWithType: PaintServer.ApplyOpacity(Brush, double)
+  nameWithType.vb: PaintServer.ApplyOpacity(Brush, Double)
+- uid: SVGImage.SVG.PaintServers.PaintServer.ApplyOpacity*
+  name: ApplyOpacity
+  href: api/SVGImage.SVG.PaintServers.PaintServer.html#SVGImage_SVG_PaintServers_PaintServer_ApplyOpacity_
+  commentId: Overload:SVGImage.SVG.PaintServers.PaintServer.ApplyOpacity
+  isSpec: "True"
+  fullName: SVGImage.SVG.PaintServers.PaintServer.ApplyOpacity
+  nameWithType: PaintServer.ApplyOpacity
 - uid: SVGImage.SVG.PaintServers.PaintServer.Brush
   name: Brush
   href: api/SVGImage.SVG.PaintServers.PaintServer.html#SVGImage_SVG_PaintServers_PaintServer_Brush
@@ -1553,19 +1624,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.PathShape.Data
   nameWithType: PathShape.Data
-- uid: SVGImage.SVG.PathShape.Fill
-  name: Fill
-  href: api/SVGImage.SVG.PathShape.html#SVGImage_SVG_PathShape_Fill
-  commentId: P:SVGImage.SVG.PathShape.Fill
-  fullName: SVGImage.SVG.PathShape.Fill
-  nameWithType: PathShape.Fill
-- uid: SVGImage.SVG.PathShape.Fill*
-  name: Fill
-  href: api/SVGImage.SVG.PathShape.html#SVGImage_SVG_PathShape_Fill_
-  commentId: Overload:SVGImage.SVG.PathShape.Fill
+- uid: SVGImage.SVG.PathShape.DefaultFill
+  name: DefaultFill()
+  href: api/SVGImage.SVG.PathShape.html#SVGImage_SVG_PathShape_DefaultFill
+  commentId: M:SVGImage.SVG.PathShape.DefaultFill
+  fullName: SVGImage.SVG.PathShape.DefaultFill()
+  nameWithType: PathShape.DefaultFill()
+- uid: SVGImage.SVG.PathShape.DefaultFill*
+  name: DefaultFill
+  href: api/SVGImage.SVG.PathShape.html#SVGImage_SVG_PathShape_DefaultFill_
+  commentId: Overload:SVGImage.SVG.PathShape.DefaultFill
   isSpec: "True"
-  fullName: SVGImage.SVG.PathShape.Fill
-  nameWithType: PathShape.Fill
+  fullName: SVGImage.SVG.PathShape.DefaultFill
+  nameWithType: PathShape.DefaultFill
 - uid: SVGImage.SVG.SVG
   name: SVG
   href: api/SVGImage.SVG.SVG.html
@@ -1951,6 +2022,25 @@ references:
   commentId: F:SVGImage.SVG.SVGImage.ImageSourcePoperty
   fullName: SVGImage.SVG.SVGImage.ImageSourcePoperty
   nameWithType: SVGImage.ImageSourcePoperty
+- uid: SVGImage.SVG.SVGImage.IsGrayscale
+  name: IsGrayscale
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_IsGrayscale
+  commentId: P:SVGImage.SVG.SVGImage.IsGrayscale
+  fullName: SVGImage.SVG.SVGImage.IsGrayscale
+  nameWithType: SVGImage.IsGrayscale
+- uid: SVGImage.SVG.SVGImage.IsGrayscale*
+  name: IsGrayscale
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_IsGrayscale_
+  commentId: Overload:SVGImage.SVG.SVGImage.IsGrayscale
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGImage.IsGrayscale
+  nameWithType: SVGImage.IsGrayscale
+- uid: SVGImage.SVG.SVGImage.IsGrayscaleProperty
+  name: IsGrayscaleProperty
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_IsGrayscaleProperty
+  commentId: F:SVGImage.SVG.SVGImage.IsGrayscaleProperty
+  fullName: SVGImage.SVG.SVGImage.IsGrayscaleProperty
+  nameWithType: SVGImage.IsGrayscaleProperty
 - uid: SVGImage.SVG.SVGImage.MeasureOverride(System.Windows.Size)
   name: MeasureOverride(Size)
   href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_MeasureOverride_System_Windows_Size_
@@ -2022,6 +2112,44 @@ references:
   commentId: F:SVGImage.SVG.SVGImage.OverrideColorProperty
   fullName: SVGImage.SVG.SVGImage.OverrideColorProperty
   nameWithType: SVGImage.OverrideColorProperty
+- uid: SVGImage.SVG.SVGImage.OverrideFillColor
+  name: OverrideFillColor
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_OverrideFillColor
+  commentId: P:SVGImage.SVG.SVGImage.OverrideFillColor
+  fullName: SVGImage.SVG.SVGImage.OverrideFillColor
+  nameWithType: SVGImage.OverrideFillColor
+- uid: SVGImage.SVG.SVGImage.OverrideFillColor*
+  name: OverrideFillColor
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_OverrideFillColor_
+  commentId: Overload:SVGImage.SVG.SVGImage.OverrideFillColor
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGImage.OverrideFillColor
+  nameWithType: SVGImage.OverrideFillColor
+- uid: SVGImage.SVG.SVGImage.OverrideFillColorProperty
+  name: OverrideFillColorProperty
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_OverrideFillColorProperty
+  commentId: F:SVGImage.SVG.SVGImage.OverrideFillColorProperty
+  fullName: SVGImage.SVG.SVGImage.OverrideFillColorProperty
+  nameWithType: SVGImage.OverrideFillColorProperty
+- uid: SVGImage.SVG.SVGImage.OverrideStrokeColor
+  name: OverrideStrokeColor
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_OverrideStrokeColor
+  commentId: P:SVGImage.SVG.SVGImage.OverrideStrokeColor
+  fullName: SVGImage.SVG.SVGImage.OverrideStrokeColor
+  nameWithType: SVGImage.OverrideStrokeColor
+- uid: SVGImage.SVG.SVGImage.OverrideStrokeColor*
+  name: OverrideStrokeColor
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_OverrideStrokeColor_
+  commentId: Overload:SVGImage.SVG.SVGImage.OverrideStrokeColor
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGImage.OverrideStrokeColor
+  nameWithType: SVGImage.OverrideStrokeColor
+- uid: SVGImage.SVG.SVGImage.OverrideStrokeColorProperty
+  name: OverrideStrokeColorProperty
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_OverrideStrokeColorProperty
+  commentId: F:SVGImage.SVG.SVGImage.OverrideStrokeColorProperty
+  fullName: SVGImage.SVG.SVGImage.OverrideStrokeColorProperty
+  nameWithType: SVGImage.OverrideStrokeColorProperty
 - uid: SVGImage.SVG.SVGImage.OverrideStrokeWidth
   name: OverrideStrokeWidth
   href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_OverrideStrokeWidth
@@ -2067,6 +2195,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.SVGImage.SVG
   nameWithType: SVGImage.SVG
+- uid: SVGImage.SVG.SVGImage.SeekAnimations(System.TimeSpan)
+  name: SeekAnimations(TimeSpan)
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_SeekAnimations_System_TimeSpan_
+  commentId: M:SVGImage.SVG.SVGImage.SeekAnimations(System.TimeSpan)
+  fullName: SVGImage.SVG.SVGImage.SeekAnimations(System.TimeSpan)
+  nameWithType: SVGImage.SeekAnimations(TimeSpan)
+- uid: SVGImage.SVG.SVGImage.SeekAnimations*
+  name: SeekAnimations
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_SeekAnimations_
+  commentId: Overload:SVGImage.SVG.SVGImage.SeekAnimations
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGImage.SeekAnimations
+  nameWithType: SVGImage.SeekAnimations
 - uid: SVGImage.SVG.SVGImage.SetImage(System.IO.Stream)
   name: SetImage(Stream)
   href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_SetImage_System_IO_Stream_
@@ -2139,6 +2280,22 @@ references:
   commentId: F:SVGImage.SVG.SVGImage.SourceProperty
   fullName: SVGImage.SVG.SVGImage.SourceProperty
   nameWithType: SVGImage.SourceProperty
+- uid: SVGImage.SVG.SVGImage.TriggerAnimationEvent(System.String,System.String)
+  name: TriggerAnimationEvent(string, string)
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_TriggerAnimationEvent_System_String_System_String_
+  commentId: M:SVGImage.SVG.SVGImage.TriggerAnimationEvent(System.String,System.String)
+  name.vb: TriggerAnimationEvent(String, String)
+  fullName: SVGImage.SVG.SVGImage.TriggerAnimationEvent(string, string)
+  fullName.vb: SVGImage.SVG.SVGImage.TriggerAnimationEvent(String, String)
+  nameWithType: SVGImage.TriggerAnimationEvent(string, string)
+  nameWithType.vb: SVGImage.TriggerAnimationEvent(String, String)
+- uid: SVGImage.SVG.SVGImage.TriggerAnimationEvent*
+  name: TriggerAnimationEvent
+  href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_TriggerAnimationEvent_
+  commentId: Overload:SVGImage.SVG.SVGImage.TriggerAnimationEvent
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGImage.TriggerAnimationEvent
+  nameWithType: SVGImage.TriggerAnimationEvent
 - uid: SVGImage.SVG.SVGImage.UriSource
   name: UriSource
   href: api/SVGImage.SVG.SVGImage.html#SVGImage_SVG_SVGImage_UriSource
@@ -2247,6 +2404,19 @@ references:
   fullName.vb: SVGImage.SVG.SVGRender.New
   nameWithType: SVGRender.SVGRender
   nameWithType.vb: SVGRender.New
+- uid: SVGImage.SVG.SVGRender.AnimationWarnings
+  name: AnimationWarnings
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_AnimationWarnings
+  commentId: P:SVGImage.SVG.SVGRender.AnimationWarnings
+  fullName: SVGImage.SVG.SVGRender.AnimationWarnings
+  nameWithType: SVGRender.AnimationWarnings
+- uid: SVGImage.SVG.SVGRender.AnimationWarnings*
+  name: AnimationWarnings
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_AnimationWarnings_
+  commentId: Overload:SVGImage.SVG.SVGRender.AnimationWarnings
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGRender.AnimationWarnings
+  nameWithType: SVGRender.AnimationWarnings
 - uid: SVGImage.SVG.SVGRender.CreateDrawing(SVGImage.SVG.SVG)
   name: CreateDrawing(SVG)
   href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_CreateDrawing_SVGImage_SVG_SVG_
@@ -2361,6 +2531,32 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.SVGRender.OverrideColor
   nameWithType: SVGRender.OverrideColor
+- uid: SVGImage.SVG.SVGRender.OverrideFillColor
+  name: OverrideFillColor
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_OverrideFillColor
+  commentId: P:SVGImage.SVG.SVGRender.OverrideFillColor
+  fullName: SVGImage.SVG.SVGRender.OverrideFillColor
+  nameWithType: SVGRender.OverrideFillColor
+- uid: SVGImage.SVG.SVGRender.OverrideFillColor*
+  name: OverrideFillColor
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_OverrideFillColor_
+  commentId: Overload:SVGImage.SVG.SVGRender.OverrideFillColor
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGRender.OverrideFillColor
+  nameWithType: SVGRender.OverrideFillColor
+- uid: SVGImage.SVG.SVGRender.OverrideStrokeColor
+  name: OverrideStrokeColor
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_OverrideStrokeColor
+  commentId: P:SVGImage.SVG.SVGRender.OverrideStrokeColor
+  fullName: SVGImage.SVG.SVGRender.OverrideStrokeColor
+  nameWithType: SVGRender.OverrideStrokeColor
+- uid: SVGImage.SVG.SVGRender.OverrideStrokeColor*
+  name: OverrideStrokeColor
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_OverrideStrokeColor_
+  commentId: Overload:SVGImage.SVG.SVGRender.OverrideStrokeColor
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGRender.OverrideStrokeColor
+  nameWithType: SVGRender.OverrideStrokeColor
 - uid: SVGImage.SVG.SVGRender.OverrideStrokeWidth
   name: OverrideStrokeWidth
   href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_OverrideStrokeWidth
@@ -2387,6 +2583,35 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.SVGRender.SVG
   nameWithType: SVGRender.SVG
+- uid: SVGImage.SVG.SVGRender.SeekAnimations(System.TimeSpan)
+  name: SeekAnimations(TimeSpan)
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_SeekAnimations_System_TimeSpan_
+  commentId: M:SVGImage.SVG.SVGRender.SeekAnimations(System.TimeSpan)
+  fullName: SVGImage.SVG.SVGRender.SeekAnimations(System.TimeSpan)
+  nameWithType: SVGRender.SeekAnimations(TimeSpan)
+- uid: SVGImage.SVG.SVGRender.SeekAnimations*
+  name: SeekAnimations
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_SeekAnimations_
+  commentId: Overload:SVGImage.SVG.SVGRender.SeekAnimations
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGRender.SeekAnimations
+  nameWithType: SVGRender.SeekAnimations
+- uid: SVGImage.SVG.SVGRender.TriggerAnimationEvent(System.String,System.String)
+  name: TriggerAnimationEvent(string, string)
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_TriggerAnimationEvent_System_String_System_String_
+  commentId: M:SVGImage.SVG.SVGRender.TriggerAnimationEvent(System.String,System.String)
+  name.vb: TriggerAnimationEvent(String, String)
+  fullName: SVGImage.SVG.SVGRender.TriggerAnimationEvent(string, string)
+  fullName.vb: SVGImage.SVG.SVGRender.TriggerAnimationEvent(String, String)
+  nameWithType: SVGRender.TriggerAnimationEvent(string, string)
+  nameWithType.vb: SVGRender.TriggerAnimationEvent(String, String)
+- uid: SVGImage.SVG.SVGRender.TriggerAnimationEvent*
+  name: TriggerAnimationEvent
+  href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_TriggerAnimationEvent_
+  commentId: Overload:SVGImage.SVG.SVGRender.TriggerAnimationEvent
+  isSpec: "True"
+  fullName: SVGImage.SVG.SVGRender.TriggerAnimationEvent
+  nameWithType: SVGRender.TriggerAnimationEvent
 - uid: SVGImage.SVG.SVGRender.UseAnimations
   name: UseAnimations
   href: api/SVGImage.SVG.SVGRender.html#SVGImage_SVG_SVGRender_UseAnimations
@@ -2406,6 +2631,200 @@ references:
   commentId: N:SVGImage.SVG.Shapes
   fullName: SVGImage.SVG.Shapes
   nameWithType: SVGImage.SVG.Shapes
+- uid: SVGImage.SVG.Shapes.CharacterLayout
+  name: CharacterLayout
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html
+  commentId: T:SVGImage.SVG.Shapes.CharacterLayout
+  fullName: SVGImage.SVG.Shapes.CharacterLayout
+  nameWithType: CharacterLayout
+- uid: SVGImage.SVG.Shapes.CharacterLayout.#ctor(System.Char)
+  name: CharacterLayout(char)
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout__ctor_System_Char_
+  commentId: M:SVGImage.SVG.Shapes.CharacterLayout.#ctor(System.Char)
+  name.vb: New(Char)
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.CharacterLayout(char)
+  fullName.vb: SVGImage.SVG.Shapes.CharacterLayout.New(Char)
+  nameWithType: CharacterLayout.CharacterLayout(char)
+  nameWithType.vb: CharacterLayout.New(Char)
+- uid: SVGImage.SVG.Shapes.CharacterLayout.#ctor*
+  name: CharacterLayout
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout__ctor_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.CharacterLayout
+  fullName.vb: SVGImage.SVG.Shapes.CharacterLayout.New
+  nameWithType: CharacterLayout.CharacterLayout
+  nameWithType.vb: CharacterLayout.New
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Addressable
+  name: Addressable
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Addressable
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.Addressable
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Addressable
+  nameWithType: CharacterLayout.Addressable
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Addressable*
+  name: Addressable
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Addressable_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.Addressable
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Addressable
+  nameWithType: CharacterLayout.Addressable
+- uid: SVGImage.SVG.Shapes.CharacterLayout.AnchoredChunk
+  name: AnchoredChunk
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_AnchoredChunk
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.AnchoredChunk
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.AnchoredChunk
+  nameWithType: CharacterLayout.AnchoredChunk
+- uid: SVGImage.SVG.Shapes.CharacterLayout.AnchoredChunk*
+  name: AnchoredChunk
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_AnchoredChunk_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.AnchoredChunk
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.AnchoredChunk
+  nameWithType: CharacterLayout.AnchoredChunk
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Character
+  name: Character
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Character
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.Character
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Character
+  nameWithType: CharacterLayout.Character
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Character*
+  name: Character
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Character_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.Character
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Character
+  nameWithType: CharacterLayout.Character
+- uid: SVGImage.SVG.Shapes.CharacterLayout.DX
+  name: DX
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_DX
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.DX
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.DX
+  nameWithType: CharacterLayout.DX
+- uid: SVGImage.SVG.Shapes.CharacterLayout.DX*
+  name: DX
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_DX_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.DX
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.DX
+  nameWithType: CharacterLayout.DX
+- uid: SVGImage.SVG.Shapes.CharacterLayout.DY
+  name: DY
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_DY
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.DY
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.DY
+  nameWithType: CharacterLayout.DY
+- uid: SVGImage.SVG.Shapes.CharacterLayout.DY*
+  name: DY
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_DY_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.DY
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.DY
+  nameWithType: CharacterLayout.DY
+- uid: SVGImage.SVG.Shapes.CharacterLayout.DoesPositionX
+  name: DoesPositionX
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_DoesPositionX
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.DoesPositionX
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.DoesPositionX
+  nameWithType: CharacterLayout.DoesPositionX
+- uid: SVGImage.SVG.Shapes.CharacterLayout.DoesPositionX*
+  name: DoesPositionX
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_DoesPositionX_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.DoesPositionX
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.DoesPositionX
+  nameWithType: CharacterLayout.DoesPositionX
+- uid: SVGImage.SVG.Shapes.CharacterLayout.DoesPositionY
+  name: DoesPositionY
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_DoesPositionY
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.DoesPositionY
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.DoesPositionY
+  nameWithType: CharacterLayout.DoesPositionY
+- uid: SVGImage.SVG.Shapes.CharacterLayout.DoesPositionY*
+  name: DoesPositionY
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_DoesPositionY_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.DoesPositionY
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.DoesPositionY
+  nameWithType: CharacterLayout.DoesPositionY
+- uid: SVGImage.SVG.Shapes.CharacterLayout.GlobalIndex
+  name: GlobalIndex
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_GlobalIndex
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.GlobalIndex
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.GlobalIndex
+  nameWithType: CharacterLayout.GlobalIndex
+- uid: SVGImage.SVG.Shapes.CharacterLayout.GlobalIndex*
+  name: GlobalIndex
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_GlobalIndex_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.GlobalIndex
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.GlobalIndex
+  nameWithType: CharacterLayout.GlobalIndex
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Hidden
+  name: Hidden
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Hidden
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.Hidden
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Hidden
+  nameWithType: CharacterLayout.Hidden
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Hidden*
+  name: Hidden
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Hidden_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.Hidden
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Hidden
+  nameWithType: CharacterLayout.Hidden
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Middle
+  name: Middle
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Middle
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.Middle
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Middle
+  nameWithType: CharacterLayout.Middle
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Middle*
+  name: Middle
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Middle_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.Middle
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Middle
+  nameWithType: CharacterLayout.Middle
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Rotation
+  name: Rotation
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Rotation
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.Rotation
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Rotation
+  nameWithType: CharacterLayout.Rotation
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Rotation*
+  name: Rotation
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Rotation_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.Rotation
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Rotation
+  nameWithType: CharacterLayout.Rotation
+- uid: SVGImage.SVG.Shapes.CharacterLayout.X
+  name: X
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_X
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.X
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.X
+  nameWithType: CharacterLayout.X
+- uid: SVGImage.SVG.Shapes.CharacterLayout.X*
+  name: X
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_X_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.X
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.X
+  nameWithType: CharacterLayout.X
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Y
+  name: Y
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Y
+  commentId: P:SVGImage.SVG.Shapes.CharacterLayout.Y
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Y
+  nameWithType: CharacterLayout.Y
+- uid: SVGImage.SVG.Shapes.CharacterLayout.Y*
+  name: Y
+  href: api/SVGImage.SVG.Shapes.CharacterLayout.html#SVGImage_SVG_Shapes_CharacterLayout_Y_
+  commentId: Overload:SVGImage.SVG.Shapes.CharacterLayout.Y
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CharacterLayout.Y
+  nameWithType: CharacterLayout.Y
 - uid: SVGImage.SVG.Shapes.CircleShape
   name: CircleShape
   href: api/SVGImage.SVG.Shapes.CircleShape.html
@@ -2457,6 +2876,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.Shapes.CircleShape.CY
   nameWithType: CircleShape.CY
+- uid: SVGImage.SVG.Shapes.CircleShape.DefaultFill
+  name: DefaultFill()
+  href: api/SVGImage.SVG.Shapes.CircleShape.html#SVGImage_SVG_Shapes_CircleShape_DefaultFill
+  commentId: M:SVGImage.SVG.Shapes.CircleShape.DefaultFill
+  fullName: SVGImage.SVG.Shapes.CircleShape.DefaultFill()
+  nameWithType: CircleShape.DefaultFill()
+- uid: SVGImage.SVG.Shapes.CircleShape.DefaultFill*
+  name: DefaultFill
+  href: api/SVGImage.SVG.Shapes.CircleShape.html#SVGImage_SVG_Shapes_CircleShape_DefaultFill_
+  commentId: Overload:SVGImage.SVG.Shapes.CircleShape.DefaultFill
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.CircleShape.DefaultFill
+  nameWithType: CircleShape.DefaultFill
 - uid: SVGImage.SVG.Shapes.CircleShape.R
   name: R
   href: api/SVGImage.SVG.Shapes.CircleShape.html#SVGImage_SVG_Shapes_CircleShape_R
@@ -2559,6 +2991,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.Shapes.EllipseShape.CY
   nameWithType: EllipseShape.CY
+- uid: SVGImage.SVG.Shapes.EllipseShape.DefaultFill
+  name: DefaultFill()
+  href: api/SVGImage.SVG.Shapes.EllipseShape.html#SVGImage_SVG_Shapes_EllipseShape_DefaultFill
+  commentId: M:SVGImage.SVG.Shapes.EllipseShape.DefaultFill
+  fullName: SVGImage.SVG.Shapes.EllipseShape.DefaultFill()
+  nameWithType: EllipseShape.DefaultFill()
+- uid: SVGImage.SVG.Shapes.EllipseShape.DefaultFill*
+  name: DefaultFill
+  href: api/SVGImage.SVG.Shapes.EllipseShape.html#SVGImage_SVG_Shapes_EllipseShape_DefaultFill_
+  commentId: Overload:SVGImage.SVG.Shapes.EllipseShape.DefaultFill
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.EllipseShape.DefaultFill
+  nameWithType: EllipseShape.DefaultFill
 - uid: SVGImage.SVG.Shapes.EllipseShape.RX
   name: RX
   href: api/SVGImage.SVG.Shapes.EllipseShape.html#SVGImage_SVG_Shapes_EllipseShape_RX
@@ -2610,22 +3055,6 @@ references:
   fullName.vb: SVGImage.SVG.Shapes.Group.New
   nameWithType: Group.Group
   nameWithType.vb: Group.New
-- uid: SVGImage.SVG.Shapes.Group.AddToList(SVGImage.SVG.SVG,System.Collections.Generic.List{SVGImage.SVG.Shapes.Shape},System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
-  name: AddToList(SVG, List<Shape>, XmlNode, Shape)
-  href: api/SVGImage.SVG.Shapes.Group.html#SVGImage_SVG_Shapes_Group_AddToList_SVGImage_SVG_SVG_System_Collections_Generic_List_SVGImage_SVG_Shapes_Shape__System_Xml_XmlNode_SVGImage_SVG_Shapes_Shape_
-  commentId: M:SVGImage.SVG.Shapes.Group.AddToList(SVGImage.SVG.SVG,System.Collections.Generic.List{SVGImage.SVG.Shapes.Shape},System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
-  name.vb: AddToList(SVG, List(Of Shape), XmlNode, Shape)
-  fullName: SVGImage.SVG.Shapes.Group.AddToList(SVGImage.SVG.SVG, System.Collections.Generic.List<SVGImage.SVG.Shapes.Shape>, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
-  fullName.vb: SVGImage.SVG.Shapes.Group.AddToList(SVGImage.SVG.SVG, System.Collections.Generic.List(Of SVGImage.SVG.Shapes.Shape), System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
-  nameWithType: Group.AddToList(SVG, List<Shape>, XmlNode, Shape)
-  nameWithType.vb: Group.AddToList(SVG, List(Of Shape), XmlNode, Shape)
-- uid: SVGImage.SVG.Shapes.Group.AddToList*
-  name: AddToList
-  href: api/SVGImage.SVG.Shapes.Group.html#SVGImage_SVG_Shapes_Group_AddToList_
-  commentId: Overload:SVGImage.SVG.Shapes.Group.AddToList
-  isSpec: "True"
-  fullName: SVGImage.SVG.Shapes.Group.AddToList
-  nameWithType: Group.AddToList
 - uid: SVGImage.SVG.Shapes.Group.Elements
   name: Elements
   href: api/SVGImage.SVG.Shapes.Group.html#SVGImage_SVG_Shapes_Group_Elements
@@ -2652,6 +3081,96 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.Shapes.Group.IsSwitch
   nameWithType: Group.IsSwitch
+- uid: SVGImage.SVG.Shapes.ITextChild
+  name: ITextChild
+  href: api/SVGImage.SVG.Shapes.ITextChild.html
+  commentId: T:SVGImage.SVG.Shapes.ITextChild
+  fullName: SVGImage.SVG.Shapes.ITextChild
+  nameWithType: ITextChild
+- uid: SVGImage.SVG.Shapes.ITextChild.Parent
+  name: Parent
+  href: api/SVGImage.SVG.Shapes.ITextChild.html#SVGImage_SVG_Shapes_ITextChild_Parent
+  commentId: P:SVGImage.SVG.Shapes.ITextChild.Parent
+  fullName: SVGImage.SVG.Shapes.ITextChild.Parent
+  nameWithType: ITextChild.Parent
+- uid: SVGImage.SVG.Shapes.ITextChild.Parent*
+  name: Parent
+  href: api/SVGImage.SVG.Shapes.ITextChild.html#SVGImage_SVG_Shapes_ITextChild_Parent_
+  commentId: Overload:SVGImage.SVG.Shapes.ITextChild.Parent
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.ITextChild.Parent
+  nameWithType: ITextChild.Parent
+- uid: SVGImage.SVG.Shapes.ITextNode
+  name: ITextNode
+  href: api/SVGImage.SVG.Shapes.ITextNode.html
+  commentId: T:SVGImage.SVG.Shapes.ITextNode
+  fullName: SVGImage.SVG.Shapes.ITextNode
+  nameWithType: ITextNode
+- uid: SVGImage.SVG.Shapes.ITextNode.GetCharacters
+  name: GetCharacters()
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetCharacters
+  commentId: M:SVGImage.SVG.Shapes.ITextNode.GetCharacters
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetCharacters()
+  nameWithType: ITextNode.GetCharacters()
+- uid: SVGImage.SVG.Shapes.ITextNode.GetCharacters*
+  name: GetCharacters
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetCharacters_
+  commentId: Overload:SVGImage.SVG.Shapes.ITextNode.GetCharacters
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetCharacters
+  nameWithType: ITextNode.GetCharacters
+- uid: SVGImage.SVG.Shapes.ITextNode.GetFirstCharacter
+  name: GetFirstCharacter()
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetFirstCharacter
+  commentId: M:SVGImage.SVG.Shapes.ITextNode.GetFirstCharacter
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetFirstCharacter()
+  nameWithType: ITextNode.GetFirstCharacter()
+- uid: SVGImage.SVG.Shapes.ITextNode.GetFirstCharacter*
+  name: GetFirstCharacter
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetFirstCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.ITextNode.GetFirstCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetFirstCharacter
+  nameWithType: ITextNode.GetFirstCharacter
+- uid: SVGImage.SVG.Shapes.ITextNode.GetLastCharacter
+  name: GetLastCharacter()
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetLastCharacter
+  commentId: M:SVGImage.SVG.Shapes.ITextNode.GetLastCharacter
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetLastCharacter()
+  nameWithType: ITextNode.GetLastCharacter()
+- uid: SVGImage.SVG.Shapes.ITextNode.GetLastCharacter*
+  name: GetLastCharacter
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetLastCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.ITextNode.GetLastCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetLastCharacter
+  nameWithType: ITextNode.GetLastCharacter
+- uid: SVGImage.SVG.Shapes.ITextNode.GetLength
+  name: GetLength()
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetLength
+  commentId: M:SVGImage.SVG.Shapes.ITextNode.GetLength
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetLength()
+  nameWithType: ITextNode.GetLength()
+- uid: SVGImage.SVG.Shapes.ITextNode.GetLength*
+  name: GetLength
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetLength_
+  commentId: Overload:SVGImage.SVG.Shapes.ITextNode.GetLength
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetLength
+  nameWithType: ITextNode.GetLength
+- uid: SVGImage.SVG.Shapes.ITextNode.GetText
+  name: GetText()
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetText
+  commentId: M:SVGImage.SVG.Shapes.ITextNode.GetText
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetText()
+  nameWithType: ITextNode.GetText()
+- uid: SVGImage.SVG.Shapes.ITextNode.GetText*
+  name: GetText
+  href: api/SVGImage.SVG.Shapes.ITextNode.html#SVGImage_SVG_Shapes_ITextNode_GetText_
+  commentId: Overload:SVGImage.SVG.Shapes.ITextNode.GetText
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.ITextNode.GetText
+  nameWithType: ITextNode.GetText
 - uid: SVGImage.SVG.Shapes.ImageShape
   name: ImageShape
   href: api/SVGImage.SVG.Shapes.ImageShape.html
@@ -2742,6 +3261,516 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.Shapes.ImageShape.Y
   nameWithType: ImageShape.Y
+- uid: SVGImage.SVG.Shapes.LengthAdjustment
+  name: LengthAdjustment
+  href: api/SVGImage.SVG.Shapes.LengthAdjustment.html
+  commentId: T:SVGImage.SVG.Shapes.LengthAdjustment
+  fullName: SVGImage.SVG.Shapes.LengthAdjustment
+  nameWithType: LengthAdjustment
+- uid: SVGImage.SVG.Shapes.LengthAdjustment.None
+  name: None
+  href: api/SVGImage.SVG.Shapes.LengthAdjustment.html#SVGImage_SVG_Shapes_LengthAdjustment_None
+  commentId: F:SVGImage.SVG.Shapes.LengthAdjustment.None
+  fullName: SVGImage.SVG.Shapes.LengthAdjustment.None
+  nameWithType: LengthAdjustment.None
+- uid: SVGImage.SVG.Shapes.LengthAdjustment.Spacing
+  name: Spacing
+  href: api/SVGImage.SVG.Shapes.LengthAdjustment.html#SVGImage_SVG_Shapes_LengthAdjustment_Spacing
+  commentId: F:SVGImage.SVG.Shapes.LengthAdjustment.Spacing
+  fullName: SVGImage.SVG.Shapes.LengthAdjustment.Spacing
+  nameWithType: LengthAdjustment.Spacing
+- uid: SVGImage.SVG.Shapes.LengthAdjustment.SpacingAndGlyphs
+  name: SpacingAndGlyphs
+  href: api/SVGImage.SVG.Shapes.LengthAdjustment.html#SVGImage_SVG_Shapes_LengthAdjustment_SpacingAndGlyphs
+  commentId: F:SVGImage.SVG.Shapes.LengthAdjustment.SpacingAndGlyphs
+  fullName: SVGImage.SVG.Shapes.LengthAdjustment.SpacingAndGlyphs
+  nameWithType: LengthAdjustment.SpacingAndGlyphs
+- uid: SVGImage.SVG.Shapes.LengthContext
+  name: LengthContext
+  href: api/SVGImage.SVG.Shapes.LengthContext.html
+  commentId: T:SVGImage.SVG.Shapes.LengthContext
+  fullName: SVGImage.SVG.Shapes.LengthContext
+  nameWithType: LengthContext
+- uid: SVGImage.SVG.Shapes.LengthContext.#ctor(SVGImage.SVG.Shapes.Shape,SVGImage.SVG.Shapes.LengthUnit)
+  name: LengthContext(Shape, LengthUnit)
+  href: api/SVGImage.SVG.Shapes.LengthContext.html#SVGImage_SVG_Shapes_LengthContext__ctor_SVGImage_SVG_Shapes_Shape_SVGImage_SVG_Shapes_LengthUnit_
+  commentId: M:SVGImage.SVG.Shapes.LengthContext.#ctor(SVGImage.SVG.Shapes.Shape,SVGImage.SVG.Shapes.LengthUnit)
+  name.vb: New(Shape, LengthUnit)
+  fullName: SVGImage.SVG.Shapes.LengthContext.LengthContext(SVGImage.SVG.Shapes.Shape, SVGImage.SVG.Shapes.LengthUnit)
+  fullName.vb: SVGImage.SVG.Shapes.LengthContext.New(SVGImage.SVG.Shapes.Shape, SVGImage.SVG.Shapes.LengthUnit)
+  nameWithType: LengthContext.LengthContext(Shape, LengthUnit)
+  nameWithType.vb: LengthContext.New(Shape, LengthUnit)
+- uid: SVGImage.SVG.Shapes.LengthContext.#ctor*
+  name: LengthContext
+  href: api/SVGImage.SVG.Shapes.LengthContext.html#SVGImage_SVG_Shapes_LengthContext__ctor_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthContext.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SVGImage.SVG.Shapes.LengthContext.LengthContext
+  fullName.vb: SVGImage.SVG.Shapes.LengthContext.New
+  nameWithType: LengthContext.LengthContext
+  nameWithType.vb: LengthContext.New
+- uid: SVGImage.SVG.Shapes.LengthContext.Owner
+  name: Owner
+  href: api/SVGImage.SVG.Shapes.LengthContext.html#SVGImage_SVG_Shapes_LengthContext_Owner
+  commentId: P:SVGImage.SVG.Shapes.LengthContext.Owner
+  fullName: SVGImage.SVG.Shapes.LengthContext.Owner
+  nameWithType: LengthContext.Owner
+- uid: SVGImage.SVG.Shapes.LengthContext.Owner*
+  name: Owner
+  href: api/SVGImage.SVG.Shapes.LengthContext.html#SVGImage_SVG_Shapes_LengthContext_Owner_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthContext.Owner
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthContext.Owner
+  nameWithType: LengthContext.Owner
+- uid: SVGImage.SVG.Shapes.LengthContext.Parse(System.String,SVGImage.SVG.Shapes.LengthOrientation)
+  name: Parse(string, LengthOrientation)
+  href: api/SVGImage.SVG.Shapes.LengthContext.html#SVGImage_SVG_Shapes_LengthContext_Parse_System_String_SVGImage_SVG_Shapes_LengthOrientation_
+  commentId: M:SVGImage.SVG.Shapes.LengthContext.Parse(System.String,SVGImage.SVG.Shapes.LengthOrientation)
+  name.vb: Parse(String, LengthOrientation)
+  fullName: SVGImage.SVG.Shapes.LengthContext.Parse(string, SVGImage.SVG.Shapes.LengthOrientation)
+  fullName.vb: SVGImage.SVG.Shapes.LengthContext.Parse(String, SVGImage.SVG.Shapes.LengthOrientation)
+  nameWithType: LengthContext.Parse(string, LengthOrientation)
+  nameWithType.vb: LengthContext.Parse(String, LengthOrientation)
+- uid: SVGImage.SVG.Shapes.LengthContext.Parse*
+  name: Parse
+  href: api/SVGImage.SVG.Shapes.LengthContext.html#SVGImage_SVG_Shapes_LengthContext_Parse_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthContext.Parse
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthContext.Parse
+  nameWithType: LengthContext.Parse
+- uid: SVGImage.SVG.Shapes.LengthContext.Unit
+  name: Unit
+  href: api/SVGImage.SVG.Shapes.LengthContext.html#SVGImage_SVG_Shapes_LengthContext_Unit
+  commentId: P:SVGImage.SVG.Shapes.LengthContext.Unit
+  fullName: SVGImage.SVG.Shapes.LengthContext.Unit
+  nameWithType: LengthContext.Unit
+- uid: SVGImage.SVG.Shapes.LengthContext.Unit*
+  name: Unit
+  href: api/SVGImage.SVG.Shapes.LengthContext.html#SVGImage_SVG_Shapes_LengthContext_Unit_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthContext.Unit
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthContext.Unit
+  nameWithType: LengthContext.Unit
+- uid: SVGImage.SVG.Shapes.LengthOrientation
+  name: LengthOrientation
+  href: api/SVGImage.SVG.Shapes.LengthOrientation.html
+  commentId: T:SVGImage.SVG.Shapes.LengthOrientation
+  fullName: SVGImage.SVG.Shapes.LengthOrientation
+  nameWithType: LengthOrientation
+- uid: SVGImage.SVG.Shapes.LengthOrientation.Horizontal
+  name: Horizontal
+  href: api/SVGImage.SVG.Shapes.LengthOrientation.html#SVGImage_SVG_Shapes_LengthOrientation_Horizontal
+  commentId: F:SVGImage.SVG.Shapes.LengthOrientation.Horizontal
+  fullName: SVGImage.SVG.Shapes.LengthOrientation.Horizontal
+  nameWithType: LengthOrientation.Horizontal
+- uid: SVGImage.SVG.Shapes.LengthOrientation.None
+  name: None
+  href: api/SVGImage.SVG.Shapes.LengthOrientation.html#SVGImage_SVG_Shapes_LengthOrientation_None
+  commentId: F:SVGImage.SVG.Shapes.LengthOrientation.None
+  fullName: SVGImage.SVG.Shapes.LengthOrientation.None
+  nameWithType: LengthOrientation.None
+- uid: SVGImage.SVG.Shapes.LengthOrientation.Vertical
+  name: Vertical
+  href: api/SVGImage.SVG.Shapes.LengthOrientation.html#SVGImage_SVG_Shapes_LengthOrientation_Vertical
+  commentId: F:SVGImage.SVG.Shapes.LengthOrientation.Vertical
+  fullName: SVGImage.SVG.Shapes.LengthOrientation.Vertical
+  nameWithType: LengthOrientation.Vertical
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumber
+  name: LengthPercentageOrNumber
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumber.html
+  commentId: T:SVGImage.SVG.Shapes.LengthPercentageOrNumber
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumber
+  nameWithType: LengthPercentageOrNumber
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumber.#ctor(System.Double,SVGImage.SVG.Shapes.LengthContext)
+  name: LengthPercentageOrNumber(double, LengthContext)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumber.html#SVGImage_SVG_Shapes_LengthPercentageOrNumber__ctor_System_Double_SVGImage_SVG_Shapes_LengthContext_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumber.#ctor(System.Double,SVGImage.SVG.Shapes.LengthContext)
+  name.vb: New(Double, LengthContext)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumber.LengthPercentageOrNumber(double, SVGImage.SVG.Shapes.LengthContext)
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumber.New(Double, SVGImage.SVG.Shapes.LengthContext)
+  nameWithType: LengthPercentageOrNumber.LengthPercentageOrNumber(double, LengthContext)
+  nameWithType.vb: LengthPercentageOrNumber.New(Double, LengthContext)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumber.#ctor*
+  name: LengthPercentageOrNumber
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumber.html#SVGImage_SVG_Shapes_LengthPercentageOrNumber__ctor_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumber.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumber.LengthPercentageOrNumber
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumber.New
+  nameWithType: LengthPercentageOrNumber.LengthPercentageOrNumber
+  nameWithType.vb: LengthPercentageOrNumber.New
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumber.Parse(SVGImage.SVG.Shapes.Shape,System.String,SVGImage.SVG.Shapes.LengthOrientation)
+  name: Parse(Shape, string, LengthOrientation)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumber.html#SVGImage_SVG_Shapes_LengthPercentageOrNumber_Parse_SVGImage_SVG_Shapes_Shape_System_String_SVGImage_SVG_Shapes_LengthOrientation_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumber.Parse(SVGImage.SVG.Shapes.Shape,System.String,SVGImage.SVG.Shapes.LengthOrientation)
+  name.vb: Parse(Shape, String, LengthOrientation)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumber.Parse(SVGImage.SVG.Shapes.Shape, string, SVGImage.SVG.Shapes.LengthOrientation)
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumber.Parse(SVGImage.SVG.Shapes.Shape, String, SVGImage.SVG.Shapes.LengthOrientation)
+  nameWithType: LengthPercentageOrNumber.Parse(Shape, string, LengthOrientation)
+  nameWithType.vb: LengthPercentageOrNumber.Parse(Shape, String, LengthOrientation)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumber.Parse*
+  name: Parse
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumber.html#SVGImage_SVG_Shapes_LengthPercentageOrNumber_Parse_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumber.Parse
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumber.Parse
+  nameWithType: LengthPercentageOrNumber.Parse
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumber.Value
+  name: Value
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumber.html#SVGImage_SVG_Shapes_LengthPercentageOrNumber_Value
+  commentId: P:SVGImage.SVG.Shapes.LengthPercentageOrNumber.Value
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumber.Value
+  nameWithType: LengthPercentageOrNumber.Value
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumber.Value*
+  name: Value
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumber.html#SVGImage_SVG_Shapes_LengthPercentageOrNumber_Value_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumber.Value
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumber.Value
+  nameWithType: LengthPercentageOrNumber.Value
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList
+  name: LengthPercentageOrNumberList
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html
+  commentId: T:SVGImage.SVG.Shapes.LengthPercentageOrNumberList
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList
+  nameWithType: LengthPercentageOrNumberList
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.#ctor(SVGImage.SVG.Shapes.Shape,System.String,SVGImage.SVG.Shapes.LengthOrientation)
+  name: LengthPercentageOrNumberList(Shape, string, LengthOrientation)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList__ctor_SVGImage_SVG_Shapes_Shape_System_String_SVGImage_SVG_Shapes_LengthOrientation_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.#ctor(SVGImage.SVG.Shapes.Shape,System.String,SVGImage.SVG.Shapes.LengthOrientation)
+  name.vb: New(Shape, String, LengthOrientation)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.LengthPercentageOrNumberList(SVGImage.SVG.Shapes.Shape, string, SVGImage.SVG.Shapes.LengthOrientation)
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.New(SVGImage.SVG.Shapes.Shape, String, SVGImage.SVG.Shapes.LengthOrientation)
+  nameWithType: LengthPercentageOrNumberList.LengthPercentageOrNumberList(Shape, string, LengthOrientation)
+  nameWithType.vb: LengthPercentageOrNumberList.New(Shape, String, LengthOrientation)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.#ctor*
+  name: LengthPercentageOrNumberList
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList__ctor_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.LengthPercentageOrNumberList
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.New
+  nameWithType: LengthPercentageOrNumberList.LengthPercentageOrNumberList
+  nameWithType.vb: LengthPercentageOrNumberList.New
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Add(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  name: Add(LengthPercentageOrNumber)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Add_SVGImage_SVG_Shapes_LengthPercentageOrNumber_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Add(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Add(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  nameWithType: LengthPercentageOrNumberList.Add(LengthPercentageOrNumber)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Add*
+  name: Add
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Add_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Add
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Add
+  nameWithType: LengthPercentageOrNumberList.Add
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Clear
+  name: Clear()
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Clear
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Clear
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Clear()
+  nameWithType: LengthPercentageOrNumberList.Clear()
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Clear*
+  name: Clear
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Clear_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Clear
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Clear
+  nameWithType: LengthPercentageOrNumberList.Clear
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Contains(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  name: Contains(LengthPercentageOrNumber)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Contains_SVGImage_SVG_Shapes_LengthPercentageOrNumber_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Contains(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Contains(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  nameWithType: LengthPercentageOrNumberList.Contains(LengthPercentageOrNumber)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Contains*
+  name: Contains
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Contains_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Contains
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Contains
+  nameWithType: LengthPercentageOrNumberList.Contains
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.CopyTo(SVGImage.SVG.Shapes.LengthPercentageOrNumber[],System.Int32)
+  name: CopyTo(LengthPercentageOrNumber[], int)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_CopyTo_SVGImage_SVG_Shapes_LengthPercentageOrNumber___System_Int32_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.CopyTo(SVGImage.SVG.Shapes.LengthPercentageOrNumber[],System.Int32)
+  name.vb: CopyTo(LengthPercentageOrNumber(), Integer)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.CopyTo(SVGImage.SVG.Shapes.LengthPercentageOrNumber[], int)
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.CopyTo(SVGImage.SVG.Shapes.LengthPercentageOrNumber(), Integer)
+  nameWithType: LengthPercentageOrNumberList.CopyTo(LengthPercentageOrNumber[], int)
+  nameWithType.vb: LengthPercentageOrNumberList.CopyTo(LengthPercentageOrNumber(), Integer)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.CopyTo*
+  name: CopyTo
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_CopyTo_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.CopyTo
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.CopyTo
+  nameWithType: LengthPercentageOrNumberList.CopyTo
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Count
+  name: Count
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Count
+  commentId: P:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Count
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Count
+  nameWithType: LengthPercentageOrNumberList.Count
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Count*
+  name: Count
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Count_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Count
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Count
+  nameWithType: LengthPercentageOrNumberList.Count
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Empty(SVGImage.SVG.Shapes.Shape,SVGImage.SVG.Shapes.LengthOrientation)
+  name: Empty(Shape, LengthOrientation)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Empty_SVGImage_SVG_Shapes_Shape_SVGImage_SVG_Shapes_LengthOrientation_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Empty(SVGImage.SVG.Shapes.Shape,SVGImage.SVG.Shapes.LengthOrientation)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Empty(SVGImage.SVG.Shapes.Shape, SVGImage.SVG.Shapes.LengthOrientation)
+  nameWithType: LengthPercentageOrNumberList.Empty(Shape, LengthOrientation)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Empty*
+  name: Empty
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Empty_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Empty
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Empty
+  nameWithType: LengthPercentageOrNumberList.Empty
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.GetEnumerator
+  name: GetEnumerator()
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_GetEnumerator
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.GetEnumerator
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.GetEnumerator()
+  nameWithType: LengthPercentageOrNumberList.GetEnumerator()
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.GetEnumerator*
+  name: GetEnumerator
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_GetEnumerator_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.GetEnumerator
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.GetEnumerator
+  nameWithType: LengthPercentageOrNumberList.GetEnumerator
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IndexOf(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  name: IndexOf(LengthPercentageOrNumber)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_IndexOf_SVGImage_SVG_Shapes_LengthPercentageOrNumber_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IndexOf(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IndexOf(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  nameWithType: LengthPercentageOrNumberList.IndexOf(LengthPercentageOrNumber)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IndexOf*
+  name: IndexOf
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_IndexOf_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IndexOf
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IndexOf
+  nameWithType: LengthPercentageOrNumberList.IndexOf
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Insert(System.Int32,SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  name: Insert(int, LengthPercentageOrNumber)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Insert_System_Int32_SVGImage_SVG_Shapes_LengthPercentageOrNumber_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Insert(System.Int32,SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  name.vb: Insert(Integer, LengthPercentageOrNumber)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Insert(int, SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Insert(Integer, SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  nameWithType: LengthPercentageOrNumberList.Insert(int, LengthPercentageOrNumber)
+  nameWithType.vb: LengthPercentageOrNumberList.Insert(Integer, LengthPercentageOrNumber)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Insert*
+  name: Insert
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Insert_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Insert
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Insert
+  nameWithType: LengthPercentageOrNumberList.Insert
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IsReadOnly
+  name: IsReadOnly
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_IsReadOnly
+  commentId: P:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IsReadOnly
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IsReadOnly
+  nameWithType: LengthPercentageOrNumberList.IsReadOnly
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IsReadOnly*
+  name: IsReadOnly
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_IsReadOnly_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IsReadOnly
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IsReadOnly
+  nameWithType: LengthPercentageOrNumberList.IsReadOnly
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Item(System.Int32)
+  name: this[int]
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Item_System_Int32_
+  commentId: P:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Item(System.Int32)
+  name.vb: this[](Integer)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.this[int]
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.this[](Integer)
+  nameWithType: LengthPercentageOrNumberList.this[int]
+  nameWithType.vb: LengthPercentageOrNumberList.this[](Integer)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Item*
+  name: this
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Item_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Item
+  isSpec: "True"
+  name.vb: this[]
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.this
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.this[]
+  nameWithType: LengthPercentageOrNumberList.this
+  nameWithType.vb: LengthPercentageOrNumberList.this[]
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Remove(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  name: Remove(LengthPercentageOrNumber)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Remove_SVGImage_SVG_Shapes_LengthPercentageOrNumber_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Remove(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Remove(SVGImage.SVG.Shapes.LengthPercentageOrNumber)
+  nameWithType: LengthPercentageOrNumberList.Remove(LengthPercentageOrNumber)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Remove*
+  name: Remove
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Remove_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Remove
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Remove
+  nameWithType: LengthPercentageOrNumberList.Remove
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.RemoveAt(System.Int32)
+  name: RemoveAt(int)
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_RemoveAt_System_Int32_
+  commentId: M:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.RemoveAt(System.Int32)
+  name.vb: RemoveAt(Integer)
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.RemoveAt(int)
+  fullName.vb: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.RemoveAt(Integer)
+  nameWithType: LengthPercentageOrNumberList.RemoveAt(int)
+  nameWithType.vb: LengthPercentageOrNumberList.RemoveAt(Integer)
+- uid: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.RemoveAt*
+  name: RemoveAt
+  href: api/SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html#SVGImage_SVG_Shapes_LengthPercentageOrNumberList_RemoveAt_
+  commentId: Overload:SVGImage.SVG.Shapes.LengthPercentageOrNumberList.RemoveAt
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.LengthPercentageOrNumberList.RemoveAt
+  nameWithType: LengthPercentageOrNumberList.RemoveAt
+- uid: SVGImage.SVG.Shapes.LengthUnit
+  name: LengthUnit
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html
+  commentId: T:SVGImage.SVG.Shapes.LengthUnit
+  fullName: SVGImage.SVG.Shapes.LengthUnit
+  nameWithType: LengthUnit
+- uid: SVGImage.SVG.Shapes.LengthUnit.Inches
+  name: Inches
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_Inches
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.Inches
+  fullName: SVGImage.SVG.Shapes.LengthUnit.Inches
+  nameWithType: LengthUnit.Inches
+- uid: SVGImage.SVG.Shapes.LengthUnit.Number
+  name: Number
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_Number
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.Number
+  fullName: SVGImage.SVG.Shapes.LengthUnit.Number
+  nameWithType: LengthUnit.Number
+- uid: SVGImage.SVG.Shapes.LengthUnit.Percent
+  name: Percent
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_Percent
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.Percent
+  fullName: SVGImage.SVG.Shapes.LengthUnit.Percent
+  nameWithType: LengthUnit.Percent
+- uid: SVGImage.SVG.Shapes.LengthUnit.PercentDiagonal
+  name: PercentDiagonal
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_PercentDiagonal
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.PercentDiagonal
+  fullName: SVGImage.SVG.Shapes.LengthUnit.PercentDiagonal
+  nameWithType: LengthUnit.PercentDiagonal
+- uid: SVGImage.SVG.Shapes.LengthUnit.PercentHeight
+  name: PercentHeight
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_PercentHeight
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.PercentHeight
+  fullName: SVGImage.SVG.Shapes.LengthUnit.PercentHeight
+  nameWithType: LengthUnit.PercentHeight
+- uid: SVGImage.SVG.Shapes.LengthUnit.PercentWidth
+  name: PercentWidth
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_PercentWidth
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.PercentWidth
+  fullName: SVGImage.SVG.Shapes.LengthUnit.PercentWidth
+  nameWithType: LengthUnit.PercentWidth
+- uid: SVGImage.SVG.Shapes.LengthUnit.Q
+  name: Q
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_Q
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.Q
+  fullName: SVGImage.SVG.Shapes.LengthUnit.Q
+  nameWithType: LengthUnit.Q
+- uid: SVGImage.SVG.Shapes.LengthUnit.Unknown
+  name: Unknown
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_Unknown
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.Unknown
+  fullName: SVGImage.SVG.Shapes.LengthUnit.Unknown
+  nameWithType: LengthUnit.Unknown
+- uid: SVGImage.SVG.Shapes.LengthUnit.ch
+  name: ch
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_ch
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.ch
+  fullName: SVGImage.SVG.Shapes.LengthUnit.ch
+  nameWithType: LengthUnit.ch
+- uid: SVGImage.SVG.Shapes.LengthUnit.cm
+  name: cm
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_cm
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.cm
+  fullName: SVGImage.SVG.Shapes.LengthUnit.cm
+  nameWithType: LengthUnit.cm
+- uid: SVGImage.SVG.Shapes.LengthUnit.em
+  name: em
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_em
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.em
+  fullName: SVGImage.SVG.Shapes.LengthUnit.em
+  nameWithType: LengthUnit.em
+- uid: SVGImage.SVG.Shapes.LengthUnit.ex
+  name: ex
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_ex
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.ex
+  fullName: SVGImage.SVG.Shapes.LengthUnit.ex
+  nameWithType: LengthUnit.ex
+- uid: SVGImage.SVG.Shapes.LengthUnit.mm
+  name: mm
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_mm
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.mm
+  fullName: SVGImage.SVG.Shapes.LengthUnit.mm
+  nameWithType: LengthUnit.mm
+- uid: SVGImage.SVG.Shapes.LengthUnit.pc
+  name: pc
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_pc
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.pc
+  fullName: SVGImage.SVG.Shapes.LengthUnit.pc
+  nameWithType: LengthUnit.pc
+- uid: SVGImage.SVG.Shapes.LengthUnit.pt
+  name: pt
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_pt
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.pt
+  fullName: SVGImage.SVG.Shapes.LengthUnit.pt
+  nameWithType: LengthUnit.pt
+- uid: SVGImage.SVG.Shapes.LengthUnit.px
+  name: px
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_px
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.px
+  fullName: SVGImage.SVG.Shapes.LengthUnit.px
+  nameWithType: LengthUnit.px
+- uid: SVGImage.SVG.Shapes.LengthUnit.rem
+  name: rem
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_rem
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.rem
+  fullName: SVGImage.SVG.Shapes.LengthUnit.rem
+  nameWithType: LengthUnit.rem
+- uid: SVGImage.SVG.Shapes.LengthUnit.vh
+  name: vh
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_vh
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.vh
+  fullName: SVGImage.SVG.Shapes.LengthUnit.vh
+  nameWithType: LengthUnit.vh
+- uid: SVGImage.SVG.Shapes.LengthUnit.vmax
+  name: vmax
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_vmax
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.vmax
+  fullName: SVGImage.SVG.Shapes.LengthUnit.vmax
+  nameWithType: LengthUnit.vmax
+- uid: SVGImage.SVG.Shapes.LengthUnit.vmin
+  name: vmin
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_vmin
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.vmin
+  fullName: SVGImage.SVG.Shapes.LengthUnit.vmin
+  nameWithType: LengthUnit.vmin
+- uid: SVGImage.SVG.Shapes.LengthUnit.vw
+  name: vw
+  href: api/SVGImage.SVG.Shapes.LengthUnit.html#SVGImage_SVG_Shapes_LengthUnit_vw
+  commentId: F:SVGImage.SVG.Shapes.LengthUnit.vw
+  fullName: SVGImage.SVG.Shapes.LengthUnit.vw
+  nameWithType: LengthUnit.vw
 - uid: SVGImage.SVG.Shapes.LineShape
   name: LineShape
   href: api/SVGImage.SVG.Shapes.LineShape.html
@@ -2818,19 +3847,19 @@ references:
   fullName.vb: SVGImage.SVG.Shapes.PolygonShape.New
   nameWithType: PolygonShape.PolygonShape
   nameWithType.vb: PolygonShape.New
-- uid: SVGImage.SVG.Shapes.PolygonShape.Fill
-  name: Fill
-  href: api/SVGImage.SVG.Shapes.PolygonShape.html#SVGImage_SVG_Shapes_PolygonShape_Fill
-  commentId: P:SVGImage.SVG.Shapes.PolygonShape.Fill
-  fullName: SVGImage.SVG.Shapes.PolygonShape.Fill
-  nameWithType: PolygonShape.Fill
-- uid: SVGImage.SVG.Shapes.PolygonShape.Fill*
-  name: Fill
-  href: api/SVGImage.SVG.Shapes.PolygonShape.html#SVGImage_SVG_Shapes_PolygonShape_Fill_
-  commentId: Overload:SVGImage.SVG.Shapes.PolygonShape.Fill
+- uid: SVGImage.SVG.Shapes.PolygonShape.DefaultFill
+  name: DefaultFill()
+  href: api/SVGImage.SVG.Shapes.PolygonShape.html#SVGImage_SVG_Shapes_PolygonShape_DefaultFill
+  commentId: M:SVGImage.SVG.Shapes.PolygonShape.DefaultFill
+  fullName: SVGImage.SVG.Shapes.PolygonShape.DefaultFill()
+  nameWithType: PolygonShape.DefaultFill()
+- uid: SVGImage.SVG.Shapes.PolygonShape.DefaultFill*
+  name: DefaultFill
+  href: api/SVGImage.SVG.Shapes.PolygonShape.html#SVGImage_SVG_Shapes_PolygonShape_DefaultFill_
+  commentId: Overload:SVGImage.SVG.Shapes.PolygonShape.DefaultFill
   isSpec: "True"
-  fullName: SVGImage.SVG.Shapes.PolygonShape.Fill
-  nameWithType: PolygonShape.Fill
+  fullName: SVGImage.SVG.Shapes.PolygonShape.DefaultFill
+  nameWithType: PolygonShape.DefaultFill
 - uid: SVGImage.SVG.Shapes.PolygonShape.Points
   name: Points
   href: api/SVGImage.SVG.Shapes.PolygonShape.html#SVGImage_SVG_Shapes_PolygonShape_Points
@@ -2907,19 +3936,19 @@ references:
   fullName.vb: SVGImage.SVG.Shapes.RectangleShape.New
   nameWithType: RectangleShape.RectangleShape
   nameWithType.vb: RectangleShape.New
-- uid: SVGImage.SVG.Shapes.RectangleShape.Fill
-  name: Fill
-  href: api/SVGImage.SVG.Shapes.RectangleShape.html#SVGImage_SVG_Shapes_RectangleShape_Fill
-  commentId: P:SVGImage.SVG.Shapes.RectangleShape.Fill
-  fullName: SVGImage.SVG.Shapes.RectangleShape.Fill
-  nameWithType: RectangleShape.Fill
-- uid: SVGImage.SVG.Shapes.RectangleShape.Fill*
-  name: Fill
-  href: api/SVGImage.SVG.Shapes.RectangleShape.html#SVGImage_SVG_Shapes_RectangleShape_Fill_
-  commentId: Overload:SVGImage.SVG.Shapes.RectangleShape.Fill
+- uid: SVGImage.SVG.Shapes.RectangleShape.DefaultFill
+  name: DefaultFill()
+  href: api/SVGImage.SVG.Shapes.RectangleShape.html#SVGImage_SVG_Shapes_RectangleShape_DefaultFill
+  commentId: M:SVGImage.SVG.Shapes.RectangleShape.DefaultFill
+  fullName: SVGImage.SVG.Shapes.RectangleShape.DefaultFill()
+  nameWithType: RectangleShape.DefaultFill()
+- uid: SVGImage.SVG.Shapes.RectangleShape.DefaultFill*
+  name: DefaultFill
+  href: api/SVGImage.SVG.Shapes.RectangleShape.html#SVGImage_SVG_Shapes_RectangleShape_DefaultFill_
+  commentId: Overload:SVGImage.SVG.Shapes.RectangleShape.DefaultFill
   isSpec: "True"
-  fullName: SVGImage.SVG.Shapes.RectangleShape.Fill
-  nameWithType: RectangleShape.Fill
+  fullName: SVGImage.SVG.Shapes.RectangleShape.DefaultFill
+  nameWithType: RectangleShape.DefaultFill
 - uid: SVGImage.SVG.Shapes.RectangleShape.Height
   name: Height
   href: api/SVGImage.SVG.Shapes.RectangleShape.html#SVGImage_SVG_Shapes_RectangleShape_Height
@@ -3057,10 +4086,43 @@ references:
   fullName.vb: SVGImage.SVG.Shapes.Shape.New
   nameWithType: Shape.Shape
   nameWithType.vb: Shape.New
+- uid: SVGImage.SVG.Shapes.Shape.DefaultFill
+  name: DefaultFill()
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_DefaultFill
+  commentId: M:SVGImage.SVG.Shapes.Shape.DefaultFill
+  fullName: SVGImage.SVG.Shapes.Shape.DefaultFill()
+  nameWithType: Shape.DefaultFill()
+- uid: SVGImage.SVG.Shapes.Shape.DefaultFill*
+  name: DefaultFill
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_DefaultFill_
+  commentId: Overload:SVGImage.SVG.Shapes.Shape.DefaultFill
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.Shape.DefaultFill
+  nameWithType: Shape.DefaultFill
+- uid: SVGImage.SVG.Shapes.Shape.DefaultStroke
+  name: DefaultStroke()
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_DefaultStroke
+  commentId: M:SVGImage.SVG.Shapes.Shape.DefaultStroke
+  fullName: SVGImage.SVG.Shapes.Shape.DefaultStroke()
+  nameWithType: Shape.DefaultStroke()
+- uid: SVGImage.SVG.Shapes.Shape.DefaultStroke*
+  name: DefaultStroke
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_DefaultStroke_
+  commentId: Overload:SVGImage.SVG.Shapes.Shape.DefaultStroke
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.Shape.DefaultStroke
+  nameWithType: Shape.DefaultStroke
 - uid: SVGImage.SVG.Shapes.Shape.Display
   name: Display
   href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Display
-  commentId: F:SVGImage.SVG.Shapes.Shape.Display
+  commentId: P:SVGImage.SVG.Shapes.Shape.Display
+  fullName: SVGImage.SVG.Shapes.Shape.Display
+  nameWithType: Shape.Display
+- uid: SVGImage.SVG.Shapes.Shape.Display*
+  name: Display
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Display_
+  commentId: Overload:SVGImage.SVG.Shapes.Shape.Display
+  isSpec: "True"
   fullName: SVGImage.SVG.Shapes.Shape.Display
   nameWithType: Shape.Display
 - uid: SVGImage.SVG.Shapes.Shape.Fill
@@ -3089,6 +4151,32 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.Shapes.Shape.GetFill
   nameWithType: Shape.GetFill
+- uid: SVGImage.SVG.Shapes.Shape.GetParentFill
+  name: GetParentFill()
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_GetParentFill
+  commentId: M:SVGImage.SVG.Shapes.Shape.GetParentFill
+  fullName: SVGImage.SVG.Shapes.Shape.GetParentFill()
+  nameWithType: Shape.GetParentFill()
+- uid: SVGImage.SVG.Shapes.Shape.GetParentFill*
+  name: GetParentFill
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_GetParentFill_
+  commentId: Overload:SVGImage.SVG.Shapes.Shape.GetParentFill
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.Shape.GetParentFill
+  nameWithType: Shape.GetParentFill
+- uid: SVGImage.SVG.Shapes.Shape.GetRoot
+  name: GetRoot()
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_GetRoot
+  commentId: M:SVGImage.SVG.Shapes.Shape.GetRoot
+  fullName: SVGImage.SVG.Shapes.Shape.GetRoot()
+  nameWithType: Shape.GetRoot()
+- uid: SVGImage.SVG.Shapes.Shape.GetRoot*
+  name: GetRoot
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_GetRoot_
+  commentId: Overload:SVGImage.SVG.Shapes.Shape.GetRoot
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.Shape.GetRoot
+  nameWithType: Shape.GetRoot
 - uid: SVGImage.SVG.Shapes.Shape.GetTextStyle(SVGImage.SVG.SVG)
   name: GetTextStyle(SVG)
   href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_GetTextStyle_SVGImage_SVG_SVG_
@@ -3222,6 +4310,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.Shapes.Shape.Stroke
   nameWithType: Shape.Stroke
+- uid: SVGImage.SVG.Shapes.Shape.Svg
+  name: Svg
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Svg
+  commentId: P:SVGImage.SVG.Shapes.Shape.Svg
+  fullName: SVGImage.SVG.Shapes.Shape.Svg
+  nameWithType: Shape.Svg
+- uid: SVGImage.SVG.Shapes.Shape.Svg*
+  name: Svg
+  href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_Svg_
+  commentId: Overload:SVGImage.SVG.Shapes.Shape.Svg
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.Shape.Svg
+  nameWithType: Shape.Svg
 - uid: SVGImage.SVG.Shapes.Shape.TextStyle
   name: TextStyle
   href: api/SVGImage.SVG.Shapes.Shape.html#SVGImage_SVG_Shapes_Shape_TextStyle
@@ -3298,6 +4399,663 @@ references:
   commentId: F:SVGImage.SVG.Shapes.Shape.m_textstyle
   fullName: SVGImage.SVG.Shapes.Shape.m_textstyle
   nameWithType: Shape.m_textstyle
+- uid: SVGImage.SVG.Shapes.TextRender
+  name: TextRender
+  href: api/SVGImage.SVG.Shapes.TextRender.html
+  commentId: T:SVGImage.SVG.Shapes.TextRender
+  fullName: SVGImage.SVG.Shapes.TextRender
+  nameWithType: TextRender
+- uid: SVGImage.SVG.Shapes.TextRender.BuildTextGeometry(SVGImage.SVG.Shapes.TextShape)
+  name: BuildTextGeometry(TextShape)
+  href: api/SVGImage.SVG.Shapes.TextRender.html#SVGImage_SVG_Shapes_TextRender_BuildTextGeometry_SVGImage_SVG_Shapes_TextShape_
+  commentId: M:SVGImage.SVG.Shapes.TextRender.BuildTextGeometry(SVGImage.SVG.Shapes.TextShape)
+  fullName: SVGImage.SVG.Shapes.TextRender.BuildTextGeometry(SVGImage.SVG.Shapes.TextShape)
+  nameWithType: TextRender.BuildTextGeometry(TextShape)
+- uid: SVGImage.SVG.Shapes.TextRender.BuildTextGeometry*
+  name: BuildTextGeometry
+  href: api/SVGImage.SVG.Shapes.TextRender.html#SVGImage_SVG_Shapes_TextRender_BuildTextGeometry_
+  commentId: Overload:SVGImage.SVG.Shapes.TextRender.BuildTextGeometry
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextRender.BuildTextGeometry
+  nameWithType: TextRender.BuildTextGeometry
+- uid: SVGImage.SVG.Shapes.TextRender.GetTextSpanTextStyle(System.Windows.DependencyObject)
+  name: GetTextSpanTextStyle(DependencyObject)
+  href: api/SVGImage.SVG.Shapes.TextRender.html#SVGImage_SVG_Shapes_TextRender_GetTextSpanTextStyle_System_Windows_DependencyObject_
+  commentId: M:SVGImage.SVG.Shapes.TextRender.GetTextSpanTextStyle(System.Windows.DependencyObject)
+  fullName: SVGImage.SVG.Shapes.TextRender.GetTextSpanTextStyle(System.Windows.DependencyObject)
+  nameWithType: TextRender.GetTextSpanTextStyle(DependencyObject)
+- uid: SVGImage.SVG.Shapes.TextRender.GetTextSpanTextStyle*
+  name: GetTextSpanTextStyle
+  href: api/SVGImage.SVG.Shapes.TextRender.html#SVGImage_SVG_Shapes_TextRender_GetTextSpanTextStyle_
+  commentId: Overload:SVGImage.SVG.Shapes.TextRender.GetTextSpanTextStyle
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextRender.GetTextSpanTextStyle
+  nameWithType: TextRender.GetTextSpanTextStyle
+- uid: SVGImage.SVG.Shapes.TextRender.TextSpanTextStyleProperty
+  name: TextSpanTextStyleProperty
+  href: api/SVGImage.SVG.Shapes.TextRender.html#SVGImage_SVG_Shapes_TextRender_TextSpanTextStyleProperty
+  commentId: F:SVGImage.SVG.Shapes.TextRender.TextSpanTextStyleProperty
+  fullName: SVGImage.SVG.Shapes.TextRender.TextSpanTextStyleProperty
+  nameWithType: TextRender.TextSpanTextStyleProperty
+- uid: SVGImage.SVG.Shapes.TextRenderBase
+  name: TextRenderBase
+  href: api/SVGImage.SVG.Shapes.TextRenderBase.html
+  commentId: T:SVGImage.SVG.Shapes.TextRenderBase
+  fullName: SVGImage.SVG.Shapes.TextRenderBase
+  nameWithType: TextRenderBase
+- uid: SVGImage.SVG.Shapes.TextRenderBase.BuildTextGeometry(SVGImage.SVG.Shapes.TextShape)
+  name: BuildTextGeometry(TextShape)
+  href: api/SVGImage.SVG.Shapes.TextRenderBase.html#SVGImage_SVG_Shapes_TextRenderBase_BuildTextGeometry_SVGImage_SVG_Shapes_TextShape_
+  commentId: M:SVGImage.SVG.Shapes.TextRenderBase.BuildTextGeometry(SVGImage.SVG.Shapes.TextShape)
+  fullName: SVGImage.SVG.Shapes.TextRenderBase.BuildTextGeometry(SVGImage.SVG.Shapes.TextShape)
+  nameWithType: TextRenderBase.BuildTextGeometry(TextShape)
+- uid: SVGImage.SVG.Shapes.TextRenderBase.BuildTextGeometry*
+  name: BuildTextGeometry
+  href: api/SVGImage.SVG.Shapes.TextRenderBase.html#SVGImage_SVG_Shapes_TextRenderBase_BuildTextGeometry_
+  commentId: Overload:SVGImage.SVG.Shapes.TextRenderBase.BuildTextGeometry
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextRenderBase.BuildTextGeometry
+  nameWithType: TextRenderBase.BuildTextGeometry
+- uid: SVGImage.SVG.Shapes.TextRenderBase.GetElement(System.Windows.DependencyObject)
+  name: GetElement(DependencyObject)
+  href: api/SVGImage.SVG.Shapes.TextRenderBase.html#SVGImage_SVG_Shapes_TextRenderBase_GetElement_System_Windows_DependencyObject_
+  commentId: M:SVGImage.SVG.Shapes.TextRenderBase.GetElement(System.Windows.DependencyObject)
+  fullName: SVGImage.SVG.Shapes.TextRenderBase.GetElement(System.Windows.DependencyObject)
+  nameWithType: TextRenderBase.GetElement(DependencyObject)
+- uid: SVGImage.SVG.Shapes.TextRenderBase.GetElement*
+  name: GetElement
+  href: api/SVGImage.SVG.Shapes.TextRenderBase.html#SVGImage_SVG_Shapes_TextRenderBase_GetElement_
+  commentId: Overload:SVGImage.SVG.Shapes.TextRenderBase.GetElement
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextRenderBase.GetElement
+  nameWithType: TextRenderBase.GetElement
+- uid: SVGImage.SVG.Shapes.TextRenderBase.SetElement(System.Windows.DependencyObject,SVGImage.SVG.Shapes.TextShapeBase)
+  name: SetElement(DependencyObject, TextShapeBase)
+  href: api/SVGImage.SVG.Shapes.TextRenderBase.html#SVGImage_SVG_Shapes_TextRenderBase_SetElement_System_Windows_DependencyObject_SVGImage_SVG_Shapes_TextShapeBase_
+  commentId: M:SVGImage.SVG.Shapes.TextRenderBase.SetElement(System.Windows.DependencyObject,SVGImage.SVG.Shapes.TextShapeBase)
+  fullName: SVGImage.SVG.Shapes.TextRenderBase.SetElement(System.Windows.DependencyObject, SVGImage.SVG.Shapes.TextShapeBase)
+  nameWithType: TextRenderBase.SetElement(DependencyObject, TextShapeBase)
+- uid: SVGImage.SVG.Shapes.TextRenderBase.SetElement*
+  name: SetElement
+  href: api/SVGImage.SVG.Shapes.TextRenderBase.html#SVGImage_SVG_Shapes_TextRenderBase_SetElement_
+  commentId: Overload:SVGImage.SVG.Shapes.TextRenderBase.SetElement
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextRenderBase.SetElement
+  nameWithType: TextRenderBase.SetElement
+- uid: SVGImage.SVG.Shapes.TextRenderBase.TSpanElementProperty
+  name: TSpanElementProperty
+  href: api/SVGImage.SVG.Shapes.TextRenderBase.html#SVGImage_SVG_Shapes_TextRenderBase_TSpanElementProperty
+  commentId: F:SVGImage.SVG.Shapes.TextRenderBase.TSpanElementProperty
+  fullName: SVGImage.SVG.Shapes.TextRenderBase.TSpanElementProperty
+  nameWithType: TextRenderBase.TSpanElementProperty
+- uid: SVGImage.SVG.Shapes.TextShape
+  name: TextShape
+  href: api/SVGImage.SVG.Shapes.TextShape.html
+  commentId: T:SVGImage.SVG.Shapes.TextShape
+  fullName: SVGImage.SVG.Shapes.TextShape
+  nameWithType: TextShape
+- uid: SVGImage.SVG.Shapes.TextShape.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
+  name: TextShape(SVG, XmlNode, Shape)
+  href: api/SVGImage.SVG.Shapes.TextShape.html#SVGImage_SVG_Shapes_TextShape__ctor_SVGImage_SVG_SVG_System_Xml_XmlNode_SVGImage_SVG_Shapes_Shape_
+  commentId: M:SVGImage.SVG.Shapes.TextShape.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
+  name.vb: New(SVG, XmlNode, Shape)
+  fullName: SVGImage.SVG.Shapes.TextShape.TextShape(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
+  fullName.vb: SVGImage.SVG.Shapes.TextShape.New(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
+  nameWithType: TextShape.TextShape(SVG, XmlNode, Shape)
+  nameWithType.vb: TextShape.New(SVG, XmlNode, Shape)
+- uid: SVGImage.SVG.Shapes.TextShape.#ctor*
+  name: TextShape
+  href: api/SVGImage.SVG.Shapes.TextShape.html#SVGImage_SVG_Shapes_TextShape__ctor_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShape.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SVGImage.SVG.Shapes.TextShape.TextShape
+  fullName.vb: SVGImage.SVG.Shapes.TextShape.New
+  nameWithType: TextShape.TextShape
+  nameWithType.vb: TextShape.New
+- uid: SVGImage.SVG.Shapes.TextShapeBase
+  name: TextShapeBase
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html
+  commentId: T:SVGImage.SVG.Shapes.TextShapeBase
+  fullName: SVGImage.SVG.Shapes.TextShapeBase
+  nameWithType: TextShapeBase
+- uid: SVGImage.SVG.Shapes.TextShapeBase.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
+  name: TextShapeBase(SVG, XmlNode, Shape)
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase__ctor_SVGImage_SVG_SVG_System_Xml_XmlNode_SVGImage_SVG_Shapes_Shape_
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
+  name.vb: New(SVG, XmlNode, Shape)
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.TextShapeBase(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
+  fullName.vb: SVGImage.SVG.Shapes.TextShapeBase.New(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
+  nameWithType: TextShapeBase.TextShapeBase(SVG, XmlNode, Shape)
+  nameWithType.vb: TextShapeBase.New(SVG, XmlNode, Shape)
+- uid: SVGImage.SVG.Shapes.TextShapeBase.#ctor*
+  name: TextShapeBase
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase__ctor_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.TextShapeBase
+  fullName.vb: SVGImage.SVG.Shapes.TextShapeBase.New
+  nameWithType: TextShapeBase.TextShapeBase
+  nameWithType.vb: TextShapeBase.New
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Attributes
+  name: Attributes
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Attributes
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.Attributes
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Attributes
+  nameWithType: TextShapeBase.Attributes
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Attributes*
+  name: Attributes
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Attributes_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.Attributes
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Attributes
+  nameWithType: TextShapeBase.Attributes
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Children
+  name: Children
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Children
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.Children
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Children
+  nameWithType: TextShapeBase.Children
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Children*
+  name: Children
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Children_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.Children
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Children
+  nameWithType: TextShapeBase.Children
+- uid: SVGImage.SVG.Shapes.TextShapeBase.DX
+  name: DX
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_DX
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.DX
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.DX
+  nameWithType: TextShapeBase.DX
+- uid: SVGImage.SVG.Shapes.TextShapeBase.DX*
+  name: DX
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_DX_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.DX
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.DX
+  nameWithType: TextShapeBase.DX
+- uid: SVGImage.SVG.Shapes.TextShapeBase.DY
+  name: DY
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_DY
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.DY
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.DY
+  nameWithType: TextShapeBase.DY
+- uid: SVGImage.SVG.Shapes.TextShapeBase.DY*
+  name: DY
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_DY_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.DY
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.DY
+  nameWithType: TextShapeBase.DY
+- uid: SVGImage.SVG.Shapes.TextShapeBase.DefaultFill
+  name: DefaultFill()
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_DefaultFill
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.DefaultFill
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.DefaultFill()
+  nameWithType: TextShapeBase.DefaultFill()
+- uid: SVGImage.SVG.Shapes.TextShapeBase.DefaultFill*
+  name: DefaultFill
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_DefaultFill_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.DefaultFill
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.DefaultFill
+  nameWithType: TextShapeBase.DefaultFill
+- uid: SVGImage.SVG.Shapes.TextShapeBase.DefaultStroke
+  name: DefaultStroke()
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_DefaultStroke
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.DefaultStroke
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.DefaultStroke()
+  nameWithType: TextShapeBase.DefaultStroke()
+- uid: SVGImage.SVG.Shapes.TextShapeBase.DefaultStroke*
+  name: DefaultStroke
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_DefaultStroke_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.DefaultStroke
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.DefaultStroke
+  nameWithType: TextShapeBase.DefaultStroke
+- uid: SVGImage.SVG.Shapes.TextShapeBase.FirstCharacter
+  name: FirstCharacter
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_FirstCharacter
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.FirstCharacter
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.FirstCharacter
+  nameWithType: TextShapeBase.FirstCharacter
+- uid: SVGImage.SVG.Shapes.TextShapeBase.FirstCharacter*
+  name: FirstCharacter
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_FirstCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.FirstCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.FirstCharacter
+  nameWithType: TextShapeBase.FirstCharacter
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetCharacters
+  name: GetCharacters()
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetCharacters
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.GetCharacters
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetCharacters()
+  nameWithType: TextShapeBase.GetCharacters()
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetCharacters*
+  name: GetCharacters
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetCharacters_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.GetCharacters
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetCharacters
+  nameWithType: TextShapeBase.GetCharacters
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetFirstCharacter
+  name: GetFirstCharacter()
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetFirstCharacter
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.GetFirstCharacter
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetFirstCharacter()
+  nameWithType: TextShapeBase.GetFirstCharacter()
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetFirstCharacter*
+  name: GetFirstCharacter
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetFirstCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.GetFirstCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetFirstCharacter
+  nameWithType: TextShapeBase.GetFirstCharacter
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetLastCharacter
+  name: GetLastCharacter()
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetLastCharacter
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.GetLastCharacter
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetLastCharacter()
+  nameWithType: TextShapeBase.GetLastCharacter()
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetLastCharacter*
+  name: GetLastCharacter
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetLastCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.GetLastCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetLastCharacter
+  nameWithType: TextShapeBase.GetLastCharacter
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetLength
+  name: GetLength()
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetLength
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.GetLength
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetLength()
+  nameWithType: TextShapeBase.GetLength()
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetLength*
+  name: GetLength
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetLength_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.GetLength
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetLength
+  nameWithType: TextShapeBase.GetLength
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetText
+  name: GetText()
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetText
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.GetText
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetText()
+  nameWithType: TextShapeBase.GetText()
+- uid: SVGImage.SVG.Shapes.TextShapeBase.GetText*
+  name: GetText
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_GetText_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.GetText
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.GetText
+  nameWithType: TextShapeBase.GetText
+- uid: SVGImage.SVG.Shapes.TextShapeBase.LastCharacter
+  name: LastCharacter
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_LastCharacter
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.LastCharacter
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.LastCharacter
+  nameWithType: TextShapeBase.LastCharacter
+- uid: SVGImage.SVG.Shapes.TextShapeBase.LastCharacter*
+  name: LastCharacter
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_LastCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.LastCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.LastCharacter
+  nameWithType: TextShapeBase.LastCharacter
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Length
+  name: Length
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Length
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.Length
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Length
+  nameWithType: TextShapeBase.Length
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Length*
+  name: Length
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Length_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.Length
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Length
+  nameWithType: TextShapeBase.Length
+- uid: SVGImage.SVG.Shapes.TextShapeBase.LengthAdjust
+  name: LengthAdjust
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_LengthAdjust
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.LengthAdjust
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.LengthAdjust
+  nameWithType: TextShapeBase.LengthAdjust
+- uid: SVGImage.SVG.Shapes.TextShapeBase.LengthAdjust*
+  name: LengthAdjust
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_LengthAdjust_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.LengthAdjust
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.LengthAdjust
+  nameWithType: TextShapeBase.LengthAdjust
+- uid: SVGImage.SVG.Shapes.TextShapeBase.ParseAtStart(SVGImage.SVG.SVG,System.Xml.XmlNode)
+  name: ParseAtStart(SVG, XmlNode)
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_ParseAtStart_SVGImage_SVG_SVG_System_Xml_XmlNode_
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.ParseAtStart(SVGImage.SVG.SVG,System.Xml.XmlNode)
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.ParseAtStart(SVGImage.SVG.SVG, System.Xml.XmlNode)
+  nameWithType: TextShapeBase.ParseAtStart(SVG, XmlNode)
+- uid: SVGImage.SVG.Shapes.TextShapeBase.ParseAtStart*
+  name: ParseAtStart
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_ParseAtStart_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.ParseAtStart
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.ParseAtStart
+  nameWithType: TextShapeBase.ParseAtStart
+- uid: SVGImage.SVG.Shapes.TextShapeBase.ParseChildren(SVGImage.SVG.SVG,System.Xml.XmlNode)
+  name: ParseChildren(SVG, XmlNode)
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_ParseChildren_SVGImage_SVG_SVG_System_Xml_XmlNode_
+  commentId: M:SVGImage.SVG.Shapes.TextShapeBase.ParseChildren(SVGImage.SVG.SVG,System.Xml.XmlNode)
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.ParseChildren(SVGImage.SVG.SVG, System.Xml.XmlNode)
+  nameWithType: TextShapeBase.ParseChildren(SVG, XmlNode)
+- uid: SVGImage.SVG.Shapes.TextShapeBase.ParseChildren*
+  name: ParseChildren
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_ParseChildren_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.ParseChildren
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.ParseChildren
+  nameWithType: TextShapeBase.ParseChildren
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Rotate
+  name: Rotate
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Rotate
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.Rotate
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Rotate
+  nameWithType: TextShapeBase.Rotate
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Rotate*
+  name: Rotate
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Rotate_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.Rotate
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Rotate
+  nameWithType: TextShapeBase.Rotate
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Text
+  name: Text
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Text
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.Text
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Text
+  nameWithType: TextShapeBase.Text
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Text*
+  name: Text
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Text_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.Text
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Text
+  nameWithType: TextShapeBase.Text
+- uid: SVGImage.SVG.Shapes.TextShapeBase.TextLength
+  name: TextLength
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_TextLength
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.TextLength
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.TextLength
+  nameWithType: TextShapeBase.TextLength
+- uid: SVGImage.SVG.Shapes.TextShapeBase.TextLength*
+  name: TextLength
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_TextLength_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.TextLength
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.TextLength
+  nameWithType: TextShapeBase.TextLength
+- uid: SVGImage.SVG.Shapes.TextShapeBase.WritingMode
+  name: WritingMode
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_WritingMode
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.WritingMode
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.WritingMode
+  nameWithType: TextShapeBase.WritingMode
+- uid: SVGImage.SVG.Shapes.TextShapeBase.WritingMode*
+  name: WritingMode
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_WritingMode_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.WritingMode
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.WritingMode
+  nameWithType: TextShapeBase.WritingMode
+- uid: SVGImage.SVG.Shapes.TextShapeBase.X
+  name: X
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_X
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.X
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.X
+  nameWithType: TextShapeBase.X
+- uid: SVGImage.SVG.Shapes.TextShapeBase.X*
+  name: X
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_X_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.X
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.X
+  nameWithType: TextShapeBase.X
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Y
+  name: Y
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Y
+  commentId: P:SVGImage.SVG.Shapes.TextShapeBase.Y
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Y
+  nameWithType: TextShapeBase.Y
+- uid: SVGImage.SVG.Shapes.TextShapeBase.Y*
+  name: Y
+  href: api/SVGImage.SVG.Shapes.TextShapeBase.html#SVGImage_SVG_Shapes_TextShapeBase_Y_
+  commentId: Overload:SVGImage.SVG.Shapes.TextShapeBase.Y
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextShapeBase.Y
+  nameWithType: TextShapeBase.Y
+- uid: SVGImage.SVG.Shapes.TextSpan
+  name: TextSpan
+  href: api/SVGImage.SVG.Shapes.TextSpan.html
+  commentId: T:SVGImage.SVG.Shapes.TextSpan
+  fullName: SVGImage.SVG.Shapes.TextSpan
+  nameWithType: TextSpan
+- uid: SVGImage.SVG.Shapes.TextSpan.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
+  name: TextSpan(SVG, XmlNode, Shape)
+  href: api/SVGImage.SVG.Shapes.TextSpan.html#SVGImage_SVG_Shapes_TextSpan__ctor_SVGImage_SVG_SVG_System_Xml_XmlNode_SVGImage_SVG_Shapes_Shape_
+  commentId: M:SVGImage.SVG.Shapes.TextSpan.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
+  name.vb: New(SVG, XmlNode, Shape)
+  fullName: SVGImage.SVG.Shapes.TextSpan.TextSpan(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
+  fullName.vb: SVGImage.SVG.Shapes.TextSpan.New(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
+  nameWithType: TextSpan.TextSpan(SVG, XmlNode, Shape)
+  nameWithType.vb: TextSpan.New(SVG, XmlNode, Shape)
+- uid: SVGImage.SVG.Shapes.TextSpan.#ctor*
+  name: TextSpan
+  href: api/SVGImage.SVG.Shapes.TextSpan.html#SVGImage_SVG_Shapes_TextSpan__ctor_
+  commentId: Overload:SVGImage.SVG.Shapes.TextSpan.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SVGImage.SVG.Shapes.TextSpan.TextSpan
+  fullName.vb: SVGImage.SVG.Shapes.TextSpan.New
+  nameWithType: TextSpan.TextSpan
+  nameWithType.vb: TextSpan.New
+- uid: SVGImage.SVG.Shapes.TextString
+  name: TextString
+  href: api/SVGImage.SVG.Shapes.TextString.html
+  commentId: T:SVGImage.SVG.Shapes.TextString
+  fullName: SVGImage.SVG.Shapes.TextString
+  nameWithType: TextString
+- uid: SVGImage.SVG.Shapes.TextString.#ctor(SVGImage.SVG.Shapes.Shape,System.String)
+  name: TextString(Shape, string)
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString__ctor_SVGImage_SVG_Shapes_Shape_System_String_
+  commentId: M:SVGImage.SVG.Shapes.TextString.#ctor(SVGImage.SVG.Shapes.Shape,System.String)
+  name.vb: New(Shape, String)
+  fullName: SVGImage.SVG.Shapes.TextString.TextString(SVGImage.SVG.Shapes.Shape, string)
+  fullName.vb: SVGImage.SVG.Shapes.TextString.New(SVGImage.SVG.Shapes.Shape, String)
+  nameWithType: TextString.TextString(Shape, string)
+  nameWithType.vb: TextString.New(Shape, String)
+- uid: SVGImage.SVG.Shapes.TextString.#ctor*
+  name: TextString
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString__ctor_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SVGImage.SVG.Shapes.TextString.TextString
+  fullName.vb: SVGImage.SVG.Shapes.TextString.New
+  nameWithType: TextString.TextString
+  nameWithType.vb: TextString.New
+- uid: SVGImage.SVG.Shapes.TextString.Characters
+  name: Characters
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Characters
+  commentId: P:SVGImage.SVG.Shapes.TextString.Characters
+  fullName: SVGImage.SVG.Shapes.TextString.Characters
+  nameWithType: TextString.Characters
+- uid: SVGImage.SVG.Shapes.TextString.Characters*
+  name: Characters
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Characters_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.Characters
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.Characters
+  nameWithType: TextString.Characters
+- uid: SVGImage.SVG.Shapes.TextString.FirstCharacter
+  name: FirstCharacter
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_FirstCharacter
+  commentId: P:SVGImage.SVG.Shapes.TextString.FirstCharacter
+  fullName: SVGImage.SVG.Shapes.TextString.FirstCharacter
+  nameWithType: TextString.FirstCharacter
+- uid: SVGImage.SVG.Shapes.TextString.FirstCharacter*
+  name: FirstCharacter
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_FirstCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.FirstCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.FirstCharacter
+  nameWithType: TextString.FirstCharacter
+- uid: SVGImage.SVG.Shapes.TextString.GetCharacters
+  name: GetCharacters()
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetCharacters
+  commentId: M:SVGImage.SVG.Shapes.TextString.GetCharacters
+  fullName: SVGImage.SVG.Shapes.TextString.GetCharacters()
+  nameWithType: TextString.GetCharacters()
+- uid: SVGImage.SVG.Shapes.TextString.GetCharacters*
+  name: GetCharacters
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetCharacters_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.GetCharacters
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.GetCharacters
+  nameWithType: TextString.GetCharacters
+- uid: SVGImage.SVG.Shapes.TextString.GetFirstCharacter
+  name: GetFirstCharacter()
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetFirstCharacter
+  commentId: M:SVGImage.SVG.Shapes.TextString.GetFirstCharacter
+  fullName: SVGImage.SVG.Shapes.TextString.GetFirstCharacter()
+  nameWithType: TextString.GetFirstCharacter()
+- uid: SVGImage.SVG.Shapes.TextString.GetFirstCharacter*
+  name: GetFirstCharacter
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetFirstCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.GetFirstCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.GetFirstCharacter
+  nameWithType: TextString.GetFirstCharacter
+- uid: SVGImage.SVG.Shapes.TextString.GetLastCharacter
+  name: GetLastCharacter()
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetLastCharacter
+  commentId: M:SVGImage.SVG.Shapes.TextString.GetLastCharacter
+  fullName: SVGImage.SVG.Shapes.TextString.GetLastCharacter()
+  nameWithType: TextString.GetLastCharacter()
+- uid: SVGImage.SVG.Shapes.TextString.GetLastCharacter*
+  name: GetLastCharacter
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetLastCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.GetLastCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.GetLastCharacter
+  nameWithType: TextString.GetLastCharacter
+- uid: SVGImage.SVG.Shapes.TextString.GetLength
+  name: GetLength()
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetLength
+  commentId: M:SVGImage.SVG.Shapes.TextString.GetLength
+  fullName: SVGImage.SVG.Shapes.TextString.GetLength()
+  nameWithType: TextString.GetLength()
+- uid: SVGImage.SVG.Shapes.TextString.GetLength*
+  name: GetLength
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetLength_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.GetLength
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.GetLength
+  nameWithType: TextString.GetLength
+- uid: SVGImage.SVG.Shapes.TextString.GetText
+  name: GetText()
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetText
+  commentId: M:SVGImage.SVG.Shapes.TextString.GetText
+  fullName: SVGImage.SVG.Shapes.TextString.GetText()
+  nameWithType: TextString.GetText()
+- uid: SVGImage.SVG.Shapes.TextString.GetText*
+  name: GetText
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_GetText_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.GetText
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.GetText
+  nameWithType: TextString.GetText
+- uid: SVGImage.SVG.Shapes.TextString.Index
+  name: Index
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Index
+  commentId: P:SVGImage.SVG.Shapes.TextString.Index
+  fullName: SVGImage.SVG.Shapes.TextString.Index
+  nameWithType: TextString.Index
+- uid: SVGImage.SVG.Shapes.TextString.Index*
+  name: Index
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Index_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.Index
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.Index
+  nameWithType: TextString.Index
+- uid: SVGImage.SVG.Shapes.TextString.LastCharacter
+  name: LastCharacter
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_LastCharacter
+  commentId: P:SVGImage.SVG.Shapes.TextString.LastCharacter
+  fullName: SVGImage.SVG.Shapes.TextString.LastCharacter
+  nameWithType: TextString.LastCharacter
+- uid: SVGImage.SVG.Shapes.TextString.LastCharacter*
+  name: LastCharacter
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_LastCharacter_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.LastCharacter
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.LastCharacter
+  nameWithType: TextString.LastCharacter
+- uid: SVGImage.SVG.Shapes.TextString.Length
+  name: Length
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Length
+  commentId: P:SVGImage.SVG.Shapes.TextString.Length
+  fullName: SVGImage.SVG.Shapes.TextString.Length
+  nameWithType: TextString.Length
+- uid: SVGImage.SVG.Shapes.TextString.Length*
+  name: Length
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Length_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.Length
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.Length
+  nameWithType: TextString.Length
+- uid: SVGImage.SVG.Shapes.TextString.Parent
+  name: Parent
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Parent
+  commentId: P:SVGImage.SVG.Shapes.TextString.Parent
+  fullName: SVGImage.SVG.Shapes.TextString.Parent
+  nameWithType: TextString.Parent
+- uid: SVGImage.SVG.Shapes.TextString.Parent*
+  name: Parent
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Parent_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.Parent
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.Parent
+  nameWithType: TextString.Parent
+- uid: SVGImage.SVG.Shapes.TextString.Text
+  name: Text
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Text
+  commentId: P:SVGImage.SVG.Shapes.TextString.Text
+  fullName: SVGImage.SVG.Shapes.TextString.Text
+  nameWithType: TextString.Text
+- uid: SVGImage.SVG.Shapes.TextString.Text*
+  name: Text
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_Text_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.Text
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.Text
+  nameWithType: TextString.Text
+- uid: SVGImage.SVG.Shapes.TextString.TextStyle
+  name: TextStyle
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_TextStyle
+  commentId: P:SVGImage.SVG.Shapes.TextString.TextStyle
+  fullName: SVGImage.SVG.Shapes.TextString.TextStyle
+  nameWithType: TextString.TextStyle
+- uid: SVGImage.SVG.Shapes.TextString.TextStyle*
+  name: TextStyle
+  href: api/SVGImage.SVG.Shapes.TextString.html#SVGImage_SVG_Shapes_TextString_TextStyle_
+  commentId: Overload:SVGImage.SVG.Shapes.TextString.TextStyle
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.TextString.TextStyle
+  nameWithType: TextString.TextStyle
 - uid: SVGImage.SVG.Shapes.UseShape
   name: UseShape
   href: api/SVGImage.SVG.Shapes.UseShape.html
@@ -3323,6 +5081,19 @@ references:
   fullName.vb: SVGImage.SVG.Shapes.UseShape.New
   nameWithType: UseShape.UseShape
   nameWithType.vb: UseShape.New
+- uid: SVGImage.SVG.Shapes.UseShape.Height
+  name: Height
+  href: api/SVGImage.SVG.Shapes.UseShape.html#SVGImage_SVG_Shapes_UseShape_Height
+  commentId: P:SVGImage.SVG.Shapes.UseShape.Height
+  fullName: SVGImage.SVG.Shapes.UseShape.Height
+  nameWithType: UseShape.Height
+- uid: SVGImage.SVG.Shapes.UseShape.Height*
+  name: Height
+  href: api/SVGImage.SVG.Shapes.UseShape.html#SVGImage_SVG_Shapes_UseShape_Height_
+  commentId: Overload:SVGImage.SVG.Shapes.UseShape.Height
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.UseShape.Height
+  nameWithType: UseShape.Height
 - uid: SVGImage.SVG.Shapes.UseShape.Parse(SVGImage.SVG.SVG,System.String,System.String)
   name: Parse(SVG, string, string)
   href: api/SVGImage.SVG.Shapes.UseShape.html#SVGImage_SVG_Shapes_UseShape_Parse_SVGImage_SVG_SVG_System_String_System_String_
@@ -3339,6 +5110,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.Shapes.UseShape.Parse
   nameWithType: UseShape.Parse
+- uid: SVGImage.SVG.Shapes.UseShape.Width
+  name: Width
+  href: api/SVGImage.SVG.Shapes.UseShape.html#SVGImage_SVG_Shapes_UseShape_Width
+  commentId: P:SVGImage.SVG.Shapes.UseShape.Width
+  fullName: SVGImage.SVG.Shapes.UseShape.Width
+  nameWithType: UseShape.Width
+- uid: SVGImage.SVG.Shapes.UseShape.Width*
+  name: Width
+  href: api/SVGImage.SVG.Shapes.UseShape.html#SVGImage_SVG_Shapes_UseShape_Width_
+  commentId: Overload:SVGImage.SVG.Shapes.UseShape.Width
+  isSpec: "True"
+  fullName: SVGImage.SVG.Shapes.UseShape.Width
+  nameWithType: UseShape.Width
 - uid: SVGImage.SVG.Shapes.UseShape.X
   name: X
   href: api/SVGImage.SVG.Shapes.UseShape.html#SVGImage_SVG_Shapes_UseShape_X
@@ -3378,6 +5162,36 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.Shapes.UseShape.hRef
   nameWithType: UseShape.hRef
+- uid: SVGImage.SVG.Shapes.WritingMode
+  name: WritingMode
+  href: api/SVGImage.SVG.Shapes.WritingMode.html
+  commentId: T:SVGImage.SVG.Shapes.WritingMode
+  fullName: SVGImage.SVG.Shapes.WritingMode
+  nameWithType: WritingMode
+- uid: SVGImage.SVG.Shapes.WritingMode.HorizontalTopToBottom
+  name: HorizontalTopToBottom
+  href: api/SVGImage.SVG.Shapes.WritingMode.html#SVGImage_SVG_Shapes_WritingMode_HorizontalTopToBottom
+  commentId: F:SVGImage.SVG.Shapes.WritingMode.HorizontalTopToBottom
+  fullName: SVGImage.SVG.Shapes.WritingMode.HorizontalTopToBottom
+  nameWithType: WritingMode.HorizontalTopToBottom
+- uid: SVGImage.SVG.Shapes.WritingMode.None
+  name: None
+  href: api/SVGImage.SVG.Shapes.WritingMode.html#SVGImage_SVG_Shapes_WritingMode_None
+  commentId: F:SVGImage.SVG.Shapes.WritingMode.None
+  fullName: SVGImage.SVG.Shapes.WritingMode.None
+  nameWithType: WritingMode.None
+- uid: SVGImage.SVG.Shapes.WritingMode.VerticalLeftToRight
+  name: VerticalLeftToRight
+  href: api/SVGImage.SVG.Shapes.WritingMode.html#SVGImage_SVG_Shapes_WritingMode_VerticalLeftToRight
+  commentId: F:SVGImage.SVG.Shapes.WritingMode.VerticalLeftToRight
+  fullName: SVGImage.SVG.Shapes.WritingMode.VerticalLeftToRight
+  nameWithType: WritingMode.VerticalLeftToRight
+- uid: SVGImage.SVG.Shapes.WritingMode.VerticalRightToLeft
+  name: VerticalRightToLeft
+  href: api/SVGImage.SVG.Shapes.WritingMode.html#SVGImage_SVG_Shapes_WritingMode_VerticalRightToLeft
+  commentId: F:SVGImage.SVG.Shapes.WritingMode.VerticalRightToLeft
+  fullName: SVGImage.SVG.Shapes.WritingMode.VerticalRightToLeft
+  nameWithType: WritingMode.VerticalRightToLeft
 - uid: SVGImage.SVG.Stroke
   name: Stroke
   href: api/SVGImage.SVG.Stroke.html
@@ -3403,6 +5217,35 @@ references:
   fullName.vb: SVGImage.SVG.Stroke.New
   nameWithType: Stroke.Stroke
   nameWithType.vb: Stroke.New
+- uid: SVGImage.SVG.Stroke.CreateDefault(SVGImage.SVG.SVG,System.Double)
+  name: CreateDefault(SVG, double)
+  href: api/SVGImage.SVG.Stroke.html#SVGImage_SVG_Stroke_CreateDefault_SVGImage_SVG_SVG_System_Double_
+  commentId: M:SVGImage.SVG.Stroke.CreateDefault(SVGImage.SVG.SVG,System.Double)
+  name.vb: CreateDefault(SVG, Double)
+  fullName: SVGImage.SVG.Stroke.CreateDefault(SVGImage.SVG.SVG, double)
+  fullName.vb: SVGImage.SVG.Stroke.CreateDefault(SVGImage.SVG.SVG, Double)
+  nameWithType: Stroke.CreateDefault(SVG, double)
+  nameWithType.vb: Stroke.CreateDefault(SVG, Double)
+- uid: SVGImage.SVG.Stroke.CreateDefault*
+  name: CreateDefault
+  href: api/SVGImage.SVG.Stroke.html#SVGImage_SVG_Stroke_CreateDefault_
+  commentId: Overload:SVGImage.SVG.Stroke.CreateDefault
+  isSpec: "True"
+  fullName: SVGImage.SVG.Stroke.CreateDefault
+  nameWithType: Stroke.CreateDefault
+- uid: SVGImage.SVG.Stroke.IsDefault
+  name: IsDefault
+  href: api/SVGImage.SVG.Stroke.html#SVGImage_SVG_Stroke_IsDefault
+  commentId: P:SVGImage.SVG.Stroke.IsDefault
+  fullName: SVGImage.SVG.Stroke.IsDefault
+  nameWithType: Stroke.IsDefault
+- uid: SVGImage.SVG.Stroke.IsDefault*
+  name: IsDefault
+  href: api/SVGImage.SVG.Stroke.html#SVGImage_SVG_Stroke_IsDefault_
+  commentId: Overload:SVGImage.SVG.Stroke.IsDefault
+  isSpec: "True"
+  fullName: SVGImage.SVG.Stroke.IsDefault
+  nameWithType: Stroke.IsDefault
 - uid: SVGImage.SVG.Stroke.IsEmpty(SVGImage.SVG.SVG)
   name: IsEmpty(SVG)
   href: api/SVGImage.SVG.Stroke.html#SVGImage_SVG_Stroke_IsEmpty_SVGImage_SVG_SVG_
@@ -3558,6 +5401,19 @@ references:
   commentId: F:SVGImage.SVG.Stroke.eLineJoin.round
   fullName: SVGImage.SVG.Stroke.eLineJoin.round
   nameWithType: Stroke.eLineJoin.round
+- uid: SVGImage.SVG.Stroke.get
+  name: get
+  href: api/SVGImage.SVG.Stroke.html#SVGImage_SVG_Stroke_get
+  commentId: P:SVGImage.SVG.Stroke.get
+  fullName: SVGImage.SVG.Stroke.get
+  nameWithType: Stroke.get
+- uid: SVGImage.SVG.Stroke.get*
+  name: get
+  href: api/SVGImage.SVG.Stroke.html#SVGImage_SVG_Stroke_get_
+  commentId: Overload:SVGImage.SVG.Stroke.get
+  isSpec: "True"
+  fullName: SVGImage.SVG.Stroke.get
+  nameWithType: Stroke.get
 - uid: SVGImage.SVG.StyleItem
   name: StyleItem
   href: api/SVGImage.SVG.StyleItem.html
@@ -3754,6 +5610,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.SvgIconBase.GetImage
   nameWithType: SvgIconBase.GetImage
+- uid: SVGImage.SVG.SvgIconBase.IsDesignMode(System.IServiceProvider)
+  name: IsDesignMode(IServiceProvider)
+  href: api/SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase_IsDesignMode_System_IServiceProvider_
+  commentId: M:SVGImage.SVG.SvgIconBase.IsDesignMode(System.IServiceProvider)
+  fullName: SVGImage.SVG.SvgIconBase.IsDesignMode(System.IServiceProvider)
+  nameWithType: SvgIconBase.IsDesignMode(IServiceProvider)
+- uid: SVGImage.SVG.SvgIconBase.IsDesignMode*
+  name: IsDesignMode
+  href: api/SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase_IsDesignMode_
+  commentId: Overload:SVGImage.SVG.SvgIconBase.IsDesignMode
+  isSpec: "True"
+  fullName: SVGImage.SVG.SvgIconBase.IsDesignMode
+  nameWithType: SvgIconBase.IsDesignMode
 - uid: SVGImage.SVG.SvgIconBase.OverrideColor
   name: OverrideColor
   href: api/SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase_OverrideColor
@@ -3767,6 +5636,32 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.SvgIconBase.OverrideColor
   nameWithType: SvgIconBase.OverrideColor
+- uid: SVGImage.SVG.SvgIconBase.OverrideFillColor
+  name: OverrideFillColor
+  href: api/SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase_OverrideFillColor
+  commentId: P:SVGImage.SVG.SvgIconBase.OverrideFillColor
+  fullName: SVGImage.SVG.SvgIconBase.OverrideFillColor
+  nameWithType: SvgIconBase.OverrideFillColor
+- uid: SVGImage.SVG.SvgIconBase.OverrideFillColor*
+  name: OverrideFillColor
+  href: api/SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase_OverrideFillColor_
+  commentId: Overload:SVGImage.SVG.SvgIconBase.OverrideFillColor
+  isSpec: "True"
+  fullName: SVGImage.SVG.SvgIconBase.OverrideFillColor
+  nameWithType: SvgIconBase.OverrideFillColor
+- uid: SVGImage.SVG.SvgIconBase.OverrideStrokeColor
+  name: OverrideStrokeColor
+  href: api/SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase_OverrideStrokeColor
+  commentId: P:SVGImage.SVG.SvgIconBase.OverrideStrokeColor
+  fullName: SVGImage.SVG.SvgIconBase.OverrideStrokeColor
+  nameWithType: SvgIconBase.OverrideStrokeColor
+- uid: SVGImage.SVG.SvgIconBase.OverrideStrokeColor*
+  name: OverrideStrokeColor
+  href: api/SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase_OverrideStrokeColor_
+  commentId: Overload:SVGImage.SVG.SvgIconBase.OverrideStrokeColor
+  isSpec: "True"
+  fullName: SVGImage.SVG.SvgIconBase.OverrideStrokeColor
+  nameWithType: SvgIconBase.OverrideStrokeColor
 - uid: SVGImage.SVG.SvgIconBase._appName
   name: _appName
   href: api/SVGImage.SVG.SvgIconBase.html#SVGImage_SVG_SvgIconBase__appName
@@ -3918,312 +5813,331 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.SvgIconExtension.Source
   nameWithType: SvgIconExtension.Source
-- uid: SVGImage.SVG.TextShape
-  name: TextShape
-  href: api/SVGImage.SVG.TextShape.html
-  commentId: T:SVGImage.SVG.TextShape
-  fullName: SVGImage.SVG.TextShape
-  nameWithType: TextShape
-- uid: SVGImage.SVG.TextShape.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
-  name: TextShape(SVG, XmlNode, Shape)
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape__ctor_SVGImage_SVG_SVG_System_Xml_XmlNode_SVGImage_SVG_Shapes_Shape_
-  commentId: M:SVGImage.SVG.TextShape.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
+- uid: SVGImage.SVG.TextRender2
+  name: TextRender2
+  href: api/SVGImage.SVG.TextRender2.html
+  commentId: T:SVGImage.SVG.TextRender2
+  fullName: SVGImage.SVG.TextRender2
+  nameWithType: TextRender2
+- uid: SVGImage.SVG.TextRender2.BuildTextGeometry(SVGImage.SVG.Shapes.TextShape)
+  name: BuildTextGeometry(TextShape)
+  href: api/SVGImage.SVG.TextRender2.html#SVGImage_SVG_TextRender2_BuildTextGeometry_SVGImage_SVG_Shapes_TextShape_
+  commentId: M:SVGImage.SVG.TextRender2.BuildTextGeometry(SVGImage.SVG.Shapes.TextShape)
+  fullName: SVGImage.SVG.TextRender2.BuildTextGeometry(SVGImage.SVG.Shapes.TextShape)
+  nameWithType: TextRender2.BuildTextGeometry(TextShape)
+- uid: SVGImage.SVG.TextRender2.BuildTextGeometry*
+  name: BuildTextGeometry
+  href: api/SVGImage.SVG.TextRender2.html#SVGImage_SVG_TextRender2_BuildTextGeometry_
+  commentId: Overload:SVGImage.SVG.TextRender2.BuildTextGeometry
+  isSpec: "True"
+  fullName: SVGImage.SVG.TextRender2.BuildTextGeometry
+  nameWithType: TextRender2.BuildTextGeometry
+- uid: SVGImage.SVG.TextShape2
+  name: TextShape2
+  href: api/SVGImage.SVG.TextShape2.html
+  commentId: T:SVGImage.SVG.TextShape2
+  fullName: SVGImage.SVG.TextShape2
+  nameWithType: TextShape2
+- uid: SVGImage.SVG.TextShape2.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
+  name: TextShape2(SVG, XmlNode, Shape)
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2__ctor_SVGImage_SVG_SVG_System_Xml_XmlNode_SVGImage_SVG_Shapes_Shape_
+  commentId: M:SVGImage.SVG.TextShape2.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)
   name.vb: New(SVG, XmlNode, Shape)
-  fullName: SVGImage.SVG.TextShape.TextShape(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
-  fullName.vb: SVGImage.SVG.TextShape.New(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
-  nameWithType: TextShape.TextShape(SVG, XmlNode, Shape)
-  nameWithType.vb: TextShape.New(SVG, XmlNode, Shape)
-- uid: SVGImage.SVG.TextShape.#ctor*
-  name: TextShape
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape__ctor_
-  commentId: Overload:SVGImage.SVG.TextShape.#ctor
+  fullName: SVGImage.SVG.TextShape2.TextShape2(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
+  fullName.vb: SVGImage.SVG.TextShape2.New(SVGImage.SVG.SVG, System.Xml.XmlNode, SVGImage.SVG.Shapes.Shape)
+  nameWithType: TextShape2.TextShape2(SVG, XmlNode, Shape)
+  nameWithType.vb: TextShape2.New(SVG, XmlNode, Shape)
+- uid: SVGImage.SVG.TextShape2.#ctor*
+  name: TextShape2
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2__ctor_
+  commentId: Overload:SVGImage.SVG.TextShape2.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: SVGImage.SVG.TextShape.TextShape
-  fullName.vb: SVGImage.SVG.TextShape.New
-  nameWithType: TextShape.TextShape
-  nameWithType.vb: TextShape.New
-- uid: SVGImage.SVG.TextShape.Fill
-  name: Fill
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_Fill
-  commentId: P:SVGImage.SVG.TextShape.Fill
-  fullName: SVGImage.SVG.TextShape.Fill
-  nameWithType: TextShape.Fill
-- uid: SVGImage.SVG.TextShape.Fill*
-  name: Fill
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_Fill_
-  commentId: Overload:SVGImage.SVG.TextShape.Fill
+  fullName: SVGImage.SVG.TextShape2.TextShape2
+  fullName.vb: SVGImage.SVG.TextShape2.New
+  nameWithType: TextShape2.TextShape2
+  nameWithType.vb: TextShape2.New
+- uid: SVGImage.SVG.TextShape2.DefaultFill
+  name: DefaultFill()
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_DefaultFill
+  commentId: M:SVGImage.SVG.TextShape2.DefaultFill
+  fullName: SVGImage.SVG.TextShape2.DefaultFill()
+  nameWithType: TextShape2.DefaultFill()
+- uid: SVGImage.SVG.TextShape2.DefaultFill*
+  name: DefaultFill
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_DefaultFill_
+  commentId: Overload:SVGImage.SVG.TextShape2.DefaultFill
   isSpec: "True"
-  fullName: SVGImage.SVG.TextShape.Fill
-  nameWithType: TextShape.Fill
-- uid: SVGImage.SVG.TextShape.Stroke
-  name: Stroke
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_Stroke
-  commentId: P:SVGImage.SVG.TextShape.Stroke
-  fullName: SVGImage.SVG.TextShape.Stroke
-  nameWithType: TextShape.Stroke
-- uid: SVGImage.SVG.TextShape.Stroke*
-  name: Stroke
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_Stroke_
-  commentId: Overload:SVGImage.SVG.TextShape.Stroke
+  fullName: SVGImage.SVG.TextShape2.DefaultFill
+  nameWithType: TextShape2.DefaultFill
+- uid: SVGImage.SVG.TextShape2.DefaultStroke
+  name: DefaultStroke()
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_DefaultStroke
+  commentId: M:SVGImage.SVG.TextShape2.DefaultStroke
+  fullName: SVGImage.SVG.TextShape2.DefaultStroke()
+  nameWithType: TextShape2.DefaultStroke()
+- uid: SVGImage.SVG.TextShape2.DefaultStroke*
+  name: DefaultStroke
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_DefaultStroke_
+  commentId: Overload:SVGImage.SVG.TextShape2.DefaultStroke
   isSpec: "True"
-  fullName: SVGImage.SVG.TextShape.Stroke
-  nameWithType: TextShape.Stroke
-- uid: SVGImage.SVG.TextShape.Text
+  fullName: SVGImage.SVG.TextShape2.DefaultStroke
+  nameWithType: TextShape2.DefaultStroke
+- uid: SVGImage.SVG.TextShape2.Text
   name: Text
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_Text
-  commentId: P:SVGImage.SVG.TextShape.Text
-  fullName: SVGImage.SVG.TextShape.Text
-  nameWithType: TextShape.Text
-- uid: SVGImage.SVG.TextShape.Text*
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_Text
+  commentId: P:SVGImage.SVG.TextShape2.Text
+  fullName: SVGImage.SVG.TextShape2.Text
+  nameWithType: TextShape2.Text
+- uid: SVGImage.SVG.TextShape2.Text*
   name: Text
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_Text_
-  commentId: Overload:SVGImage.SVG.TextShape.Text
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_Text_
+  commentId: Overload:SVGImage.SVG.TextShape2.Text
   isSpec: "True"
-  fullName: SVGImage.SVG.TextShape.Text
-  nameWithType: TextShape.Text
-- uid: SVGImage.SVG.TextShape.TextSpan
+  fullName: SVGImage.SVG.TextShape2.Text
+  nameWithType: TextShape2.Text
+- uid: SVGImage.SVG.TextShape2.TextSpan
   name: TextSpan
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_TextSpan
-  commentId: P:SVGImage.SVG.TextShape.TextSpan
-  fullName: SVGImage.SVG.TextShape.TextSpan
-  nameWithType: TextShape.TextSpan
-- uid: SVGImage.SVG.TextShape.TextSpan*
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_TextSpan
+  commentId: P:SVGImage.SVG.TextShape2.TextSpan
+  fullName: SVGImage.SVG.TextShape2.TextSpan
+  nameWithType: TextShape2.TextSpan
+- uid: SVGImage.SVG.TextShape2.TextSpan*
   name: TextSpan
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_TextSpan_
-  commentId: Overload:SVGImage.SVG.TextShape.TextSpan
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_TextSpan_
+  commentId: Overload:SVGImage.SVG.TextShape2.TextSpan
   isSpec: "True"
-  fullName: SVGImage.SVG.TextShape.TextSpan
-  nameWithType: TextShape.TextSpan
-- uid: SVGImage.SVG.TextShape.X
+  fullName: SVGImage.SVG.TextShape2.TextSpan
+  nameWithType: TextShape2.TextSpan
+- uid: SVGImage.SVG.TextShape2.X
   name: X
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_X
-  commentId: P:SVGImage.SVG.TextShape.X
-  fullName: SVGImage.SVG.TextShape.X
-  nameWithType: TextShape.X
-- uid: SVGImage.SVG.TextShape.X*
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_X
+  commentId: P:SVGImage.SVG.TextShape2.X
+  fullName: SVGImage.SVG.TextShape2.X
+  nameWithType: TextShape2.X
+- uid: SVGImage.SVG.TextShape2.X*
   name: X
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_X_
-  commentId: Overload:SVGImage.SVG.TextShape.X
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_X_
+  commentId: Overload:SVGImage.SVG.TextShape2.X
   isSpec: "True"
-  fullName: SVGImage.SVG.TextShape.X
-  nameWithType: TextShape.X
-- uid: SVGImage.SVG.TextShape.Y
+  fullName: SVGImage.SVG.TextShape2.X
+  nameWithType: TextShape2.X
+- uid: SVGImage.SVG.TextShape2.Y
   name: Y
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_Y
-  commentId: P:SVGImage.SVG.TextShape.Y
-  fullName: SVGImage.SVG.TextShape.Y
-  nameWithType: TextShape.Y
-- uid: SVGImage.SVG.TextShape.Y*
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_Y
+  commentId: P:SVGImage.SVG.TextShape2.Y
+  fullName: SVGImage.SVG.TextShape2.Y
+  nameWithType: TextShape2.Y
+- uid: SVGImage.SVG.TextShape2.Y*
   name: Y
-  href: api/SVGImage.SVG.TextShape.html#SVGImage_SVG_TextShape_Y_
-  commentId: Overload:SVGImage.SVG.TextShape.Y
+  href: api/SVGImage.SVG.TextShape2.html#SVGImage_SVG_TextShape2_Y_
+  commentId: Overload:SVGImage.SVG.TextShape2.Y
   isSpec: "True"
-  fullName: SVGImage.SVG.TextShape.Y
-  nameWithType: TextShape.Y
-- uid: SVGImage.SVG.TextSpan
-  name: TextSpan
-  href: api/SVGImage.SVG.TextSpan.html
-  commentId: T:SVGImage.SVG.TextSpan
-  fullName: SVGImage.SVG.TextSpan
-  nameWithType: TextSpan
-- uid: SVGImage.SVG.TextSpan.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape,SVGImage.SVG.TextSpan.eElementType,System.Collections.Generic.List{SVGImage.SVG.StyleItem})
-  name: TextSpan(SVG, Shape, eElementType, List<StyleItem>)
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan__ctor_SVGImage_SVG_SVG_SVGImage_SVG_Shapes_Shape_SVGImage_SVG_TextSpan_eElementType_System_Collections_Generic_List_SVGImage_SVG_StyleItem__
-  commentId: M:SVGImage.SVG.TextSpan.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape,SVGImage.SVG.TextSpan.eElementType,System.Collections.Generic.List{SVGImage.SVG.StyleItem})
+  fullName: SVGImage.SVG.TextShape2.Y
+  nameWithType: TextShape2.Y
+- uid: SVGImage.SVG.TextSpan2
+  name: TextSpan2
+  href: api/SVGImage.SVG.TextSpan2.html
+  commentId: T:SVGImage.SVG.TextSpan2
+  fullName: SVGImage.SVG.TextSpan2
+  nameWithType: TextSpan2
+- uid: SVGImage.SVG.TextSpan2.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape,SVGImage.SVG.TextSpan2.eElementType,System.Collections.Generic.List{SVGImage.SVG.StyleItem})
+  name: TextSpan2(SVG, Shape, eElementType, List<StyleItem>)
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2__ctor_SVGImage_SVG_SVG_SVGImage_SVG_Shapes_Shape_SVGImage_SVG_TextSpan2_eElementType_System_Collections_Generic_List_SVGImage_SVG_StyleItem__
+  commentId: M:SVGImage.SVG.TextSpan2.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape,SVGImage.SVG.TextSpan2.eElementType,System.Collections.Generic.List{SVGImage.SVG.StyleItem})
   name.vb: New(SVG, Shape, eElementType, List(Of StyleItem))
-  fullName: SVGImage.SVG.TextSpan.TextSpan(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape, SVGImage.SVG.TextSpan.eElementType, System.Collections.Generic.List<SVGImage.SVG.StyleItem>)
-  fullName.vb: SVGImage.SVG.TextSpan.New(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape, SVGImage.SVG.TextSpan.eElementType, System.Collections.Generic.List(Of SVGImage.SVG.StyleItem))
-  nameWithType: TextSpan.TextSpan(SVG, Shape, TextSpan.eElementType, List<StyleItem>)
-  nameWithType.vb: TextSpan.New(SVG, Shape, TextSpan.eElementType, List(Of StyleItem))
-- uid: SVGImage.SVG.TextSpan.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape,System.String)
-  name: TextSpan(SVG, Shape, string)
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan__ctor_SVGImage_SVG_SVG_SVGImage_SVG_Shapes_Shape_System_String_
-  commentId: M:SVGImage.SVG.TextSpan.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape,System.String)
+  fullName: SVGImage.SVG.TextSpan2.TextSpan2(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape, SVGImage.SVG.TextSpan2.eElementType, System.Collections.Generic.List<SVGImage.SVG.StyleItem>)
+  fullName.vb: SVGImage.SVG.TextSpan2.New(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape, SVGImage.SVG.TextSpan2.eElementType, System.Collections.Generic.List(Of SVGImage.SVG.StyleItem))
+  nameWithType: TextSpan2.TextSpan2(SVG, Shape, TextSpan2.eElementType, List<StyleItem>)
+  nameWithType.vb: TextSpan2.New(SVG, Shape, TextSpan2.eElementType, List(Of StyleItem))
+- uid: SVGImage.SVG.TextSpan2.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape,System.String)
+  name: TextSpan2(SVG, Shape, string)
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2__ctor_SVGImage_SVG_SVG_SVGImage_SVG_Shapes_Shape_System_String_
+  commentId: M:SVGImage.SVG.TextSpan2.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape,System.String)
   name.vb: New(SVG, Shape, String)
-  fullName: SVGImage.SVG.TextSpan.TextSpan(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape, string)
-  fullName.vb: SVGImage.SVG.TextSpan.New(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape, String)
-  nameWithType: TextSpan.TextSpan(SVG, Shape, string)
-  nameWithType.vb: TextSpan.New(SVG, Shape, String)
-- uid: SVGImage.SVG.TextSpan.#ctor*
-  name: TextSpan
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan__ctor_
-  commentId: Overload:SVGImage.SVG.TextSpan.#ctor
+  fullName: SVGImage.SVG.TextSpan2.TextSpan2(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape, string)
+  fullName.vb: SVGImage.SVG.TextSpan2.New(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape, String)
+  nameWithType: TextSpan2.TextSpan2(SVG, Shape, string)
+  nameWithType.vb: TextSpan2.New(SVG, Shape, String)
+- uid: SVGImage.SVG.TextSpan2.#ctor*
+  name: TextSpan2
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2__ctor_
+  commentId: Overload:SVGImage.SVG.TextSpan2.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: SVGImage.SVG.TextSpan.TextSpan
-  fullName.vb: SVGImage.SVG.TextSpan.New
-  nameWithType: TextSpan.TextSpan
-  nameWithType.vb: TextSpan.New
-- uid: SVGImage.SVG.TextSpan.Attributes
+  fullName: SVGImage.SVG.TextSpan2.TextSpan2
+  fullName.vb: SVGImage.SVG.TextSpan2.New
+  nameWithType: TextSpan2.TextSpan2
+  nameWithType.vb: TextSpan2.New
+- uid: SVGImage.SVG.TextSpan2.Attributes
   name: Attributes
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Attributes
-  commentId: P:SVGImage.SVG.TextSpan.Attributes
-  fullName: SVGImage.SVG.TextSpan.Attributes
-  nameWithType: TextSpan.Attributes
-- uid: SVGImage.SVG.TextSpan.Attributes*
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Attributes
+  commentId: P:SVGImage.SVG.TextSpan2.Attributes
+  fullName: SVGImage.SVG.TextSpan2.Attributes
+  nameWithType: TextSpan2.Attributes
+- uid: SVGImage.SVG.TextSpan2.Attributes*
   name: Attributes
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Attributes_
-  commentId: Overload:SVGImage.SVG.TextSpan.Attributes
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Attributes_
+  commentId: Overload:SVGImage.SVG.TextSpan2.Attributes
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.Attributes
-  nameWithType: TextSpan.Attributes
-- uid: SVGImage.SVG.TextSpan.Children
+  fullName: SVGImage.SVG.TextSpan2.Attributes
+  nameWithType: TextSpan2.Attributes
+- uid: SVGImage.SVG.TextSpan2.Children
   name: Children
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Children
-  commentId: P:SVGImage.SVG.TextSpan.Children
-  fullName: SVGImage.SVG.TextSpan.Children
-  nameWithType: TextSpan.Children
-- uid: SVGImage.SVG.TextSpan.Children*
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Children
+  commentId: P:SVGImage.SVG.TextSpan2.Children
+  fullName: SVGImage.SVG.TextSpan2.Children
+  nameWithType: TextSpan2.Children
+- uid: SVGImage.SVG.TextSpan2.Children*
   name: Children
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Children_
-  commentId: Overload:SVGImage.SVG.TextSpan.Children
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Children_
+  commentId: Overload:SVGImage.SVG.TextSpan2.Children
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.Children
-  nameWithType: TextSpan.Children
-- uid: SVGImage.SVG.TextSpan.ElementType
+  fullName: SVGImage.SVG.TextSpan2.Children
+  nameWithType: TextSpan2.Children
+- uid: SVGImage.SVG.TextSpan2.ElementType
   name: ElementType
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_ElementType
-  commentId: P:SVGImage.SVG.TextSpan.ElementType
-  fullName: SVGImage.SVG.TextSpan.ElementType
-  nameWithType: TextSpan.ElementType
-- uid: SVGImage.SVG.TextSpan.ElementType*
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_ElementType
+  commentId: P:SVGImage.SVG.TextSpan2.ElementType
+  fullName: SVGImage.SVG.TextSpan2.ElementType
+  nameWithType: TextSpan2.ElementType
+- uid: SVGImage.SVG.TextSpan2.ElementType*
   name: ElementType
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_ElementType_
-  commentId: Overload:SVGImage.SVG.TextSpan.ElementType
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_ElementType_
+  commentId: Overload:SVGImage.SVG.TextSpan2.ElementType
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.ElementType
-  nameWithType: TextSpan.ElementType
-- uid: SVGImage.SVG.TextSpan.End
+  fullName: SVGImage.SVG.TextSpan2.ElementType
+  nameWithType: TextSpan2.ElementType
+- uid: SVGImage.SVG.TextSpan2.End
   name: End
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_End
-  commentId: P:SVGImage.SVG.TextSpan.End
-  fullName: SVGImage.SVG.TextSpan.End
-  nameWithType: TextSpan.End
-- uid: SVGImage.SVG.TextSpan.End*
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_End
+  commentId: P:SVGImage.SVG.TextSpan2.End
+  fullName: SVGImage.SVG.TextSpan2.End
+  nameWithType: TextSpan2.End
+- uid: SVGImage.SVG.TextSpan2.End*
   name: End
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_End_
-  commentId: Overload:SVGImage.SVG.TextSpan.End
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_End_
+  commentId: Overload:SVGImage.SVG.TextSpan2.End
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.End
-  nameWithType: TextSpan.End
-- uid: SVGImage.SVG.TextSpan.Parse(SVGImage.SVG.SVG,System.String,SVGImage.SVG.TextShape)
-  name: Parse(SVG, string, TextShape)
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Parse_SVGImage_SVG_SVG_System_String_SVGImage_SVG_TextShape_
-  commentId: M:SVGImage.SVG.TextSpan.Parse(SVGImage.SVG.SVG,System.String,SVGImage.SVG.TextShape)
-  name.vb: Parse(SVG, String, TextShape)
-  fullName: SVGImage.SVG.TextSpan.Parse(SVGImage.SVG.SVG, string, SVGImage.SVG.TextShape)
-  fullName.vb: SVGImage.SVG.TextSpan.Parse(SVGImage.SVG.SVG, String, SVGImage.SVG.TextShape)
-  nameWithType: TextSpan.Parse(SVG, string, TextShape)
-  nameWithType.vb: TextSpan.Parse(SVG, String, TextShape)
-- uid: SVGImage.SVG.TextSpan.Parse*
+  fullName: SVGImage.SVG.TextSpan2.End
+  nameWithType: TextSpan2.End
+- uid: SVGImage.SVG.TextSpan2.Parse(SVGImage.SVG.SVG,System.String,SVGImage.SVG.TextShape2)
+  name: Parse(SVG, string, TextShape2)
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Parse_SVGImage_SVG_SVG_System_String_SVGImage_SVG_TextShape2_
+  commentId: M:SVGImage.SVG.TextSpan2.Parse(SVGImage.SVG.SVG,System.String,SVGImage.SVG.TextShape2)
+  name.vb: Parse(SVG, String, TextShape2)
+  fullName: SVGImage.SVG.TextSpan2.Parse(SVGImage.SVG.SVG, string, SVGImage.SVG.TextShape2)
+  fullName.vb: SVGImage.SVG.TextSpan2.Parse(SVGImage.SVG.SVG, String, SVGImage.SVG.TextShape2)
+  nameWithType: TextSpan2.Parse(SVG, string, TextShape2)
+  nameWithType.vb: TextSpan2.Parse(SVG, String, TextShape2)
+- uid: SVGImage.SVG.TextSpan2.Parse*
   name: Parse
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Parse_
-  commentId: Overload:SVGImage.SVG.TextSpan.Parse
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Parse_
+  commentId: Overload:SVGImage.SVG.TextSpan2.Parse
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.Parse
-  nameWithType: TextSpan.Parse
-- uid: SVGImage.SVG.TextSpan.Print(SVGImage.SVG.TextSpan,System.String)
-  name: Print(TextSpan, string)
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Print_SVGImage_SVG_TextSpan_System_String_
-  commentId: M:SVGImage.SVG.TextSpan.Print(SVGImage.SVG.TextSpan,System.String)
-  name.vb: Print(TextSpan, String)
-  fullName: SVGImage.SVG.TextSpan.Print(SVGImage.SVG.TextSpan, string)
-  fullName.vb: SVGImage.SVG.TextSpan.Print(SVGImage.SVG.TextSpan, String)
-  nameWithType: TextSpan.Print(TextSpan, string)
-  nameWithType.vb: TextSpan.Print(TextSpan, String)
-- uid: SVGImage.SVG.TextSpan.Print*
+  fullName: SVGImage.SVG.TextSpan2.Parse
+  nameWithType: TextSpan2.Parse
+- uid: SVGImage.SVG.TextSpan2.Print(SVGImage.SVG.TextSpan2,System.String)
+  name: Print(TextSpan2, string)
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Print_SVGImage_SVG_TextSpan2_System_String_
+  commentId: M:SVGImage.SVG.TextSpan2.Print(SVGImage.SVG.TextSpan2,System.String)
+  name.vb: Print(TextSpan2, String)
+  fullName: SVGImage.SVG.TextSpan2.Print(SVGImage.SVG.TextSpan2, string)
+  fullName.vb: SVGImage.SVG.TextSpan2.Print(SVGImage.SVG.TextSpan2, String)
+  nameWithType: TextSpan2.Print(TextSpan2, string)
+  nameWithType.vb: TextSpan2.Print(TextSpan2, String)
+- uid: SVGImage.SVG.TextSpan2.Print*
   name: Print
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Print_
-  commentId: Overload:SVGImage.SVG.TextSpan.Print
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Print_
+  commentId: Overload:SVGImage.SVG.TextSpan2.Print
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.Print
-  nameWithType: TextSpan.Print
-- uid: SVGImage.SVG.TextSpan.StartIndex
+  fullName: SVGImage.SVG.TextSpan2.Print
+  nameWithType: TextSpan2.Print
+- uid: SVGImage.SVG.TextSpan2.StartIndex
   name: StartIndex
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_StartIndex
-  commentId: P:SVGImage.SVG.TextSpan.StartIndex
-  fullName: SVGImage.SVG.TextSpan.StartIndex
-  nameWithType: TextSpan.StartIndex
-- uid: SVGImage.SVG.TextSpan.StartIndex*
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_StartIndex
+  commentId: P:SVGImage.SVG.TextSpan2.StartIndex
+  fullName: SVGImage.SVG.TextSpan2.StartIndex
+  nameWithType: TextSpan2.StartIndex
+- uid: SVGImage.SVG.TextSpan2.StartIndex*
   name: StartIndex
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_StartIndex_
-  commentId: Overload:SVGImage.SVG.TextSpan.StartIndex
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_StartIndex_
+  commentId: Overload:SVGImage.SVG.TextSpan2.StartIndex
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.StartIndex
-  nameWithType: TextSpan.StartIndex
-- uid: SVGImage.SVG.TextSpan.Text
+  fullName: SVGImage.SVG.TextSpan2.StartIndex
+  nameWithType: TextSpan2.StartIndex
+- uid: SVGImage.SVG.TextSpan2.Text
   name: Text
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Text
-  commentId: P:SVGImage.SVG.TextSpan.Text
-  fullName: SVGImage.SVG.TextSpan.Text
-  nameWithType: TextSpan.Text
-- uid: SVGImage.SVG.TextSpan.Text*
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Text
+  commentId: P:SVGImage.SVG.TextSpan2.Text
+  fullName: SVGImage.SVG.TextSpan2.Text
+  nameWithType: TextSpan2.Text
+- uid: SVGImage.SVG.TextSpan2.Text*
   name: Text
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Text_
-  commentId: Overload:SVGImage.SVG.TextSpan.Text
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Text_
+  commentId: Overload:SVGImage.SVG.TextSpan2.Text
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.Text
-  nameWithType: TextSpan.Text
-- uid: SVGImage.SVG.TextSpan.ToString
+  fullName: SVGImage.SVG.TextSpan2.Text
+  nameWithType: TextSpan2.Text
+- uid: SVGImage.SVG.TextSpan2.ToString
   name: ToString()
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_ToString
-  commentId: M:SVGImage.SVG.TextSpan.ToString
-  fullName: SVGImage.SVG.TextSpan.ToString()
-  nameWithType: TextSpan.ToString()
-- uid: SVGImage.SVG.TextSpan.ToString*
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_ToString
+  commentId: M:SVGImage.SVG.TextSpan2.ToString
+  fullName: SVGImage.SVG.TextSpan2.ToString()
+  nameWithType: TextSpan2.ToString()
+- uid: SVGImage.SVG.TextSpan2.ToString*
   name: ToString
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_ToString_
-  commentId: Overload:SVGImage.SVG.TextSpan.ToString
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_ToString_
+  commentId: Overload:SVGImage.SVG.TextSpan2.ToString
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.ToString
-  nameWithType: TextSpan.ToString
-- uid: SVGImage.SVG.TextSpan.Transform
+  fullName: SVGImage.SVG.TextSpan2.ToString
+  nameWithType: TextSpan2.ToString
+- uid: SVGImage.SVG.TextSpan2.Transform
   name: Transform
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Transform
-  commentId: P:SVGImage.SVG.TextSpan.Transform
-  fullName: SVGImage.SVG.TextSpan.Transform
-  nameWithType: TextSpan.Transform
-- uid: SVGImage.SVG.TextSpan.Transform*
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Transform
+  commentId: P:SVGImage.SVG.TextSpan2.Transform
+  fullName: SVGImage.SVG.TextSpan2.Transform
+  nameWithType: TextSpan2.Transform
+- uid: SVGImage.SVG.TextSpan2.Transform*
   name: Transform
-  href: api/SVGImage.SVG.TextSpan.html#SVGImage_SVG_TextSpan_Transform_
-  commentId: Overload:SVGImage.SVG.TextSpan.Transform
+  href: api/SVGImage.SVG.TextSpan2.html#SVGImage_SVG_TextSpan2_Transform_
+  commentId: Overload:SVGImage.SVG.TextSpan2.Transform
   isSpec: "True"
-  fullName: SVGImage.SVG.TextSpan.Transform
-  nameWithType: TextSpan.Transform
-- uid: SVGImage.SVG.TextSpan.eElementType
-  name: TextSpan.eElementType
-  href: api/SVGImage.SVG.TextSpan.eElementType.html
-  commentId: T:SVGImage.SVG.TextSpan.eElementType
-  fullName: SVGImage.SVG.TextSpan.eElementType
-  nameWithType: TextSpan.eElementType
-- uid: SVGImage.SVG.TextSpan.eElementType.Tag
+  fullName: SVGImage.SVG.TextSpan2.Transform
+  nameWithType: TextSpan2.Transform
+- uid: SVGImage.SVG.TextSpan2.eElementType
+  name: TextSpan2.eElementType
+  href: api/SVGImage.SVG.TextSpan2.eElementType.html
+  commentId: T:SVGImage.SVG.TextSpan2.eElementType
+  fullName: SVGImage.SVG.TextSpan2.eElementType
+  nameWithType: TextSpan2.eElementType
+- uid: SVGImage.SVG.TextSpan2.eElementType.Tag
   name: Tag
-  href: api/SVGImage.SVG.TextSpan.eElementType.html#SVGImage_SVG_TextSpan_eElementType_Tag
-  commentId: F:SVGImage.SVG.TextSpan.eElementType.Tag
-  fullName: SVGImage.SVG.TextSpan.eElementType.Tag
-  nameWithType: TextSpan.eElementType.Tag
-- uid: SVGImage.SVG.TextSpan.eElementType.Text
+  href: api/SVGImage.SVG.TextSpan2.eElementType.html#SVGImage_SVG_TextSpan2_eElementType_Tag
+  commentId: F:SVGImage.SVG.TextSpan2.eElementType.Tag
+  fullName: SVGImage.SVG.TextSpan2.eElementType.Tag
+  nameWithType: TextSpan2.eElementType.Tag
+- uid: SVGImage.SVG.TextSpan2.eElementType.Text
   name: Text
-  href: api/SVGImage.SVG.TextSpan.eElementType.html#SVGImage_SVG_TextSpan_eElementType_Text
-  commentId: F:SVGImage.SVG.TextSpan.eElementType.Text
-  fullName: SVGImage.SVG.TextSpan.eElementType.Text
-  nameWithType: TextSpan.eElementType.Text
+  href: api/SVGImage.SVG.TextSpan2.eElementType.html#SVGImage_SVG_TextSpan2_eElementType_Text
+  commentId: F:SVGImage.SVG.TextSpan2.eElementType.Text
+  fullName: SVGImage.SVG.TextSpan2.eElementType.Text
+  nameWithType: TextSpan2.eElementType.Text
 - uid: SVGImage.SVG.TextStyle
   name: TextStyle
   href: api/SVGImage.SVG.TextStyle.html
   commentId: T:SVGImage.SVG.TextStyle
   fullName: SVGImage.SVG.TextStyle
   nameWithType: TextStyle
-- uid: SVGImage.SVG.TextStyle.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape)
-  name: TextStyle(SVG, Shape)
-  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle__ctor_SVGImage_SVG_SVG_SVGImage_SVG_Shapes_Shape_
-  commentId: M:SVGImage.SVG.TextStyle.#ctor(SVGImage.SVG.SVG,SVGImage.SVG.Shapes.Shape)
-  name.vb: New(SVG, Shape)
-  fullName: SVGImage.SVG.TextStyle.TextStyle(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape)
-  fullName.vb: SVGImage.SVG.TextStyle.New(SVGImage.SVG.SVG, SVGImage.SVG.Shapes.Shape)
-  nameWithType: TextStyle.TextStyle(SVG, Shape)
-  nameWithType.vb: TextStyle.New(SVG, Shape)
+- uid: SVGImage.SVG.TextStyle.#ctor(SVGImage.SVG.Shapes.Shape)
+  name: TextStyle(Shape)
+  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle__ctor_SVGImage_SVG_Shapes_Shape_
+  commentId: M:SVGImage.SVG.TextStyle.#ctor(SVGImage.SVG.Shapes.Shape)
+  name.vb: New(Shape)
+  fullName: SVGImage.SVG.TextStyle.TextStyle(SVGImage.SVG.Shapes.Shape)
+  fullName.vb: SVGImage.SVG.TextStyle.New(SVGImage.SVG.Shapes.Shape)
+  nameWithType: TextStyle.TextStyle(Shape)
+  nameWithType.vb: TextStyle.New(Shape)
 - uid: SVGImage.SVG.TextStyle.#ctor(SVGImage.SVG.TextStyle)
   name: TextStyle(TextStyle)
   href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle__ctor_SVGImage_SVG_TextStyle_
@@ -4256,19 +6170,6 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.TextStyle.BaseLineShift
   nameWithType: TextStyle.BaseLineShift
-- uid: SVGImage.SVG.TextStyle.Copy(SVGImage.SVG.TextStyle)
-  name: Copy(TextStyle)
-  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_Copy_SVGImage_SVG_TextStyle_
-  commentId: M:SVGImage.SVG.TextStyle.Copy(SVGImage.SVG.TextStyle)
-  fullName: SVGImage.SVG.TextStyle.Copy(SVGImage.SVG.TextStyle)
-  nameWithType: TextStyle.Copy(TextStyle)
-- uid: SVGImage.SVG.TextStyle.Copy*
-  name: Copy
-  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_Copy_
-  commentId: Overload:SVGImage.SVG.TextStyle.Copy
-  isSpec: "True"
-  fullName: SVGImage.SVG.TextStyle.Copy
-  nameWithType: TextStyle.Copy
 - uid: SVGImage.SVG.TextStyle.FontFamily
   name: FontFamily
   href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_FontFamily
@@ -4321,6 +6222,32 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.TextStyle.Fontweight
   nameWithType: TextStyle.Fontweight
+- uid: SVGImage.SVG.TextStyle.GetGlyphTypeface
+  name: GetGlyphTypeface()
+  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_GetGlyphTypeface
+  commentId: M:SVGImage.SVG.TextStyle.GetGlyphTypeface
+  fullName: SVGImage.SVG.TextStyle.GetGlyphTypeface()
+  nameWithType: TextStyle.GetGlyphTypeface()
+- uid: SVGImage.SVG.TextStyle.GetGlyphTypeface*
+  name: GetGlyphTypeface
+  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_GetGlyphTypeface_
+  commentId: Overload:SVGImage.SVG.TextStyle.GetGlyphTypeface
+  isSpec: "True"
+  fullName: SVGImage.SVG.TextStyle.GetGlyphTypeface
+  nameWithType: TextStyle.GetGlyphTypeface
+- uid: SVGImage.SVG.TextStyle.GetTypeface
+  name: GetTypeface()
+  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_GetTypeface
+  commentId: M:SVGImage.SVG.TextStyle.GetTypeface
+  fullName: SVGImage.SVG.TextStyle.GetTypeface()
+  nameWithType: TextStyle.GetTypeface()
+- uid: SVGImage.SVG.TextStyle.GetTypeface*
+  name: GetTypeface
+  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_GetTypeface_
+  commentId: Overload:SVGImage.SVG.TextStyle.GetTypeface
+  isSpec: "True"
+  fullName: SVGImage.SVG.TextStyle.GetTypeface
+  nameWithType: TextStyle.GetTypeface
 - uid: SVGImage.SVG.TextStyle.LetterSpacing
   name: LetterSpacing
   href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_LetterSpacing
@@ -4334,6 +6261,19 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.TextStyle.LetterSpacing
   nameWithType: TextStyle.LetterSpacing
+- uid: SVGImage.SVG.TextStyle.Merge(SVGImage.SVG.TextStyle,SVGImage.SVG.TextStyle)
+  name: Merge(TextStyle, TextStyle)
+  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_Merge_SVGImage_SVG_TextStyle_SVGImage_SVG_TextStyle_
+  commentId: M:SVGImage.SVG.TextStyle.Merge(SVGImage.SVG.TextStyle,SVGImage.SVG.TextStyle)
+  fullName: SVGImage.SVG.TextStyle.Merge(SVGImage.SVG.TextStyle, SVGImage.SVG.TextStyle)
+  nameWithType: TextStyle.Merge(TextStyle, TextStyle)
+- uid: SVGImage.SVG.TextStyle.Merge*
+  name: Merge
+  href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_Merge_
+  commentId: Overload:SVGImage.SVG.TextStyle.Merge
+  isSpec: "True"
+  fullName: SVGImage.SVG.TextStyle.Merge
+  nameWithType: TextStyle.Merge
 - uid: SVGImage.SVG.TextStyle.TextAlignment
   name: TextAlignment
   href: api/SVGImage.SVG.TextStyle.html#SVGImage_SVG_TextStyle_TextAlignment
@@ -4373,6 +6313,156 @@ references:
   isSpec: "True"
   fullName: SVGImage.SVG.TextStyle.WordSpacing
   nameWithType: TextStyle.WordSpacing
+- uid: SVGImage.SVG.Utils
+  name: SVGImage.SVG.Utils
+  href: api/SVGImage.SVG.Utils.html
+  commentId: N:SVGImage.SVG.Utils
+  fullName: SVGImage.SVG.Utils
+  nameWithType: SVGImage.SVG.Utils
+- uid: SVGImage.SVG.Utils.DpiUtil
+  name: DpiUtil
+  href: api/SVGImage.SVG.Utils.DpiUtil.html
+  commentId: T:SVGImage.SVG.Utils.DpiUtil
+  fullName: SVGImage.SVG.Utils.DpiUtil
+  nameWithType: DpiUtil
+- uid: SVGImage.SVG.Utils.DpiUtil.DpiScale
+  name: DpiScale
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_DpiScale
+  commentId: P:SVGImage.SVG.Utils.DpiUtil.DpiScale
+  fullName: SVGImage.SVG.Utils.DpiUtil.DpiScale
+  nameWithType: DpiUtil.DpiScale
+- uid: SVGImage.SVG.Utils.DpiUtil.DpiScale*
+  name: DpiScale
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_DpiScale_
+  commentId: Overload:SVGImage.SVG.Utils.DpiUtil.DpiScale
+  isSpec: "True"
+  fullName: SVGImage.SVG.Utils.DpiUtil.DpiScale
+  nameWithType: DpiUtil.DpiScale
+- uid: SVGImage.SVG.Utils.DpiUtil.DpiX
+  name: DpiX
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_DpiX
+  commentId: P:SVGImage.SVG.Utils.DpiUtil.DpiX
+  fullName: SVGImage.SVG.Utils.DpiUtil.DpiX
+  nameWithType: DpiUtil.DpiX
+- uid: SVGImage.SVG.Utils.DpiUtil.DpiX*
+  name: DpiX
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_DpiX_
+  commentId: Overload:SVGImage.SVG.Utils.DpiUtil.DpiX
+  isSpec: "True"
+  fullName: SVGImage.SVG.Utils.DpiUtil.DpiX
+  nameWithType: DpiUtil.DpiX
+- uid: SVGImage.SVG.Utils.DpiUtil.DpiY
+  name: DpiY
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_DpiY
+  commentId: P:SVGImage.SVG.Utils.DpiUtil.DpiY
+  fullName: SVGImage.SVG.Utils.DpiUtil.DpiY
+  nameWithType: DpiUtil.DpiY
+- uid: SVGImage.SVG.Utils.DpiUtil.DpiY*
+  name: DpiY
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_DpiY_
+  commentId: Overload:SVGImage.SVG.Utils.DpiUtil.DpiY
+  isSpec: "True"
+  fullName: SVGImage.SVG.Utils.DpiUtil.DpiY
+  nameWithType: DpiUtil.DpiY
+- uid: SVGImage.SVG.Utils.DpiUtil.GetPixelsPerDip
+  name: GetPixelsPerDip()
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_GetPixelsPerDip
+  commentId: M:SVGImage.SVG.Utils.DpiUtil.GetPixelsPerDip
+  fullName: SVGImage.SVG.Utils.DpiUtil.GetPixelsPerDip()
+  nameWithType: DpiUtil.GetPixelsPerDip()
+- uid: SVGImage.SVG.Utils.DpiUtil.GetPixelsPerDip*
+  name: GetPixelsPerDip
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_GetPixelsPerDip_
+  commentId: Overload:SVGImage.SVG.Utils.DpiUtil.GetPixelsPerDip
+  isSpec: "True"
+  fullName: SVGImage.SVG.Utils.DpiUtil.GetPixelsPerDip
+  nameWithType: DpiUtil.GetPixelsPerDip
+- uid: SVGImage.SVG.Utils.DpiUtil.PixelsPerDip
+  name: PixelsPerDip
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_PixelsPerDip
+  commentId: P:SVGImage.SVG.Utils.DpiUtil.PixelsPerDip
+  fullName: SVGImage.SVG.Utils.DpiUtil.PixelsPerDip
+  nameWithType: DpiUtil.PixelsPerDip
+- uid: SVGImage.SVG.Utils.DpiUtil.PixelsPerDip*
+  name: PixelsPerDip
+  href: api/SVGImage.SVG.Utils.DpiUtil.html#SVGImage_SVG_Utils_DpiUtil_PixelsPerDip_
+  commentId: Overload:SVGImage.SVG.Utils.DpiUtil.PixelsPerDip
+  isSpec: "True"
+  fullName: SVGImage.SVG.Utils.DpiUtil.PixelsPerDip
+  nameWithType: DpiUtil.PixelsPerDip
+- uid: SVGImage.SVG.Utils.DrawingColorConverter
+  name: DrawingColorConverter
+  href: api/SVGImage.SVG.Utils.DrawingColorConverter.html
+  commentId: T:SVGImage.SVG.Utils.DrawingColorConverter
+  fullName: SVGImage.SVG.Utils.DrawingColorConverter
+  nameWithType: DrawingColorConverter
+- uid: SVGImage.SVG.Utils.DrawingColorConverter.ToGrayscale(System.Windows.Media.Drawing)
+  name: ToGrayscale(Drawing)
+  href: api/SVGImage.SVG.Utils.DrawingColorConverter.html#SVGImage_SVG_Utils_DrawingColorConverter_ToGrayscale_System_Windows_Media_Drawing_
+  commentId: M:SVGImage.SVG.Utils.DrawingColorConverter.ToGrayscale(System.Windows.Media.Drawing)
+  fullName: SVGImage.SVG.Utils.DrawingColorConverter.ToGrayscale(System.Windows.Media.Drawing)
+  nameWithType: DrawingColorConverter.ToGrayscale(Drawing)
+- uid: SVGImage.SVG.Utils.DrawingColorConverter.ToGrayscale*
+  name: ToGrayscale
+  href: api/SVGImage.SVG.Utils.DrawingColorConverter.html#SVGImage_SVG_Utils_DrawingColorConverter_ToGrayscale_
+  commentId: Overload:SVGImage.SVG.Utils.DrawingColorConverter.ToGrayscale
+  isSpec: "True"
+  fullName: SVGImage.SVG.Utils.DrawingColorConverter.ToGrayscale
+  nameWithType: DrawingColorConverter.ToGrayscale
+- uid: SVGImage.SVG.Utils.FontResolver
+  name: FontResolver
+  href: api/SVGImage.SVG.Utils.FontResolver.html
+  commentId: T:SVGImage.SVG.Utils.FontResolver
+  fullName: SVGImage.SVG.Utils.FontResolver
+  nameWithType: FontResolver
+- uid: SVGImage.SVG.Utils.FontResolver.#ctor(System.Int32)
+  name: FontResolver(int)
+  href: api/SVGImage.SVG.Utils.FontResolver.html#SVGImage_SVG_Utils_FontResolver__ctor_System_Int32_
+  commentId: M:SVGImage.SVG.Utils.FontResolver.#ctor(System.Int32)
+  name.vb: New(Integer)
+  fullName: SVGImage.SVG.Utils.FontResolver.FontResolver(int)
+  fullName.vb: SVGImage.SVG.Utils.FontResolver.New(Integer)
+  nameWithType: FontResolver.FontResolver(int)
+  nameWithType.vb: FontResolver.New(Integer)
+- uid: SVGImage.SVG.Utils.FontResolver.#ctor*
+  name: FontResolver
+  href: api/SVGImage.SVG.Utils.FontResolver.html#SVGImage_SVG_Utils_FontResolver__ctor_
+  commentId: Overload:SVGImage.SVG.Utils.FontResolver.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SVGImage.SVG.Utils.FontResolver.FontResolver
+  fullName.vb: SVGImage.SVG.Utils.FontResolver.New
+  nameWithType: FontResolver.FontResolver
+  nameWithType.vb: FontResolver.New
+- uid: SVGImage.SVG.Utils.FontResolver.MaxLevenshteinDistance
+  name: MaxLevenshteinDistance
+  href: api/SVGImage.SVG.Utils.FontResolver.html#SVGImage_SVG_Utils_FontResolver_MaxLevenshteinDistance
+  commentId: P:SVGImage.SVG.Utils.FontResolver.MaxLevenshteinDistance
+  fullName: SVGImage.SVG.Utils.FontResolver.MaxLevenshteinDistance
+  nameWithType: FontResolver.MaxLevenshteinDistance
+- uid: SVGImage.SVG.Utils.FontResolver.MaxLevenshteinDistance*
+  name: MaxLevenshteinDistance
+  href: api/SVGImage.SVG.Utils.FontResolver.html#SVGImage_SVG_Utils_FontResolver_MaxLevenshteinDistance_
+  commentId: Overload:SVGImage.SVG.Utils.FontResolver.MaxLevenshteinDistance
+  isSpec: "True"
+  fullName: SVGImage.SVG.Utils.FontResolver.MaxLevenshteinDistance
+  nameWithType: FontResolver.MaxLevenshteinDistance
+- uid: SVGImage.SVG.Utils.FontResolver.ResolveFontFamily(System.String)
+  name: ResolveFontFamily(string)
+  href: api/SVGImage.SVG.Utils.FontResolver.html#SVGImage_SVG_Utils_FontResolver_ResolveFontFamily_System_String_
+  commentId: M:SVGImage.SVG.Utils.FontResolver.ResolveFontFamily(System.String)
+  name.vb: ResolveFontFamily(String)
+  fullName: SVGImage.SVG.Utils.FontResolver.ResolveFontFamily(string)
+  fullName.vb: SVGImage.SVG.Utils.FontResolver.ResolveFontFamily(String)
+  nameWithType: FontResolver.ResolveFontFamily(string)
+  nameWithType.vb: FontResolver.ResolveFontFamily(String)
+- uid: SVGImage.SVG.Utils.FontResolver.ResolveFontFamily*
+  name: ResolveFontFamily
+  href: api/SVGImage.SVG.Utils.FontResolver.html#SVGImage_SVG_Utils_FontResolver_ResolveFontFamily_
+  commentId: Overload:SVGImage.SVG.Utils.FontResolver.ResolveFontFamily
+  isSpec: "True"
+  fullName: SVGImage.SVG.Utils.FontResolver.ResolveFontFamily
+  nameWithType: FontResolver.ResolveFontFamily
 - uid: SVGImage.SVG.Visibility
   name: Visibility
   href: api/SVGImage.SVG.Visibility.html

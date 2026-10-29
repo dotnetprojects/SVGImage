@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Changelog | SVGImage </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Changelog | SVGImage ">
+      
+      <meta name="description" content="The ongoing history of SVGImage changes, fixes and verification.">
+      <link rel="icon" href="images/logo.svg">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dotnetprojects/SVGImage/blob/master/Docs/Changelog.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="images/logo.svg" alt="SVGImage">
+            SVGImage
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="changelog">Changelog</h1>
+
+<p>Changes to SVGImage are recorded here, newest first. Dates use the project's local calendar (Europe/Berlin).</p>
+<h2 id="unreleased">Unreleased</h2>
+<p>These entries describe the current repository source. They have not been assigned a NuGet release version. Install a published package for its released feature set, or build the current source to use these additions.</p>
+<h3 id="2026-10-29">2026-10-29</h3>
+<h4 id="added">Added</h4>
+<ul>
+<li><strong>Documentation:</strong> redesigned homepage and repository overview, original WPF-rendered gallery, support reference, getting-started guide and this permanent changelog.</li>
+<li><strong>SVG filter graphs:</strong> standalone raster rendering, named <code>in</code> / <code>in2</code> / <code>result</code> connections, <code>SourceGraphic</code> / <code>SourceAlpha</code>, filter regions, primitive subregions, coordinate units and sRGB / linearRGB processing.</li>
+<li><strong>Procedural effects:</strong> four-channel seeded <code>feTurbulence</code> with turbulence/fractal noise, one/two base frequencies, octaves and stitching; <code>feDisplacementMap</code> with unpremultiplied channel selection and bilinear sampling.</li>
+<li><strong>More filter primitives:</strong> <code>feFlood</code>, <code>feOffset</code>, <code>feMerge</code>, <code>feComposite</code>, <code>feColorMatrix</code> (matrix, saturation, hue rotation, luminance-to-alpha), <code>feComponentTransfer</code> (identity, table, discrete, linear, gamma), <code>feBlend</code>, <code>feGaussianBlur</code>, <code>feMorphology</code> and <code>feTile</code>.</li>
+<li><strong>Text on a path:</strong> local <code>textPath</code> references, glyph placement and tangent rotation, percentage <code>startOffset</code>, text anchoring and styled spans.</li>
+<li><strong>SMIL motion:</strong> <code>animateMotion</code> with inline paths or local <code>mpath</code> references, automatic/numeric rotation and <code>keyPoints</code> / <code>keyTimes</code>.</li>
+<li><strong>Nested SVG viewports:</strong> independent percentage contexts, placement and sizing, viewBox mapping, meet/slice/none and overflow clipping. Symbol viewBoxes establish their content's percentage context too.</li>
+<li><strong>Pattern painting:</strong> independent tile/content units, tile positions/dimensions, viewBoxes, transforms, opacity and forward <code>href</code> templates. Patterns are generated per target bounds.</li>
+<li><strong>CSS cascade:</strong> specificity/source order, presentation/inline declarations, <code>!important</code>, CSS-wide keywords, inherited custom properties, nested <code>var()</code> fallbacks and cycle handling.</li>
+<li><strong>CSS selectors:</strong> type, universal, ID, class, compound and attribute presence/equality selectors, <code>:root</code>, descendant/child and adjacent/general sibling relationships.</li>
+<li><strong>CSS animation controls:</strong> multiple animations, shorthand/longhands, positive/negative delays, fractional repeats, directions, fill modes, initial paused state, grouped offsets and per-keyframe easing. Matching transform functions preserve full rotations.</li>
+<li><strong>CSS colors:</strong> RGB/RGBA and HSL/HSLA functions, percentage channels, short/long RGBA hex colors, grey aliases and <code>rebeccapurple</code>.</li>
+<li><strong>Regression coverage:</strong> an optional local resvg test-suite runner for 196 path/point/filter cases and eight turbulence references. Downloaded fixtures remain outside the repository.</li>
+</ul>
+<h4 id="fixed">Fixed</h4>
+<ul>
+<li>Middle/end text anchoring now shifts text before its anchor using advances; <code>textPath</code> respects its own anchor style. The native documentation gallery exposed this existing alignment issue.</li>
+<li>Clip paths unite child silhouettes and honor paths, basic shapes, text, <code>use</code>, inherited <code>clip-rule</code>, transforms, bounding-box units and forward references. Empty clips safely hide their targets.</li>
+<li>Recursive <code>use</code> references stop instead of overflowing the stack. Rendering restores the referenced shape's original parent.</li>
+<li>Paths preserve completed segments before invalid data, accept adjacent single-token arc flags and reflect curve controls. Point lists preserve valid pairs, ignore unmatched final coordinates and safely handle missing data.</li>
+<li>Element opacity is applied after filtering; fill/stroke opacity remains part of <code>SourceGraphic</code>. User-space generators can paint empty groups; tiling preserves input subregions and their transparent pixels.</li>
+<li>Radial focal points use the center's coordinate space. Gradient/pattern opacity is independent per use. Gradient spreading and monotonically clamped stop offsets are honored.</li>
+<li>RGB alpha/channel clamping, quoted local paint/filter references and explicit inheritance of non-inherited CSS properties are handled correctly.</li>
+<li><code>currentColor</code>, gradient-stop styling, transform origin, variables and animation declarations participate in improved CSS handling.</li>
+</ul>
+<h4 id="verification-and-scope">Verification and scope</h4>
+<ul>
+<li>All nine library targets build without warnings/errors. WPF regressions, live clocks and 14 external animation examples pass.</li>
+<li>Selected checks use resvg-test-suite revision <code>d8e0643</code>: 200 reference-image comparisons and four render-only cases with nonportable/undefined expectations. Tolerances account for WPF antialiasing, tiled edges and fractional morphology radii.</li>
+<li>Blur uses separable box convolutions; morphology uses sliding extrema. Raster filters are capped at 2048 pixels on their longest dimension and sample sources at load time. Single matrix/saturation filters can retain vector paints to preserve native clocks.</li>
+<li>A plain-WPF rendering preflight reports an unavailable Windows graphics session before SVG pixel checks run.</li>
+</ul>
+<p>Implementation: <a href="https://github.com/dotnetprojects/SVGImage/commit/49bb532">CSS</a>, <a href="https://github.com/dotnetprojects/SVGImage/commit/2dd3429">geometry, patterns, motion and procedural filters</a>, <a href="https://github.com/dotnetprojects/SVGImage/commit/8d35028">filter graphs, paths and colors</a>.</p>
+<h3 id="2026-10-28">2026-10-28</h3>
+<h4 id="added-1">Added</h4>
+<ul>
+<li><strong>Native animation:</strong> WPF clocks for SMIL transforms, timed visibility/display, opacity, circle/ellipse radii/centers and root viewBox cameras. Numeric starts, repeats, freeze, key times, splines and explicit click starts are supported.</li>
+<li><strong>CSS keyframes:</strong> transform/opacity and stepped sprite-sheet playback, including the extracted CodePen horse example.</li>
+<li><strong>Host controls:</strong> <code>UseAnimations</code>, deterministic <code>SeekAnimations</code> snapshots and <code>TriggerAnimationEvent</code>. Changing the source after initialization respects the animation setting.</li>
+</ul>
+<h4 id="fixed-1">Fixed</h4>
+<ul>
+<li>Symbol/use viewBoxes, dimensions, alignment and aspect ratios now render correctly, fixing facial-part placement in MattHead and PeteyHead.</li>
+<li>Static color-matrix/saturation paint mappings support Flash2Svg exports while preserving native drawing animation.</li>
+</ul>
+<p>Implementation: <a href="https://github.com/dotnetprojects/SVGImage/commit/070e54d">native animation</a>.</p>
+<h2 id="5216--2026-10-28"><a href="https://github.com/dotnetprojects/SVGImage/releases/tag/5.2.16">5.2.16</a> — 2026-10-28</h2>
+<h3 id="added-2">Added</h3>
+<ul>
+<li>Luminance/alpha masks, mask/content units, region clipping, percentages, transforms, styled/forward references, nesting and safe empty/cyclic references. White/alpha masks keep vector drawing where possible; colored luminance masks use composited raster conversion.</li>
+</ul>
+<h3 id="fixed-2">Fixed</h3>
+<ul>
+<li>The SVG from <a href="https://github.com/dotnetprojects/SVGImage/issues/118">#118</a> renders with its intended mask. Its fixture checks 93,767 flat interior pixels against Chromium.</li>
+</ul>
+<p>Implementation: <a href="https://github.com/dotnetprojects/SVGImage/commit/6494ad8">SVG masks</a>.</p>
+<h2 id="5215--2026-10-28"><a href="https://github.com/dotnetprojects/SVGImage/releases/tag/5.2.15">5.2.15</a> — 2026-10-28</h2>
+<h3 id="added-3">Added</h3>
+<ul>
+<li><code>IsGrayscale</code> and <code>DrawingColorConverter.ToGrayscale</code> cover solid/gradient brushes, strokes, groups and bitmaps. Frozen drawings remain shareable. Addresses <a href="https://github.com/dotnetprojects/SVGImage/issues/99">#99</a>.</li>
+</ul>
+<h3 id="fixed-3">Fixed</h3>
+<ul>
+<li>RGB/percentage RGB gradient stops are parsed correctly. Addresses <a href="https://github.com/dotnetprojects/SVGImage/issues/116">#116</a>.</li>
+<li>SVG button content has an intrinsic desired size without explicit dimensions. Addresses <a href="https://github.com/dotnetprojects/SVGImage/issues/106">#106</a>.</li>
+</ul>
+<p>Implementation: <a href="https://github.com/dotnetprojects/SVGImage/commit/0844bf9">RGB gradients</a>, <a href="https://github.com/dotnetprojects/SVGImage/commit/f31af63">button sizing</a>, <a href="https://github.com/dotnetprojects/SVGImage/commit/434d2fc">grayscale</a>.</p>
+<h2 id="5214--2026-10-28"><a href="https://github.com/dotnetprojects/SVGImage/releases/tag/5.2.14">5.2.14</a> — 2026-10-28</h2>
+<ul>
+<li>Incorporated the upstream duplicate-font-name correction from <a href="https://github.com/dotnetprojects/SVGImage/pull/121">#121</a>, originally authored in March 2026.</li>
+</ul>
+<h2 id="earlier-history">Earlier history</h2>
+<p>For earlier changes, see the <a href="https://github.com/dotnetprojects/SVGImage/tags">release tags</a> and <a href="https://github.com/dotnetprojects/SVGImage/commits/master/">commit history</a>. Historical versions are not reconstructed as release notes here.</p>
+<h2 id="maintaining-this-changelog">Maintaining this changelog</h2>
+<p>Add user-visible changes under <strong>Unreleased</strong>, with a dated subsection and issue/commit links. Describe resulting behavior, compatibility changes and practical limits. On package publication, move entries to a versioned release heading with its date and start a fresh Unreleased section. This file is the single source; the documentation site includes it directly.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dotnetprojects/SVGImage/blob/master/Docs/Changelog.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="svg-footer"><span>SVGImage · Native SVG for WPF</span><span>MIT licensed · <a href="https://github.com/dotnetprojects/SVGImage">Built in the open</a> · © 2020–2026 DotNetProjects</span></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

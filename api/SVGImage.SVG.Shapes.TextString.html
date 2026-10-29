@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Class TextString | SVGImage </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class TextString | SVGImage ">
+      
+      <meta name="description" content="The leaf of the Text tree">
+      <link rel="icon" href="../images/logo.svg">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dotnetprojects/SVGImage/new/master/apiSpec/new?filename=SVGImage_SVG_Shapes_TextString.md&amp;value=---%0Auid%3A%20SVGImage.SVG.Shapes.TextString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SVGImage">
+            SVGImage
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SVGImage.SVG.Shapes.TextString">
+
+
+
+  <h1 id="SVGImage_SVG_Shapes_TextString" data-uid="SVGImage.SVG.Shapes.TextString" class="text-break">
+Class TextString  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SVGImage.html">SVGImage</a>.<a class="xref" href="SVGImage.SVG.html">SVG</a>.<a class="xref" href="SVGImage.SVG.Shapes.html">Shapes</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>DotNetProjects.SVGImage.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>The leaf of the Text tree</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TextString : ITextChild, ITextNode</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">TextString</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="SVGImage.SVG.Shapes.ITextChild.html">ITextChild</a></div>
+      <div><a class="xref" href="SVGImage.SVG.Shapes.ITextNode.html">ITextNode</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="SVGImage_SVG_Shapes_TextString__ctor_" data-uid="SVGImage.SVG.Shapes.TextString.#ctor*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString__ctor_SVGImage_SVG_Shapes_Shape_System_String_" data-uid="SVGImage.SVG.Shapes.TextString.#ctor(SVGImage.SVG.Shapes.Shape,System.String)">
+  TextString(Shape, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TextString(Shape parent, string text)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>parent</code> <a class="xref" href="SVGImage.SVG.Shapes.Shape.html">Shape</a></dt>
+    <dd></dd>
+    <dt><code>text</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_Characters_" data-uid="SVGImage.SVG.Shapes.TextString.Characters*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_Characters" data-uid="SVGImage.SVG.Shapes.TextString.Characters">
+  Characters
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Represents the layout info for the string of text owned by this TextString.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout[] Characters { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_FirstCharacter_" data-uid="SVGImage.SVG.Shapes.TextString.FirstCharacter*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_FirstCharacter" data-uid="SVGImage.SVG.Shapes.TextString.FirstCharacter">
+  FirstCharacter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout FirstCharacter { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_Index_" data-uid="SVGImage.SVG.Shapes.TextString.Index*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_Index" data-uid="SVGImage.SVG.Shapes.TextString.Index">
+  Index
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The index of this TextString in the root TextShape. This is set by the <a class="xref" href="SVGImage.SVG.Shapes.TextRender.html">TextRender</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Index { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_LastCharacter_" data-uid="SVGImage.SVG.Shapes.TextString.LastCharacter*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_LastCharacter" data-uid="SVGImage.SVG.Shapes.TextString.LastCharacter">
+  LastCharacter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout LastCharacter { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_Length_" data-uid="SVGImage.SVG.Shapes.TextString.Length*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_Length" data-uid="SVGImage.SVG.Shapes.TextString.Length">
+  Length
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Length { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_Parent_" data-uid="SVGImage.SVG.Shapes.TextString.Parent*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_Parent" data-uid="SVGImage.SVG.Shapes.TextString.Parent">
+  Parent
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Shape Parent { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.Shape.html">Shape</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_Text_" data-uid="SVGImage.SVG.Shapes.TextString.Text*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_Text" data-uid="SVGImage.SVG.Shapes.TextString.Text">
+  Text
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Text { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_TextStyle_" data-uid="SVGImage.SVG.Shapes.TextString.TextStyle*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_TextStyle" data-uid="SVGImage.SVG.Shapes.TextString.TextStyle">
+  TextStyle
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TextStyle TextStyle { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.TextStyle.html">TextStyle</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_GetCharacters_" data-uid="SVGImage.SVG.Shapes.TextString.GetCharacters*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_GetCharacters" data-uid="SVGImage.SVG.Shapes.TextString.GetCharacters">
+  GetCharacters()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout[] GetCharacters()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_GetFirstCharacter_" data-uid="SVGImage.SVG.Shapes.TextString.GetFirstCharacter*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_GetFirstCharacter" data-uid="SVGImage.SVG.Shapes.TextString.GetFirstCharacter">
+  GetFirstCharacter()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout GetFirstCharacter()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_GetLastCharacter_" data-uid="SVGImage.SVG.Shapes.TextString.GetLastCharacter*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_GetLastCharacter" data-uid="SVGImage.SVG.Shapes.TextString.GetLastCharacter">
+  GetLastCharacter()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CharacterLayout GetLastCharacter()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.CharacterLayout.html">CharacterLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_GetLength_" data-uid="SVGImage.SVG.Shapes.TextString.GetLength*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_GetLength" data-uid="SVGImage.SVG.Shapes.TextString.GetLength">
+  GetLength()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetLength()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_TextString_GetText_" data-uid="SVGImage.SVG.Shapes.TextString.GetText*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_TextString_GetText" data-uid="SVGImage.SVG.Shapes.TextString.GetText">
+  GetText()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetText()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/TextString.cs/#L10" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="svg-footer"><span>SVGImage · Native SVG for WPF</span><span>MIT licensed · <a href="https://github.com/dotnetprojects/SVGImage">Built in the open</a> · © 2020–2026 DotNetProjects</span></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

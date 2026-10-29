@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Class LengthPercentageOrNumberList | SVGImage </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class LengthPercentageOrNumberList | SVGImage ">
+      
+      
+      <link rel="icon" href="../images/logo.svg">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dotnetprojects/SVGImage/new/master/apiSpec/new?filename=SVGImage_SVG_Shapes_LengthPercentageOrNumberList.md&amp;value=---%0Auid%3A%20SVGImage.SVG.Shapes.LengthPercentageOrNumberList%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SVGImage">
+            SVGImage
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList">
+
+
+
+  <h1 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList" class="text-break">
+Class LengthPercentageOrNumberList  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SVGImage.html">SVGImage</a>.<a class="xref" href="SVGImage.SVG.html">SVG</a>.<a class="xref" href="SVGImage.SVG.Shapes.html">Shapes</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>DotNetProjects.SVGImage.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class LengthPercentageOrNumberList : IList&lt;LengthPercentageOrNumber&gt;, ICollection&lt;LengthPercentageOrNumber&gt;, IEnumerable&lt;LengthPercentageOrNumber&gt;, IEnumerable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">LengthPercentageOrNumberList</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList__ctor_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.#ctor*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList__ctor_SVGImage_SVG_Shapes_Shape_System_String_SVGImage_SVG_Shapes_LengthOrientation_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.#ctor(SVGImage.SVG.Shapes.Shape,System.String,SVGImage.SVG.Shapes.LengthOrientation)">
+  LengthPercentageOrNumberList(Shape, string, LengthOrientation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new instance of LengthPercentageOrNumberList with the specified owner and orientation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LengthPercentageOrNumberList(Shape owner, string value, LengthOrientation orientation = LengthOrientation.None)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>owner</code> <a class="xref" href="SVGImage.SVG.Shapes.Shape.html">Shape</a></dt>
+    <dd><p>The element that the length list is associated with.</p>
+</dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A string representation of a length list</p>
+</dd>
+    <dt><code>orientation</code> <a class="xref" href="SVGImage.SVG.Shapes.LengthOrientation.html">LengthOrientation</a></dt>
+    <dd><p>Used to establish the context of the lengths.
+Should be <a class="xref" href="SVGImage.SVG.Shapes.LengthOrientation.html#SVGImage_SVG_Shapes_LengthOrientation_Horizontal">Horizontal</a> for inherntly horizontal values like 'x' and 'dx'.
+Should be <a class="xref" href="SVGImage.SVG.Shapes.LengthOrientation.html#SVGImage_SVG_Shapes_LengthOrientation_Vertical">Vertical</a> for inherntly vertical values like 'y' and 'dy'.
+Should be <a class="xref" href="SVGImage.SVG.Shapes.LengthOrientation.html#SVGImage_SVG_Shapes_LengthOrientation_None">None</a> for other values.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Count_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Count*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Count" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Count">
+  Count
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of elements contained in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of elements contained in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_IsReadOnly_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IsReadOnly*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_IsReadOnly" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IsReadOnly">
+  IsReadOnly
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a> is read-only.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsReadOnly { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a> is read-only; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Item_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Item*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Item_System_Int32_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Item(System.Int32)">
+  this[int]
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the element at the specified index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LengthPercentageOrNumber this[int index] { get; set; }</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The zero-based index of the element to get or set.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a></dt>
+    <dd><p>The element at the specified index.</p>
+</dd>
+  </dl>
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">index</code> is not a valid index in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p>The property is set and the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a> is read-only.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Add_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Add*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Add_SVGImage_SVG_Shapes_LengthPercentageOrNumber_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Add(SVGImage.SVG.Shapes.LengthPercentageOrNumber)">
+  Add(LengthPercentageOrNumber)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds an item to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Add(LengthPercentageOrNumber item)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>item</code> <a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a></dt>
+    <dd><p>The object to add to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a> is read-only.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Clear_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Clear*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Clear" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Clear">
+  Clear()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes all items from the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a> is read-only.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Contains_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Contains*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Contains_SVGImage_SVG_Shapes_LengthPercentageOrNumber_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Contains(SVGImage.SVG.Shapes.LengthPercentageOrNumber)">
+  Contains(LengthPercentageOrNumber)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a> contains a specific value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(LengthPercentageOrNumber item)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>item</code> <a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a></dt>
+    <dd><p>The object to locate in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">item</code> is found in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_CopyTo_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.CopyTo*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_CopyTo_SVGImage_SVG_Shapes_LengthPercentageOrNumber___System_Int32_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.CopyTo(SVGImage.SVG.Shapes.LengthPercentageOrNumber[],System.Int32)">
+  CopyTo(LengthPercentageOrNumber[], int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies the elements of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a> to an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.array">Array</a>, starting at a particular <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.array">Array</a> index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyTo(LengthPercentageOrNumber[] array, int arrayIndex)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>array</code> <a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a>[]</dt>
+    <dd><p>The one-dimensional <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.array">Array</a> that is the destination of the elements copied from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>. The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.array">Array</a> must have zero-based indexing.</p>
+</dd>
+    <dt><code>arrayIndex</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The zero-based index in <code class="paramref">array</code> at which copying begins.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></dt>
+    <dd><p><code class="paramref">array</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">arrayIndex</code> is less than 0.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>The number of elements in the source <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a> is greater than the available space from <code class="paramref">arrayIndex</code> to the end of the destination <code class="paramref">array</code>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Empty_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Empty*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Empty_SVGImage_SVG_Shapes_Shape_SVGImage_SVG_Shapes_LengthOrientation_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Empty(SVGImage.SVG.Shapes.Shape,SVGImage.SVG.Shapes.LengthOrientation)">
+  Empty(Shape, LengthOrientation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static LengthPercentageOrNumberList Empty(Shape owner, LengthOrientation orientation = LengthOrientation.None)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>owner</code> <a class="xref" href="SVGImage.SVG.Shapes.Shape.html">Shape</a></dt>
+    <dd></dd>
+    <dt><code>orientation</code> <a class="xref" href="SVGImage.SVG.Shapes.LengthOrientation.html">LengthOrientation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.html">LengthPercentageOrNumberList</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_GetEnumerator_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.GetEnumerator*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_GetEnumerator" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.GetEnumerator">
+  GetEnumerator()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerator&lt;LengthPercentageOrNumber&gt; GetEnumerator()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1">IEnumerator</a>&lt;<a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a>&gt;</dt>
+    <dd><p>An enumerator that can be used to iterate through the collection.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_IndexOf_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IndexOf*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_IndexOf_SVGImage_SVG_Shapes_LengthPercentageOrNumber_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.IndexOf(SVGImage.SVG.Shapes.LengthPercentageOrNumber)">
+  IndexOf(LengthPercentageOrNumber)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines the index of a specific item in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int IndexOf(LengthPercentageOrNumber item)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>item</code> <a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a></dt>
+    <dd><p>The object to locate in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The index of <code class="paramref">item</code> if found in the list; otherwise, -1.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Insert_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Insert*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Insert_System_Int32_SVGImage_SVG_Shapes_LengthPercentageOrNumber_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Insert(System.Int32,SVGImage.SVG.Shapes.LengthPercentageOrNumber)">
+  Insert(int, LengthPercentageOrNumber)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inserts an item to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a> at the specified index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Insert(int index, LengthPercentageOrNumber item)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The zero-based index at which <code class="paramref">item</code> should be inserted.</p>
+</dd>
+    <dt><code>item</code> <a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a></dt>
+    <dd><p>The object to insert into the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">index</code> is not a valid index in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a> is read-only.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Remove_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Remove*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_Remove_SVGImage_SVG_Shapes_LengthPercentageOrNumber_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.Remove(SVGImage.SVG.Shapes.LengthPercentageOrNumber)">
+  Remove(LengthPercentageOrNumber)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes the first occurrence of a specific object from the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Remove(LengthPercentageOrNumber item)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>item</code> <a class="xref" href="SVGImage.SVG.Shapes.LengthPercentageOrNumber.html">LengthPercentageOrNumber</a></dt>
+    <dd><p>The object to remove from the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">item</code> was successfully removed from the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>. This method also returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> if <code class="paramref">item</code> is not found in the original <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a> is read-only.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_RemoveAt_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.RemoveAt*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_LengthPercentageOrNumberList_RemoveAt_System_Int32_" data-uid="SVGImage.SVG.Shapes.LengthPercentageOrNumberList.RemoveAt(System.Int32)">
+  RemoveAt(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L105"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a> item at the specified index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveAt(int index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The zero-based index of the item to remove.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p><code class="paramref">index</code> is not a valid index in the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a>.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a> is read-only.</p>
+</dd>
+  </dl>
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/LengthPercentageOrNumberList.cs/#L10" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="svg-footer"><span>SVGImage · Native SVG for WPF</span><span>MIT licensed · <a href="https://github.com/dotnetprojects/SVGImage">Built in the open</a> · © 2020–2026 DotNetProjects</span></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

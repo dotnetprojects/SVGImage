@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Animated SVGs | SVGImage </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Animated SVGs | SVGImage ">
+      
+      
+      <link rel="icon" href="images/logo.svg">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/dotnetprojects/SVGImage/blob/master/Docs/Animations.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="images/logo.svg" alt="SVGImage">
+            SVGImage
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="animated-svgs">Animated SVGs</h1>
+
+<p><code>SVGImage</code> plays supported SVG animations using native WPF animation clocks:</p>
+<pre><code class="lang-xml">&lt;svg:SVGImage UriSource=&quot;animation.svg&quot;
+              UseAnimations=&quot;True&quot;
+              SizeType=&quot;ViewBoxToSizeNoStretch&quot; /&gt;
+</code></pre>
+<p><code>UseAnimations</code> defaults to true. It also works when the source is changed after initialization. Set it to false to render the static document. With <code>SVGRender</code>, opt in before loading:</p>
+<pre><code class="lang-csharp">var renderer = new SVGImage.SVG.SVGRender { UseAnimations = true };
+DrawingGroup drawing = renderer.LoadDrawing(filename);
+</code></pre>
+<p>Supported timing includes numeric <code>begin</code> offsets, finite or indefinite <code>repeatCount</code>, <code>fill=&quot;freeze&quot;</code>, explicit <code>keyTimes</code>, linear/discrete interpolation and <code>keySplines</code>. Motion animation supports inline paths, local <code>mpath</code> references, path tangents (<code>auto</code>/<code>auto-reverse</code>), numeric rotation and <code>keyPoints</code> with <code>keyTimes</code>. Supported SMIL properties are <code>animateTransform</code> translation, scale, rotation and skew, timed <code>display</code>/<code>visibility</code>, opacity, circle/ellipse radii and center coordinates, and root <code>viewBox</code> camera movement. Additive transforms compose in SVG order. Animations can target their parent or a local <code>href</code>/<code>xlink:href</code> reference.</p>
+<p>CSS <code>@keyframes</code> supports transform and opacity animations, grouped offsets, multiple animations, shorthand and longhand declarations, positive/negative delays, fractional/indefinite iterations, reverse/alternate directions, fill modes and an initially paused state. Timing functions include the ease presets, cubic-bezier curves and the steps jump modes. Matching transform functions interpolate their parameters, preserving full rotations. Static/animated transforms support <code>transform-origin</code> with view-box or fill-box reference bounds. CSS must be included in a <code>&lt;style&gt;</code> element in the SVG; an HTML page's external styles are not automatically loaded. Styles may occur after their targets. Percentage translations, general transform-matrix decomposition and interactive play-state changes are not implemented.</p>
+<p><code>symbol</code>/<code>use</code> rendering honors symbol viewBoxes, use viewport dimensions, alignment and aspect ratio. This is needed for Flash2Svg exports that assemble facial parts from symbols. Static matrix/saturation color filters used by these exports are applied to vector paint colors. Raster turbulence/displacement filter chains are described in <a href="Rendering.html">Rendering.md</a>; animated filter parameters are not implemented.</p>
+<p>For deterministic snapshots or exports, stop playback at an exact time:</p>
+<pre><code class="lang-csharp">renderer.SeekAnimations(TimeSpan.FromSeconds(25));
+// Render drawing into a RenderTargetBitmap, for example.
+</code></pre>
+<p><code>SeekAnimations</code> stops playback and evaluates the existing drawing; load/recreate the drawing to restart its native clocks. The same method is available on the control. For SMIL click-start timing, explicitly forward an event:</p>
+<pre><code class="lang-csharp">svgControl.TriggerAnimationEvent(&quot;playButton&quot;, &quot;click&quot;);
+// Or renderer.TriggerAnimationEvent(&quot;playButton&quot;, &quot;click&quot;).
+</code></pre>
+<p>This starts tracks whose <code>begin</code> names <code>playButton.click</code>, including numeric offsets. The control does not infer SVG element hit targets; the host decides which element/event to forward. Numeric event timing can also be used with snapshots.</p>
+<p><code>SVGRender.AnimationWarnings</code> reports unsupported animated attributes and malformed SMIL tracks. Flash2Svg's empty final spline segment is treated as linear. JavaScript, HTML audio/foreignObject playback, path morphing, syncbase timing, animated masks and CSS layout/background animations are not implemented. In particular, the LoveDota example's visual camera/character timeline renders, while its JavaScript-triggered embedded audio is not played.</p>
+<p>The regression suite includes synthetic timing, sprite-sheet, live-clock, symbol viewport, camera and color-filter checks. Downloaded examples are deliberately kept outside this repository. To additionally validate local copies of the Flash2Svg examples and extracted CodePen horse, set <code>SVG_ANIMATION_EXAMPLES</code> to a folder containing <code>Flash2Svg.wiki/img/*.svg</code> and <code>horse.svg</code>, then run the regression runner. The extra checks load every file, trigger click-start timelines where present and require a changed rendered frame.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/dotnetprojects/SVGImage/blob/master/Docs/Animations.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="svg-footer"><span>SVGImage · Native SVG for WPF</span><span>MIT licensed · <a href="https://github.com/dotnetprojects/SVGImage">Built in the open</a> · © 2020–2026 DotNetProjects</span></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

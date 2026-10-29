@@ -1,14 +1,13 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Class Shape
- | SVGImage Documentation </title>
+      <title>Class Shape | SVGImage </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class Shape
- | SVGImage Documentation ">
+      <meta name="title" content="Class Shape | SVGImage ">
       
-      <link rel="icon" href="../images/dotnetprojects.png">
+      
+      <link rel="icon" href="../images/logo.svg">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
@@ -30,22 +29,22 @@
       <meta name="loc:changeTheme" content="Change theme">
       <meta name="loc:copy" content="Copy">
       <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-
-  <script type="module" src="./../public/docfx.min.js"></script>
-
-  <script>
-    const theme = localStorage.getItem('theme') || 'auto'
-    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
-  </script>
-
 
   <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
     <header class="bg-body border-bottom">
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../images/dotnetprojects.png" alt="SVGImage">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SVGImage">
             SVGImage
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +54,7 @@
             <div id="navbar">
               <form class="search" role="search" id="search">
                 <i class="bi bi-search"></i>
-                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
@@ -78,7 +77,7 @@
 
       <div class="content">
         <div class="actionbar">
-          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
             <i class="bi bi-list"></i>
           </button>
 
@@ -90,8 +89,7 @@
 
 
   <h1 id="SVGImage_SVG_Shapes_Shape" data-uid="SVGImage.SVG.Shapes.Shape" class="text-break">
-    Class Shape
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L12"><i class="bi bi-code-slash"></i></a>
+Class Shape  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -133,13 +131,14 @@
       <div><a class="xref" href="SVGImage.SVG.Shapes.PolygonShape.html">PolygonShape</a></div>
       <div><a class="xref" href="SVGImage.SVG.Shapes.PolylineShape.html">PolylineShape</a></div>
       <div><a class="xref" href="SVGImage.SVG.Shapes.RectangleShape.html">RectangleShape</a></div>
+      <div><a class="xref" href="SVGImage.SVG.Shapes.TextShapeBase.html">TextShapeBase</a></div>
       <div><a class="xref" href="SVGImage.SVG.Shapes.UseShape.html">UseShape</a></div>
-      <div><a class="xref" href="SVGImage.SVG.TextShape.html">TextShape</a></div>
-      <div><a class="xref" href="SVGImage.SVG.TextSpan.html">TextSpan</a></div>
+      <div><a class="xref" href="SVGImage.SVG.TextShape2.html">TextShape2</a></div>
+      <div><a class="xref" href="SVGImage.SVG.TextSpan2.html">TextSpan2</a></div>
     </dd>
   </dl>
 
-  <dl class="typelist derived">
+  <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
     <div>
@@ -152,9 +151,6 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
-    </div>
-    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
     </div>
     <div>
@@ -162,6 +158,9 @@
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
   </dd></dl>
 
@@ -178,7 +177,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape__ctor_SVGImage_SVG_SVG_System_Collections_Generic_List_SVGImage_SVG_StyleItem__SVGImage_SVG_Shapes_Shape_" data-uid="SVGImage.SVG.Shapes.Shape.#ctor(SVGImage.SVG.SVG,System.Collections.Generic.List{SVGImage.SVG.StyleItem},SVGImage.SVG.Shapes.Shape)">
   Shape(SVG, List&lt;StyleItem&gt;, Shape)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L102"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -213,7 +212,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape__ctor_SVGImage_SVG_SVG_System_Xml_XmlNode_" data-uid="SVGImage.SVG.Shapes.Shape.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode)">
   Shape(SVG, XmlNode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L56"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -246,7 +245,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape__ctor_SVGImage_SVG_SVG_System_Xml_XmlNode_SVGImage_SVG_Shapes_Shape_" data-uid="SVGImage.SVG.Shapes.Shape.#ctor(SVGImage.SVG.SVG,System.Xml.XmlNode,SVGImage.SVG.Shapes.Shape)">
   Shape(SVG, XmlNode, Shape)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L71"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -282,39 +281,9 @@
 
 
 
-  <h3 id="SVGImage_SVG_Shapes_Shape_Display" data-uid="SVGImage.SVG.Shapes.Shape.Display">
-  Display
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L26"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Display</code></pre>
-  </div>
-
-
-
-
-  <h4 class="section">Field Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
   <h3 id="SVGImage_SVG_Shapes_Shape_m_fill" data-uid="SVGImage.SVG.Shapes.Shape.m_fill">
   m_fill
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L23"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -344,7 +313,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_m_localStyle" data-uid="SVGImage.SVG.Shapes.Shape.m_localStyle">
   m_localStyle
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L29"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -374,7 +343,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_m_stroke" data-uid="SVGImage.SVG.Shapes.Shape.m_stroke">
   m_stroke
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L25"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -404,7 +373,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_m_textstyle" data-uid="SVGImage.SVG.Shapes.Shape.m_textstyle">
   m_textstyle
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L27"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -435,18 +404,49 @@
 </h2>
 
 
-  <a id="SVGImage_SVG_Shapes_Shape_Fill_" data-uid="SVGImage.SVG.Shapes.Shape.Fill*"></a>
+  <a id="SVGImage_SVG_Shapes_Shape_Display_" data-uid="SVGImage.SVG.Shapes.Shape.Display*"></a>
 
-  <h3 id="SVGImage_SVG_Shapes_Shape_Fill" data-uid="SVGImage.SVG.Shapes.Shape.Fill">
-  Fill
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  <h3 id="SVGImage_SVG_Shapes_Shape_Display" data-uid="SVGImage.SVG.Shapes.Shape.Display">
+  Display
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L50"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Fill Fill { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool Display { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_Shape_Fill_" data-uid="SVGImage.SVG.Shapes.Shape.Fill*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_Shape_Fill" data-uid="SVGImage.SVG.Shapes.Shape.Fill">
+  Fill
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Fill Fill { get; set; }</code></pre>
   </div>
 
 
@@ -470,7 +470,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_Opacity" data-uid="SVGImage.SVG.Shapes.Shape.Opacity">
   Opacity
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L210"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -501,7 +501,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_PaintServerKey" data-uid="SVGImage.SVG.Shapes.Shape.PaintServerKey">
   PaintServerKey
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L126"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -532,7 +532,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_Parent" data-uid="SVGImage.SVG.Shapes.Shape.Parent">
   Parent
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L219"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -563,7 +563,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_RequiredExtensions" data-uid="SVGImage.SVG.Shapes.Shape.RequiredExtensions">
   RequiredExtensions
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L132"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -594,7 +594,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_RequiredFeatures" data-uid="SVGImage.SVG.Shapes.Shape.RequiredFeatures">
   RequiredFeatures
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L134"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -625,14 +625,14 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_Stroke" data-uid="SVGImage.SVG.Shapes.Shape.Stroke">
   Stroke
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L153"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Stroke Stroke { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Stroke Stroke { get; set; }</code></pre>
   </div>
 
 
@@ -652,11 +652,42 @@
 
 
 
+  <a id="SVGImage_SVG_Shapes_Shape_Svg_" data-uid="SVGImage.SVG.Shapes.Shape.Svg*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_Shape_Svg" data-uid="SVGImage.SVG.Shapes.Shape.Svg">
+  Svg
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SVG Svg { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.SVG.html">SVG</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="SVGImage_SVG_Shapes_Shape_TextStyle_" data-uid="SVGImage.SVG.Shapes.Shape.TextStyle*"></a>
 
   <h3 id="SVGImage_SVG_Shapes_Shape_TextStyle" data-uid="SVGImage.SVG.Shapes.Shape.TextStyle">
   TextStyle
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L187"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -687,7 +718,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_Transform" data-uid="SVGImage.SVG.Shapes.Shape.Transform">
   Transform
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L136"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L216"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -718,7 +749,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_Visibility" data-uid="SVGImage.SVG.Shapes.Shape.Visibility">
   Visibility
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L136"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -749,11 +780,73 @@
 </h2>
 
 
+  <a id="SVGImage_SVG_Shapes_Shape_DefaultFill_" data-uid="SVGImage.SVG.Shapes.Shape.DefaultFill*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_Shape_DefaultFill" data-uid="SVGImage.SVG.Shapes.Shape.DefaultFill">
+  DefaultFill()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L159"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual Fill DefaultFill()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Fill.html">Fill</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_Shape_DefaultStroke_" data-uid="SVGImage.SVG.Shapes.Shape.DefaultStroke*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_Shape_DefaultStroke" data-uid="SVGImage.SVG.Shapes.Shape.DefaultStroke">
+  DefaultStroke()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual Stroke DefaultStroke()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Stroke.html">Stroke</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="SVGImage_SVG_Shapes_Shape_GetFill_" data-uid="SVGImage.SVG.Shapes.Shape.GetFill*"></a>
 
   <h3 id="SVGImage_SVG_Shapes_Shape_GetFill_SVGImage_SVG_SVG_" data-uid="SVGImage.SVG.Shapes.Shape.GetFill(SVGImage.SVG.SVG)">
   GetFill(SVG)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L384"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L527"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -785,11 +878,73 @@
 
 
 
+  <a id="SVGImage_SVG_Shapes_Shape_GetParentFill_" data-uid="SVGImage.SVG.Shapes.Shape.GetParentFill*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_Shape_GetParentFill" data-uid="SVGImage.SVG.Shapes.Shape.GetParentFill">
+  GetParentFill()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L164"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual Fill GetParentFill()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Fill.html">Fill</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_Shapes_Shape_GetRoot_" data-uid="SVGImage.SVG.Shapes.Shape.GetRoot*"></a>
+
+  <h3 id="SVGImage_SVG_Shapes_Shape_GetRoot" data-uid="SVGImage.SVG.Shapes.Shape.GetRoot">
+  GetRoot()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Shape GetRoot()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="SVGImage.SVG.Shapes.Shape.html">Shape</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
   <a id="SVGImage_SVG_Shapes_Shape_GetTextStyle_" data-uid="SVGImage.SVG.Shapes.Shape.GetTextStyle*"></a>
 
   <h3 id="SVGImage_SVG_Shapes_Shape_GetTextStyle_SVGImage_SVG_SVG_" data-uid="SVGImage.SVG.Shapes.Shape.GetTextStyle(SVGImage.SVG.SVG)">
   GetTextStyle(SVG)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L390"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L537"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -825,7 +980,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_Parse_SVGImage_SVG_SVG_System_String_System_String_" data-uid="SVGImage.SVG.Shapes.Shape.Parse(SVGImage.SVG.SVG,System.String,System.String)">
   Parse(SVG, string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L243"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -860,7 +1015,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_ParseAtStart_SVGImage_SVG_SVG_System_Xml_XmlNode_" data-uid="SVGImage.SVG.Shapes.Shape.ParseAtStart(SVGImage.SVG.SVG,System.Xml.XmlNode)">
   ParseAtStart(SVG, XmlNode)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L142"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L224"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -893,7 +1048,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_ParseLocalStyle_SVGImage_SVG_SVG_" data-uid="SVGImage.SVG.Shapes.Shape.ParseLocalStyle(SVGImage.SVG.SVG)">
   ParseLocalStyle(SVG)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L226"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -924,7 +1079,7 @@
 
   <h3 id="SVGImage_SVG_Shapes_Shape_ToString" data-uid="SVGImage.SVG.Shapes.Shape.ToString">
   ToString()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L396"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L547"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns a string that represents the current object.</p>
@@ -957,7 +1112,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/Shapes/Shape.cs/#L12" class="edit-link">Edit this page</a>
+          <a href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/Shapes/Shape.cs/#L20" class="edit-link">Edit this page</a>
         </div>
 
 
@@ -973,7 +1128,7 @@
     <footer class="border-top text-secondary">
       <div class="container-xxl">
         <div class="flex-fill">
-          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2020 - 2023 DotNetProjects</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+          <div class="svg-footer"><span>SVGImage · Native SVG for WPF</span><span>MIT licensed · <a href="https://github.com/dotnetprojects/SVGImage">Built in the open</a> · © 2020–2026 DotNetProjects</span></div>
         </div>
       </div>
     </footer>

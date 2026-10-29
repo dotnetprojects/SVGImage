@@ -1,14 +1,13 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Class SVGRender
- | SVGImage Documentation </title>
+      <title>Class SVGRender | SVGImage </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class SVGRender
- | SVGImage Documentation ">
+      <meta name="title" content="Class SVGRender | SVGImage ">
       
-      <link rel="icon" href="../images/dotnetprojects.png">
+      <meta name="description" content="This is the class that creates the WPF Drawing object based on the information from the  class.">
+      <link rel="icon" href="../images/logo.svg">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
@@ -30,22 +29,22 @@
       <meta name="loc:changeTheme" content="Change theme">
       <meta name="loc:copy" content="Copy">
       <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-
-  <script type="module" src="./../public/docfx.min.js"></script>
-
-  <script>
-    const theme = localStorage.getItem('theme') || 'auto'
-    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
-  </script>
-
 
   <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
     <header class="bg-body border-bottom">
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../images/dotnetprojects.png" alt="SVGImage">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SVGImage">
             SVGImage
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +54,7 @@
             <div id="navbar">
               <form class="search" role="search" id="search">
                 <i class="bi bi-search"></i>
-                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
@@ -78,7 +77,7 @@
 
       <div class="content">
         <div class="actionbar">
-          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
             <i class="bi bi-list"></i>
           </button>
 
@@ -90,8 +89,7 @@
 
 
   <h1 id="SVGImage_SVG_SVGRender" data-uid="SVGImage.SVG.SVGRender" class="text-break">
-    Class SVGRender
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L22"><i class="bi bi-code-slash"></i></a>
+Class SVGRender  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L23"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -120,20 +118,14 @@
 
 
 
-  <dl class="typelist derived">
+  <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
-    </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
@@ -143,6 +135,12 @@
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
   </dd></dl>
 
@@ -159,7 +157,7 @@
 
   <h3 id="SVGImage_SVG_SVGRender__ctor" data-uid="SVGImage.SVG.SVGRender.#ctor">
   SVGRender()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L25"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -179,20 +177,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender__ctor_" data-uid="SVGImage.SVG.SVGRender.#ctor*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender__ctor_SVGImage_SVG_FileLoaders_IExternalFileLoader_" data-uid="SVGImage.SVG.SVGRender.#ctor(SVGImage.SVG.FileLoaders.IExternalFileLoader)">
   SVGRender(IExternalFileLoader)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L29"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -217,24 +208,48 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <h2 class="section" id="properties">Properties
 </h2>
 
 
+  <a id="SVGImage_SVG_SVGRender_AnimationWarnings_" data-uid="SVGImage.SVG.SVGRender.AnimationWarnings*"></a>
+
+  <h3 id="SVGImage_SVG_SVGRender_AnimationWarnings" data-uid="SVGImage.SVG.SVGRender.AnimationWarnings">
+  AnimationWarnings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;string&gt; AnimationWarnings { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="SVGImage_SVG_SVGRender_CustomBrushes_" data-uid="SVGImage.SVG.SVGRender.CustomBrushes*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_CustomBrushes" data-uid="SVGImage.SVG.SVGRender.CustomBrushes">
   CustomBrushes
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L59"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -259,20 +274,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_ExternalFileLoader_" data-uid="SVGImage.SVG.SVGRender.ExternalFileLoader*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_ExternalFileLoader" data-uid="SVGImage.SVG.SVGRender.ExternalFileLoader">
   ExternalFileLoader
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L72"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -297,20 +305,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_OverrideColor_" data-uid="SVGImage.SVG.SVGRender.OverrideColor*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_OverrideColor" data-uid="SVGImage.SVG.SVGRender.OverrideColor">
   OverrideColor
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L49"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -335,20 +336,75 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
+
+
+  <a id="SVGImage_SVG_SVGRender_OverrideFillColor_" data-uid="SVGImage.SVG.SVGRender.OverrideFillColor*"></a>
+
+  <h3 id="SVGImage_SVG_SVGRender_OverrideFillColor" data-uid="SVGImage.SVG.SVGRender.OverrideFillColor">
+  OverrideFillColor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color? OverrideFillColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.color">Color</a>?</dt>
+    <dd></dd>
   </dl>
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_SVGRender_OverrideStrokeColor_" data-uid="SVGImage.SVG.SVGRender.OverrideStrokeColor*"></a>
+
+  <h3 id="SVGImage_SVG_SVGRender_OverrideStrokeColor" data-uid="SVGImage.SVG.SVGRender.OverrideStrokeColor">
+  OverrideStrokeColor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color? OverrideStrokeColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.color">Color</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
 
 
   <a id="SVGImage_SVG_SVGRender_OverrideStrokeWidth_" data-uid="SVGImage.SVG.SVGRender.OverrideStrokeWidth*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_OverrideStrokeWidth" data-uid="SVGImage.SVG.SVGRender.OverrideStrokeWidth">
   OverrideStrokeWidth
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L55"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -373,20 +429,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_SVG_" data-uid="SVGImage.SVG.SVGRender.SVG*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_SVG" data-uid="SVGImage.SVG.SVGRender.SVG">
   SVG
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L34"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -411,20 +460,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_UseAnimations_" data-uid="SVGImage.SVG.SVGRender.UseAnimations*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_UseAnimations" data-uid="SVGImage.SVG.SVGRender.UseAnimations">
   UseAnimations
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L36"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -449,13 +491,6 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <h2 class="section" id="methods">Methods
@@ -466,7 +501,7 @@
 
   <h3 id="SVGImage_SVG_SVGRender_CreateDrawing_SVGImage_SVG_SVG_" data-uid="SVGImage.SVG.SVGRender.CreateDrawing(SVGImage.SVG.SVG)">
   CreateDrawing(SVG)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L128"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -496,20 +531,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_CreateDrawing_" data-uid="SVGImage.SVG.SVGRender.CreateDrawing*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_CreateDrawing_SVGImage_SVG_Shapes_Shape_" data-uid="SVGImage.SVG.SVGRender.CreateDrawing(SVGImage.SVG.Shapes.Shape)">
   CreateDrawing(Shape)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L144"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -539,20 +567,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_LoadDrawing_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_LoadDrawing_System_IO_Stream_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing(System.IO.Stream)">
   LoadDrawing(Stream)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L121"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -582,20 +603,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_LoadDrawing_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_LoadDrawing_System_IO_TextReader_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing(System.IO.TextReader)">
   LoadDrawing(TextReader)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L105"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -625,20 +639,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_LoadDrawing_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_LoadDrawing_System_String_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing(System.String)">
   LoadDrawing(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L74"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -668,20 +675,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_LoadDrawing_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_LoadDrawing_System_Uri_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing(System.Uri)">
   LoadDrawing(Uri)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L97"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -711,20 +711,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_LoadDrawing_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_LoadDrawing_System_Xml_XmlReader_" data-uid="SVGImage.SVG.SVGRender.LoadDrawing(System.Xml.XmlReader)">
   LoadDrawing(XmlReader)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L113"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -754,20 +747,13 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
-  </dl>
 
 
   <a id="SVGImage_SVG_SVGRender_LoadXmlDrawing_" data-uid="SVGImage.SVG.SVGRender.LoadXmlDrawing*"></a>
 
   <h3 id="SVGImage_SVG_SVGRender_LoadXmlDrawing_System_String_" data-uid="SVGImage.SVG.SVGRender.LoadXmlDrawing(System.String)">
   LoadXmlDrawing(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L89"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -797,13 +783,72 @@
 
 
 
-  <dl class="typelist seealso">
-    <dt>See Also</dt>
-    <dd>
-    <div><span><a href="http://www.w3.org/TR/SVGTiny12/">http://www.w3.org/TR/SVGTiny12/</a></span></div>
-    <div><span><a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials">http://commons.oreilly.com/wiki/index.php/SVG_Essentials</a></span></div>
-    </dd>
+
+
+  <a id="SVGImage_SVG_SVGRender_SeekAnimations_" data-uid="SVGImage.SVG.SVGRender.SeekAnimations*"></a>
+
+  <h3 id="SVGImage_SVG_SVGRender_SeekAnimations_System_TimeSpan_" data-uid="SVGImage.SVG.SVGRender.SeekAnimations(System.TimeSpan)">
+  SeekAnimations(TimeSpan)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Stops playback and evaluates the current scene at an exact time.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SeekAnimations(TimeSpan position)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>position</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd></dd>
   </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SVGImage_SVG_SVGRender_TriggerAnimationEvent_" data-uid="SVGImage.SVG.SVGRender.TriggerAnimationEvent*"></a>
+
+  <h3 id="SVGImage_SVG_SVGRender_TriggerAnimationEvent_System_String_System_String_" data-uid="SVGImage.SVG.SVGRender.TriggerAnimationEvent(System.String,System.String)">
+  TriggerAnimationEvent(string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Forwards a named SVG event, for example an element's click, to SMIL timing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TriggerAnimationEvent(string elementId, string eventName = &quot;click&quot;)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>elementId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>eventName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
 
 
   <h2 id="seealso">See Also</h2>
@@ -815,7 +860,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/dotnetprojects/SVGImage/blob/master/Source/SVGImage/SVG/SVGRender.cs/#L22" class="edit-link">Edit this page</a>
+          <a href="https://github.com/jogibear9988/SVGImage/blob/codex/open-issue-fixes/Source/SVGImage/SVG/SVGRender.cs/#L23" class="edit-link">Edit this page</a>
         </div>
 
 
@@ -831,7 +876,7 @@
     <footer class="border-top text-secondary">
       <div class="container-xxl">
         <div class="flex-fill">
-          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2020 - 2023 DotNetProjects</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+          <div class="svg-footer"><span>SVGImage · Native SVG for WPF</span><span>MIT licensed · <a href="https://github.com/dotnetprojects/SVGImage">Built in the open</a> · © 2020–2026 DotNetProjects</span></div>
         </div>
       </div>
     </footer>
