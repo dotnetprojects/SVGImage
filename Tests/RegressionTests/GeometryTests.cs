@@ -66,6 +66,12 @@ internal static class GeometryTests
         Pixel(d,5,5,Color.FromArgb(128,255,0,0),"pattern fill opacity",2);
         d=Svg("<radialGradient id='r'><stop offset='0' stop-color='red'/><stop offset='1' stop-color='white'/></radialGradient><rect width='100' height='100' fill='url(#r)'/>");
         Pixel(d,50,50,Colors.Red,"default radial focal point is centered",5);
+        var centered=Svg("<text x='50' y='50' text-anchor='middle' font-family='Arial' font-size='20'>OO</text>").Bounds;
+        if(Math.Abs(centered.X+centered.Width/2-50)>1) throw new Exception("middle text anchor centers advances around x");
+        var ended=Svg("<text x='50' y='50' text-anchor='end' font-family='Arial' font-size='20'>OO</text>").Bounds;
+        if(Math.Abs(ended.Right-50)>1) throw new Exception("end text anchor precedes x");
+        var centeredPath=Svg("<defs><path id='anchor' d='M0 50H100'/></defs><text font-family='Arial' font-size='20'><textPath href='#anchor' startOffset='50%' text-anchor='middle'>OO</textPath></text>").Bounds;
+        if(Math.Abs(centeredPath.X+centeredPath.Width/2-50)>1) throw new Exception("textPath uses its own anchor style");
         Console.WriteLine("Clip paths, nested viewports, text paths and recursive-use checks passed.");
     }
     private static void Near(Rect expected,Rect actual,string name)

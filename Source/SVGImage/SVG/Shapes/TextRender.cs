@@ -47,7 +47,6 @@ namespace SVGImage.SVG.Shapes
             public List<GlyphRun> GlyphRuns { get; set; } = new List<GlyphRun>();
             public Dictionary<GlyphRun, List<Rect>> BackgroundDecorations { get; set; } = new Dictionary<GlyphRun, List<Rect>>();
             public Dictionary<GlyphRun, List<Rect>> ForegroundDecorations { get; set; } = new Dictionary<GlyphRun, List<Rect>>();
-            public Dictionary<GlyphRun, Rect> GlyphRunBounds { get; set; } = new Dictionary<GlyphRun, Rect>();
             public Dictionary<GlyphRun, TextStyle> TextStyles { get; set; } = new Dictionary<GlyphRun, TextStyle>();
             public Dictionary<GlyphRun, TextShapeBase> TextContainers { get; set; } = new Dictionary<GlyphRun, TextShapeBase>();
             public TextAlignment TextAlignment { get; set; }
@@ -63,7 +62,8 @@ namespace SVGImage.SVG.Shapes
                     if (TextContainers.TryGetValue(glyphRun, out TextShapeBase container) && TextPathLayout.Find(container) is TextPath path)
                     {
                         double advance = GlyphRuns.Where(r => TextContainers.ContainsKey(r) && TextPathLayout.Find(TextContainers[r]) == path).Sum(r => r.AdvanceWidths.Sum());
-                        double anchorOffset = TextAlignment == TextAlignment.Center ? advance / 2 : TextAlignment == TextAlignment.Right ? advance : 0;
+                        var pathAlignment = TextStyles[glyphRun].TextAlignment;
+                        double anchorOffset = pathAlignment == TextAlignment.Center ? advance / 2 : pathAlignment == TextAlignment.Right ? advance : 0;
                         runGeometry = TextPathLayout.Build(glyphRun, path, anchorOffset);
                     }
                     if (runGeometry.IsFrozen)
@@ -107,38 +107,23 @@ namespace SVGImage.SVG.Shapes
                 return geometryGroup;
             }
 
-            private Rect GetBoundingBox()
-            {
-                if (GlyphRunBounds.Count == 0)
-                {
-                    return Rect.Empty;
-                }
-                Rect boundingBox = GlyphRunBounds.First().Value;
-                foreach (var kvp in GlyphRunBounds)
-                {
-                    boundingBox.Union(kvp.Value);
-                }
-                return boundingBox;
-            }
-
             private double GetAlignmentOffset()
             {
                 if(TextAlignment == TextAlignment.Left)
                 {
                     return 0; // No offset needed for left alignment
                 }
-                var boundingBox = GetBoundingBox();
-                double totalWidth = boundingBox.Width;
+                double totalWidth = GlyphRuns.Sum(run => run.AdvanceWidths.Sum());
                 double alignmentOffset = 0;
                 switch (TextAlignment)
                 {
                     case TextAlignment.Left:
                         break;
                     case TextAlignment.Right:
-                        alignmentOffset = totalWidth;
+                        alignmentOffset = -totalWidth;
                         break;
                     case TextAlignment.Center:
-                        alignmentOffset = totalWidth / 2d;
+                        alignmentOffset = -totalWidth / 2d;
                         break;
                     case TextAlignment.Justify:
                         // Justify is not implemented
@@ -182,7 +167,6 @@ namespace SVGImage.SVG.Shapes
                     var runGeometry = run.BuildGeometry();
                     currentTextChunk.GlyphRuns.Add(run);
                     currentTextChunk.TextStyles[run] = textStyle;
-                    currentTextChunk.GlyphRunBounds[run] = runGeometry.Bounds;
                     currentTextChunk.TextContainers[run] = (TextShapeBase)textString.Parent;
                     if (textStyle.TextDecoration != null && textStyle.TextDecoration.Count > 0)
                     {
