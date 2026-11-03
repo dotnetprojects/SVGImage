@@ -137,7 +137,11 @@ namespace SVGImage.SVG.Shapes
 
         public Visibility Visibility { get; set; }
 
-        protected virtual Stroke DefaultStroke()
+        protected virtual Stroke DefaultStroke() => InheritedStroke;
+
+        internal Stroke InheritedStroke => GetParentStroke();
+
+        private Stroke GetParentStroke()
         {
             var parent = this.Parent;
             while (parent != null)
@@ -522,8 +526,9 @@ namespace SVGImage.SVG.Shapes
         {
             if (this.m_stroke == null)
             {
-                this.m_stroke = new Stroke(svg);
-                this.m_stroke.PaintServerKey = svg.PaintServers.Parse("black");
+                // Stroke properties inherit independently. A local width or
+                // opacity must not introduce paint; the initial stroke is none.
+                this.m_stroke = new Stroke(svg, this);
             }
 
             return this.m_stroke;

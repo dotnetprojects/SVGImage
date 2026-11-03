@@ -24,6 +24,8 @@ namespace SVGImage.SVG
         }
 
         private SVG _svg;
+        private readonly Shape owner;
+        private bool hasPaint, hasOpacity, hasWidth, hasLineCap, hasLineJoin, hasStrokeArray;
 
         private bool _isDefault;
 
@@ -49,6 +51,11 @@ namespace SVGImage.SVG
             _opacity = 100;
         }
 
+        internal Stroke(SVG svg, Shape owner) : this(svg)
+        {
+            this.owner = owner;
+        }
+
         public static Stroke CreateDefault(SVG svg, double width)
         {
             var stroke = new Stroke(svg);
@@ -69,54 +76,60 @@ namespace SVGImage.SVG
 
         public string PaintServerKey
         {
-            get => _paintServerKey;
+            get => !hasPaint && owner != null ? owner.InheritedStroke?.PaintServerKey : _paintServerKey;
             set {
                 Debug.Assert(_isDefault == false);
+                hasPaint = true;
                 _paintServerKey = value;
             }
         }
 
         public double Opacity
         {
-            get => _opacity;
+            get => !hasOpacity && owner != null ? owner.InheritedStroke?.Opacity ?? 100 : _opacity;
             set {
                 Debug.Assert(_isDefault == false);
+                hasOpacity = true;
                 _opacity = value;
             }
         }
 
         public double Width
         {
-            get => _width;
+            get => !hasWidth && owner != null ? owner.InheritedStroke?.Width ?? 1 : _width;
             set {
                 Debug.Assert(_isDefault == false);
+                hasWidth = true;
                 _width = value;
             }
         }
 
         public eLineCap LineCap
         {
-            get => _lineCap;
+            get => !hasLineCap && owner != null ? owner.InheritedStroke?.LineCap ?? eLineCap.butt : _lineCap;
             set {
                 Debug.Assert(_isDefault == false);
+                hasLineCap = true;
                 _lineCap = value;
             }
         }
 
         public eLineJoin LineJoin
         {
-            get => _lineJoin;
+            get => !hasLineJoin && owner != null ? owner.InheritedStroke?.LineJoin ?? eLineJoin.miter : _lineJoin;
             set {
                 Debug.Assert(_isDefault == false);
+                hasLineJoin = true;
                 _lineJoin = value;
             }
         }
 
         public double[] StrokeArray
         {
-            get => _strokeArray;
+            get => !hasStrokeArray && owner != null ? owner.InheritedStroke?.StrokeArray : _strokeArray;
             set {
                 Debug.Assert(_isDefault == false);
+                hasStrokeArray = true;
                 _strokeArray = value;
             }
         }
@@ -156,7 +169,7 @@ namespace SVGImage.SVG
                             var checkPaintServer = svg.PaintServers.GetServer(p.Stroke.PaintServerKey);
                             if (!(checkPaintServer is InheritPaintServer))
                             {
-                                return checkPaintServer.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
+                                return checkPaintServer?.GetBrush(this.Opacity * elementOpacity, svg, svgRender, bounds);
                             }
                         }
                         p = p.RealParent ?? p.Parent;

@@ -6,6 +6,12 @@ Changes to SVGImage are recorded here, newest first. Dates use the project's loc
 
 These entries describe the current repository source. They have not been assigned a NuGet release version. Install a published package for its released feature set, or build the current source to use these additions.
 
+### 2026-11-03
+
+#### Fixed
+
+- [#123](https://github.com/dotnetprojects/SVGImage/issues/123): setting `stroke-width` or other stroke properties without a stroke paint no longer introduces a black outline. The initial paint remains `none`. Stroke paint, width, opacity, dash array, caps and joins inherit independently, including through `use` instances; explicit `none`/dash resets remain local. Added the issue's exact rectangle and focused inheritance/pixel regressions.
+
 ### 2026-10-29
 
 #### Added

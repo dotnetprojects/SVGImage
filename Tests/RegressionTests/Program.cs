@@ -22,6 +22,7 @@ internal static class Program
         AnimationTests.Run();
         AdvancedAnimationTests.Run();
         CssTests.Run();
+        StrokeTests.Run();
         GeometryTests.Run();
         FilterTests.Run();
         LightingImageBackdropTests.Run();

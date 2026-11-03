@@ -23,7 +23,7 @@ This page describes the **current repository source**, including [unreleased wor
 
 | Feature | Current scope | Details |
 | --- | --- | --- |
-| Fills / strokes | Solid colors, widths, caps, joins and dash arrays | Some CSS length/layout cases remain incomplete. |
+| Fills / strokes | Solid colors, widths, caps, joins and dash arrays; initial stroke is `none`, with independent property inheritance | Some CSS length/layout cases remain incomplete. |
 | Gradients | Linear/radial paints, stops and spreading | Stop opacity, focal points, pad/repeat/reflect and per-use opacity. General template inheritance is incomplete. |
 | `pattern` | Repeated SVG content | Tile/content units, viewBoxes, transforms, opacity and local templates. |
 | Colors | Names, RGB/RGBA, HSL/HSLA and hex | Modern RGB/RGBA mixed numbers/percentages, slash alpha, legacy commas, clamping and short/long RGBA hex notation. |

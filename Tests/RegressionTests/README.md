@@ -32,3 +32,5 @@ Advanced animation checks cover compatible and to-only path morphs, incompatible
 
 
 Lighting/image/backdrop checks exercise diffuse/specular alpha and saturation, all three light sources, CSS color, invalid parameters, raster/SVG data URIs, local elements, relative external SVG/raster chains, released file handles, missing/cyclic images, disabled/reset/clipped background buffers, sibling order, transformed targets and ancestor opacity. All three Filter features demos render offline, and the actual WPF control loads their embedded relative SVG resource.
+
+Issue #123 checks the exact width-only rectangle for an absent outline, inline/presentation/stylesheet stroke properties, independent paint/width/opacity/dash/cap/join inheritance, explicit none, dash resets and use-instance paint inheritance.
