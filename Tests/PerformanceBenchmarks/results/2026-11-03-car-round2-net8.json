@@ -1,0 +1,145 @@
+{
+  "date": "2026-11-03",
+  "baselineCommit": "dd6ade6",
+  "framework": "net8.0-windows",
+  "iterations": 5,
+  "processorCount": 8,
+  "maximumNumericParallelism": 4,
+  "parallelPixelThreshold": 131072,
+  "samplingScale": 4,
+  "description": "Serial baseline/candidate runs with per-workload warmup and five timed iterations. Elapsed time includes completion of bounded numeric workers. allocatedBytes is cumulative caller-thread managed allocation, excluding worker/native/GPU allocations. Hash checks at 300x200, 900x600 and every native ImageDrawing bitmap resolution run outside the timed section.",
+  "cases": [
+    {
+      "name": "nested groups 16",
+      "beforeMilliseconds": 0.3587,
+      "afterMilliseconds": 0.3828,
+      "beforeAllocatedBytes": 96064,
+      "afterAllocatedBytes": 96064,
+      "pixelHash": "D0A982CE75B70626E1B580B84D00F0729DE70D9AAC43710EC398822E41300C8E",
+      "fullPixelHash": "E9D3E6C29EA7DD0BA412EFE2E9FCBC401B114E95CB12ACBBE14D196A38D5A495",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "nested groups 20",
+      "beforeMilliseconds": 0.5267,
+      "afterMilliseconds": 0.4404,
+      "beforeAllocatedBytes": 111664,
+      "afterAllocatedBytes": 111664,
+      "pixelHash": "D0A982CE75B70626E1B580B84D00F0729DE70D9AAC43710EC398822E41300C8E",
+      "fullPixelHash": "E9D3E6C29EA7DD0BA412EFE2E9FCBC401B114E95CB12ACBBE14D196A38D5A495",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "color matrix",
+      "beforeMilliseconds": 56.4057,
+      "afterMilliseconds": 32.486,
+      "beforeAllocatedBytes": 38475136,
+      "afterAllocatedBytes": 38478880,
+      "pixelHash": "167516A4F5BF21A654BB403AFAF34F57B5E5371E7319DD8B1594A15464016B30",
+      "fullPixelHash": "D4E6BBED6DD082F6F049C3E22ACC2FD3813A4E89E8523B4B4F7CCDC67E80A979",
+      "filterBitmapHash": "F9E577C55E7842429B8C3A15C20DF6B9C269224779604CB860118D8E3DEE5394",
+      "bitmapCount": 1
+    },
+    {
+      "name": "multiply blend",
+      "beforeMilliseconds": 71.9021,
+      "afterMilliseconds": 42.972,
+      "beforeAllocatedBytes": 53838016,
+      "afterAllocatedBytes": 53841752,
+      "pixelHash": "F62338490C6A28FF638D8364C4D0AFDB7A129694BB55503E464A200D1B3A16C9",
+      "fullPixelHash": "DE32FEB0803ACDFCAD24DB8A8B6CE1831E4138E78F0E8998EAE2820DABBDD15B",
+      "filterBitmapHash": "0BA7C94264EAD3824446EE47C4334BAAEDB19B32FB64D08AE4363704DBD740A6",
+      "bitmapCount": 1
+    },
+    {
+      "name": "hue blend",
+      "beforeMilliseconds": 134.7304,
+      "afterMilliseconds": 123.2148,
+      "beforeAllocatedBytes": 53838000,
+      "afterAllocatedBytes": 53841760,
+      "pixelHash": "7095AF7B8BC9F362932F893C1DF1CA7581A5C5E76FA3CE4862DC3B5CFDF19A3E",
+      "fullPixelHash": "34559CDE8769013BD2AB363BC8AF1EE4DA934E24D9283DE70E82813405512483",
+      "filterBitmapHash": "8B202661E9D75AB5D75F1B0DCB910E541DA4B9ED89E643A97A33BB349C443F09",
+      "bitmapCount": 1
+    },
+    {
+      "name": "linear filter chain",
+      "beforeMilliseconds": 523.7037,
+      "afterMilliseconds": 184.6527,
+      "beforeAllocatedBytes": 115378696,
+      "afterAllocatedBytes": 99938728,
+      "pixelHash": "242131CB688A6FB90AD75C2EB350E616CD364A0AB07A9F9DF7EAC4A02A801F81",
+      "fullPixelHash": "86BA80B90DB4C23F6DD82A03EFAE59EC403EEAB099C884EE891735253DECA3CD",
+      "filterBitmapHash": "5F45CC1E972FAF3395F3A8B6EE2326EF93BDE6B5F846A75E36FA624282BDBA7D",
+      "bitmapCount": 1
+    },
+    {
+      "name": "tiger.svg load",
+      "beforeMilliseconds": 42.2306,
+      "afterMilliseconds": 22.4798,
+      "beforeAllocatedBytes": 6851344,
+      "afterAllocatedBytes": 6851264,
+      "pixelHash": "B6DE4D3F3EC248EDADA93FBECF8B49BABFCD1D9FB3EF5B10C3AB65099D5BF877",
+      "fullPixelHash": "889355BD32F6CE5009A3E70D7CA66AC560667E3DE4723BD87B0E828996144447",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "tiger.svg redraw",
+      "beforeMilliseconds": 28.3561,
+      "afterMilliseconds": 15.3282,
+      "beforeAllocatedBytes": 5244408,
+      "afterAllocatedBytes": 5244408,
+      "pixelHash": "B6DE4D3F3EC248EDADA93FBECF8B49BABFCD1D9FB3EF5B10C3AB65099D5BF877",
+      "fullPixelHash": "889355BD32F6CE5009A3E70D7CA66AC560667E3DE4723BD87B0E828996144447",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "acid1.svg load",
+      "beforeMilliseconds": 9.9527,
+      "afterMilliseconds": 9.2123,
+      "beforeAllocatedBytes": 2325056,
+      "afterAllocatedBytes": 2324976,
+      "pixelHash": "25503D0F5921E5FA71FA1BFA17CD19FF2DE9CAC3FF72DFEB8D0ACF984FC66AAA",
+      "fullPixelHash": "9CFB3771BAAD9A4BEF63C93C73EEE3B53BD780CC3E90A25F7A9D5E4F225BDEA7",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "acid1.svg redraw",
+      "beforeMilliseconds": 5.0632,
+      "afterMilliseconds": 3.6814,
+      "beforeAllocatedBytes": 880280,
+      "afterAllocatedBytes": 880280,
+      "pixelHash": "25503D0F5921E5FA71FA1BFA17CD19FF2DE9CAC3FF72DFEB8D0ACF984FC66AAA",
+      "fullPixelHash": "9CFB3771BAAD9A4BEF63C93C73EEE3B53BD780CC3E90A25F7A9D5E4F225BDEA7",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "171.svg load",
+      "beforeMilliseconds": 5073.5847,
+      "afterMilliseconds": 1118.528,
+      "beforeAllocatedBytes": 1384689344,
+      "afterAllocatedBytes": 642642840,
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E",
+      "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+      "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+      "bitmapCount": 70
+    },
+    {
+      "name": "171.svg redraw",
+      "beforeMilliseconds": 5160.2914,
+      "afterMilliseconds": 944.4853,
+      "beforeAllocatedBytes": 1370297072,
+      "afterAllocatedBytes": 628281536,
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E",
+      "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+      "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+      "bitmapCount": 70
+    }
+  ]
+}

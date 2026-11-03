@@ -25,6 +25,7 @@ internal static class Program
         StrokeTests.Run();
         GeometryTests.Run();
         FilterTests.Run();
+        BlurKernelTests.Run();
         LightingImageBackdropTests.Run();
         ResvgTests.Run();
         Console.WriteLine("All regression checks passed.");

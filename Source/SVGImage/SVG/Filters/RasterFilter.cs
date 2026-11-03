@@ -63,7 +63,14 @@ namespace SVGImage.SVG.Filters
         internal Drawing Render(Drawing source, Drawing background = null)
         {
             if (filterRegion.IsEmpty || region.IsEmpty || unitX <= 0 || unitY <= 0) return new DrawingGroup();
-            var graphic = Rasterize(source, false, filterRegion);
+            XmlNode sole=null;
+            foreach(XmlNode primitive in filter.ChildNodes)
+                if(primitive.NodeType==XmlNodeType.Element && primitive.LocalName.StartsWith("fe"))
+                { if(sole!=null) { sole=null; break; } sole=primitive; }
+            bool disposableBlur=sole!=null && sole.LocalName=="feGaussianBlur" &&
+                (Attr(sole,"in")=="" || Attr(sole,"in")=="SourceGraphic");
+            bool sourceLinear=disposableBlur && Style(sole,"color-interpolation-filters","linearRGB",true)!="sRGB";
+            var graphic = Rasterize(source,sourceLinear,filterRegion);
             var bytes = new byte[width * height * 4];
             var images = new Dictionary<string, Frame> { { "SourceGraphic", graphic } };
             if (filter.SelectNodes(".//*[@in='BackgroundImage' or @in='BackgroundAlpha' or @in2='BackgroundImage' or @in2='BackgroundAlpha']").Count > 0)
@@ -127,7 +134,7 @@ namespace SVGImage.SVG.Filters
                     case "feColorMatrix": ColorMatrix(node, input, output); break;
                     case "feComponentTransfer": ComponentTransfer(node, input, output); break;
                     case "feBlend": Blend(node, input, second, output); break;
-                    case "feGaussianBlur": output = Blur(node, input); break;
+                    case "feGaussianBlur": output = Blur(node, input,disposableBlur); break;
                     case "feMorphology": output = Morphology(node, input); break;
                     case "feTile": Tile(input, output); break;
                     case "feConvolveMatrix": Convolve(node, input, output); break;
@@ -149,11 +156,7 @@ namespace SVGImage.SVG.Filters
                 previous = output;
                 string result = Attr(node, "result"); if (result.Length > 0) images[result] = output;
             }
-            previous = ConvertFrame(previous, false);
-            for (int i = 0; i < bytes.Length; i += 4)
-            {
-                bytes[i] = Byte(previous.Data[i + 2]); bytes[i + 1] = Byte(previous.Data[i + 1]); bytes[i + 2] = Byte(previous.Data[i]); bytes[i + 3] = Byte(previous.Data[i + 3]);
-            }
+            EncodeFrame(previous,bytes);
             var image = BitmapSource.Create(width, height, 96, 96, PixelFormats.Pbgra32, null, bytes, width * 4); image.Freeze();
             var resultDrawing = new DrawingGroup { ClipGeometry = new RectangleGeometry(filterRegion) };
             resultDrawing.Children.Add(new ImageDrawing(image, region));
@@ -161,16 +164,35 @@ namespace SVGImage.SVG.Filters
         }
         private Frame Rasterize(Drawing drawing, bool linear, Rect area)
         {
-            var result = new Frame(width*height*4,false) { Area = area };
+            var result = new Frame(width*height*4,linear) { Area = area };
             if(drawing==null) { result.Linear=linear; return result; }
             var visual = new DrawingVisual();
             using(var dc=visual.RenderOpen())
             { dc.PushTransform(new MatrixTransform(sx,0,0,sy,-region.X*sx,-region.Y*sy)); dc.DrawDrawing(drawing); }
             var bitmap=new RenderTargetBitmap(width,height,96,96,PixelFormats.Pbgra32); bitmap.Render(visual);
             var pixels=new byte[result.Data.Length]; bitmap.CopyPixels(pixels,width*4,0);
-            for(int i=0;i<pixels.Length;i+=4)
-            { result.Data[i]=pixels[i+2]/255f; result.Data[i+1]=pixels[i+1]/255f; result.Data[i+2]=pixels[i]/255f; result.Data[i+3]=pixels[i+3]/255f; }
-            return ConvertFrame(result,linear);
+            const int batch=16384;
+            RunNumericRows((pixels.Length+batch-1)/batch,pixels.Length/4,row =>
+            {
+                int end=Math.Min(pixels.Length,(row+1)*batch);
+                for(int i=row*batch;i<end;i+=4)
+                {
+                    // Match the old byte -> float -> double conversion order.
+                    double a=pixels[i+3]/255f;
+                    result.Data[i+3]=(float)a;
+                    if(linear && a==0) continue;
+                    float r=pixels[i+2]/255f,g=pixels[i+1]/255f,b=pixels[i]/255f;
+                    if(linear)
+                    {
+                        if(r==g && r==b)
+                        { r=(float)(a*ConvertColor(r/a,true));g=r;b=r; }
+                        else
+                        { r=(float)(a*ConvertColor(r/a,true));g=(float)(a*ConvertColor(g/a,true));b=(float)(a*ConvertColor(b/a,true)); }
+                    }
+                    result.Data[i]=r;result.Data[i+1]=g;result.Data[i+2]=b;
+                }
+            });
+            return result;
         }
         private static Frame Alpha(Frame frame)
         {
@@ -206,12 +228,53 @@ namespace SVGImage.SVG.Filters
         {
             if (input.Linear == linear) return input;
             var result = new Frame(input.Data.Length, linear) { Area = input.Area };
-            for (int i = 0; i < input.Data.Length; i += 4)
+            const int batch=16384;
+            RunNumericRows((input.Data.Length+batch-1)/batch,input.Data.Length/4,row =>
             {
-                double a = input.Data[i + 3]; result.Data[i + 3] = (float)a;
-                for (int c = 0; c < 3; c++) result.Data[i + c] = (float)(a > 0 ? a * ConvertColor(input.Data[i + c] / a, linear) : 0);
-            }
+                int end=Math.Min(input.Data.Length,(row+1)*batch);
+                for(int i=row*batch;i<end;i+=4)
+                {
+                    double a=input.Data[i+3]; result.Data[i+3]=(float)a;
+                    if(!(a>0)) continue;
+                    if(input.Data[i]==input.Data[i+1] && input.Data[i]==input.Data[i+2])
+                    {
+                        float gray=(float)(a*ConvertColor(input.Data[i]/a,linear));
+                        result.Data[i]=gray; result.Data[i+1]=gray; result.Data[i+2]=gray;
+                    }
+                    else for(int c=0;c<3;c++) result.Data[i+c]=(float)(a*ConvertColor(input.Data[i+c]/a,linear));
+                }
+            });
             return result;
+        }
+        private static void EncodeFrame(Frame input,byte[] bytes)
+        {
+            const int batch=16384;
+            RunNumericRows((bytes.Length+batch-1)/batch,bytes.Length/4,row =>
+            {
+                int end=Math.Min(bytes.Length,(row+1)*batch);
+                for(int i=row*batch;i<end;i+=4)
+                {
+                    double a=input.Data[i+3];
+                    if(input.Linear && (!(a>0) || input.Data[i]==input.Data[i+1] && input.Data[i]==input.Data[i+2]))
+                    {
+                        byte gray=Byte((float)(a>0 ? a*ConvertColor(input.Data[i]/a,false) : 0));
+                        bytes[i]=gray; bytes[i+1]=gray; bytes[i+2]=gray;
+                    }
+                    else if(input.Linear)
+                    {
+                        // Preserve the old intermediate float rounding exactly,
+                        // without allocating another full RGBA float frame.
+                        bytes[i]=Byte((float)(a>0 ? a*ConvertColor(input.Data[i+2]/a,false) : 0));
+                        bytes[i+1]=Byte((float)(a>0 ? a*ConvertColor(input.Data[i+1]/a,false) : 0));
+                        bytes[i+2]=Byte((float)(a>0 ? a*ConvertColor(input.Data[i]/a,false) : 0));
+                    }
+                    else
+                    {
+                        bytes[i]=Byte(input.Data[i+2]); bytes[i+1]=Byte(input.Data[i+1]); bytes[i+2]=Byte(input.Data[i]);
+                    }
+                    bytes[i+3]=Byte(a);
+                }
+            });
         }
         private static int Channel(string value) => value == "R" ? 0 : value == "G" ? 1 : value == "B" ? 2 : 3;
         private float Pixel(Frame frame, int x, int y, int c) => x < 0 || y < 0 || x >= width || y >= height ? 0 : frame.Data[(y * width + x) * 4 + c];

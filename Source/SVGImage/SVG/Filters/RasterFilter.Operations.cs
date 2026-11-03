@@ -99,107 +99,12 @@ namespace SVGImage.SVG.Filters
             double min=color.Min, max=color.Max;
             return max>min ? new Rgb((color.R-min)*sat/(max-min),(color.G-min)*sat/(max-min),(color.B-min)*sat/(max-min)) : new Rgb();
         }
-        private Frame Blur(XmlNode node, Frame input)
+        private Frame Blur(XmlNode node, Frame input,bool disposableInput=false)
         {
             var deviation = global::SVGImage.SVG.Utils.SvgNumberReader.List(Attr(node, "stdDeviation", "0"));
             double dx = deviation.Length > 0 ? deviation[0] : 0, dy = deviation.Length > 1 ? deviation[1] : dx;
-            if (dx < 0 || dy < 0 || deviation.Length > 2) return BlurAxes(input, 0, 0, "none");
-            return BlurAxes(input, dx * unitX * sx, dy * unitY * sy, Attr(node, "edgeMode", "none"));
-        }
-        private Frame BlurAxes(Frame input, double sigmaX, double sigmaY, string edge)
-        {
-            var result = input;
-            Frame first=null, second=null;
-            for (int axis = 0; axis < 2; axis++)
-            {
-                double sigma = axis == 0 ? sigmaX : sigmaY;
-                if (sigma <= 0) continue;
-                // Three box convolutions approximate a Gaussian in linear time,
-                // including large radii, without a per-pixel kernel allocation.
-                double ideal = Math.Sqrt(4 * sigma * sigma + 1);
-                int lower = (int)Math.Min(1000000, Math.Floor(ideal));
-                if (lower % 2 == 0) lower--;
-                lower = Math.Max(1, lower);
-                int upper = lower + 2;
-                int small = (int)Math.Round((12 * sigma * sigma - 3 * lower * lower - 12 * lower - 9) / (-4 * lower - 4));
-                for (int pass = 0; pass < 3; pass++)
-                {
-                    int radius=(pass<small ? lower : upper)/2;
-                    if(radius==0) continue;
-                    // Alternate two private scratch buffers. Neither aliases the
-                    // graph input, which may still be referenced by another result.
-                    Frame target;
-                    if(ReferenceEquals(result,first))
-                        target=second ?? (second=new Frame(input.Data.Length,input.Linear));
-                    else target=first ?? (first=new Frame(input.Data.Length,input.Linear));
-                    result=BoxBlur(result,radius,axis==0,edge,target);
-                }
-            }
-            if (ReferenceEquals(result, input)) { result = new Frame(input.Data.Length, input.Linear); Array.Copy(input.Data, result.Data, input.Data.Length); }
-            return result;
-        }
-        private Frame BoxBlur(Frame input, int radius, bool horizontal, string edge, Frame output)
-        {
-            int length = horizontal ? width : height, lines = horizontal ? height : width;
-            bool duplicate = edge == "duplicate", wrap = edge == "wrap";
-            double divisor = 2.0 * radius + 1;
-            // Gather each scanline once. Sliding all RGBA channels together avoids
-            // repeated edge-mode parsing and strided reads for every channel.
-            var scan = new float[length * 4];
-            for (int line = 0; line < lines; line++)
-            {
-                if (horizontal) Array.Copy(input.Data, line * width * 4, scan, 0, scan.Length);
-                else for (int at = 0; at < length; at++)
-                {
-                    int source=(at*width+line)*4, target=at*4;
-                    scan[target]=input.Data[source]; scan[target+1]=input.Data[source+1];
-                    scan[target+2]=input.Data[source+2]; scan[target+3]=input.Data[source+3];
-                }
-                double r = 0, g = 0, b = 0, a = 0;
-                for (int at = 0; at < length; at++)
-                {
-                    int copies = at <= radius ? 1 : 0;
-                    if (duplicate)
-                    {
-                        if (at == 0) copies += radius;
-                        if (at == length - 1) copies += Math.Max(0, radius - length + 1);
-                    }
-                    else if (wrap)
-                    {
-                        int window = 2 * radius + 1, start = ((-radius % length) + length) % length;
-                        copies = window / length + (((at - start + length) % length) < window % length ? 1 : 0);
-                    }
-                    int index = at * 4;
-                    r += (double)scan[index] * copies; g += (double)scan[index + 1] * copies;
-                    b += (double)scan[index + 2] * copies; a += (double)scan[index + 3] * copies;
-                }
-                for (int at = 0; at < length; at++)
-                {
-                    int index = (horizontal ? line * width + at : at * width + line) * 4;
-                    output.Data[index] = (float)(r / divisor); output.Data[index + 1] = (float)(g / divisor);
-                    output.Data[index + 2] = (float)(b / divisor); output.Data[index + 3] = (float)(a / divisor);
-                    int entering = at + radius + 1, leaving = at - radius;
-                    if (duplicate)
-                    {
-                        entering = Math.Min(length - 1, entering); leaving = Math.Max(0, leaving);
-                    }
-                    else if (wrap)
-                    {
-                        entering %= length; leaving = (leaving % length + length) % length;
-                    }
-                    if (entering >= 0 && entering < length)
-                    {
-                        int i = entering * 4;
-                        r += scan[i]; g += scan[i + 1]; b += scan[i + 2]; a += scan[i + 3];
-                    }
-                    if (leaving >= 0 && leaving < length)
-                    {
-                        int i = leaving * 4;
-                        r -= scan[i]; g -= scan[i + 1]; b -= scan[i + 2]; a -= scan[i + 3];
-                    }
-                }
-            }
-            return output;
+            if (dx < 0 || dy < 0 || deviation.Length > 2) return BlurAxes(input, 0, 0, "none",disposableInput);
+            return BlurAxes(input, dx * unitX * sx, dy * unitY * sy, Attr(node, "edgeMode", "none"),disposableInput);
         }
         private float Edge(Frame frame, int position, int line, int channel, bool horizontal, string edge)
         {

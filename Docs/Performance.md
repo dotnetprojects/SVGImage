@@ -14,7 +14,7 @@ The current source reduces temporary allocations in the raster pipeline and redu
 - Alpha-only inputs are materialized only when requested. Blur, morphology and image primitives supply their own output frames. Single-input primitives skip unused second-input color conversions; generators skip unused source color conversions.
 - Flood colors are converted once per primitive. Full-region primitives skip redundant per-pixel clipping tests.
 
-## Measured comparison
+## First optimization pass
 
 Baseline: commit `5b28407`. Measured on 2026-11-03. All twelve pixel hashes matched exactly.
 
@@ -37,7 +37,27 @@ Baseline: commit `5b28407`. Measured on 2026-11-03. All twelve pixel hashes matc
 
 The benchmark uses `SVGRender` with its default animation-disabled setting, so the standalone color-matrix case exercises raster rendering rather than the animation-preserving vector shortcut.
 
-The .NET 8 Release benchmark compares the committed baseline with the optimized source on the same Windows host. Each case has one untimed warmup and five timed iterations; values are medians. Managed allocations are cumulative bytes allocated by the rendering thread, not peak resident or native/GPU memory. Final image rasterization/hash computation and explicit GC are outside the timed section. Results are specific to these workloads and this machine.
+The first-pass .NET 8 Release benchmark compared its committed baseline with the then-optimized source on the same Windows host. Each case has one untimed warmup and five timed iterations; values are medians. Managed allocations are cumulative bytes allocated by the rendering thread, not peak resident or native/GPU memory. Final image rasterization/hash computation and explicit GC are outside the timed section. Results are specific to these workloads and this machine.
+
+## Further car and blur optimization
+
+A second pass profiles and removes the remaining car bottlenecks. Blur axes use contiguous rows, with a tiled transpose for the vertical axis, and exact black/white/gray channel specialization. Numeric work over buffers of at least 131,072 pixels uses at most four-way parallelism; small buffers and single-core hosts stay serial. WPF rasterization/object access stays on the caller STA. Worker callbacks only read/write numeric buffers.
+
+Sole SourceGraphic Gaussian filters decode directly into the working color space and can donate their temporary source as scratch. Shared/multi-step graphs keep their input frames immutable. Final conversion writes encoded bytes directly, retaining the previous intermediate float rounding. These changes retain the same kernels, quality scale and 2048-pixel cap.
+
+Five-run .NET 8 medians on the same eight-processor host, compared with `dd6ade6`:
+
+| Workload | Previous → optimized | Caller-thread allocated bytes |
+| --- | ---: | ---: |
+| Car load | 5.07 s → 1.12 s | 1.38 GB → 643 MB |
+| Car redraw | 5.16 s → 0.94 s | 1.37 GB → 628 MB |
+| LinearRGB filter chain | 524 ms → 185 ms | See raw results |
+
+All twelve workloads match at 300×200 and 900×600, with matching hashes for every native bitmap drawing. For the car, 900×600 is its native size and all **70 filter bitmaps** match at their full raster resolutions. [Raw second-pass results](https://github.com/dotnetprojects/SVGImage/blob/master/Tests/PerformanceBenchmarks/results/2026-11-03-car-round2-net8.json).
+
+A separate fresh-process progressive-loading check published its unfiltered preview at **303 ms** and the frozen complete drawing at **2.30 s total**, including parsing, JIT and background-STA startup. Both drawings were rendered across threads, and the full drawing matched a fresh complete render byte-for-byte. This integration check is a single run, separate from the warmed medians.
+
+These are elapsed-time medians with a warmup, not a guarantee for every host or cold start. Allocation counters cover the caller thread; worker-thread bookkeeping, native buffers and GPU allocations are excluded. In particular, the allocation columns are not peak-memory measurements. The benchmark runs complete baseline and candidate processes serially without other builds/tests running.
 
 ## Reproduce
 
