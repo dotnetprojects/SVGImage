@@ -14,6 +14,8 @@
     href: Animations.md
   - name: Rendering & filters
     href: Rendering.md
+  - name: Performance
+    href: Performance.md
   - name: Grayscale
     href: Grayscale.md
   - name: Background & sizing

@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-03",
+  "baselineCommit": "5b28407",
+  "framework": "net8.0-windows",
+  "iterations": 5,
+  "samplingScale": 4,
+  "description": "Serial STA runs, per-workload warmup, median render-thread elapsed time and cumulative managed allocation; pixel hashing/final rasterization and explicit GC excluded. Native filter rasterization included. Machine/workload specific.",
+  "cases": [
+    {
+      "name": "nested groups 16",
+      "beforeMilliseconds": 10.76,
+      "afterMilliseconds": 0.5874,
+      "beforeAllocatedBytes": 96064,
+      "afterAllocatedBytes": 96064,
+      "pixelHash": "D0A982CE75B70626E1B580B84D00F0729DE70D9AAC43710EC398822E41300C8E"
+    },
+    {
+      "name": "nested groups 20",
+      "beforeMilliseconds": 63.1935,
+      "afterMilliseconds": 1.2084,
+      "beforeAllocatedBytes": 111664,
+      "afterAllocatedBytes": 111664,
+      "pixelHash": "D0A982CE75B70626E1B580B84D00F0729DE70D9AAC43710EC398822E41300C8E"
+    },
+    {
+      "name": "color matrix",
+      "beforeMilliseconds": 105.1792,
+      "afterMilliseconds": 66.9438,
+      "beforeAllocatedBytes": 169035224,
+      "afterAllocatedBytes": 38475136,
+      "pixelHash": "167516A4F5BF21A654BB403AFAF34F57B5E5371E7319DD8B1594A15464016B30"
+    },
+    {
+      "name": "multiply blend",
+      "beforeMilliseconds": 95.7269,
+      "afterMilliseconds": 90.6678,
+      "beforeAllocatedBytes": 161358104,
+      "afterAllocatedBytes": 53838016,
+      "pixelHash": "F62338490C6A28FF638D8364C4D0AFDB7A129694BB55503E464A200D1B3A16C9"
+    },
+    {
+      "name": "hue blend",
+      "beforeMilliseconds": 205.3612,
+      "afterMilliseconds": 157.5337,
+      "beforeAllocatedBytes": 529997384,
+      "afterAllocatedBytes": 53838000,
+      "pixelHash": "7095AF7B8BC9F362932F893C1DF1CA7581A5C5E76FA3CE4862DC3B5CFDF19A3E"
+    },
+    {
+      "name": "linear filter chain",
+      "beforeMilliseconds": 615.6432,
+      "afterMilliseconds": 423.5428,
+      "beforeAllocatedBytes": 338099312,
+      "afterAllocatedBytes": 115378696,
+      "pixelHash": "242131CB688A6FB90AD75C2EB350E616CD364A0AB07A9F9DF7EAC4A02A801F81"
+    },
+    {
+      "name": "tiger.svg load",
+      "beforeMilliseconds": 30.7454,
+      "afterMilliseconds": 24.4618,
+      "beforeAllocatedBytes": 6851264,
+      "afterAllocatedBytes": 6851344,
+      "pixelHash": "B6DE4D3F3EC248EDADA93FBECF8B49BABFCD1D9FB3EF5B10C3AB65099D5BF877"
+    },
+    {
+      "name": "tiger.svg redraw",
+      "beforeMilliseconds": 27.7119,
+      "afterMilliseconds": 24.8491,
+      "beforeAllocatedBytes": 5244408,
+      "afterAllocatedBytes": 5244408,
+      "pixelHash": "B6DE4D3F3EC248EDADA93FBECF8B49BABFCD1D9FB3EF5B10C3AB65099D5BF877"
+    },
+    {
+      "name": "acid1.svg load",
+      "beforeMilliseconds": 9.642,
+      "afterMilliseconds": 10.7454,
+      "beforeAllocatedBytes": 2324976,
+      "afterAllocatedBytes": 2325056,
+      "pixelHash": "25503D0F5921E5FA71FA1BFA17CD19FF2DE9CAC3FF72DFEB8D0ACF984FC66AAA"
+    },
+    {
+      "name": "acid1.svg redraw",
+      "beforeMilliseconds": 4.2238,
+      "afterMilliseconds": 3.6006,
+      "beforeAllocatedBytes": 880280,
+      "afterAllocatedBytes": 880280,
+      "pixelHash": "25503D0F5921E5FA71FA1BFA17CD19FF2DE9CAC3FF72DFEB8D0ACF984FC66AAA"
+    },
+    {
+      "name": "171.svg load",
+      "beforeMilliseconds": 5824.7699,
+      "afterMilliseconds": 4691.4198,
+      "beforeAllocatedBytes": 3111007744,
+      "afterAllocatedBytes": 1384665264,
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E"
+    },
+    {
+      "name": "171.svg redraw",
+      "beforeMilliseconds": 5646.2295,
+      "afterMilliseconds": 4656.3979,
+      "beforeAllocatedBytes": 3096640008,
+      "afterAllocatedBytes": 1370280048,
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E"
+    }
+  ]
+}

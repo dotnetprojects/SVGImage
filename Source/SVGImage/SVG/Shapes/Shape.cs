@@ -141,20 +141,9 @@ namespace SVGImage.SVG.Shapes
 
         internal Stroke InheritedStroke => GetParentStroke();
 
-        private Stroke GetParentStroke()
-        {
-            var parent = this.Parent;
-            while (parent != null)
-            {
-                if (parent.Stroke != null)
-                {
-                    return parent.Stroke;
-                }
-
-                parent = parent.Parent;
-            }
-            return null;
-        }
+        // Parent getters already resolve the entire ancestry. Walking it again
+        // repeats the same empty chains exponentially in deeply nested groups.
+        private Stroke GetParentStroke() => Parent?.Stroke;
 
         public Stroke Stroke
         {
@@ -167,20 +156,7 @@ namespace SVGImage.SVG.Shapes
             return null;
         }
 
-        protected virtual Fill GetParentFill()
-        {
-            var parent = this.Parent;
-            while (parent != null)
-            {
-                if (parent.Fill != null)
-                {
-                    return parent.Fill;
-                }
-
-                parent = parent.Parent;
-            }
-            return null;
-        }
+        protected virtual Fill GetParentFill() => Parent?.Fill;
 
         public Fill Fill
         {

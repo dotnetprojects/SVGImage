@@ -7,6 +7,14 @@ internal static class GeometryTests
 {
     internal static void Run()
     {
+        string groups=string.Concat(System.Linq.Enumerable.Repeat("<g>",128));
+        string ends=string.Concat(System.Linq.Enumerable.Repeat("</g>",128));
+        var deep=Svg(groups+"<rect x='20' y='20' width='20' height='20'/>"+ends);
+        Pixel(deep,30,30,Colors.Black,"deep empty groups retain initial fill");
+        Pixel(deep,19,30,Colors.Transparent,"deep empty groups retain initial stroke none");
+        deep=Svg("<g fill='red' stroke='blue' stroke-width='4'>"+groups+"<rect x='20' y='20' width='20' height='20'/>"+ends+"</g>");
+        Pixel(deep,30,30,Colors.Red,"deep groups inherit fill");
+        Pixel(deep,19,30,Colors.Blue,"deep groups inherit stroke");
         var d = Svg("<rect width='100' height='100' fill='red' clip-path='url(#c)'/><defs><clipPath id='c'><path d='M10 10H50V50H10Z'/></clipPath></defs>");
         Pixel(d,20,20,Colors.Red,"path clipping with forward reference"); Pixel(d,60,20,Colors.Transparent,"path clipping exterior");
         d=Svg("<clipPath id='c'><rect x='20' y='30' width='20' height='20'/></clipPath><rect width='100' height='100' fill='red' clip-path='url(#c)'/>");

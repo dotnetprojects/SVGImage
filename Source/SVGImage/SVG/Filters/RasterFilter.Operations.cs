@@ -43,9 +43,10 @@ namespace SVGImage.SVG.Filters
             for (int i = 0; i < output.Data.Length; i += 4)
             {
                 double sa = source.Data[i + 3], ba = backdrop.Data[i + 3];
-                var s = new double[3]; var b = new double[3];
-                for (int c = 0; c < 3; c++) { s[c] = sa > 0 ? source.Data[i + c] / sa : 0; b[c] = ba > 0 ? backdrop.Data[i + c] / ba : 0; }
-                double[] nonseparable = null;
+                var s = new Rgb(sa > 0 ? source.Data[i] / sa : 0, sa > 0 ? source.Data[i+1] / sa : 0, sa > 0 ? source.Data[i+2] / sa : 0);
+                var b = new Rgb(ba > 0 ? backdrop.Data[i] / ba : 0, ba > 0 ? backdrop.Data[i+1] / ba : 0, ba > 0 ? backdrop.Data[i+2] / ba : 0);
+                var nonseparable = s;
+                bool useNonseparable = mode == "hue" || mode == "saturation" || mode == "color" || mode == "luminosity";
                 if (mode == "hue") nonseparable = SetLum(SetSat(s, Sat(b)), Lum(b));
                 else if (mode == "saturation") nonseparable = SetLum(SetSat(b, Sat(s)), Lum(b));
                 else if (mode == "color") nonseparable = SetLum(s, Lum(b));
@@ -67,26 +68,36 @@ namespace SVGImage.SVG.Filters
                         case "difference": value = Math.Abs(bc - sc); break;
                         case "exclusion": value = bc + sc - 2 * bc * sc; break;
                     }
-                    if (nonseparable != null) value = nonseparable[c];
+                    if (useNonseparable) value = nonseparable[c];
                     output.Data[i + c] = (float)Clamp((1 - sa) * backdrop.Data[i + c] + (1 - ba) * source.Data[i + c] + sa * ba * value);
                 }
                 output.Data[i + 3] = (float)(sa + ba - sa * ba);
             }
         }
-        private static double Lum(double[] color) => .3 * color[0] + .59 * color[1] + .11 * color[2];
-        private static double Sat(double[] color) => color.Max() - color.Min();
-        private static double[] SetLum(double[] color, double lum)
+        // Small value types keep blend color arithmetic off the managed heap.
+        private struct Rgb
         {
-            double delta = lum - Lum(color); var result = color.Select(v => v + delta).ToArray();
-            double min = result.Min(), max = result.Max();
-            if (min < 0) for (int c = 0; c < 3; c++) result[c] = lum + (result[c] - lum) * lum / (lum - min);
-            if (max > 1) for (int c = 0; c < 3; c++) result[c] = lum + (result[c] - lum) * (1 - lum) / (max - lum);
+            internal double R, G, B;
+            internal Rgb(double r, double g, double b) { R=r; G=g; B=b; }
+            internal double this[int channel] => channel==0 ? R : channel==1 ? G : B;
+            internal double Min => Math.Min(R,Math.Min(G,B));
+            internal double Max => Math.Max(R,Math.Max(G,B));
+        }
+        private static double Lum(Rgb color) => .3 * color.R + .59 * color.G + .11 * color.B;
+        private static double Sat(Rgb color) => color.Max - color.Min;
+        private static Rgb SetLum(Rgb color, double lum)
+        {
+            double delta=lum-Lum(color);
+            var result=new Rgb(color.R+delta,color.G+delta,color.B+delta);
+            double min=result.Min, max=result.Max;
+            if(min<0) result=new Rgb(lum+(result.R-lum)*lum/(lum-min),lum+(result.G-lum)*lum/(lum-min),lum+(result.B-lum)*lum/(lum-min));
+            if(max>1) result=new Rgb(lum+(result.R-lum)*(1-lum)/(max-lum),lum+(result.G-lum)*(1-lum)/(max-lum),lum+(result.B-lum)*(1-lum)/(max-lum));
             return result;
         }
-        private static double[] SetSat(double[] color, double sat)
+        private static Rgb SetSat(Rgb color, double sat)
         {
-            double min = color.Min(), max = color.Max();
-            return color.Select(v => max > min ? (v - min) * sat / (max - min) : 0).ToArray();
+            double min=color.Min, max=color.Max;
+            return max>min ? new Rgb((color.R-min)*sat/(max-min),(color.G-min)*sat/(max-min),(color.B-min)*sat/(max-min)) : new Rgb();
         }
         private Frame Blur(XmlNode node, Frame input)
         {
@@ -98,6 +109,7 @@ namespace SVGImage.SVG.Filters
         private Frame BlurAxes(Frame input, double sigmaX, double sigmaY, string edge)
         {
             var result = input;
+            Frame first=null, second=null;
             for (int axis = 0; axis < 2; axis++)
             {
                 double sigma = axis == 0 ? sigmaX : sigmaY;
@@ -110,15 +122,24 @@ namespace SVGImage.SVG.Filters
                 lower = Math.Max(1, lower);
                 int upper = lower + 2;
                 int small = (int)Math.Round((12 * sigma * sigma - 3 * lower * lower - 12 * lower - 9) / (-4 * lower - 4));
-                for (int pass = 0; pass < 3; pass++) result = BoxBlur(result, (pass < small ? lower : upper) / 2, axis == 0, edge);
+                for (int pass = 0; pass < 3; pass++)
+                {
+                    int radius=(pass<small ? lower : upper)/2;
+                    if(radius==0) continue;
+                    // Alternate two private scratch buffers. Neither aliases the
+                    // graph input, which may still be referenced by another result.
+                    Frame target;
+                    if(ReferenceEquals(result,first))
+                        target=second ?? (second=new Frame(input.Data.Length,input.Linear));
+                    else target=first ?? (first=new Frame(input.Data.Length,input.Linear));
+                    result=BoxBlur(result,radius,axis==0,edge,target);
+                }
             }
             if (ReferenceEquals(result, input)) { result = new Frame(input.Data.Length, input.Linear); Array.Copy(input.Data, result.Data, input.Data.Length); }
             return result;
         }
-        private Frame BoxBlur(Frame input, int radius, bool horizontal, string edge)
+        private Frame BoxBlur(Frame input, int radius, bool horizontal, string edge, Frame output)
         {
-            if (radius == 0) return input;
-            var output = new Frame(input.Data.Length, input.Linear);
             int length = horizontal ? width : height, lines = horizontal ? height : width;
             bool duplicate = edge == "duplicate", wrap = edge == "wrap";
             double divisor = 2.0 * radius + 1;
@@ -129,7 +150,11 @@ namespace SVGImage.SVG.Filters
             {
                 if (horizontal) Array.Copy(input.Data, line * width * 4, scan, 0, scan.Length);
                 else for (int at = 0; at < length; at++)
-                    Array.Copy(input.Data, (at * width + line) * 4, scan, at * 4, 4);
+                {
+                    int source=(at*width+line)*4, target=at*4;
+                    scan[target]=input.Data[source]; scan[target+1]=input.Data[source+1];
+                    scan[target+2]=input.Data[source+2]; scan[target+3]=input.Data[source+3];
+                }
                 double r = 0, g = 0, b = 0, a = 0;
                 for (int at = 0; at < length; at++)
                 {

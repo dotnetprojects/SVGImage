@@ -58,6 +58,8 @@ Standalone filters and chains support named results, `SourceGraphic` / `SourceAl
 
 Element opacity is applied **after** filtering. Fill/stroke opacity is part of `SourceGraphic`.
 
+[Performance notes](Performance.md) cover measured improvements, benchmark reproduction and quality controls.
+
 Raster filters sample inputs **at load time**. Animating their source/parameters does not refresh the bitmap. Single matrix/saturation filters can retain vector paints with animation enabled. `SVGRender.RasterizationScale` sets pixels per user unit (default four), capped at 2048 pixels on the longest dimension. Default lighting derivatives are pixel based, so lighting changes with the sampling resolution; set the scale to the intended output resolution when comparing reference images.
 
 Backdrops use the SVG 1.1 `enable-background` model: an ancestor `new` enables capture; `accumulate` preserves the buffer; nested `new` resets it. Optional `new x y width height` clips the captured region. Filters see preceding siblings in their coordinate space, before ancestor group opacity/filter/clip/mask composition. Explicit `inherit` inherits the parent value, including a `new` reset. This does not implement CSS `backdrop-filter` on HTML.

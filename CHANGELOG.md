@@ -8,6 +8,12 @@ These entries describe the current repository source. They have not been assigne
 
 ### 2026-11-03
 
+#### Performance
+
+- Remove per-pixel color-matrix/blend allocations; avoid repeated empty paint-ancestor traversal; reuse two private blur scratch buffers; materialize alpha inputs on demand; skip unused input conversions, discarded output frames and redundant full-region clipping. Preserve default sampling quality and shared filter inputs.
+- Same-host .NET 8 measurements (five-iteration medians): car load 5.82 s → 4.69 s and cumulative managed allocation 3.11 GB → 1.38 GB; color-matrix allocations 169 MB → 38 MB; hue-blend allocations 530 MB → 54 MB. All twelve output pixel hashes match the baseline. Results are workload/machine specific; raw data and methodology are recorded in the performance guide.
+- Add a reproducible .NET 8 STA benchmark for twelve synthetic/real workloads with elapsed time, managed allocation and pixel hashes, plus a performance guide. Add deep-inheritance and shared-blur-input regressions.
+
 #### Fixed
 
 - [#123](https://github.com/dotnetprojects/SVGImage/issues/123): setting `stroke-width` or other stroke properties without a stroke paint no longer introduces a black outline. The initial paint remains `none`. Stroke paint, width, opacity, dash array, caps and joins inherit independently, including through `use` instances; explicit `none`/dash resets remain local. Added the issue's exact rectangle and focused inheritance/pixel regressions.

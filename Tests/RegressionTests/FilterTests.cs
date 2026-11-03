@@ -30,9 +30,22 @@ internal static class FilterTests
         GeometryTests.Pixel(renderer.CreateDrawing(renderer.SVG),50,50,Colors.Transparent,"full pass restores mask filters");
     }
 
+    private static void SharedBlurInputs()
+    {
+        const string shape="<rect x='20' y='20' width='60' height='60' fill='#4080c0' fill-opacity='.5' filter='url(#f)'/>";
+        const string start="<filter id='f' filterUnits='userSpaceOnUse' x='0' y='0' width='100' height='100'>";
+        var baseline=Image(start+"<feOffset/></filter>"+shape);
+        foreach(string graph in new[]{
+            "<feGaussianBlur stdDeviation='4'/><feGaussianBlur stdDeviation='2'/><feOffset in='SourceGraphic'/>",
+            "<feOffset result='saved'/><feGaussianBlur in='saved' stdDeviation='4'/><feGaussianBlur stdDeviation='2'/><feOffset in='saved'/>"})
+            if(!baseline.SequenceEqual(Image(start+graph+"</filter>"+shape)))
+                throw new Exception("Blur scratch buffers must not mutate shared source/named results");
+    }
+
     internal static void Run()
     {
         FilterPreview();
+        SharedBlurInputs();
         var d=GeometryTests.Svg("<filter id='f' x='0' y='0' width='1' height='1' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise'/></filter><rect width='100' height='100' filter='url(#f)'/>");
         GeometryTests.Pixel(d,50,50,Color.FromArgb(128,128,128,128),"zero-frequency fractal noise in sRGB",2);
         d=GeometryTests.Svg("<filter id='f' x='0' y='0' width='1' height='1'><feTurbulence type='fractalNoise'/></filter><rect width='100' height='100' filter='url(#f)'/>");

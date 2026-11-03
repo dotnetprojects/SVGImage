@@ -65,11 +65,11 @@ namespace SVGImage.SVG.Filters
             if (filterRegion.IsEmpty || region.IsEmpty || unitX <= 0 || unitY <= 0) return new DrawingGroup();
             var graphic = Rasterize(source, false, filterRegion);
             var bytes = new byte[width * height * 4];
-            var images = new Dictionary<string, Frame> { { "SourceGraphic", graphic }, { "SourceAlpha", Alpha(graphic) } };
+            var images = new Dictionary<string, Frame> { { "SourceGraphic", graphic } };
             if (filter.SelectNodes(".//*[@in='BackgroundImage' or @in='BackgroundAlpha' or @in2='BackgroundImage' or @in2='BackgroundAlpha']").Count > 0)
             {
                 var backdrop = Rasterize(background, false, filterRegion);
-                images["BackgroundImage"] = backdrop; images["BackgroundAlpha"] = Alpha(backdrop);
+                images["BackgroundImage"] = backdrop;
             }
             Frame previous = graphic;
             foreach (XmlNode node in filter.ChildNodes)
@@ -78,16 +78,20 @@ namespace SVGImage.SVG.Filters
                 var styles = svg.StyleSheet.Resolve(node);
                 string space = Style(node, "color-interpolation-filters", "linearRGB", true);
                 bool linear = space != "sRGB";
-                Frame input = Input(images, Attr(node, "in"), previous, linear), second = Input(images, Attr(node, "in2"), previous, linear);
-                var output = new Frame(bytes.Length, linear);
+                bool generator = node.LocalName == "feFlood" || node.LocalName == "feTurbulence" || node.LocalName == "feImage";
+                Frame input = generator ? previous : Input(images, Attr(node, "in"), previous, linear);
+                Frame second = node.LocalName == "feBlend" || node.LocalName == "feComposite" || node.LocalName == "feDisplacementMap"
+                    ? Input(images, Attr(node, "in2"), previous, linear) : null;
+                Frame output = node.LocalName == "feGaussianBlur" || node.LocalName == "feMorphology" || node.LocalName == "feImage" ? null : new Frame(bytes.Length, linear);
                 switch (node.LocalName)
                 {
                     case "feDiffuseLighting": Lighting(node,input,output,false); break;
                     case "feSpecularLighting": Lighting(node,input,output,true); break;
                     case "feImage":
                         var imageArea = Region(node,filterRegion,false);
-                        if (renderer != null && !imageArea.IsEmpty)
-                            output = Rasterize(renderer.RenderFilterImage(node,imageArea,unitX,unitY),linear,imageArea);
+                        output = renderer != null && !imageArea.IsEmpty
+                            ? Rasterize(renderer.RenderFilterImage(node,imageArea,unitX,unitY),linear,imageArea)
+                            : new Frame(bytes.Length,linear);
                         break;
                     case "feTurbulence": Noise(node, output); break;
                     case "feDisplacementMap":
@@ -104,10 +108,12 @@ namespace SVGImage.SVG.Filters
                         Color flood; if (color == "currentColor") color = Style(node, "color", "black", true);
                         if (!CssColor.TryParse(color ?? "black", out flood)) flood = Colors.Black;
                         double fa = Clamp(flood.A / 255.0 * (opacity == null ? 1 : XmlUtil.GetDoubleValue(opacity, 1)));
+                        float fr=(float)(fa*(linear ? ConvertColor(flood.R/255.0,true) : flood.R/255.0));
+                        float fg=(float)(fa*(linear ? ConvertColor(flood.G/255.0,true) : flood.G/255.0));
+                        float fb=(float)(fa*(linear ? ConvertColor(flood.B/255.0,true) : flood.B/255.0));
                         for (int i = 0; i < output.Data.Length; i += 4)
                         {
-                            output.Data[i] = (float)(fa * (linear ? ConvertColor(flood.R / 255.0, true) : flood.R / 255.0)); output.Data[i + 1] = (float)(fa * (linear ? ConvertColor(flood.G / 255.0, true) : flood.G / 255.0));
-                            output.Data[i + 2] = (float)(fa * (linear ? ConvertColor(flood.B / 255.0, true) : flood.B / 255.0)); output.Data[i + 3] = (float)fa;
+                            output.Data[i]=fr; output.Data[i+1]=fg; output.Data[i+2]=fb; output.Data[i+3]=(float)fa;
                         }
                         break;
                     case "feOffset":
@@ -136,8 +142,10 @@ namespace SVGImage.SVG.Filters
                 Rect clip = Region(node, defaultArea, false);
                 clip.Intersect(region);
                 output.Area = clip;
-                for (int y = 0; y < height; y++) for (int x = 0; x < width; x++)
-                    if (!clip.Contains(region.X + (x + .5) / sx, region.Y + (y + .5) / sy)) Array.Clear(output.Data, (y * width + x) * 4, 4);
+                if(clip.IsEmpty) Array.Clear(output.Data,0,output.Data.Length);
+                else if(!clip.Contains(region))
+                    for (int y = 0; y < height; y++) for (int x = 0; x < width; x++)
+                        if (!clip.Contains(region.X + (x + .5) / sx, region.Y + (y + .5) / sy)) Array.Clear(output.Data, (y * width + x) * 4, 4);
                 previous = output;
                 string result = Attr(node, "result"); if (result.Length > 0) images[result] = output;
             }
@@ -181,7 +189,15 @@ namespace SVGImage.SVG.Filters
         private Frame Input(Dictionary<string, Frame> images, string name, Frame previous, bool linear)
         {
             Frame frame;
-            return ConvertFrame(name.Length == 0 ? previous : images.TryGetValue(name, out frame) ? frame : new Frame(previous.Data.Length, linear), linear);
+            if(name.Length==0) frame=previous;
+            else if(!images.TryGetValue(name,out frame))
+            {
+                Frame color;
+                if((name=="SourceAlpha" || name=="BackgroundAlpha") && images.TryGetValue(name=="SourceAlpha" ? "SourceGraphic" : "BackgroundImage",out color))
+                    images[name]=frame=Alpha(color);
+                else frame=new Frame(previous.Data.Length,linear);
+            }
+            return ConvertFrame(frame,linear);
         }
         private static double Clamp(double v) => Math.Max(0, Math.Min(1, v));
         private static byte Byte(double v) => (byte)Math.Round(255 * Clamp(v));
@@ -261,11 +277,15 @@ namespace SVGImage.SVG.Filters
             if (m.Length != 20) { Array.Copy(input.Data, output.Data, input.Data.Length); return; }
             for (int i = 0; i < input.Data.Length; i += 4)
             {
-                double a = input.Data[i + 3]; var values = new[] { a > 0 ? input.Data[i] / a : 0, a > 0 ? input.Data[i + 1] / a : 0, a > 0 ? input.Data[i + 2] / a : 0, a, 1 };
-                var result = new double[4];
-                for (int r = 0; r < 4; r++) { for (int c = 0; c < 5; c++) result[r] += m[r * 5 + c] * values[c]; result[r] = Clamp(result[r]); }
-                for (int c = 0; c < 3; c++) output.Data[i + c] = (float)(result[c] * result[3]); output.Data[i + 3] = (float)result[3];
+                double a=input.Data[i+3], r=a>0 ? input.Data[i]/a : 0, g=a>0 ? input.Data[i+1]/a : 0, b=a>0 ? input.Data[i+2]/a : 0;
+                double alpha=MatrixChannel(m,15,r,g,b,a);
+                output.Data[i]=(float)(MatrixChannel(m,0,r,g,b,a)*alpha);
+                output.Data[i+1]=(float)(MatrixChannel(m,5,r,g,b,a)*alpha);
+                output.Data[i+2]=(float)(MatrixChannel(m,10,r,g,b,a)*alpha);
+                output.Data[i+3]=(float)alpha;
             }
         }
+        private static double MatrixChannel(double[] matrix,int row,double r,double g,double b,double a)
+            => Clamp(matrix[row]*r+matrix[row+1]*g+matrix[row+2]*b+matrix[row+3]*a+matrix[row+4]);
     }
 }
