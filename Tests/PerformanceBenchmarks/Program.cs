@@ -14,7 +14,9 @@ internal static class Program
     [STAThread]
     private static void Main(string[] args)
     {
-        string repo=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"../../../../../"));
+        string repo=Environment.GetEnvironmentVariable("SVG_PERF_REPOSITORY") ?? Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"../../../../../"));
+        if(args.Length>0 && args[0]=="cold-car-child") {ColdCarBenchmarks.Child(args[1]);return;}
+        if(args.Length>0 && args[0]=="cold-car") {ColdCarBenchmarks.Run(repo,args.Length>1 ? int.Parse(args[1]) : 5,args.Length>2 ? args[2] : null);return;}
         int iterations=args.Length>0?int.Parse(args[0]):5;
         if(iterations<1) throw new ArgumentOutOfRangeException(nameof(iterations));
         bool carOnly=args.Length>1 && args[1]=="car";
@@ -75,7 +77,7 @@ internal static class Program
         Array.Sort(times); Array.Sort(allocations);
         Console.WriteLine(JsonSerializer.Serialize(new {name,iterations,medianMilliseconds=times[iterations/2],allocatedBytes=allocations[iterations/2],pixelHash=Convert.ToHexString(SHA256.HashData(pixels)),fullPixelHash=Convert.ToHexString(SHA256.HashData(fullPixels)),filterBitmapHash=bitmapHash,bitmapCount=hashes.Count}));
     }
-    private static void BitmapHashes(Drawing drawing,System.Collections.Generic.List<string> hashes)
+    internal static void BitmapHashes(Drawing drawing,System.Collections.Generic.List<string> hashes)
     {
         if(drawing is DrawingGroup group)
             foreach(var child in group.Children) BitmapHashes(child,hashes);

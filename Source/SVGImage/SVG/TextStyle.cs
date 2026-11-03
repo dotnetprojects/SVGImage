@@ -12,7 +12,9 @@ namespace SVGImage.SVG
     using System.Windows.Media;
     public sealed class TextStyle
     {
-        private static readonly FontResolver _fontResolver = new FontResolver(0);
+        // Most SVGs contain only geometry. Build the system font catalog only
+        // when text actually needs a typeface, retaining one thread-safe resolver.
+        private static readonly Lazy<FontResolver> _fontResolver = new Lazy<FontResolver>(() => new FontResolver(0));
         //This should be configurable in some way.
         private static readonly TextStyle _defaults = new TextStyle()
         {
@@ -54,7 +56,7 @@ namespace SVGImage.SVG
 
         public Typeface GetTypeface()
         {
-            var fontFamily = _fontResolver.ResolveFontFamily(FontFamily);
+            var fontFamily = _fontResolver.Value.ResolveFontFamily(FontFamily);
             return new Typeface(fontFamily,
             Fontstyle,
             Fontweight,

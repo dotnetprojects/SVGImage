@@ -59,6 +59,24 @@ A separate fresh-process progressive-loading check published its unfiltered prev
 
 These are elapsed-time medians with a warmup, not a guarantee for every host or cold start. Allocation counters cover the caller thread; worker-thread bookkeeping, native buffers and GPU allocations are excluded. In particular, the allocation columns are not peak-memory measurements. The benchmark runs complete baseline and candidate processes serially without other builds/tests running.
 
+## Cold progressive startup
+
+Cold startup now has a separate fresh-process benchmark. Each child times its first parse, unfiltered preview, freeze and complete filtered render on a background STA. The parent stamps preview/full readiness events before validation and hashing. Baseline and candidate binaries use the same drive and alternate trial order. OS disk/font caches are retained.
+
+Five paired .NET 8 trials against `06c5cca` on this host:
+
+| Metric | Before | After |
+| --- | ---: | ---: |
+| First full pipeline | 2.18 s | 1.52 s |
+| Process launch to full readiness | 2.30 s | 1.63 s |
+| Pipeline preview readiness | 262 ms | 289 ms |
+
+The measured gain comes from optimized first-call code for the byte/color kernels and blur kernels on the current .NET 6/7/8 targets. Geometry-only documents also defer the managed font catalog until text requests a typeface; their text-style inheritance stays intact. Ordinary CSS values skip unnecessary importance-pattern matching.
+
+This policy favors first filtered readiness. It bypasses tiered compilation for seven pure numeric methods; the rest of the library uses its normal runtime policy. Warmed measurements varied across runs. The recorded same-drive warmed car load was 1.52 s → 1.08 s, while redraw was 1.07 s → 1.21 s. These results include a warmed redraw tradeoff and do not imply uniformly faster steady-state rendering. Older target frameworks retain their usual JIT behavior.
+
+All five previews and full 900×600 car images match, including all 70 native filter bitmaps. All twelve warmed benchmark workloads also retain matching thumbnail, 900×600 and native-bitmap hashes. The cold trials render frozen drawings across threads; validation runs after the readiness event. [Raw cold/warm checks and per-phase samples](https://github.com/dotnetprojects/SVGImage/blob/master/Tests/PerformanceBenchmarks/results/2026-11-03-cold-start-net8.json).
+
 ## Reproduce
 
 ```powershell

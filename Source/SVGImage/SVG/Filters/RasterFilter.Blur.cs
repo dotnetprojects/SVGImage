@@ -52,6 +52,9 @@ namespace SVGImage.SVG.Filters
             if(ReferenceEquals(current,first)) return second ?? (second=new Frame(current.Data.Length,current.Linear));
             return first ?? (first=new Frame(current.Data.Length,current.Linear));
         }
+#if NETNEXT
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveOptimization)]
+#endif
         private static void Transpose(Frame input,Frame output,int columns,int rows)
         {
             const int tile=16;
@@ -77,6 +80,9 @@ namespace SVGImage.SVG.Filters
                 else BlurGrayRow(input.Data,output.Data,line*length*4,length,radius,duplicate,wrap,divisor,channels);
             });
         }
+#if NETNEXT
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveOptimization)]
+#endif
         private static int BlurChannels(float[] data)
         {
             bool black=true,white=true;
@@ -89,6 +95,9 @@ namespace SVGImage.SVG.Filters
             }
             return black ? 1 : white ? 2 : 3;
         }
+#if NETNEXT
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveOptimization)]
+#endif
         private static void BlurGrayRow(float[] input,float[] output,int start,int length,int radius,bool duplicate,bool wrap,double divisor,int channels)
         {
             // Black and white height maps require only alpha; other gray maps
@@ -137,6 +146,9 @@ namespace SVGImage.SVG.Filters
                 for(int row=0;row<rows;row++) action(row);
             else Parallel.For(0,rows,NumericWorkers,action);
         }
+#if NETNEXT
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveOptimization)]
+#endif
         private static void BlurRow(float[] input,float[] output,int start,int length,int radius,bool duplicate,bool wrap,double divisor)
         {
             double r=0,g=0,b=0,a=0;

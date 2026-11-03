@@ -1,0 +1,370 @@
+{
+  "date": "2026-11-03",
+  "baselineCommit": "06c5cca",
+  "framework": "net8.0-windows",
+  "trialsPerVariant": 5,
+  "method": "Alternating AB/BA fresh-process pairs. Baseline and candidate binaries copied to the same drive; both read the same car file. First parse, preview, freeze and filtered render are timed, with no rendering warmup. OS caches are retained. Parent process-to-ready measures receipt of progress events, before image validation/hashing.",
+  "medianMilliseconds": {
+    "baseline": {
+      "processToPreviewMilliseconds": 374.1036,
+      "processToFullMilliseconds": 2295.5215,
+      "phases": {
+        "rendererMilliseconds": 2.1067,
+        "parseMilliseconds": 188.7993,
+        "previewDrawMilliseconds": 60.69909999999999,
+        "previewFreezeMilliseconds": 10.208200000000005,
+        "fullDrawMilliseconds": 1905.9768,
+        "fullFreezeMilliseconds": 7.542300000000068,
+        "previewReadyMilliseconds": 262.0667,
+        "fullReadyMilliseconds": 2184.3222
+      }
+    },
+    "candidate": {
+      "processToPreviewMilliseconds": 400.6817,
+      "processToFullMilliseconds": 1628.6614,
+      "phases": {
+        "rendererMilliseconds": 2.5664,
+        "parseMilliseconds": 216.6677,
+        "previewDrawMilliseconds": 59.34370000000001,
+        "previewFreezeMilliseconds": 10.51339999999999,
+        "fullDrawMilliseconds": 1214.2946000000002,
+        "fullFreezeMilliseconds": 13.658999999999878,
+        "previewReadyMilliseconds": 288.7173,
+        "fullReadyMilliseconds": 1517.846
+      }
+    }
+  },
+  "samples": [
+    {
+      "iteration": 1,
+      "variant": "baseline",
+      "processToPreviewMilliseconds": 431.5067,
+      "processToFullMilliseconds": 2255.0092,
+      "sample": {
+        "rendererMilliseconds": 3.8895999999999997,
+        "parseMilliseconds": 218.62470000000002,
+        "previewDrawMilliseconds": 68.0409,
+        "previewFreezeMilliseconds": 11.64349999999996,
+        "fullDrawMilliseconds": 1825.7158000000002,
+        "fullFreezeMilliseconds": 4.675899999999729,
+        "previewReadyMilliseconds": 303.6393,
+        "fullReadyMilliseconds": 2135.0126,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    },
+    {
+      "iteration": 1,
+      "variant": "candidate",
+      "processToPreviewMilliseconds": 400.6817,
+      "processToFullMilliseconds": 1628.6614,
+      "sample": {
+        "rendererMilliseconds": 1.9768000000000003,
+        "parseMilliseconds": 216.6677,
+        "previewDrawMilliseconds": 59.34370000000001,
+        "previewFreezeMilliseconds": 9.949400000000026,
+        "fullDrawMilliseconds": 1214.2946000000002,
+        "fullFreezeMilliseconds": 13.658999999999878,
+        "previewReadyMilliseconds": 288.7173,
+        "fullReadyMilliseconds": 1517.846,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    },
+    {
+      "iteration": 2,
+      "variant": "candidate",
+      "processToPreviewMilliseconds": 501.4859,
+      "processToFullMilliseconds": 1762.2869,
+      "sample": {
+        "rendererMilliseconds": 2.5664,
+        "parseMilliseconds": 259.3337,
+        "previewDrawMilliseconds": 89.95850000000002,
+        "previewFreezeMilliseconds": 14.149100000000033,
+        "fullDrawMilliseconds": 1247.1567,
+        "fullFreezeMilliseconds": 13.601200000000063,
+        "previewReadyMilliseconds": 367.048,
+        "fullReadyMilliseconds": 1628.958,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    },
+    {
+      "iteration": 2,
+      "variant": "baseline",
+      "processToPreviewMilliseconds": 402.3541,
+      "processToFullMilliseconds": 2058.4025,
+      "sample": {
+        "rendererMilliseconds": 2.2021,
+        "parseMilliseconds": 209.8036,
+        "previewDrawMilliseconds": 66.74350000000001,
+        "previewFreezeMilliseconds": 10.794100000000014,
+        "fullDrawMilliseconds": 1644.5045999999998,
+        "fullFreezeMilliseconds": 11.49720000000002,
+        "previewReadyMilliseconds": 290.315,
+        "fullReadyMilliseconds": 1947.2738,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    },
+    {
+      "iteration": 3,
+      "variant": "baseline",
+      "processToPreviewMilliseconds": 374.1036,
+      "processToFullMilliseconds": 2295.5215,
+      "sample": {
+        "rendererMilliseconds": 2.0846,
+        "parseMilliseconds": 188.1554,
+        "previewDrawMilliseconds": 60.69909999999999,
+        "previewFreezeMilliseconds": 10.094400000000007,
+        "fullDrawMilliseconds": 1905.9768,
+        "fullFreezeMilliseconds": 15.34310000000005,
+        "previewReadyMilliseconds": 262.0667,
+        "fullReadyMilliseconds": 2184.3222,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    },
+    {
+      "iteration": 3,
+      "variant": "candidate",
+      "processToPreviewMilliseconds": 363.8993,
+      "processToFullMilliseconds": 1551.056,
+      "sample": {
+        "rendererMilliseconds": 2.6719,
+        "parseMilliseconds": 188.84629999999999,
+        "previewDrawMilliseconds": 57.32599999999999,
+        "previewFreezeMilliseconds": 10.51339999999999,
+        "fullDrawMilliseconds": 1172.5795,
+        "fullFreezeMilliseconds": 14.510099999999966,
+        "previewReadyMilliseconds": 260.2416,
+        "fullReadyMilliseconds": 1448.3237,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    },
+    {
+      "iteration": 4,
+      "variant": "candidate",
+      "processToPreviewMilliseconds": 361.1165,
+      "processToFullMilliseconds": 1530.8757,
+      "sample": {
+        "rendererMilliseconds": 1.9746000000000001,
+        "parseMilliseconds": 182.924,
+        "previewDrawMilliseconds": 57.726200000000006,
+        "previewFreezeMilliseconds": 10.169200000000018,
+        "fullDrawMilliseconds": 1154.9180999999999,
+        "fullFreezeMilliseconds": 14.728399999999965,
+        "previewReadyMilliseconds": 253.5016,
+        "fullReadyMilliseconds": 1424.0759,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    },
+    {
+      "iteration": 4,
+      "variant": "baseline",
+      "processToPreviewMilliseconds": 363.0734,
+      "processToFullMilliseconds": 2357.0686,
+      "sample": {
+        "rendererMilliseconds": 2.1067,
+        "parseMilliseconds": 188.7993,
+        "previewDrawMilliseconds": 57.8639,
+        "previewFreezeMilliseconds": 10.208200000000005,
+        "fullDrawMilliseconds": 1988.2292,
+        "fullFreezeMilliseconds": 5.728500000000167,
+        "previewReadyMilliseconds": 259.77,
+        "fullReadyMilliseconds": 2254.7433,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    },
+    {
+      "iteration": 5,
+      "variant": "baseline",
+      "processToPreviewMilliseconds": 366.5257,
+      "processToFullMilliseconds": 2894.0889,
+      "sample": {
+        "rendererMilliseconds": 1.9668,
+        "parseMilliseconds": 187.4024,
+        "previewDrawMilliseconds": 58.16409999999999,
+        "previewFreezeMilliseconds": 10.003900000000016,
+        "fullDrawMilliseconds": 2519.8867,
+        "fullFreezeMilliseconds": 7.542300000000068,
+        "previewReadyMilliseconds": 258.3451,
+        "fullReadyMilliseconds": 2787.0533,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    },
+    {
+      "iteration": 5,
+      "variant": "candidate",
+      "processToPreviewMilliseconds": 866.0412,
+      "processToFullMilliseconds": 4489.3604,
+      "sample": {
+        "rendererMilliseconds": 7.3187999999999995,
+        "parseMilliseconds": 406.8349,
+        "previewDrawMilliseconds": 181.37039999999996,
+        "previewFreezeMilliseconds": 63.709299999999985,
+        "fullDrawMilliseconds": 3611.8132,
+        "fullFreezeMilliseconds": 11.14050000000043,
+        "previewReadyMilliseconds": 660.6847,
+        "fullReadyMilliseconds": 4309.4451,
+        "previewPixelHash": "411A8EB6049B5C47D7401294D21E794759841B9FEF4DCC3D29D997EB4227821D",
+        "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+        "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+        "bitmapCount": 70
+      }
+    }
+  ],
+  "warmCarBaseline": [
+    {
+      "name": "171.svg load",
+      "iterations": 5,
+      "medianMilliseconds": 1522.4139,
+      "allocatedBytes": 638652040,
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E",
+      "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+      "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+      "bitmapCount": 70
+    },
+    {
+      "name": "171.svg redraw",
+      "iterations": 5,
+      "medianMilliseconds": 1067.0356,
+      "allocatedBytes": 628265856,
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E",
+      "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+      "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+      "bitmapCount": 70
+    }
+  ],
+  "warmCarCandidate": [
+    {
+      "name": "171.svg load",
+      "iterations": 5,
+      "medianMilliseconds": 1080.1956,
+      "allocatedBytes": 638861024,
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E",
+      "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+      "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+      "bitmapCount": 70
+    },
+    {
+      "name": "171.svg redraw",
+      "iterations": 5,
+      "medianMilliseconds": 1211.6624,
+      "allocatedBytes": 628282256,
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E",
+      "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+      "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+      "bitmapCount": 70
+    }
+  ],
+  "warmCorrectnessChecks": [
+    {
+      "name": "nested groups 16",
+      "pixelHash": "D0A982CE75B70626E1B580B84D00F0729DE70D9AAC43710EC398822E41300C8E",
+      "fullPixelHash": "E9D3E6C29EA7DD0BA412EFE2E9FCBC401B114E95CB12ACBBE14D196A38D5A495",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "nested groups 20",
+      "pixelHash": "D0A982CE75B70626E1B580B84D00F0729DE70D9AAC43710EC398822E41300C8E",
+      "fullPixelHash": "E9D3E6C29EA7DD0BA412EFE2E9FCBC401B114E95CB12ACBBE14D196A38D5A495",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "color matrix",
+      "pixelHash": "167516A4F5BF21A654BB403AFAF34F57B5E5371E7319DD8B1594A15464016B30",
+      "fullPixelHash": "D4E6BBED6DD082F6F049C3E22ACC2FD3813A4E89E8523B4B4F7CCDC67E80A979",
+      "filterBitmapHash": "F9E577C55E7842429B8C3A15C20DF6B9C269224779604CB860118D8E3DEE5394",
+      "bitmapCount": 1
+    },
+    {
+      "name": "multiply blend",
+      "pixelHash": "F62338490C6A28FF638D8364C4D0AFDB7A129694BB55503E464A200D1B3A16C9",
+      "fullPixelHash": "DE32FEB0803ACDFCAD24DB8A8B6CE1831E4138E78F0E8998EAE2820DABBDD15B",
+      "filterBitmapHash": "0BA7C94264EAD3824446EE47C4334BAAEDB19B32FB64D08AE4363704DBD740A6",
+      "bitmapCount": 1
+    },
+    {
+      "name": "hue blend",
+      "pixelHash": "7095AF7B8BC9F362932F893C1DF1CA7581A5C5E76FA3CE4862DC3B5CFDF19A3E",
+      "fullPixelHash": "34559CDE8769013BD2AB363BC8AF1EE4DA934E24D9283DE70E82813405512483",
+      "filterBitmapHash": "8B202661E9D75AB5D75F1B0DCB910E541DA4B9ED89E643A97A33BB349C443F09",
+      "bitmapCount": 1
+    },
+    {
+      "name": "linear filter chain",
+      "pixelHash": "242131CB688A6FB90AD75C2EB350E616CD364A0AB07A9F9DF7EAC4A02A801F81",
+      "fullPixelHash": "86BA80B90DB4C23F6DD82A03EFAE59EC403EEAB099C884EE891735253DECA3CD",
+      "filterBitmapHash": "5F45CC1E972FAF3395F3A8B6EE2326EF93BDE6B5F846A75E36FA624282BDBA7D",
+      "bitmapCount": 1
+    },
+    {
+      "name": "tiger.svg load",
+      "pixelHash": "B6DE4D3F3EC248EDADA93FBECF8B49BABFCD1D9FB3EF5B10C3AB65099D5BF877",
+      "fullPixelHash": "889355BD32F6CE5009A3E70D7CA66AC560667E3DE4723BD87B0E828996144447",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "tiger.svg redraw",
+      "pixelHash": "B6DE4D3F3EC248EDADA93FBECF8B49BABFCD1D9FB3EF5B10C3AB65099D5BF877",
+      "fullPixelHash": "889355BD32F6CE5009A3E70D7CA66AC560667E3DE4723BD87B0E828996144447",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "acid1.svg load",
+      "pixelHash": "25503D0F5921E5FA71FA1BFA17CD19FF2DE9CAC3FF72DFEB8D0ACF984FC66AAA",
+      "fullPixelHash": "9CFB3771BAAD9A4BEF63C93C73EEE3B53BD780CC3E90A25F7A9D5E4F225BDEA7",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "acid1.svg redraw",
+      "pixelHash": "25503D0F5921E5FA71FA1BFA17CD19FF2DE9CAC3FF72DFEB8D0ACF984FC66AAA",
+      "fullPixelHash": "9CFB3771BAAD9A4BEF63C93C73EEE3B53BD780CC3E90A25F7A9D5E4F225BDEA7",
+      "filterBitmapHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bitmapCount": 0
+    },
+    {
+      "name": "171.svg load",
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E",
+      "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+      "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+      "bitmapCount": 70
+    },
+    {
+      "name": "171.svg redraw",
+      "pixelHash": "1A69EAFC86DA3EB6DA10E1EDB993EAD22D856BD2B9B88D04CAA533097BADE89E",
+      "fullPixelHash": "35297EA9469DDE191682376813161901D854B666C3C224E033A6D6516FAFFCB5",
+      "filterBitmapHash": "67EB40E151EE139A0F0589F4555B94F73DCFADDE8F131EC8BB5A17029D6273BA",
+      "bitmapCount": 70
+    }
+  ],
+  "note": "Recorded warmed redraw is slower in this run (1.07 -> 1.21 s); these changes favor first filtered readiness. Warm timings varied across repeat runs. All recorded preview/full/native bitmap hashes match."
+}

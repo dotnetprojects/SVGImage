@@ -63,7 +63,7 @@ namespace SVGImage.SVG.Utils
             add = (name, value, specificity, allowImportant) =>
             {
                 name = name.StartsWith("--") ? name : name.ToLowerInvariant();
-                bool important = allowImportant && Regex.IsMatch(value, @"!\s*important\s*$", RegexOptions.IgnoreCase);
+                bool important = allowImportant && value.IndexOf('!') >= 0 && Regex.IsMatch(value, @"!\s*important\s*$", RegexOptions.IgnoreCase);
                 if (important) value = Regex.Replace(value, @"!\s*important\s*$", "", RegexOptions.IgnoreCase).Trim();
                 if (name == "animation")
                 {

@@ -38,3 +38,5 @@ Issue #123 checks the exact width-only rectangle for an absent outline, inline/p
 Performance regressions include 128 nested groups with initial/inherited paint and filter graphs that reuse SourceGraphic/named results after multiple blurs. Timing/allocation benchmarks run separately; see [PerformanceBenchmarks](../PerformanceBenchmarks/README.md).
 
 Blur kernel checks compare optimized output with independent direct box convolution across color/gray/white/black inputs, none/duplicate/wrap edges, narrow and non-square images, parallel-sized buffers and both shared/donated input ownership. Separate scalar encoding checks enforce exact intermediate float rounding in serial and parallel output paths.
+
+Cold-start checks run before the other SVG tests, confirming that geometry and inherited font declarations leave the font catalog lazy, while first real text initializes it and produces glyph geometry.

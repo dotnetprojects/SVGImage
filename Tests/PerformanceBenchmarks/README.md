@@ -17,3 +17,21 @@ dotnet run --project Tests/PerformanceBenchmarks --configuration Release -p:Targ
 ```
 
 See [performance notes](../../Docs/Performance.md) for the measured changes and remaining tradeoffs.
+
+
+## Cold progressive loading
+
+```powershell
+dotnet run --project Tests/PerformanceBenchmarks --configuration Release -p:TargetFrameworks=net8.0-windows -p:GeneratePackageOnBuild=false -- cold-car 5
+```
+
+Each trial starts a fresh hidden child process and measures its first car parse, preview construction/freeze and complete filtered construction/freeze on a background STA. There is no rendering warmup. The parent also measures process launch to preview/full readiness. Image validation and hashing follow those readiness events, including cross-thread frozen drawing access. OS caches are retained, so these are fresh-process measurements rather than cold-machine/disk-cache measurements.
+
+An optional baseline harness path enables alternating AB/BA pairs:
+
+```powershell
+$env:SVG_PERF_REPOSITORY = 'D:\path\to\SVGImage'
+dotnet 'C:\bench\candidate\PerformanceBenchmarks.dll' cold-car 5 'C:\bench\baseline\Benchmark.dll'
+```
+
+Build this same harness against the baseline library too; older benchmark executables lack the cold-child mode. Copy baseline/candidate binaries to the same drive and stop other builds/tests before timing. `SVG_PERF_REPOSITORY` overrides repository discovery when the harness is copied away from its build directory. Output includes each individual trial, phases, readiness times and preview/full/native-bitmap hashes. Keep warm throughput checks separate and record any tradeoff along with the cold result.
